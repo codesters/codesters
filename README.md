@@ -12,11 +12,10 @@ The plan is to make a platform for students to help them learn, share and collab
 + Users can do separate lessons from track of their choice.
 
 
-##Used
+##Technologies Used
 
 + Django 1.4
 + MySQL database
-+ PyJade
 
 
 ## Contributors
