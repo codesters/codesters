@@ -1,2 +1,3 @@
 *.pyc
 venv/*
+codesters/local_settings.py
