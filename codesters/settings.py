@@ -80,7 +80,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'Asia/Kolkata'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
