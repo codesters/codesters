@@ -1,13 +1,14 @@
 import os
 
-PROJECT_ROOT = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-     ('Admin', 'admin@codesters.org'),
+     ('Your Name', 'your_email@example.com'),
 )
+
 MANAGERS = ADMINS
 
 DJANGO_APPS = (
@@ -22,71 +23,85 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'south',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
+    'django_extensions',
+    'registration',
+    'guardian',
+    #'bootstrapform',
+    #'widget_tweaks',
 )
 
 LOCAL_APPS = (
     'profiles',
-    'post',
     'track',
     'blog',
+    'post',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '',                      # Or path to database file if using sqlite3.
+        'USER': '',                      # Not used with sqlite3.
+        'PASSWORD': '',                  # Not used with sqlite3.
+        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+# Absolute filesystem path to the directory that will hold user-uploaded files.
+# Example: "/home/media/media.lawrence.com/media/"
 MEDIA_ROOT = ''
 
-MEDIA_URL = ''
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
 
+# Absolute path to the directory static files should be collected to.
+# Don't put anything in this directory yourself; store your static files
+# in apps' "static/" subdirectories and in STATICFILES_DIRS.
+# Example: "/home/media/media.lawrence.com/static/"
 STATIC_ROOT = ''
 
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
 
+# Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(PROJECT_ROOT, 'static'),
 )
 
 TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
     os.path.join(PROJECT_ROOT, 'templates'),
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount',
-)
-
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-
 AUTHENTICATION_BACKENDS = (
-    'allauth.account.auth_backends.AuthenticationBackend',
+        'django.contrib.auth.backends.ModelBackend',
+        'guardian.backends.ObjectPermissionBackend',
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
+ANONYMOUS_USER_ID = -1
+
+ALLOWED_HOSTS = []
 
 TIME_ZONE = 'Asia/Kolkata'
+
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -102,26 +117,29 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+MIDDLEWARE_CLASSES = (
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.request',
+    'django.core.context_processors.static',
+)
+
+
 ROOT_URLCONF = 'codesters.urls'
 
 WSGI_APPLICATION = 'codesters.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db1.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error when DEBUG=False.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -146,10 +164,8 @@ LOGGING = {
     }
 }
 
-try:
-    from local_db_settings import *
-except ImportError:
-    pass
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 try:
     from local_settings import *

@@ -1,4 +1,5 @@
 from django.db import models
+#from profiles.models import Student
 
 
 class Tag(models.Model):
@@ -21,6 +22,7 @@ class Post(models.Model):
     post_type = models.ForeignKey(PostType)
     tag = models.ManyToManyField(Tag)
     vote = models.IntegerField(default=0, editable=False)
+    posted_by = models.ForeignKey('profiles.Student')
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):

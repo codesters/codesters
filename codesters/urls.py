@@ -11,6 +11,5 @@ urlpatterns = patterns('',
     # url(r'^codesters/', include('codesters.foo.urls')),
 
     url(r'^$', direct_to_template, {'template': 'index.html' }),
-    url(r'^accounts/', include('allauth.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

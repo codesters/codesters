@@ -17,7 +17,7 @@ class Tag(models.Model):
     def __unicode__(self):
          return self.name
 
-class Post(models.Model):
+class Entry(models.Model):
     blog = models.ForeignKey(Blog)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -33,4 +33,4 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug == slugify(self.title)
-        self(Post, self).save(*args, **kwargs)
+        self(Entry, self).save(*args, **kwargs)
