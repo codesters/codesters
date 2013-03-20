@@ -1,18 +1,36 @@
 from django.db import models
+from profiles.models import Student
 from django.template.defaultfilters import slugify
 
+class Blog(models.Model):
+    student = models.ForeignKey(Student)
+    title = models.CharField(max_length=50)
+    subtitle = models.CharField(max_length=100, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.title
+
+class Tag(models.Model):
+    name = models.CharField(max_length=20)
+    slug = models.SlugField(max_length=255)
+
+    def __unicode__(self):
+         return self.name
+
 class Post(models.Model):
+    blog = models.ForeignKey(Blog)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     title = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, blank=True, default='')
+    slug = models.SlugField(max_length=255)
     content = models.TextField()
+    tags = models.ManyToManyField(Tag)
     published = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, *kwargs):
+    def save(self, *args, **kwargs):
         if not self.slug:
             self.slug == slugify(self.title)
         self(Post, self).save(*args, **kwargs)

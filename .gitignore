@@ -2,3 +2,4 @@
 *.swp
 venv/*
 codesters/local_db_settings.py
+*.db
