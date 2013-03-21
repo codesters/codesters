@@ -2,9 +2,9 @@ from django.contrib import admin
 from blog.models import Blog, Tag, Entry
 
 class BlogAdmin(admin.ModelAdmin):
-    list_display=('title', 'student')
+    list_display=('title', 'user')
     list_display_link = ['title']
-    search_fields = ['title', 'student']
+    search_fields = ['title', 'user']
 
 
 class EntryAdmin(admin.ModelAdmin):

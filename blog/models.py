@@ -1,15 +1,19 @@
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.db import models
-from profiles.models import Student
-
 from django.template.defaultfilters import slugify
 
+
 class Blog(models.Model):
-    student = models.ForeignKey(Student)
+    user = models.ForeignKey(User)
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=100, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog_detail', kwargs={'username': self.user.username})
 
 
 class Tag(models.Model):
@@ -32,3 +36,6 @@ class Entry(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('entry_detail', kwargs={'username':self.blog.user.username, 'slug': self.slug})

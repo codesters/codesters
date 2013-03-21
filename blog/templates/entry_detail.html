@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block page_title %}Blog{% endblock %}
+{% block page_subtitle %}{{ blog.user.username }}{% endblock %}
+{% block content %}
+<div class="span3">
+    <h2><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></h2>
+    <p class="lead">{{ blog.subtitle }}</p>
+</div>
+<div class="span8">
+    <div class="row">
+        <div class="container">
+            <h3>{{ entry.title }}</h3>
+            <p><small>created on {{ entry.created_at }}</small></p>
+            <p>{{ entry.content }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
