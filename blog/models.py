@@ -24,7 +24,7 @@ class Entry(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255)
     content = models.TextField()
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, null=True, blank=True)
     published = models.BooleanField(default=True)
 
     def __unicode__(self):
