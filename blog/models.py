@@ -11,7 +11,7 @@ class Blog(models.Model):
         return self.title
 
 class Tag(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, unique=True)
     slug = models.SlugField(max_length=255)
 
     def __unicode__(self):
@@ -30,7 +30,7 @@ class Entry(models.Model):
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug == slugify(self.title)
-        self(Entry, self).save(*args, **kwargs)
+#    def save(self, *args, **kwargs):
+#        if not self.slug:
+#            self.slug == slugify(self.title)
+#        self(Entry, self).save(*args, **kwargs)

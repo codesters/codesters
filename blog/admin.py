@@ -3,10 +3,23 @@ from blog.models import Blog, Tag, Entry
 
 class BlogAdmin(admin.ModelAdmin):
     list_display=('title', 'student')
+    list_display_link = ['title']
+    search_fields = ['title', 'student']
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display=('title', 'blog', 'created_at', 'published')
+    date_hierarchy = 'created_at'
+    list_display = ('title', 'blog', 'created_at', 'published')
+    list_display_link = ['title']
+    list_editable = ['published']
+    list_filter = ['published','updated_at']
+    search_fields = ['title', 'content']
+    prepopulated_fields = {'slug': ['title',]}
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+    list_display_link = ['name']
+    prepopulated_fields = {'slug': ['name',]}
 
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Entry, EntryAdmin)
-admin.site.register(Tag)
+admin.site.register(Tag, TagAdmin)
