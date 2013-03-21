@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from profiles.models import Student
 from django.template.defaultfilters import slugify
@@ -26,6 +27,7 @@ class Entry(models.Model):
     content = models.TextField()
     tags = models.ManyToManyField(Tag)
     published = models.BooleanField(default=True)
+    author = models.ForeignKey(User, related_name='entrys')
 
     def __unicode__(self):
         return self.title
