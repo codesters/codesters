@@ -44,7 +44,7 @@
                 </button>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="#"><i class="icon-white icon-home"></i> Home</a></li>
+                        <li><a href="{% url 'home' %}"><i class="icon-white icon-home"></i> Home</a></li>
                         <li><a href="#"><i class="icon-white icon-th-list"></i> Track</a></li>
                         <li><a href="#"><i class="icon-white icon-tags"></i> Feeds</a></li>
                         <li><a href="#"><i class="icon-white icon-globe"></i> Explore</a></li>
@@ -56,7 +56,7 @@
                                 <li><a href="#"><i class="icon-pencil"></i> My Feeds</a></li>
                                 <li><a href="#"><i class="icon-briefcase"></i> My Projects</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><i class="icon-wrench"></i> Settings</a></li>
+                                <li><a href="{% url 'user_profile' %}"><i class="icon-wrench"></i> Settings</a></li>
                                 <li><a href="{% url 'auth_logout' %}"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
