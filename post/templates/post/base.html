@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="span10">
+    <ul class="nav nav-tabs">
+        <li><a href="{% url post_list %}">Recent</a></li>
+        <li><a href="{% url post_popular_list %}">Popular</a></li>
+        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Types <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="{% url post_type_list slug="video" %}">Video</a></li>
+                <li><a href="{% url post_type_list slug="tutorial" %}">Tutorial</a></li>
+                <li><a href="{% url post_type_list slug="blog-post" %}">Blog Post</a></li>
+                <li><a href="{% url post_type_list slug="course" %}">Course</a></li>
+                <li><a href="{% url post_type_list slug="documentation" %}">Documentation</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="row">
+    <div class="container">{% block post_content %}{% endblock %}</div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "post/base.html" %}
+
+{% block post_content %}
+<div class="row">
+    <div class="span10 offset1">
+        <h3>{{ post.title }}</h3>
+            <p><strong>{{ post.post_type }}</strong><br /> {{ post.posted_on }}</p>
+    </div>
+</div>
+{% endblock %}

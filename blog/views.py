@@ -2,13 +2,11 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response
 
-from django.views.generic import TemplateView
-from guardian.mixins import LoginRequiredMixin
-
 from django.contrib.auth.models import User
 from blog.models import Blog, Entry, Tag
 
-from django.views.generic import ListView, DetailView
+from guardian.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, TemplateView
 
 class BlogHomeView(LoginRequiredMixin, TemplateView):
     template_name = 'blog_home.html'
@@ -17,7 +15,7 @@ class BlogHomeView(LoginRequiredMixin, TemplateView):
 class EntryDetailView(DetailView):
     model = Entry
     context_object_name = 'entry'
-    template_name = 'entry_detail.html'
+    template_name = 'blog/entry_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(EntryDetailView, self).get_context_data(**kwargs)
@@ -30,7 +28,7 @@ class EntryDetailView(DetailView):
 
 class EntryListView(ListView):
     context_object_name = 'entry_list'
-    template_name = 'entry_list.html'
+    template_name = 'blog/entry_list.html'
 
     def get_queryset(self):
         username = self.kwargs['username']

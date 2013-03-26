@@ -3,12 +3,14 @@ from post.models import PostType, Tag, Post
 
 class PostTypeAdmin(admin.ModelAdmin):
     list_display=('name',)
+    prepopulated_fields = {'slug': ['name',]}
 
 class TagAdmin(admin.ModelAdmin):
     list_display=('name',)
+    prepopulated_fields = {'slug': ['name',]}
 
 class PostAdmin(admin.ModelAdmin):
-    list_display=('title', 'url')
+    list_display=('title', 'post_type', 'url')
 
 
 admin.site.register(PostType, PostTypeAdmin)

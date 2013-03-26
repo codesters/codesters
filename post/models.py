@@ -4,17 +4,19 @@ from django.db import models
 
 class Tag(models.Model):
     name = models.CharField(max_length=60)
+    slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.name)
+        return self.name
 
 class PostType(models.Model):
     name = models.CharField(max_length=60)
+    slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
 
     def __unicode__(self):
-        return unicode(self.name)
+        return self.name
 
 class Post(models.Model):
     title = models.CharField(max_length=250)
@@ -26,4 +28,4 @@ class Post(models.Model):
     posted_on = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return unicode(self.title)
+        return self.title

@@ -1,0 +1,12 @@
+{% extends "post/base.html" %}
+
+{% block post_content %}
+{% for post in posts %}
+<div class="row">
+    <div class="span10 offset1">
+        <h3><a href="{{ post.url }}">{{ post.title }}</a> <small><a href="{% url post_detail pk=post.id %}">Discuss</a></small></h3>
+        <p><small>{{ post.posted_on }} - {{ post.posted_by }}</small><br /><strong>{{ post.post_type }}</strong><br /> </p>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

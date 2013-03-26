@@ -1,19 +1,10 @@
 from django.conf.urls import patterns, include, url
 
-from django.views.generic.simple import direct_to_template
-
-from codesters.views import *
-
-from django.contrib import admin
-admin.autodiscover()
+from post.views import *
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'codesters.views.home', name='home'),
-    # url(r'^codesters/', include('codesters.foo.urls')),
-
-    url(r'^$', HomeView.as_view(), name='home'),
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^accounts/profile/$', ProfileView.as_view(), name='user_profile'),
+    url(r'^$', PostListView.as_view(), name='post_list'),
+    url(r'^popular/$', PostPopularListView.as_view(), name='post_popular_list'),
+    url(r'^type/(?P<slug>[-\w]+)/$', PostTypeListView.as_view(), name='post_type_list'),
+    url(r'^(?P<pk>\d+)/$', PostDetailView.as_view(), name='post_detail'),
 )
