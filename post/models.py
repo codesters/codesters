@@ -1,6 +1,7 @@
 from django.db import models
 #from profiles.models import Student
 
+from django.core.urlresolvers import reverse
 
 class Tag(models.Model):
     name = models.CharField(max_length=60)
@@ -18,6 +19,9 @@ class PostType(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('post_type_list', kwargs={'slug': self.slug})
+
 class Post(models.Model):
     title = models.CharField(max_length=250)
     url = models.URLField()
@@ -29,3 +33,6 @@ class Post(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('post_detail', kwargs={'pk': self.id})

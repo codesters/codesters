@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
 
 from guardian.mixins import LoginRequiredMixin
 
@@ -32,3 +32,8 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'post_detail.html'
+
+
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'post/post_create.html'
