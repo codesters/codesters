@@ -11,7 +11,7 @@
         body {
             margin-top:10px;
         }
-        .brand {
+        .logo {
             line-height: 50px;
             margin: 20px 0 0;
             vertical-align: middle;
@@ -31,7 +31,7 @@
                 <h1>{% block page_title %}Codesters{% endblock %} <small>{% block page_subtitle %}simplifying learning{% endblock %}</small></h1>
             </div>
             <div class="span2">
-                <a href="#" class="brand">codesters</a>
+                <a href="/" class="logo visible-desktop">codesters</a>
             </div>
         </div>
     <div class="navbar navbar-static-top">
@@ -42,6 +42,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a href="/" class="brand hidden-desktop">codesters</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li><a href="{% url 'home' %}"><i class="icon-white icon-home"></i> Home</a></li>

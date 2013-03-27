@@ -15,6 +15,7 @@ class PostType(models.Model):
     name = models.CharField(max_length=60)
     slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
+    color = models.CharField(max_length=20, default='purple')
 
     def __unicode__(self):
         return self.name

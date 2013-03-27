@@ -2,7 +2,7 @@ from django.contrib import admin
 from post.models import PostType, Tag, Post
 
 class PostTypeAdmin(admin.ModelAdmin):
-    list_display=('name',)
+    list_display=('name', 'color')
     prepopulated_fields = {'slug': ['name',]}
 
 class TagAdmin(admin.ModelAdmin):

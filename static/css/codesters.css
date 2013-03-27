@@ -1,0 +1,34 @@
+.feed {
+    margin: 10px 0;
+    padding: 5px 12px;
+    background-color: rgb(245, 245, 245);
+    border: 1px solid rgb(221, 221, 221);
+}
+
+.feed-green {
+    border-left: solid 7px #46a546;
+}
+
+.feed-blue {
+    border-left: solid 7px #049cdb;
+}
+
+.feed-red {
+    border-left: solid 7px #9d261d;
+}
+
+.feed-yellow {
+    border-left: solid 7px #ffc40d;
+}
+
+.feed-orange {
+    border-left: solid 7px #f89406;
+}
+
+.feed-pink {
+    border-left: solid 7px #c3325f;
+}
+
+.feed-purple {
+    border-left: solid 7px #7a43b6;
+}
