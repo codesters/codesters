@@ -12,12 +12,12 @@
             <div class="span12 feed feed-{{ post.post_type.color }}">
                 <div class="row-fluid">
                     <div class="span1 vote">
-                        <img src="{{ STATIC_URL }}img/thumbs_up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" />
-                        <img src="{{ STATIC_URL }}img/thumbs_down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" />
+                        <a href="#"><img src="{{ STATIC_URL }}img/up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" /></a>
+                        <a href="#"><img src="{{ STATIC_URL }}img/down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" /></a>
                     </div>
                     <div class="span11 feed-data">
                         <h3><a href="{{ post.url }}">{{ post.title }}</a> <small><a href="{% url post_detail pk=post.id %}">Discuss</a></small></h3>
-                        <p><small>{{ post.posted_on }} - {{ post.posted_by }}</small><br /><strong>{{ post.post_type }}</strong><br /> </p>
+                        <p><small>{{ post.posted_on }} - <a href="{{ post.posted_by.get_absolute_url }}">{{ post.posted_by }}</a></small><br /><strong>{{ post.post_type }}</strong><br /> </p>
                     </div>
                 </div>
             </div>

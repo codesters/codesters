@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from track.models import Chapter, Badge
+
+from django.core.urlresolvers import reverse
 
 class Student(models.Model):
     user = models.ForeignKey(User)
@@ -16,6 +17,9 @@ class Student(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+    def get_absolute_url(self):
+        return reverse('student_detail', kwargs={'pk': self.id})
 
 #class Moderator(models.Model):
 #    user = models.ForeignKey(User)

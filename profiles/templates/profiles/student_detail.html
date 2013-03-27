@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{ student.user }}{% endblock %}
+
+{% block page_title %}{{ student.user }}{% endblock %}
+
+{% block page_subtitle %}profile{% endblock %}
+
+{% block content %}
+<div class="span6 offset3">
+    <h2>{{ student.user.get_full_name }}</h2>
+    <p><strong>BIO:</strong> {{ student.bio }}</p>
+</div>
+{% endblock %}

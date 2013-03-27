@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^accounts/profile/$', ProfileView.as_view(), name='user_profile'),
     url(r'^blog/', include('blog.urls')),
     url(r'^feed/', include('post.urls')),
+    url(r'^profile/', include('profiles.urls')),
 )
