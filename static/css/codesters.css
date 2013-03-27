@@ -1,8 +1,23 @@
 .feed {
     margin: 0 0 15px 0;
     padding: 5px 12px;
+    min-height: 100px;
     background-color: rgb(245, 245, 245);
     border: 1px solid rgb(221, 221, 221);
+}
+
+.vote {
+    border-right: 2px solid rgb(221,221, 221);
+    overflow: hidden;
+}
+
+.vote img {
+    margin: 20px 0;
+    display: block;
+}
+
+.feed-data {
+    padding-left: 15px;
 }
 
 .feed-green {

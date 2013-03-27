@@ -9,9 +9,17 @@
     <div class="span9">
         {% for post in posts %}
         <div class="row-fluid">
-            <div class="feed span12 feed-{{ post.post_type.color }}">
-                <h3><a href="{{ post.url }}">{{ post.title }}</a> <small><a href="{% url post_detail pk=post.id %}">Discuss</a></small></h3>
-                <p><small>{{ post.posted_on }} - {{ post.posted_by }}</small><br /><strong>{{ post.post_type }}</strong><br /> </p>
+            <div class="span12 feed feed-{{ post.post_type.color }}">
+                <div class="row-fluid">
+                    <div class="span1 vote">
+                        <img src="{{ STATIC_URL }}img/thumbs_up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" />
+                        <img src="{{ STATIC_URL }}img/thumbs_down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" />
+                    </div>
+                    <div class="span11 feed-data">
+                        <h3><a href="{{ post.url }}">{{ post.title }}</a> <small><a href="{% url post_detail pk=post.id %}">Discuss</a></small></h3>
+                        <p><small>{{ post.posted_on }} - {{ post.posted_by }}</small><br /><strong>{{ post.post_type }}</strong><br /> </p>
+                    </div>
+                </div>
             </div>
         </div>
         {% endfor %}
