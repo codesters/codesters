@@ -11,6 +11,9 @@ class Tag(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('post_tag_list', kwargs={'slug': self.slug})
+
 class PostType(models.Model):
     name = models.CharField(max_length=60)
     slug = models.SlugField(default='')
