@@ -1,5 +1,4 @@
 from django.db import models
-#from profiles.models import Student
 
 from django.core.urlresolvers import reverse
 
@@ -12,9 +11,9 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('post_tag_list', kwargs={'slug': self.slug})
+        return reverse('feed_tag_list', kwargs={'slug': self.slug})
 
-class PostType(models.Model):
+class FeedType(models.Model):
     name = models.CharField(max_length=60)
     slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
@@ -24,19 +23,19 @@ class PostType(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('post_type_list', kwargs={'slug': self.slug})
+        return reverse('feed_type_list', kwargs={'slug': self.slug})
 
-class Post(models.Model):
+class Feed(models.Model):
     title = models.CharField(max_length=250)
     url = models.URLField()
-    post_type = models.ForeignKey(PostType)
-    tag = models.ManyToManyField(Tag)
+    feed_type = models.ForeignKey(FeedType)
+    tags = models.ManyToManyField(Tag)
     vote = models.IntegerField(default=0, editable=False)
-    posted_by = models.ForeignKey('profiles.Student')
-    posted_on = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey('profiles.Student')
+    created_on = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('post_detail', kwargs={'pk': self.id})
+        return reverse('feed_detail', kwargs={'pk': self.id})

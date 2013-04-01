@@ -1,7 +1,7 @@
 from django.contrib import admin
-from post.models import PostType, Tag, Post
+from feeds.models import FeedType, Tag, Feed
 
-class PostTypeAdmin(admin.ModelAdmin):
+class FeedTypeAdmin(admin.ModelAdmin):
     list_display=('name', 'color')
     prepopulated_fields = {'slug': ['name',]}
 
@@ -9,10 +9,10 @@ class TagAdmin(admin.ModelAdmin):
     list_display=('name',)
     prepopulated_fields = {'slug': ['name',]}
 
-class PostAdmin(admin.ModelAdmin):
-    list_display=('title', 'post_type', 'url')
+class FeedAdmin(admin.ModelAdmin):
+    list_display=('title', 'feed_type', 'url')
 
 
-admin.site.register(PostType, PostTypeAdmin)
+admin.site.register(FeedType, FeedTypeAdmin)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(Post, PostAdmin)
+admin.site.register(Feed, FeedAdmin)

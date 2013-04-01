@@ -1,5 +1,5 @@
 from django.db import models
-from post.models import Post
+from feeds.models import Feed
 from profiles.models import Student
 
 class TrackCategory(models.Model):
@@ -51,7 +51,7 @@ class Chapter(models.Model):
     description = models.TextField(blank=True, default='')
     track = models.ForeignKey(Track)
 #    ordering = models.IntegerField()
-    posts = models.ManyToManyField(Post)
+    feeds = models.ManyToManyField(Feed)
     exercise = models.ForeignKey(Exercise, null=True, blank=True)
 
     def __unicode__(self):

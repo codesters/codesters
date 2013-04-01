@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Blog, Tag, Entry
+from blogs.models import Blog, Tag, Entry
 
 class BlogAdmin(admin.ModelAdmin):
     list_display=('title', 'user')

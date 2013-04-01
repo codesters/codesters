@@ -8,23 +8,57 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Deleting field 'Blog.student'
-        db.delete_column('blog_blog', 'student_id')
+        # Adding model 'Blog'
+        db.create_table('blogs_blog', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('subtitle', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
+        ))
+        db.send_create_signal('blogs', ['Blog'])
 
-        # Adding field 'Blog.user'
-        db.add_column('blog_blog', 'user',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['auth.User']),
-                      keep_default=False)
+        # Adding model 'Tag'
+        db.create_table('blogs_tag', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=20)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
+        ))
+        db.send_create_signal('blogs', ['Tag'])
+
+        # Adding model 'Entry'
+        db.create_table('blogs_entry', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('blog', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['blogs.Blog'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('updated_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=255)),
+            ('content', self.gf('django.db.models.fields.TextField')()),
+            ('published', self.gf('django.db.models.fields.BooleanField')(default=True)),
+        ))
+        db.send_create_signal('blogs', ['Entry'])
+
+        # Adding M2M table for field tags on 'Entry'
+        db.create_table('blogs_entry_tags', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('entry', models.ForeignKey(orm['blogs.entry'], null=False)),
+            ('tag', models.ForeignKey(orm['blogs.tag'], null=False))
+        ))
+        db.create_unique('blogs_entry_tags', ['entry_id', 'tag_id'])
 
 
     def backwards(self, orm):
-        # Adding field 'Blog.student'
-        db.add_column('blog_blog', 'student',
-                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['profiles.Student']),
-                      keep_default=False)
+        # Deleting model 'Blog'
+        db.delete_table('blogs_blog')
 
-        # Deleting field 'Blog.user'
-        db.delete_column('blog_blog', 'user_id')
+        # Deleting model 'Tag'
+        db.delete_table('blogs_tag')
+
+        # Deleting model 'Entry'
+        db.delete_table('blogs_entry')
+
+        # Removing M2M table for field tags on 'Entry'
+        db.delete_table('blogs_entry_tags')
 
 
     models = {
@@ -57,26 +91,26 @@ class Migration(SchemaMigration):
             'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
             'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
         },
-        'blog.blog': {
+        'blogs.blog': {
             'Meta': {'object_name': 'Blog'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'subtitle': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
-        'blog.entry': {
+        'blogs.entry': {
             'Meta': {'object_name': 'Entry'},
-            'blog': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blog.Blog']"}),
+            'blog': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['blogs.Blog']"}),
             'content': ('django.db.models.fields.TextField', [], {}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'published': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '255'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['blog.Tag']", 'null': 'True', 'blank': 'True'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['blogs.Tag']", 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'updated_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'})
         },
-        'blog.tag': {
+        'blogs.tag': {
             'Meta': {'object_name': 'Tag'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '20'}),
@@ -91,4 +125,4 @@ class Migration(SchemaMigration):
         }
     }
 
-    complete_apps = ['blog']
+    complete_apps = ['blogs']

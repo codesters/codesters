@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 
 from django.contrib.auth.models import User
-from blog.models import Blog, Entry, Tag
+from blogs.models import Blog, Entry, Tag
 
 from guardian.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView

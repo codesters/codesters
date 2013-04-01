@@ -1,5 +1,5 @@
 from django.contrib import admin
-from track.models import Badge, Chapter, Track, TrackCategory, Exercise, Post, ExerciseSubmission
+from tracks.models import Badge, Chapter, Track, TrackCategory, Exercise, Feed, ExerciseSubmission
 
 class TrackAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'created_by')

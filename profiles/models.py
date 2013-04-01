@@ -12,8 +12,8 @@ class Student(models.Model):
     stackoverflow = models.URLField(null=True, blank=True)
     coderwall = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
-    badges = models.ManyToManyField('track.Badge', null=True, blank=True)
-    chapters_completed = models.ManyToManyField('track.Chapter', null=True, blank=True)
+    badges = models.ManyToManyField('tracks.Badge', null=True, blank=True)
+    chapters_completed = models.ManyToManyField('tracks.Chapter', null=True, blank=True)
 
     def __unicode__(self):
         return self.user.username
