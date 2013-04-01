@@ -2,26 +2,29 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span12">
+    <div class="span9">
         <ul class="nav nav-tabs">
-            <li><a href="{% url post_list %}">Recent</a></li>
-            <li><a href="{% url post_popular_list %}">Popular</a></li>
+            <li><a href="{% url feed_list %}">Recent</a></li>
+            <li><a href="{% url feed_popular_list %}">Popular</a></li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Types <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url post_type_list slug="video" %}">Video</a></li>
-                    <li><a href="{% url post_type_list slug="tutorial" %}">Tutorial</a></li>
-                    <li><a href="{% url post_type_list slug="blog-post" %}">Blog Post</a></li>
-                    <li><a href="{% url post_type_list slug="course" %}">Course</a></li>
-                    <li><a href="{% url post_type_list slug="documentation" %}">Documentation</a></li>
+                    <li><a href="{% url feed_type_list slug="video" %}">Video</a></li>
+                    <li><a href="{% url feed_type_list slug="tutorial" %}">Tutorial</a></li>
+                    <li><a href="{% url feed_type_list slug="blog-post" %}">Blog Post</a></li>
+                    <li><a href="{% url feed_type_list slug="course" %}">Course</a></li>
+                    <li><a href="{% url feed_type_list slug="documentation" %}">Documentation</a></li>
                 </ul>
             </li>
-            {% if user.is_authenticated %}
-            <li class="pull-right"><a href="{% url post_create %}">Add New</a></li>
-            {% endif %}
         </ul>
+      </div>
+      <div class="span2 pull-right">
+            {% if user.is_authenticated %}
+            <li class="btn"><a href="{% url feed_create %}">Add New</a></li>
+            {% endif %}
+      </div>
     </div>
 </div>
 <div class="row-fluid">
-    <div class="container">{% block post_content %}{% endblock %}</div>
+    <div class="container">{% block feed_content %}{% endblock %}</div>
 </div>
 {% endblock %}

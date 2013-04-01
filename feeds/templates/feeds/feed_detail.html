@@ -1,10 +1,10 @@
 {% extends "post/base.html" %}
 
-{% block post_content %}
+{% block feed_content %}
 <div class="row">
     <div class="span10 offset1">
-        <h3>{{ post.title }}</h3>
-            <p><strong>{{ post.post_type }}</strong><br /> {{ post.posted_on }}</p>
+        <h3>{{ feed.title }}</h3>
+            <p><strong>{{ feed.feed_type }}</strong><br /> {{ feed.created_on }}</p>
     </div>
 </div>
 {% endblock %}

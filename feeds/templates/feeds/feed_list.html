@@ -1,23 +1,23 @@
-{% extends "post/base.html" %}
+{% extends "feeds/base.html" %}
 
 {% block extra_head %}
 <link href="{{ STATIC_URL }}css/codesters.css" rel="stylesheet">
 {% endblock %}
 
-{% block post_content %}
+{% block feed_content %}
 <div class="row-fluid">
     <div class="span9">
-        {% for post in posts %}
+        {% for feed in feeds %}
         <div class="row-fluid">
-            <div class="span12 feed feed-{{ post.post_type.color }}">
+            <div class="span12 feed feed-{{ feeds.feed_type.color }}">
                 <div class="row-fluid">
                     <div class="span1 vote">
                         <a href="#"><img src="{{ STATIC_URL }}img/up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" /></a>
                         <a href="#"><img src="{{ STATIC_URL }}img/down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" /></a>
                     </div>
                     <div class="span11 feed-data">
-                        <h3><a href="{{ post.url }}">{{ post.title }}</a> <small><a href="{% url post_detail pk=post.id %}">Discuss</a></small></h3>
-                        <p><small>{{ post.posted_on }} - <a href="{{ post.posted_by.get_absolute_url }}">{{ post.posted_by }}</a></small><br /><strong>{{ post.post_type }}</strong><br /> </p>
+                        <h3><a href="{{ feed.url }}">{{ feed.title }}</a> <small><a href="{% url feed_detail pk=feed.id %}">Discuss</a></small></h3>
+                        <p><small>{{ feed.created_on }} - <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.posted_by }}</a></small><br /><strong>{{ feed.feed_type }}</strong><br /> </p>
                     </div>
                 </div>
             </div>
@@ -25,6 +25,6 @@
         {% endfor %}
     </div>
 
-    <div class="span3 well">{% include "post/tags.html" %}</div>
+    <div class="span3 well">{% include "feeds/tags.html" %}</div>
 </div>
 {% endblock %}

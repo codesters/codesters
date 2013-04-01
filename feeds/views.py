@@ -9,7 +9,7 @@ from profiles.models import Student
 class FeedListView(ListView):
     queryset = Feed.objects.all().order_by('-created_on')
     context_object_name = 'feeds'
-    template_name = 'feed_list.html'
+    template_name = 'feeds/feed_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedListView, self).get_context_data(**kwargs)
@@ -21,7 +21,7 @@ class FeedListView(ListView):
 class FeedPopularListView(ListView):
     queryset = Feed.objects.all().order_by('-vote')
     context_object_name = 'feeds'
-    template_name = 'feed_list.html'
+    template_name = 'feeds/feed_list.html'
 
     def get_context_data(self, **kwargs):
         context = super(FeedPopularListView, self).get_context_data(**kwargs)
@@ -32,7 +32,7 @@ class FeedPopularListView(ListView):
 
 class FeedTypeListView(ListView):
     context_object_name = 'feeds'
-    template_name = 'feed_list.html'
+    template_name = 'feeds/feed_list.html'
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -48,7 +48,7 @@ class FeedTypeListView(ListView):
 
 class FeedTagListView(ListView):
     context_object_name = 'feeds'
-    template_name = 'feed_list.html'
+    template_name = 'feeds/feed_list.html'
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -65,9 +65,9 @@ class FeedTagListView(ListView):
 class FeedDetailView(DetailView):
     model = Feed
     context_object_name = 'feed'
-    template_name = 'feed_detail.html'
+    template_name = 'feeds/feed_detail.html'
 
 
 class FeedCreateView(LoginRequiredMixin, CreateView):
     model = Feed
-    template_name = 'feed/feed_create.html'
+    template_name = 'feeds/feed_create.html'
