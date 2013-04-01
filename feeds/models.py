@@ -28,6 +28,7 @@ class FeedType(models.Model):
 class Feed(models.Model):
     title = models.CharField(max_length=250)
     url = models.URLField()
+    description = models.TextField(null=True, blank=True, default='')
     feed_type = models.ForeignKey(FeedType)
     tags = models.ManyToManyField(Tag)
     vote = models.IntegerField(default=0, editable=False)
