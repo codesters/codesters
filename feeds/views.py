@@ -96,6 +96,7 @@ class FeedCreateView(LoginRequiredMixin, CreateView):
         return super(FeedCreateView, self).form_valid(form)
 
 
+#TODO add permission mixin to check the owner or staff status
 class FeedUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FeedUpdateForm
     model = Feed

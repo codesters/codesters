@@ -1,19 +1,13 @@
-{% extends "base.html" %}
+{% extends "blogs/base.html" %}
 {% block page_title %}Blog{% endblock %}
 {% block page_subtitle %}{{ blog.user.username }}{% endblock %}
-{% block content %}
-<div class="span3">
-    <h2>{{ blog.title }}</h2>
-    <p class="lead">{{ blog.subtitle }}</p>
-</div>
-<div class="span8">
+{% block blog_content %}
     {% for entry in entry_list %}
-    <div class="row">
-        <div class="container">
+    <div class="row-fluid">
+        <div class="span12">
             <h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
             <p><small>created on {{ entry.created_at }}</small></p>
         </div>
     </div>
     {% endfor %}
-</div>
 {% endblock %}
