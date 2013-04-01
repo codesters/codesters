@@ -9,7 +9,6 @@ class BlogAdmin(admin.ModelAdmin):
 
 class EntryAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
-    fields = ('published', 'title', 'blog', 'slug', 'content')
     list_display = ('title', 'blog', 'created_at', 'published')
     list_display_link = ['title', 'blog']
     list_editable = ['published']

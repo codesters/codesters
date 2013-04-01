@@ -1,6 +1,6 @@
 <h2>Tags</h2>
 <ul class="unstyled">
     {% for tag in tags %}
-    <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }} ({{ tag.post_set.count }})</a></li>
+    <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }} ({{ tag.feed_set.count }})</a></li>
     {% endfor %}
 </ul>

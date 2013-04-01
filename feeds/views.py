@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from feeds.models import Feed, Tag, FeedType
 from profiles.models import Student
 
+from feeds.forms import FeedCreateForm, FeedUpdateForm
+
 class FeedListView(ListView):
     queryset = Feed.objects.all().order_by('-created_on')
     context_object_name = 'feeds'
@@ -67,7 +69,24 @@ class FeedDetailView(DetailView):
     context_object_name = 'feed'
     template_name = 'feeds/feed_detail.html'
 
+    def get_object(self):
+        feed = super(FeedDetailView, self).get_object()
+        feed.vote += 2
+        feed.save()
+        return feed
+
 
 class FeedCreateView(LoginRequiredMixin, CreateView):
+    form_class = FeedCreateForm
+    template_name = 'feeds/feed_create.html'
+
+    def form_valid(self, form):
+        student = Student.objects.get(user=self.request.user)
+        form.instance.created_by = student
+        return super(FeedCreateView, self).form_valid(form)
+
+
+class FeedUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = FeedUpdateForm
     model = Feed
     template_name = 'feeds/feed_create.html'
