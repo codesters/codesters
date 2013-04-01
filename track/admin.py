@@ -10,7 +10,7 @@ class TrackCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('name',)}
 
 class ChapterAdmin(admin.ModelAdmin):
-    list_display=('name',)
+    list_display=('name', 'track')
     prepopulated_fields = {'slug':('name',)}
 
 class ExerciseAdmin(admin.ModelAdmin):
