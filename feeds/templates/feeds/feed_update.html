@@ -1,0 +1,11 @@
+{% extends "feeds/base.html" %}
+
+{% block feed_content %}
+<div class="span6 offset3">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+</div>
+{% endblock %}

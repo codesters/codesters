@@ -40,3 +40,11 @@ class Feed(models.Model):
 
     def get_absolute_url(self):
         return reverse('feed_detail', kwargs={'pk': self.id})
+
+    def vote_up(self):
+        self.vote += 1
+        self.save()
+
+    def vote_down(self):
+        self.vote -= 1
+        self.save()

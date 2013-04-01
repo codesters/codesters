@@ -18,8 +18,11 @@
                         <a href="#"><img src="{{ STATIC_URL }}img/down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" /></a>
                     </div>
                     <div class="span11 feed-data">
-                        <h3><a href="{{ feed.url }}">{{ feed.title }}</a> <small><a href="{{ feed.url|domain }}">{{ feed.url|website }}</a></small></h3>
-                        <p><small>submitted  {{ feed.created_on|age  }} by <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.created_by }}</a> in <a href="{% url feed_type_list slug=feed.feed_type %">{{ feed.feed_type }}</a></small> </p>
+                        <h3><a href="{% url feed_redirect pk=feed.id %}">{{ feed.title }}</a> <small>{{ feed.url|website }}</small></h3>
+                        <p><small>submitted  {{ feed.created_on|age  }} by 
+                                <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.created_by }}</a> in 
+                                <a href="{% url feed_type_list slug=feed.feed_type.slug %}">{{ feed.feed_type }}</a>
+                        </small> </p>
                         <a href="{% url feed_detail pk=feed.id %}" class="btn btn-small"><i class="icon icon-comment"></i> Discuss - # comments</a> 
                         {% if user.is_staff or feed.created_by.user == user %}<a href="{% url feed_update pk=feed.id %}" class="btn btn-small"><i class="icon icon-edit"></i> Edit</a>{% endif %}
                     </div>

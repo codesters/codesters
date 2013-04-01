@@ -16,14 +16,13 @@
                 </ul>
             </li>
         </ul>
-      </div>
-      <div class="span2 pull-right">
-            {% if user.is_authenticated %}
-            <li class="btn"><a href="{% url feed_create %}">Add New</a></li>
-            {% endif %}
-      </div>
     </div>
-</div>
+    <div class="span2 pull-right">
+        {% if user.is_authenticated %}
+        <li class="btn"><a href="{% url feed_create %}">Add New</a></li>
+        {% endif %}
+    </div>
+</div><!-- /subnavbar row-fluid -->
 <div class="row-fluid">
     <div class="container">{% block feed_content %}{% endblock %}</div>
 </div>

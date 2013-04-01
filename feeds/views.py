@@ -1,6 +1,8 @@
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
 
 from guardian.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
 from feeds.models import Feed, Tag, FeedType
@@ -64,6 +66,14 @@ class FeedTagListView(ListView):
         return context
 
 
+class FeedRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, pk):
+        feed = get_object_or_404(Feed, pk=pk)
+        feed.vote_up()
+        return feed.url
+
 class FeedDetailView(DetailView):
     model = Feed
     context_object_name = 'feed'
@@ -89,4 +99,4 @@ class FeedCreateView(LoginRequiredMixin, CreateView):
 class FeedUpdateView(LoginRequiredMixin, UpdateView):
     form_class = FeedUpdateForm
     model = Feed
-    template_name = 'feeds/feed_create.html'
+    template_name = 'feeds/feed_update.html'

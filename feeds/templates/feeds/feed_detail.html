@@ -1,10 +1,26 @@
 {% extends "feeds/base.html" %}
-
+{% load feeduri %}
 {% block feed_content %}
-<div class="row">
-    <div class="span10 offset1">
-        <h3>{{ feed.title }}</h3>
-            <p><strong>{{ feed.feed_type }}</strong><br /> {{ feed.created_on }}</p>
+<div class="row-fluid">
+    <div class="span12">
+        <h1><a href="{% url feed_redirect pk=feed.id %}">{{ feed.title }}</a></h1>
+        <p><small>submitted {{ feed.created_on|age }} by 
+                <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.created_by }}</a> in 
+                <a href="{% url feed_type_list slug=feed.feed_type.slug %}">{{ feed.feed_type }}</a>
+            </small></p>
+    </div>
+</div>
+{% if feed.description %}
+<div class="row-fluid">
+    <div class="span12">
+        <p>{{ feed.description }}</p>
+    </div>
+</div>
+{% endif %}
+<div class="row-fluid">
+    <div class="span12">
+        <h3>Comments</h3>
+        <p>Coming Soon ...</p>
     </div>
 </div>
 {% endblock %}
