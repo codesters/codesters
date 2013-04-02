@@ -1,10 +1,10 @@
 {% extends "feeds/base.html" %}
-
+{% load bootstrap_toolkit %}
 {% block feed_content %}
 <div class="span6 offset3">
     <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        {% bootstrap_form form layout="vertical" %}
         <button class="btn btn-primary" type="submit">Add</button>
     </form>
 </div>
