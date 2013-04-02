@@ -17,7 +17,7 @@ class FeedListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(FeedListView, self).get_context_data(**kwargs)
-        tags = Tag.objects.all()
+        tags = Tag.objects.filter(feed__title__isnull=False).distinct()
         context['tags'] = tags
         return context
 
@@ -29,7 +29,7 @@ class FeedPopularListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(FeedPopularListView, self).get_context_data(**kwargs)
-        tags = Tag.objects.all()
+        tags = Tag.objects.filter(feed__title__isnull=False).distinct()
         context['tags'] = tags
         return context
 
@@ -45,7 +45,7 @@ class FeedTypeListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(FeedTypeListView, self).get_context_data(**kwargs)
-        tags = Tag.objects.all()
+        tags = Tag.objects.filter(feed__title__isnull=False).distinct()
         context['tags'] = tags
         return context
 
@@ -61,7 +61,7 @@ class FeedTagListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(FeedTagListView, self).get_context_data(**kwargs)
-        tags = Tag.objects.all()
+        tags = Tag.objects.filter(feed__title__isnull=False).distinct()
         context['tags'] = tags
         return context
 
