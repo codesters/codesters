@@ -1,29 +1,5 @@
-{% load url from future %}
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>{% block head_title %}Codesters - simplifying learning{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{ STATIC_URL }}css/bootstrap-responsive.min.css" rel="stylesheet">
-    <style>
-        body {
-            margin-top:10px;
-        }
-        .logo {
-            line-height: 50px;
-            margin: 20px 0 0;
-            vertical-align: middle;
-            font-size: 24px;
-        }
-        .header {
-            margin-bottom: 20px;
-        }
-    </style>
-    {% block extra_head %}{% endblock %}
-</head>
-<body>
+{% extends "bare_base.html" %}
+
 {% block body %}
 <div class="header">
         <div class="heading container">
@@ -45,9 +21,9 @@
                 <a href="/" class="brand hidden-desktop">codesters</a>
                 <div class="nav-collapse collapse">
                     <ul class="nav">
-                        <li><a href="{% url 'home' %}"><i class="icon-white icon-home"></i> Home</a></li>
+                        <li><a href="{% url home %}"><i class="icon-white icon-home"></i> Home</a></li>
                         <li><a href="#"><i class="icon-white icon-th-list"></i> Tracks</a></li>
-                        <li><a href="{% url 'feed_list' %}"><i class="icon-white icon-tags"></i> Feeds</a></li>
+                        <li><a href="{% url feed_list %}"><i class="icon-white icon-tags"></i> Feeds</a></li>
                         <li><a href="#"><i class="icon-white icon-globe"></i> Explore</a></li>
                         {% if user.is_authenticated %}
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-white icon-user"></i> {{ user.username }} <b class="caret"></b></a>
@@ -57,13 +33,13 @@
                                 <li><a href="#"><i class="icon-pencil"></i> My Feeds</a></li>
                                 <li><a href="#"><i class="icon-briefcase"></i> My Projects</a></li>
                                 <li class="divider"></li>
-                                <li><a href="{% url 'user_profile' %}"><i class="icon-wrench"></i> Settings</a></li>
-                                <li><a href="{% url 'auth_logout' %}"><i class="icon-off"></i> Logout</a></li>
+                                <li><a href="{% url user_profile %}"><i class="icon-wrench"></i> Settings</a></li>
+                                <li><a href="{% url auth_logout %}"><i class="icon-off"></i> Logout</a></li>
                             </ul>
                         </li>
                         {% else %}
-                                <li><a href="{% url 'auth_login' %}"><i class="icon-download icon-white"></i> Login</a></li>
-                                <li><a href="{% url 'registration_register' %}"><i class="icon-upload icon-white"></i> Register</a></li>
+                                <li><a href="{% url auth_login %}"><i class="icon-download icon-white"></i> Login</a></li>
+                                <li><a href="{% url registration_register %}"><i class="icon-upload icon-white"></i> Register</a></li>
                         {% endif %}
                     </ul>
                     <form method="post" action="" class="navbar-form pull-right">
@@ -78,7 +54,3 @@
     {% block content %}{% endblock %}
 </div><!--/.content -->
 {% endblock %}
-<script src="{{ STATIC_URL }}js/jquery.min.js" type="text/javascript"></script>
-<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
-</body>
-</html>

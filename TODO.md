@@ -1,6 +1,6 @@
 #TODO
 
-> Figure out how to record a person's vote
-> Change Post app name to Feed and Post model to Feed everywhere
-> Add something to do the numbering/sequencing of chapters in tracks.
-> Add feed list from a domain with domain template tag filter.
+- Figure out how to record a person's vote
+- Change Post app name to Feed and Post model to Feed everywhere
+- Add something to do the numbering/sequencing of chapters in tracks.
+- Add feed list from a domain with domain template tag filter.
