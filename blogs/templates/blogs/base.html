@@ -1,98 +1,33 @@
 {% extends "bare_base.html" %}
 
 {% block extra_head %}
-<style>
-    body {
-        margin-top: 0;
-    }
-    .screen {
-        height: 100%;
-        overflow: auto;
-    }
-    .sidebar {
-        height: 100%;
-        left: 0;
-        max-width: 500px;
-        position: fixed;
-        top: 0;
-        width: 30%;
-        border-right: solid 1px #aaa;
-    }
-    .article {
-        margin-left: 36%;
-        max-width: 640px;
-        overflow: hidden;
-        padding-bottom: 50px;
-        padding-top: 50px;
-        width: 58%;
-    }
-    .cover-body {
-        background-color: #fff;
-        bottom: 0;
-        width: 100%;
-        padding: 10px 5% 5%;
-    }
-    .blog-title {
-        font-size: 32px;
-        text-align: center;
-    }
-    .blog-title a {
-        color: #333332;
-    }
-    .blog-subtitle {
-        font-size: 16px;
-        font-style: italic;
-        text-align: center;
-        color: #666665;
-        line-height: 1.2;
-    }
-    .blog-user {
-        font-size: 22px;
-        text-align: right;
-    }
-    @media (max-width: 980px) {
-        .sidebar {
-            position: relative;
-            width: 100%;
-            max-width: none;
-            height: auto;
-            background-position: center 150px;
-        }
-        .article {
-            margin-left: 10%;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            width: 80%;
-            max-width: none;
-        }
-    }
-    body {
-        padding: 0;
-    }
-</style>
+<link rel="stylesheet" href="{{ STATIC_URL }}css/blog.css" />
 {% endblock %}
 
 {% block body %}
-<div class="screen">
-    <div class="sidebar">
-        <div class="row-fluid">
-            <div class="span12 cover-photo">
-                <img src="{{ STATIC_URL }}img/cover.jpeg" alt="codesters {{ user }} blog" />
+<div class="screen-content">
+    <aside class="cover cover-user picker-target">
+        <div class="cover-table">
+            <div class="cover-row">
+                <div class="cover-img" style="background-image:url('{{ STATIC_URL }}img/cover.jpeg')"></div>
             </div>
-        </div>
-        <div class="row-fluid">
-            <div class="span12 cover-body">
-                <div class="span8 offset2">
-                    <h1 class="blog-title"><a href="{% url blog_detail username=blog.user.username %}">{{ blog.title }}</a></h1>
-                    <p class="blog-subtitle">{{ blog.subtitle }}</p>
-                    <p class="blog-user">by <a href="{% url student_detail pk=blog.user.id %}">{{ blog.user }}</a></p>
+            <div class="cover-row">
+                <div class="cover-body">
+                    <div class="cover-body-inner">
+                        <span class="cover-avatar">
+                            <img src="{{ STATIC_URL }}img/avatar.png" alt="Avatar" />
+                        </span>
+                        <h1 class="cover-title"><a href="{% url blog_detail username=blog.user.username %}">{{ blog.title }}</a></h1>
+                        <p class="cover-description">{{ blog.subtitle }}</p>
+                        <p class="blog-user">by <a href="{% url student_detail pk=blog.user.id %}">{{ blog.user }}</a></p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div><!--/sidebar -->
+    </aside><!--/sidebar -->
 
-    <div class="article">
+    <section class="wrapper">
         {% block blog_content %}{% endblock %}
-    </div>
+    </section>
 </div>
 {% endblock %}

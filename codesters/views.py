@@ -6,6 +6,10 @@ from django.views.generic import TemplateView
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
+from profiles.models import Student
+
+class SettingsView(TemplateView):
+    template_name = 'profile.html'
 
 class HomeView(TemplateView):
     template_name = 'index.html'

@@ -1,7 +1,3 @@
-body {
-    margin-top:10px;
-}
-
 .logo {
     line-height: 50px;
     margin: 20px 0 0;
@@ -10,7 +6,13 @@ body {
 }
 
 .header {
+    padding-top: 10px;
     margin-bottom: 20px;
+    background: url("/static/img/header.png");
+}
+
+.header {
+    background: url("/static/img/header.png");
 }
 
 .footer {

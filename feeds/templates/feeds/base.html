@@ -19,7 +19,7 @@
     </div>
     <div class="span2 pull-right">
         {% if user.is_authenticated %}
-        <li class="btn"><a href="{% url feed_create %}">Add New</a></li>
+        <a class="btn btn-primary" href="{% url feed_create %}">Add New</a>
         {% endif %}
     </div>
 </div><!-- /subnavbar row-fluid -->

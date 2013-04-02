@@ -3,11 +3,14 @@
 {% block page_subtitle %}{{ blog.user.username }}{% endblock %}
 {% block blog_content %}
     {% for entry in entry_list %}
-    <div class="row-fluid">
-        <div class="span12">
-            <h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
-            <p><small>created on {{ entry.created_at }}</small></p>
-        </div>
+    <div class="bucket post-bucket">
+        <article class="post-item">
+            <h3 class="post-item-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
+            <div class="post-item-meta">
+                <p>created on {{ entry.created_at }}</p>
+            </div>
+            <p class="post-item-snippet">{{ entry.content|slice:":300" }}... <a href="{{ entry.get_absolute_url }}">Read more</a></p>
+        </article>
     </div>
     {% endfor %}
 {% endblock %}

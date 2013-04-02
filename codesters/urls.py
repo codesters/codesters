@@ -13,7 +13,7 @@ urlpatterns = patterns('',
     url(r'^team/$', TeamView.as_view(), name='page_team'),
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
-    url(r'^accounts/profile/$', ProfileView.as_view(), name='user_profile'),
+    url(r'^accounts/settings/$', SettingsView.as_view(), name='user_settings'),
 )
 
 urlpatterns += patterns('',

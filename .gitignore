@@ -3,3 +3,4 @@
 venv/*
 codesters/local_settings.py
 *.db
+assets/*
