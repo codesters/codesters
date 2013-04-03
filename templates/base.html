@@ -3,9 +3,7 @@
 {% block body %}
 <div class="header">
         <div class="heading container">
-            <div class="span9">
-                <h1>{% block page_title %}Codesters{% endblock %} <small>{% block page_subtitle %}simplifying learning{% endblock %}</small></h1>
-            </div>
+            <h1>{% block page_title %}Codesters{% endblock %} <small>{% block page_subtitle %}simplifying learning{% endblock %}</small></h1>
         </div>
     <div class="navbar navbar-static-top navbar-inverse">
         <div class="navbar-inner">
@@ -21,7 +19,7 @@
                         <li><a href="{% url page_home %}"><i class="icon-white icon-home"></i> Home</a></li>
                         <li><a href="#"><i class="icon-white icon-th-list"></i> Tracks</a></li>
                         <li><a href="{% url feed_list %}"><i class="icon-white icon-tags"></i> Feeds</a></li>
-                        <li><a href="#"><i class="icon-white icon-globe"></i> Explore</a></li>
+                        <li><a href="{% url explore_home %}"><i class="icon-white icon-globe"></i> Explore</a></li>
                         {% if user.is_authenticated %}
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-white icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">

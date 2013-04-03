@@ -2,14 +2,37 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{{ STATIC_URL }}css/blog.css" />
+<style type="text/css">
+    .screen-content {
+        left: 0;
+        z-index: 50;
+    }
+    .site-logo {
+        top: 10px;
+        left: 20px;
+        z-index: 400;
+    }
+    a.codesters-icon:before {
+        content: url('{{ STATIC_URL }}img/logo-48.png');
+        color: #fff;
+        float: left;
+        position: relative;
+    }
+    @media (min-width: 980px){
+        .site-logo {
+            position: absolute;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block body %}
+<div class="site-logo"><a href="{% url page_home %}" title="Go Home" class="icon codesters-icon"> </a></div>
 <div class="screen-content">
     <aside class="cover cover-user picker-target">
         <div class="cover-table">
             <div class="cover-row">
-                <div class="cover-img" style="background-image:url('{{ STATIC_URL }}img/cover.jpeg')"></div>
+                <div class="cover-img" style="background-image:url('{{ STATIC_URL }}img/cover.jpg')"></div>
             </div>
             <div class="cover-row">
                 <div class="cover-body">
@@ -25,7 +48,6 @@
             </div>
         </div>
     </aside><!--/sidebar -->
-
     <section class="wrapper">
         {% block blog_content %}{% endblock %}
     </section>

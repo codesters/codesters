@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head_title %}Explore{% endblock %}
+{% block page_title %}Explore{% endblock %}
+{% block page_subtitle %}codesters project{% endblock %}
+
+{% block content %}
+<div class="row-fluid">
+    <div class="span5 explore-box">
+        <h3>Recent Entries</h3>
+        <ol class="explore-list unstyled">
+            {% for entry in entries %}
+            <li>
+                <h4><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a> <small><a href="{{ entry.blog.get_absolute_url }}">{{ entry.blog }}</a> by <a href="{{ entry.blog.user.get_absolute_url }}">{{ entry.blog.user }}</a></small></h4>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="span5 offset1 explore-box">
+        <h3>Recent Projects</h3>
+        <ol class="explore-list unstyled">
+            <li>
+                <h4>Coming Soon</h4>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span5 explore-box">
+        <h3>Popular Blogs</h3>
+        <ol class="explore-list unstyled">
+            {% for blog in blogs %}
+            <li>
+                <h4><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a> <small>by <a href="{{ blog.user.get_absolute_url }}">{{ blog.user }}</a></small></h4>
+                <p>{{ blog.subtitle }}</p>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="span5 offset1 explore-box">
+        <h3>Popular Users</h3>
+        <ol class="explore-list unstyled">
+            {% for person in users %}
+            <li>
+                <a href="{{ person.get_absolute_url }}">{{ person }}</a>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock %}
