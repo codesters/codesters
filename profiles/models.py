@@ -12,22 +12,11 @@ class Student(models.Model):
     stackoverflow = models.URLField(null=True, blank=True)
     coderwall = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
-    badges = models.ManyToManyField('tracks.Badge', null=True, blank=True)
-    chapters_completed = models.ManyToManyField('tracks.Chapter', null=True, blank=True)
+#    badges = models.ManyToManyField('tracks.Badge', null=True, blank=True)
+#    chapters_completed = models.ManyToManyField('tracks.Chapter', null=True, blank=True)
 
     def __unicode__(self):
         return self.user.username
 
     def get_absolute_url(self):
         return reverse('student_detail', kwargs={'pk': self.id})
-
-#class Moderator(models.Model):
-#    user = models.ForeignKey(User)
-#
-#    def __unicode__(self):
-#        return u'%s' %self.user
-
-#@receiver(user_signed_up)
-#def student_create(sender, user, request, **kwargs):
-#    s = Student.objects.create(user=user)
-#    s.save()

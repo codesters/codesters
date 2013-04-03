@@ -1,6 +1,6 @@
 from django.db import models
 from feeds.models import Feed
-from profiles.models import Student
+from django.contrib.auth.models import User
 
 class TrackCategory(models.Model):
     name = models.CharField(max_length=30)
@@ -17,8 +17,9 @@ class Track(models.Model):
     prerequisites = models.TextField(null=True, blank=True)
     category = models.ForeignKey(TrackCategory)
     related_courses = models.ManyToManyField('self', null=True, blank=True)
-    created_by = models.ForeignKey(Student, related_name='creator')
-    moderators = models.ManyToManyField(Student, null=True, blank=True)
+    created_by = models.ForeignKey(User, related_name='creator')
+    created_at = models.DateTimeField(auto_now=True, editable=False)
+    moderators = models.ManyToManyField(User, null=True, blank=True)
 
     def __unicode__(self):
         return self.name
@@ -36,10 +37,10 @@ class Exercise(models.Model):
 #TODO make a Questions model for exercise
 
 class ExerciseSubmission(models.Model):
-    student = models.ForeignKey(Student)
+    student = models.ForeignKey(User)
     exercise = models.ForeignKey(Exercise)
     github_url = models.URLField()
-    endorse = models.ManyToManyField(Student, related_name='endorser')
+    endorse = models.ManyToManyField(User, related_name='endorser')
     accepted = models.BooleanField(default=False)
 
     def __unicode__(self):

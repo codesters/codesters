@@ -25,7 +25,8 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.TextField')()),
             ('prerequisites', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('category', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tracks.TrackCategory'])),
-            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='creator', to=orm['profiles.Student'])),
+            ('created_by', self.gf('django.db.models.fields.related.ForeignKey')(related_name='creator', to=orm['auth.User'])),
+            ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
         ))
         db.send_create_signal('tracks', ['Track'])
 
@@ -41,9 +42,9 @@ class Migration(SchemaMigration):
         db.create_table('tracks_track_moderators', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('track', models.ForeignKey(orm['tracks.track'], null=False)),
-            ('student', models.ForeignKey(orm['profiles.student'], null=False))
+            ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
-        db.create_unique('tracks_track_moderators', ['track_id', 'student_id'])
+        db.create_unique('tracks_track_moderators', ['track_id', 'user_id'])
 
         # Adding model 'Exercise'
         db.create_table('tracks_exercise', (
@@ -57,7 +58,7 @@ class Migration(SchemaMigration):
         # Adding model 'ExerciseSubmission'
         db.create_table('tracks_exercisesubmission', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('student', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['profiles.Student'])),
+            ('student', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
             ('exercise', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['tracks.Exercise'])),
             ('github_url', self.gf('django.db.models.fields.URLField')(max_length=200)),
             ('accepted', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -68,9 +69,9 @@ class Migration(SchemaMigration):
         db.create_table('tracks_exercisesubmission_endorse', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
             ('exercisesubmission', models.ForeignKey(orm['tracks.exercisesubmission'], null=False)),
-            ('student', models.ForeignKey(orm['profiles.student'], null=False))
+            ('user', models.ForeignKey(orm['auth.user'], null=False))
         ))
-        db.create_unique('tracks_exercisesubmission_endorse', ['exercisesubmission_id', 'student_id'])
+        db.create_unique('tracks_exercisesubmission_endorse', ['exercisesubmission_id', 'user_id'])
 
         # Adding model 'Chapter'
         db.create_table('tracks_chapter', (
@@ -172,8 +173,9 @@ class Migration(SchemaMigration):
         },
         'feeds.feed': {
             'Meta': {'object_name': 'Feed'},
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['profiles.Student']"}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'created_on': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'description': ('django.db.models.fields.TextField', [], {'default': "''", 'null': 'True', 'blank': 'True'}),
             'feed_type': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['feeds.FeedType']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['feeds.Tag']", 'symmetrical': 'False'}),
@@ -195,20 +197,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '60'}),
             'slug': ('django.db.models.fields.SlugField', [], {'default': "''", 'max_length': '50'})
-        },
-        'profiles.student': {
-            'Meta': {'object_name': 'Student'},
-            'badges': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['tracks.Badge']", 'null': 'True', 'blank': 'True'}),
-            'bio': ('django.db.models.fields.TextField', [], {'default': "''", 'blank': 'True'}),
-            'chapters_completed': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['tracks.Chapter']", 'null': 'True', 'blank': 'True'}),
-            'coderwall': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'github_username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'linkedin': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'stackoverflow': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'twitter_username': ('django.db.models.fields.CharField', [], {'max_length': '30', 'null': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
-            'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'})
         },
         'tracks.badge': {
             'Meta': {'object_name': 'Badge'},
@@ -237,19 +225,20 @@ class Migration(SchemaMigration):
         'tracks.exercisesubmission': {
             'Meta': {'object_name': 'ExerciseSubmission'},
             'accepted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'endorse': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'endorser'", 'symmetrical': 'False', 'to': "orm['profiles.Student']"}),
+            'endorse': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'endorser'", 'symmetrical': 'False', 'to': "orm['auth.User']"}),
             'exercise': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tracks.Exercise']"}),
             'github_url': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'student': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['profiles.Student']"})
+            'student': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'tracks.track': {
             'Meta': {'object_name': 'Track'},
             'category': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['tracks.TrackCategory']"}),
-            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'creator'", 'to': "orm['profiles.Student']"}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
+            'created_by': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'creator'", 'to': "orm['auth.User']"}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'moderators': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['profiles.Student']", 'null': 'True', 'blank': 'True'}),
+            'moderators': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['auth.User']", 'null': 'True', 'blank': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'prerequisites': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'related_courses': ('django.db.models.fields.related.ManyToManyField', [], {'blank': 'True', 'related_name': "'related_courses_rel_+'", 'null': 'True', 'to': "orm['tracks.Track']"}),

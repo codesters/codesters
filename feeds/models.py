@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
 
@@ -32,7 +33,7 @@ class Feed(models.Model):
     feed_type = models.ForeignKey(FeedType)
     tags = models.ManyToManyField(Tag)
     vote = models.IntegerField(default=0, editable=False)
-    created_by = models.ForeignKey('profiles.Student')
+    created_by = models.ForeignKey(User)
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
