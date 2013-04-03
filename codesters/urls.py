@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
     url(r'^accounts/settings/$', SettingsView.as_view(), name='user_settings'),
+    url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
 )
 
 urlpatterns += patterns('',
