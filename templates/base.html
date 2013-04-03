@@ -17,16 +17,16 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li><a href="{% url page_home %}"><i class="icon-white icon-home"></i> Home</a></li>
-                        <li><a href="#"><i class="icon-white icon-th-list"></i> Tracks</a></li>
+                        <li><a href="{% url track_list %}"><i class="icon-white icon-th-list"></i> Tracks</a></li>
                         <li><a href="{% url feed_list %}"><i class="icon-white icon-tags"></i> Feeds</a></li>
                         <li><a href="{% url explore_home %}"><i class="icon-white icon-globe"></i> Explore</a></li>
                         {% if user.is_authenticated %}
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-white icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><i class="icon-book"></i> My Blog</a></li>
-                                <li><a href="#"><i class="icon-th-list"></i> My tracks</a></li>
-                                <li><a href="#"><i class="icon-pencil"></i> My Feeds</a></li>
-                                <li><a href="#"><i class="icon-briefcase"></i> My Projects</a></li>
+                                <li><a href="{% url user_tracks %}"><i class="icon-th-list"></i> My tracks</a></li>
+                                <li><a href="{% url user_feeds %}"><i class="icon-pencil"></i> My Feeds</a></li>
+                                <li><a href="{% url user_projects %}"><i class="icon-briefcase"></i> My Projects</a></li>
                                 <li><a href="{% url user_profile %}"><i class="icon-picture"></i> My Profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="{% url user_settings %}"><i class="icon-wrench"></i> Settings</a></li>

@@ -39,6 +39,3 @@ class ContactView(TemplateView):
 
 class GuidelinesView(TemplateView):
     template_name = 'guidelines.html'
-
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'profile.html'

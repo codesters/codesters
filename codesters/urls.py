@@ -23,4 +23,5 @@ urlpatterns += patterns('',
     url(r'^blog/', include('blogs.urls')),
     url(r'^feed/', include('feeds.urls')),
     url(r'^profile/', include('profiles.urls')),
+    url(r'^track/', include('tracks.urls')),
 )
