@@ -14,6 +14,7 @@ class FeedListView(ListView):
     queryset = Feed.objects.all().order_by('-created_on')
     context_object_name = 'feeds'
     template_name = 'feeds/feed_list.html'
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super(FeedListView, self).get_context_data(**kwargs)
@@ -26,6 +27,7 @@ class FeedPopularListView(ListView):
     queryset = Feed.objects.all().order_by('-vote')
     context_object_name = 'feeds'
     template_name = 'feeds/feed_list.html'
+    paginate_by = 12
 
     def get_context_data(self, **kwargs):
         context = super(FeedPopularListView, self).get_context_data(**kwargs)
@@ -37,6 +39,7 @@ class FeedPopularListView(ListView):
 class FeedTypeListView(ListView):
     context_object_name = 'feeds'
     template_name = 'feeds/feed_list.html'
+    paginate_by = 12
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -53,6 +56,7 @@ class FeedTypeListView(ListView):
 class FeedTagListView(ListView):
     context_object_name = 'feeds'
     template_name = 'feeds/feed_list.html'
+    paginate_by = 12
 
     def get_queryset(self):
         slug = self.kwargs['slug']

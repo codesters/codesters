@@ -23,7 +23,7 @@
                         {% if user.is_authenticated %}
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-white icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><i class="icon-book"></i> My Blog</a></li>
+                                <li><a href="{% url user_blog %}"><i class="icon-book"></i> My Blog</a></li>
                                 <li><a href="{% url user_tracks %}"><i class="icon-th-list"></i> My tracks</a></li>
                                 <li><a href="{% url user_feeds %}"><i class="icon-pencil"></i> My Feeds</a></li>
                                 <li><a href="{% url user_projects %}"><i class="icon-briefcase"></i> My Projects</a></li>

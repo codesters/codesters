@@ -42,7 +42,10 @@
                         </span>
                         <h1 class="cover-title"><a href="{% url blog_detail username=blog.user.username %}">{{ blog.title }}</a></h1>
                         <p class="cover-description">{{ blog.subtitle }}</p>
-                        <p class="blog-user">by <a href="{% url student_detail pk=blog.user.id %}">{{ blog.user }}</a></p>
+                        <p class="blog-user">by <a href="{% url student_profile pk=blog.user.id %}">{{ blog.user }}</a></p>
+                        {% ifequal user blog.user %}
+                        <a href="{% url entry_create %}" class="btn btn-small btn-primary">Create New Post</a>
+                        {% endifequal %}
                     </div>
                 </div>
             </div>

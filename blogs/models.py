@@ -39,3 +39,8 @@ class Entry(models.Model):
 
     def get_absolute_url(self):
         return reverse('entry_detail', kwargs={'username':self.blog.user.username, 'slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Entry, self).save(*args, **kwargs)
