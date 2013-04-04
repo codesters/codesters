@@ -5,6 +5,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+PROD = True
+
 ADMINS = (
      ('Karambir Singh Nain', 'karambir@codesters.org'),
      ('Mohammad Adil', 'adil@codesters.org'),
@@ -56,8 +58,6 @@ MEDIA_ROOT = ''
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'assets')
-
-STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
@@ -155,3 +155,8 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+if PROD:
+    STATIC_URL = 'https://googledrive.com/host/0B7JHXm1IKzlFQnowLUVsSTJfTkE/'
+else:
+    STATIC_URL = '/static/'

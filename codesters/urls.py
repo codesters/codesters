@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
-from django.conf import settings
 
 from codesters.views import *
 
@@ -22,9 +21,4 @@ urlpatterns += patterns('',
     url(r'^feed/', include('feeds.urls')),
     url(r'^profile/', include('profiles.urls')),
     url(r'^track/', include('tracks.urls')),
-)
-
-urlpatterns += patterns('',
-    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
-    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )
