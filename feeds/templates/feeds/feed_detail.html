@@ -2,7 +2,7 @@
 {% load feeduri %}
 {% block feed_content %}
 <div class="row-fluid">
-    <div class="span12">
+    <div class="span9">
         <h1><a href="{% url feed_redirect pk=feed.id %}">{{ feed.title }}</a></h1>
         <p><small>submitted {{ feed.created_on|age }} by 
                 <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.created_by }}</a> in 
@@ -12,13 +12,13 @@
 </div>
 {% if feed.description %}
 <div class="row-fluid">
-    <div class="span12">
+    <div class="span9">
         <p>{{ feed.description }}</p>
     </div>
 </div>
 {% endif %}
 <div class="row-fluid">
-    <div class="span12">
+    <div class="span9">
         <h3>Comments</h3>
         <p>Coming Soon ...</p>
     </div>
