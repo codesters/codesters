@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 class Tag(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
     slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
 
@@ -15,10 +15,10 @@ class Tag(models.Model):
         return reverse('feed_tag_list', kwargs={'slug': self.slug})
 
 class FeedType(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
     slug = models.SlugField(default='')
     help_text = models.CharField(max_length=300, null=True, blank=True)
-    color = models.CharField(max_length=20, default='purple')
+    color = models.CharField(max_length=20, default='purple', unique=True)
 
     def __unicode__(self):
         return self.name
@@ -27,8 +27,8 @@ class FeedType(models.Model):
         return reverse('feed_type_list', kwargs={'slug': self.slug})
 
 class Feed(models.Model):
-    title = models.CharField(max_length=250)
-    url = models.URLField()
+    title = models.CharField(max_length=250, unique=True)
+    url = models.URLField(unique=True)
     description = models.TextField(null=True, blank=True, default='')
     feed_type = models.ForeignKey(FeedType)
     tags = models.ManyToManyField(Tag)
