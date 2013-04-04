@@ -39,7 +39,14 @@ class UserFeedsView(ListView):
 
 
 class UserProjectsView(TemplateView):
-    template_name = 'coming_soon.html'
+    template_name = 'profiles/user_projects.html'
+
+    def get_context_data(self,**kwargs):
+        context = super(UserProjectsView, self).get_context_data(**kwargs)
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+        context['userinfo'] = user
+        return context
+
 
 class UserEntriesView(ListView):
     context_object_name = 'entries'

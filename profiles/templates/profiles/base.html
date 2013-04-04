@@ -5,7 +5,7 @@
     <div class="span3 profile-sidebar well">
         <div class="row-fluid">
             <div class="span12 profile-photo">
-                <a href="http://gravatar.com/emails/"><img src="{% gravatar_url userinfo.email %}" alt="{{ userinfo }} photo - codesters" /></a>
+                <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="{% gravatar_url userinfo.email %}" alt="{{ userinfo }} photo - codesters" /></a>
             </div>
         </div>
         <div class="row-fluid">
@@ -29,7 +29,7 @@
         <ul class="nav nav-tabs">
             <li><a href="{{ userinfo.userprofile.get_absolute_url }}">Info</a></li>
             <li><a href="{% url user_feeds pk=userinfo.pk %}">Feeds</a></li>
-            <li class="disabled"><a href="{% url user_projects pk=userinfo.pk %}">Projects</a></li>
+            <li><a href="{% url user_projects pk=userinfo.pk %}">Projects</a></li>
             <li><a href="{% url user_entries pk=userinfo.pk %}">Entries</a></li>
         </ul>
         <div class="row-fluid profile-content">
