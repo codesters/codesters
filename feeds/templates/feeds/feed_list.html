@@ -19,7 +19,7 @@
                                 <a href="{{ feed.created_by.userprofile.get_absolute_url }}">{{ feed.created_by }}</a> in 
                                 <a href="{% url feed_type_list slug=feed.feed_type.slug %}">{{ feed.feed_type }}</a>
                         </small> </p>
-                        <a href="{% url feed_detail pk=feed.id %}" class="btn btn-small"><i class="icon-comment"></i> Discuss - # comments</a> 
+                        <a href="{% url feed_detail pk=feed.id %}" class="btn btn-small"><i class="icon-comments"></i> Discuss - # comments</a> 
                         {% if user.is_staff or feed.created_by.user == user %}<a href="{% url feed_update pk=feed.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
                     </div>
                 </div>

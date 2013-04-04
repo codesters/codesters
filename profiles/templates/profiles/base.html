@@ -12,25 +12,25 @@
             <div class="span12 profile-short-info">
                 <ul class="nav nav-list ">
                     <li class="nav-header">{{ userinfo }}</li>
-                    <li><a href="{{ userinfo.userprofile.get_absolute_url }}">{{ userinfo.get_full_name }}</a></li>
-                    <li><a href="{{ userinfo.blog.get_absolute_url }}">Blog</a></li>
+                    <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-user"></i> {{ userinfo.get_full_name|default:"(Not provided)" }}</a></li>
+                    <li><a href="{{ userinfo.blog.get_absolute_url }}"><i class="icon-folder-close"></i> Blog</a></li>
                     <li class="nav-header">Other Profiles</li>
-                    {% if userinfo.userprofile.github %}<li><a href="http://github.com/{{ userinfo.userprofile.github }}"> Github</a></li>{% endif %}
-                    {% if userinfo.userprofile.twitter %}<li><a href="http://twitter.com/{{ userinfo.userprofile.twitter }}"> Twitter</a></li>{% endif %}
-                    {% if userinfo.userprofile.website %}<li><a href="{{ userinfo.userprofile.website }}"> Website</a></li>{% endif %}
-                    {% if userinfo.userprofile.stackoverflow %}<li><a href="{{ userinfo.userprofile.stackoverflow }}"> Stackoverflow</a></li>{% endif %}
-                    {% if userinfo.userprofile.coderwall %}<li><a href="{{ userinfo.userprofile.coderwall }}"> Coderwall</a></li>{% endif %}
-                    {% if userinfo.userprofile.linkedin %}<li><a href="{{ userinfo.userprofile.linkedin }}"> Linkedin</a></li>{% endif %}
+                    {% if userinfo.userprofile.github %}<li><a href="http://github.com/{{ userinfo.userprofile.github }}"><i class="icon-github"></i> Github</a></li>{% endif %}
+                    {% if userinfo.userprofile.twitter %}<li><a href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
+                    {% if userinfo.userprofile.website %}<li><a href="{{ userinfo.userprofile.website }}"><i class="icon-external-link"></i> Website</a></li>{% endif %}
+                    {% if userinfo.userprofile.stackoverflow %}<li><a href="{{ userinfo.userprofile.stackoverflow }}"><i class="icon-cogs"></i> Stackoverflow</a></li>{% endif %}
+                    {% if userinfo.userprofile.coderwall %}<li><a href="{{ userinfo.userprofile.coderwall }}"><i class="icon-spinner"></i> Coderwall</a></li>{% endif %}
+                    {% if userinfo.userprofile.linkedin %}<li><a href="{{ userinfo.userprofile.linkedin }}"><i class="icon-linkedin"></i> Linkedin</a></li>{% endif %}
                 </ul>
             </div>
         </div>
     </div>
     <div class="span9 profile-main">
         <ul class="nav nav-tabs">
-            <li><a href="{{ userinfo.userprofile.get_absolute_url }}">Info</a></li>
-            <li><a href="{% url user_feeds pk=userinfo.pk %}">Feeds</a></li>
-            <li><a href="{% url user_projects pk=userinfo.pk %}">Projects</a></li>
-            <li><a href="{% url user_entries pk=userinfo.pk %}">Entries</a></li>
+            <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-info-sign"></i> Info</a></li>
+            <li><a href="{% url user_feeds pk=userinfo.pk %}"><i class="icon-pushpin"></i> Feeds</a></li>
+            <li><a href="{% url user_projects pk=userinfo.pk %}"><i class="icon-briefcase"></i> Projects</a></li>
+            <li><a href="{% url user_entries pk=userinfo.pk %}"><i class="icon-quote-right"></i> Entries</a></li>
         </ul>
         <div class="row-fluid profile-content">
             {% block profile_content %}{% endblock %}

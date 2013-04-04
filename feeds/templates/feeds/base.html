@@ -4,9 +4,9 @@
 <div class="row-fluid">
     <div class="span9">
         <ul class="nav nav-tabs">
-            <li><a href="{% url feed_list %}">Recent</a></li>
-            <li><a href="{% url feed_popular_list %}">Popular</a></li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Types <b class="caret"></b></a>
+            <li><a href="{% url feed_list %}"><i class="icon-time"></i> Recent</a></li>
+            <li><a href="{% url feed_popular_list %}"><i class="icon-fire"></i> Popular</a></li>
+            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-large"></i> Types <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url feed_type_list slug="video" %}">Video</a></li>
                     <li><a href="{% url feed_type_list slug="tutorial" %}">Tutorial</a></li>
@@ -19,7 +19,7 @@
     </div>
     <div class="span2 pull-right">
         {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="{% url feed_create %}">Add New</a>
+        <a class="btn btn-primary" href="{% url feed_create %}"><i class="icon-plus"></i> Add New</a>
         {% endif %}
     </div>
 </div><!-- /subnavbar row-fluid -->

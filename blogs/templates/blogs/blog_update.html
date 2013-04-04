@@ -2,10 +2,10 @@
 {% block head_title %}Update Blog{% endblock %}
 {% load bootstrap %}
 {% block blog_content %}
-    <h2>Edit Blog</h2>
+    <h2><i class="icon-edit"></i> Edit Blog</h2>
     <form action="" method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
-        <button class="btn btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save</button>
     </form>
 {% endblock %}
