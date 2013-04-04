@@ -67,8 +67,6 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, 'templates'),
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
-
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
         'guardian.backends.ObjectPermissionBackend',
