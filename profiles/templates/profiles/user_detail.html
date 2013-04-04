@@ -13,7 +13,7 @@
         {% if userprofile.website %}<a href="{{ userprofile.website }}">Website</a><br />{% endif %}
         {% if userprofile.github %}<a href="http://github.com/{{ userprofile.github }}">Github</a><br />{% endif %}
         {% if userprofile.twitter %}<a href="http://twitter.com/{{ userprofile.twitter }}">Twitter</a><br />{% endif %}
-        <a href="{% url blog_detail username=userinfo.username %}">Blog</a>
+        <a href="{% url blog_detail pk=userinfo.blog.pk %}">Blog</a>
     </p>
 </div>
 {% endblock %}

@@ -11,7 +11,8 @@ from blogs.forms import EntryCreateForm, EntryUpdateForm, BlogUpdateForm
 
 class BlogHomeView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self):
-        return reverse('blog_detail', kwargs={'username':'admin'})
+        pk = User.objects.get(username='admin').pk
+        return reverse('blog_detail', kwargs={'pk':pk})
 
 #TODO Add permission
 class BlogUpdateView(UpdateView):
@@ -21,7 +22,7 @@ class BlogUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(BlogUpdateView, self).get_context_data(**kwargs)
-        blog = Blog.objects.get(user=self.request.user)
+        blog = get_object_or_404(Blog, pk=self.kwargs['pk'])
         context['blog'] = blog
         return context
 
@@ -52,10 +53,8 @@ class EntryDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(EntryDetailView, self).get_context_data(**kwargs)
-        username = self.kwargs['username']
-        u = User.objects.get(username=username)
-        blog = Blog.objects.get(user=u)
-        context['blog'] = blog
+        entry = get_object_or_404(Entry, pk=self.kwargs['pk'])
+        context['blog'] = entry.blog
         return context
 
 class EntryUpdateView(UpdateView):
@@ -75,16 +74,12 @@ class EntryListView(ListView):
     paginate_by = 12
 
     def get_queryset(self):
-        username = self.kwargs['username']
-        u = User.objects.get(username=username)
-        blog = Blog.objects.get(user=u)
+        blog = get_object_or_404(Blog, pk=self.kwargs['pk'])
         entries = blog.entry_set.all()
         return entries
 
     def get_context_data(self, **kwargs):
         context = super(EntryListView, self).get_context_data(**kwargs)
-        username = self.kwargs['username']
-        u = User.objects.get(username=username)
-        blog = Blog.objects.get(user=u)
+        blog = get_object_or_404(Blog, pk=self.kwargs['pk'])
         context['blog'] = blog
         return context

@@ -13,7 +13,7 @@ class Blog(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog_detail', kwargs={'username': self.user.username})
+        return reverse('blog_detail', kwargs={'pk': self.pk})
 
 
 class Tag(models.Model):
@@ -38,7 +38,7 @@ class Entry(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('entry_detail', kwargs={'username':self.blog.user.username, 'slug': self.slug})
+        return reverse('entry_detail', kwargs={'pk':self.pk})
 
     def save(self, *args, **kwargs):
         if not self.slug:

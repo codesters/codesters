@@ -40,7 +40,7 @@
                         <span class="cover-avatar">
                             <img src="{{ STATIC_URL }}img/avatar.png" alt="Avatar" />
                         </span>
-                        <h1 class="cover-title"><a href="{% url blog_detail username=blog.user.username %}">{{ blog.title }}</a></h1>
+                        <h1 class="cover-title"><a href="{% url blog_detail pk=blog.pk %}">{{ blog.title }}</a></h1>
                         <p class="cover-description">{{ blog.subtitle|default:"Not provided" }}</p>
                         <p class="blog-user">by <a href="{% url user_detail pk=blog.user.id %}">{{ blog.user }}</a></p>
                         {% ifequal user blog.user %}

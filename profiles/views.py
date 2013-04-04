@@ -40,7 +40,7 @@ class MyBlogView(LoginRequiredMixin, RedirectView):
 
     def get_redirect_url(self):
         user = self.request.user
-        return reverse('blog_detail', kwargs={'username':user.username})
+        return reverse('blog_detail', kwargs={'pk':user.blog.pk})
 
 class MyProfileView(LoginRequiredMixin, RedirectView):
     permanent = False
