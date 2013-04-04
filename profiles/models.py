@@ -32,6 +32,9 @@ class UserProfile(models.Model):
     def get_absolute_url(self):
         return reverse('user_detail', kwargs={'pk': self.user.pk})
 
+    def get_feeds_url(self):
+        return reverse('user_feeds', kwargs={'pk': self.user.pk})
+
     def get_feeds(self):
         return self.user.feed_set.all()
 

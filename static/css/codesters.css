@@ -6,6 +6,16 @@ h1 a, h2 a, h3 a {
     color: #034482;
 }
 
+.profile-photo {
+    height: 300px !important;
+    padding: 10px;
+}
+
+.profile-photo img {
+    height: 280px;
+    width: 250px;
+}
+
 .info-page {
     min-height: 380px !important;
     padding: 30px;

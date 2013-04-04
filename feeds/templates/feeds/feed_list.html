@@ -1,6 +1,6 @@
 {% extends "feeds/base.html" %}
 
-{% load feeduri %}
+{% load codesters %}
 
 {% block feed_content %}
 <div class="row-fluid">
@@ -16,7 +16,7 @@
                     <div class="span11 feed-data">
                         <h3><a href="{% url feed_redirect pk=feed.id %}">{{ feed.title }}</a> <small>{{ feed.url|website }}</small></h3>
                         <p><small>submitted  {{ feed.created_on|age  }} by 
-                                <a href="{{ feed.created_by.get_absolute_url }}">{{ feed.created_by }}</a> in 
+                                <a href="{{ feed.created_by.userprofile.get_absolute_url }}">{{ feed.created_by }}</a> in 
                                 <a href="{% url feed_type_list slug=feed.feed_type.slug %}">{{ feed.feed_type }}</a>
                         </small> </p>
                         <a href="{% url feed_detail pk=feed.id %}" class="btn btn-small"><i class="icon-comment"></i> Discuss - # comments</a> 

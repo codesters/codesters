@@ -69,23 +69,6 @@ class FeedTagListView(ListView):
         return context
 
 
-class FeedUserListView(ListView):
-    context_object_name = 'feeds'
-    template_name = 'feeds/feed_list.html'
-    paginate_by = 12
-
-    def get_queryset(self):
-        pk = self.kwargs['pk']
-        user = get_object_or_404(User, pk=pk)
-        return user.feed_set.all()
-
-    def get_context_data(self, **kwargs):
-        context = super(FeedUserListView, self).get_context_data(**kwargs)
-        tags = Tag.objects.filter(feed__title__isnull=False).distinct()
-        context['tags'] = tags
-        return context
-
-
 class FeedRedirectView(RedirectView):
     permanent = False
 

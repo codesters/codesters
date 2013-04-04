@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^tracks/$', MyTracksView.as_view(), name='my_tracks'),
     url(r'^projects/$', MyProjectsView.as_view(), name='my_projects'),
     url(r'^(?P<pk>\d+)/$', UserDetailView.as_view(), name='user_detail'),
+    url(r'^(?P<pk>\d+)/feeds/$', UserFeedsView.as_view(), name='user_feeds'),
+    url(r'^(?P<pk>\d+)/projects/$', UserProjectsView.as_view(), name='user_projects'),
+    url(r'^(?P<pk>\d+)/entries/$', UserEntriesView.as_view(), name='user_entries'),
 )

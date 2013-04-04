@@ -1,10 +1,11 @@
 {% extends "blogs/base.html" %}
 {% block page_title %}Blog{% endblock %}
 {% block page_subtitle %}{{ blog.user.username }}{% endblock %}
+{% load codesters %}
 
 {% block blog_content %}
     <h2>{{ entry.title }}</h2>
-    <p><small>created on {{ entry.created_at }}</small></p>
+    <p><small>created {{ entry.created_at|age }}</small></p>
     <a href="{% url entry_update pk=entry.pk %}" class="btn btn-small pull-right btn-primary">Edit post</a>
     <p>{{ entry.content|linebreaksbr }}</p>
 {% endblock %}

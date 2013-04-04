@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "profiles/base.html" %}
 
 {% block head_title %}{{ userinfo }}{% endblock %}
 
@@ -6,14 +6,8 @@
 
 {% block page_subtitle %}profile{% endblock %}
 
-{% block content %}
-<div class="span6 offset3">
-    <h2>{{ userinfo.get_full_name }}</h2>
-    <p class="lead"><strong>BIO:</strong> {{ userprofile.bio }}<br />
-        {% if userprofile.website %}<a href="{{ userprofile.website }}">Website</a><br />{% endif %}
-        {% if userprofile.github %}<a href="http://github.com/{{ userprofile.github }}">Github</a><br />{% endif %}
-        {% if userprofile.twitter %}<a href="http://twitter.com/{{ userprofile.twitter }}">Twitter</a><br />{% endif %}
-        <a href="{% url blog_detail pk=userinfo.blog.pk %}">Blog</a>
-    </p>
+{% block profile_content %}
+<div class="span12">
+    <p>{{ userinfo.userprofile.bio }}</p>
 </div>
 {% endblock %}

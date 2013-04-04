@@ -1,0 +1,10 @@
+{% extends "profiles/base.html" %}
+{% load codesters %}
+{% block profile_content %}
+<div class="span12">
+    {% for entry in entries %}
+            <h3><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a> <small>created {{ entry.created_at|age }}</small></h3>
+    {% endfor %}
+    {% include "pagination.html" %}
+</div>
+{% endblock %}

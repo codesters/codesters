@@ -1,13 +1,14 @@
 {% extends "blogs/base.html" %}
 {% block page_title %}Blog{% endblock %}
 {% block page_subtitle %}{{ blog.user.username }}{% endblock %}
+{% load codesters %}
 {% block blog_content %}
     {% for entry in entry_list %}
     <div class="bucket post-bucket">
         <article class="post-item">
             <h3 class="post-item-title"><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></h3>
             <div class="post-item-meta">
-                <p>created on {{ entry.created_at }}</p>
+                <p>created {{ entry.created_at|age }}</p>
             </div>
             <p class="post-item-snippet">{{ entry.content|slice:":300" }}... <a href="{{ entry.get_absolute_url }}">Read more</a></p>
         </article>
