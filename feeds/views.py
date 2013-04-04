@@ -6,7 +6,6 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
 from feeds.models import Feed, Tag, FeedType
-from profiles.models import Student
 
 from feeds.forms import FeedCreateForm, FeedUpdateForm
 
@@ -95,8 +94,7 @@ class FeedCreateView(LoginRequiredMixin, CreateView):
     template_name = 'feeds/feed_create.html'
 
     def form_valid(self, form):
-        student = Student.objects.get(user=self.request.user)
-        form.instance.created_by = student
+        form.instance.created_by = self.request.user
         return super(FeedCreateView, self).form_valid(form)
 
 

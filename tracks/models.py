@@ -47,11 +47,11 @@ class ExerciseSubmission(models.Model):
         return u'%s from %s at %s' % (exercise.name, student.user.username, github_url)
 
 class Chapter(models.Model):
+#    index = models.IntegerField()
     name = models.CharField(max_length=100)
     slug = models.SlugField()
     description = models.TextField(blank=True, default='')
     track = models.ForeignKey(Track)
-#    ordering = models.IntegerField()
     feeds = models.ManyToManyField(Feed)
     exercise = models.ForeignKey(Exercise, null=True, blank=True)
 

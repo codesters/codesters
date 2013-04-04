@@ -2,6 +2,7 @@
 
 - *IMPORTANT* student-profile url is using student pk but in blog base template, it is given user pk. It can lead to problems amend it.
 - Make users in advance with usernames projects, feeds, tracks, blog, codesters, admin.
+- Make blog edit views.
 - Remove all unnecessary import from all files.
 - Limit explore boxes to show only 6 items.
 - Figure out how to record a person's vote

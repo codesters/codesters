@@ -1,7 +1,7 @@
 from django.contrib import admin
-from profiles.models import Student
+from profiles.models import UserProfile
 
-class StudentAdmin(admin.ModelAdmin):
-    list_display=('user', 'github_username')
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display=('user', 'github', 'twitter')
 
-admin.site.register(Student, StudentAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

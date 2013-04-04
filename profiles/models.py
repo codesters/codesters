@@ -1,22 +1,33 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tracks.models import Chapter, Badge
 
 from django.core.urlresolvers import reverse
 
-class Student(models.Model):
-    user = models.ForeignKey(User)
+from django.dispatch import receiver
+from registration.signals import user_activated
+
+@receiver(user_activated)
+def create_user_profile(sender, user, request, **kwargs):
+    from blogs.models import Blog
+    user_profile = UserProfile.objects.create(user=user)
+    blog_title = str(user.username)+'\'s Blog'
+    blog = Blog.objects.create(user=user, title=blog_title)
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
     bio = models.TextField(blank=True, default='')
-    github_username = models.CharField(max_length=30, null=True, blank=True)
+    github = models.CharField(max_length=30, null=True, blank=True)
+    twitter = models.CharField(max_length=30, null=True, blank=True)
     website = models.URLField(null=True, blank=True)
-    twitter_username = models.CharField(max_length=30, null=True, blank=True)
     stackoverflow = models.URLField(null=True, blank=True)
     coderwall = models.URLField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
-#    badges = models.ManyToManyField('tracks.Badge', null=True, blank=True)
-#    chapters_completed = models.ManyToManyField('tracks.Chapter', null=True, blank=True)
+    badges = models.ManyToManyField(Badge, null=True, blank=True)
+    chapters_completed = models.ManyToManyField(Chapter, null=True, blank=True)
 
     def __unicode__(self):
         return self.user.username
 
     def get_absolute_url(self):
-        return reverse('student_detail', kwargs={'pk': self.id})
+        return reverse('user_detail', kwargs={'pk': self.user.id})

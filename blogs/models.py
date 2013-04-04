@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 
 
 class Blog(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=100, null=True, blank=True)
 

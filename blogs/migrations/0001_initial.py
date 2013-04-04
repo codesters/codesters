@@ -11,7 +11,7 @@ class Migration(SchemaMigration):
         # Adding model 'Blog'
         db.create_table('blogs_blog', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('subtitle', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
         ))
@@ -96,7 +96,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'subtitle': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
         },
         'blogs.entry': {
             'Meta': {'object_name': 'Entry'},

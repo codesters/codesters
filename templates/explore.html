@@ -42,7 +42,7 @@
         <ol class="explore-list unstyled">
             {% for person in users %}
             <li>
-                <a href="{{ person.get_absolute_url }}">{{ person }}</a>
+                <a href="{% url user_detail pk=person.id %}">{{ person }}</a>
             </li>
             {% endfor %}
         </ol>

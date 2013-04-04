@@ -1,11 +1,9 @@
 from django.conf.urls import patterns, include, url
-
-from django.views.generic.simple import direct_to_template
-
-from codesters.views import *
-
 from django.contrib import admin
 admin.autodiscover()
+from django.conf import settings
+
+from codesters.views import *
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
@@ -13,7 +11,7 @@ urlpatterns = patterns('',
     url(r'^team/$', TeamView.as_view(), name='page_team'),
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
-    url(r'^accounts/settings/$', SettingsView.as_view(), name='user_settings'),
+    url(r'^accounts/settings/$', SettingsView.as_view(), name='my_settings'),
     url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
 )
 
@@ -24,4 +22,9 @@ urlpatterns += patterns('',
     url(r'^feed/', include('feeds.urls')),
     url(r'^profile/', include('profiles.urls')),
     url(r'^track/', include('tracks.urls')),
+)
+
+urlpatterns += patterns('',
+    (r'^favicon\.ico$', 'django.views.generic.simple.redirect_to', {'url': '/static/img/favicon.ico'}),
+    (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
 )

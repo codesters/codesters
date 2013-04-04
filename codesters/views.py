@@ -6,7 +6,6 @@ from django.views.generic import TemplateView, ListView
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
-from profiles.models import Student
 from blogs.models import Entry, Blog, Tag
 
 class ExploreView(ListView):
@@ -17,7 +16,7 @@ class ExploreView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ExploreView, self).get_context_data(**kwargs)
         blogs = Blog.objects.all()
-        users = User.objects.filter(is_active=True)
+        users = User.objects.filter(is_active=True).exclude(pk=-1)
         context['blogs'] = blogs
         context['users'] = users
         return context

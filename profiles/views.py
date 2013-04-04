@@ -2,15 +2,24 @@ from django.views.generic import DetailView, RedirectView, TemplateView, ListVie
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
-from profiles.models import Student
+from profiles.models import UserProfile
 from feeds.models import Feed
 
+from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 
-class StudentProfileView(DetailView):
-    context_object_name = 'student'
-    template_name = 'profiles/student_profile.html'
-    model = Student
+
+class UserDetailView(DetailView):
+    context_object_name = 'userinfo'
+    template_name = 'profiles/user_detail.html'
+    model = User
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailView, self).get_context_data(**kwargs)
+        user = get_object_or_404(User, pk=self.kwargs['pk'])
+        userprofile = get_object_or_404(UserProfile, user=user)
+        context['userprofile'] = userprofile
+        return context
 
 
 class MyTracksView(LoginRequiredMixin, TemplateView):
@@ -20,7 +29,7 @@ class MyProjectsView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
 
 class MyFeedsView(LoginRequiredMixin, ListView):
-    template_name = 'profiles/user_feeds.html'
+    template_name = 'profiles/my_feeds.html'
     context_object_name = 'feeds'
 
     def get_queryset(self):
@@ -38,5 +47,4 @@ class MyProfileView(LoginRequiredMixin, RedirectView):
 
     def get_redirect_url(self):
         user = self.request.user
-        pk = Student.objects.get(user=user).id
-        return reverse('student_profile', kwargs={'pk':pk})
+        return reverse('user_detail', kwargs={'pk':user.id})
