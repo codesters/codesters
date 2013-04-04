@@ -28,10 +28,10 @@ THIRD_PARTY_APPS = (
     'django_extensions',
     'registration',
     'guardian',
+    'bootstrapform',
 )
 
 LOCAL_APPS = (
-    'bootstrap_toolkit',
     'profiles',
     'tracks',
     'blogs',

@@ -1,11 +1,11 @@
 {% extends "blogs/base.html" %}
 {% block head_title %}Update Entry | Blog{% endblock %}
-{% load bootstrap_toolkit %}
+{% load bootstrap %}
 {% block blog_content %}
     <h2>Update Entry</h2>
     <form action="" method="post">
         {% csrf_token %}
-        {% bootstrap_form form layout="vertical" %}
+        {{ form|bootstrap }}
         <button class="btn btn-primary" type="submit">Update</button>
     </form>
 {% endblock %}
