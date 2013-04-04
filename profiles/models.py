@@ -30,4 +30,25 @@ class UserProfile(models.Model):
         return self.user.username
 
     def get_absolute_url(self):
-        return reverse('user_detail', kwargs={'pk': self.user.id})
+        return reverse('user_detail', kwargs={'pk': self.user.pk})
+
+    def get_feeds(self):
+        return self.user.feed_set.all()
+
+    def get_feeds_by_type(self, slug):
+        return self.user.feed_set.filter(feed_type__slug=slug)
+
+    def get_feeds_by_tag(self, slug):
+        return self.user.feed_set.filter(tags__slug=slug)
+
+    def get_blog(self):
+        return self.user.blog
+
+    def get_entries(self):
+        return self.user.blog.entry_set.all()
+
+    def get_published_entries(self):
+        return self.user.blog.entry_set.filter(published=True)
+
+    def get_entries_by_tag(self, slug):
+        return self.user.blog.entry_set.filter(tags__slug=slug)

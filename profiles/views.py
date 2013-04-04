@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, RedirectView, TemplateView, ListView
+from django.views.generic import DetailView, RedirectView, TemplateView
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
@@ -17,7 +17,7 @@ class UserDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(UserDetailView, self).get_context_data(**kwargs)
         user = get_object_or_404(User, pk=self.kwargs['pk'])
-        userprofile = get_object_or_404(UserProfile, user=user)
+        userprofile = get_object_or_404(UserProfile, user=user) #redundancy check for user may exist but his profile not
         context['userprofile'] = userprofile
         return context
 
@@ -28,12 +28,12 @@ class MyTracksView(LoginRequiredMixin, TemplateView):
 class MyProjectsView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
 
-class MyFeedsView(LoginRequiredMixin, ListView):
-    template_name = 'profiles/my_feeds.html'
-    context_object_name = 'feeds'
+class MyFeedsView(LoginRequiredMixin, RedirectView):
+    permanent = False
 
-    def get_queryset(self):
-        return Feed.objects.filter(created_by=self.request.user)
+    def get_redirect_url(self):
+        user = self.request.user
+        return reverse('feed_user_list', kwargs={'pk':user.pk})
 
 class MyBlogView(LoginRequiredMixin, RedirectView):
     permanent = False
