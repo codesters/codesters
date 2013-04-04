@@ -7,11 +7,27 @@ from django.shortcuts import get_object_or_404
 from guardian.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, RedirectView
 
-from blogs.forms import EntryCreateForm, EntryUpdateForm
+from blogs.forms import EntryCreateForm, EntryUpdateForm, BlogUpdateForm
 
 class BlogHomeView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self):
         return reverse('blog_detail', kwargs={'username':'admin'})
+
+#TODO Add permission
+class BlogUpdateView(UpdateView):
+    model = Blog
+    form_class = BlogUpdateForm
+    template_name = 'blogs/blog_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(BlogUpdateView, self).get_context_data(**kwargs)
+        blog = Blog.objects.get(user=self.request.user)
+        context['blog'] = blog
+        return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(BlogUpdateView, self).form_valid(form)
 
 class EntryCreateView(CreateView):
     model = Entry
