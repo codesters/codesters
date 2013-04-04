@@ -154,11 +154,6 @@ import dj_database_url
 DATABASES['default'] = dj_database_url.config()
 
 try:
-    from prod_settings import *
-except ImportError:
-    pass
-
-try:
     from local_settings import *
 except ImportError:
     pass

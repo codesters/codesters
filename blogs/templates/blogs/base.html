@@ -44,7 +44,10 @@
                         <p class="cover-description">{{ blog.subtitle|default:"Not provided" }}</p>
                         <p class="blog-user">by <a href="{% url user_detail pk=blog.user.id %}">{{ blog.user }}</a></p>
                         {% ifequal user blog.user %}
-                        <a href="{% url entry_create %}" class="btn btn-small btn-primary">Create New Post</a>
+                        <div class="btn-group">
+                            <a href="{% url entry_create %}" class="btn btn-small btn-primary">Create New Post</a>
+                            <a href="{% url blog_update pk=user.blog.pk %}" class="btn btn-small">Edit Blog</a>
+                        </div>
                         {% endifequal %}
                     </div>
                 </div>

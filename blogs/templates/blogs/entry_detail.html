@@ -5,5 +5,6 @@
 {% block blog_content %}
     <h2>{{ entry.title }}</h2>
     <p><small>created on {{ entry.created_at }}</small></p>
+    <a href="{% url entry_update pk=entry.pk %}" class="btn btn-small pull-right btn-primary">Edit post</a>
     <p>{{ entry.content|linebreaksbr }}</p>
 {% endblock %}

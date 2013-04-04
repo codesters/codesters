@@ -5,7 +5,7 @@
     <h2>Edit Blog</h2>
     <form action="" method="post">
         {% csrf_token %}
-        {{ b form|bootstrap }}
+        {{ form|bootstrap }}
         <button class="btn btn-primary" type="submit">Save</button>
     </form>
 {% endblock %}

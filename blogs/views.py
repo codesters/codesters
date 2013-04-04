@@ -15,7 +15,7 @@ class BlogHomeView(LoginRequiredMixin, RedirectView):
         return reverse('blog_detail', kwargs={'pk':pk})
 
 #TODO Add permission
-class BlogUpdateView(UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UpdateView):
     model = Blog
     form_class = BlogUpdateForm
     template_name = 'blogs/blog_update.html'
@@ -30,7 +30,7 @@ class BlogUpdateView(UpdateView):
         form.instance.user = self.request.user
         return super(BlogUpdateView, self).form_valid(form)
 
-class EntryCreateView(CreateView):
+class EntryCreateView(LoginRequiredMixin, CreateView):
     model = Entry
     form_class = EntryCreateForm
     template_name = 'blogs/entry_create.html'
@@ -57,7 +57,7 @@ class EntryDetailView(DetailView):
         context['blog'] = entry.blog
         return context
 
-class EntryUpdateView(UpdateView):
+class EntryUpdateView(LoginRequiredMixin, UpdateView):
     model = Entry
     form_class = EntryUpdateForm
     template_name = 'blogs/entry_update.html'
