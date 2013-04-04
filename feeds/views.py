@@ -42,7 +42,7 @@ class FeedTypeListView(ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
-        feed_type = FeedType.objects.get(slug=slug)
+        feed_type = get_object_or_404(FeedType, slug=slug)
         return Feed.objects.filter(feed_type=feed_type)
 
     def get_context_data(self, **kwargs):
@@ -59,7 +59,7 @@ class FeedTagListView(ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
-        tag = Tag.objects.get(slug=slug)
+        tag = get_object_or_404(Tag, slug=slug)
         return tag.feed_set.all()
 
     def get_context_data(self, **kwargs):
@@ -74,7 +74,7 @@ class FeedRedirectView(RedirectView):
 
     def get_redirect_url(self, pk):
         feed = get_object_or_404(Feed, pk=pk)
-        feed.vote_up()
+        feed.upvote()
         return feed.url
 
 class FeedDetailView(DetailView):
@@ -84,8 +84,8 @@ class FeedDetailView(DetailView):
 
     def get_object(self):
         feed = super(FeedDetailView, self).get_object()
-        feed.vote += 2
-        feed.save()
+        feed.upvote()
+        feed.upvote()
         return feed
 
 
