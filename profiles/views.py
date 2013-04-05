@@ -1,4 +1,4 @@
-from django.views.generic import DetailView, RedirectView, TemplateView, ListView
+from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
@@ -8,6 +8,7 @@ from feeds.models import Feed
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 
+from profiles.forms import UserUpdateForm, UserProfileUpdateForm
 
 class UserDetailView(DetailView):
     context_object_name = 'userinfo'
@@ -64,11 +65,33 @@ class UserEntriesView(ListView):
         return context
 
 
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = UserUpdateForm
+    model = User
+    template_name = 'profiles/user_update.html'
+
+
+class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = UserProfileUpdateForm
+    model = UserProfile
+    template_name = 'profiles/userprofile_update.html'
+
+
+class MySettingsView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        user = self.request.user
+        return reverse('userprofile_update', kwargs={'pk': user.userprofile.pk})
+
+
 class MyTracksView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
 
+
 class MyProjectsView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
+
 
 class MyFeedsView(LoginRequiredMixin, RedirectView):
     permanent = False
@@ -77,12 +100,14 @@ class MyFeedsView(LoginRequiredMixin, RedirectView):
         user = self.request.user
         return reverse('user_feeds', kwargs={'pk':user.pk})
 
+
 class MyBlogView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
         user = self.request.user
         return reverse('blog_detail', kwargs={'pk':user.blog.pk})
+
 
 class MyProfileView(LoginRequiredMixin, RedirectView):
     permanent = False
