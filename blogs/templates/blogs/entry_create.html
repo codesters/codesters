@@ -1,11 +1,7 @@
 {% extends "blogs/base.html" %}
 {% block head_title %}Create New Entry | Blog{% endblock %}
-{% load bootstrap %}
 {% block blog_content %}
     <h2>Create new Entry</h2>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form|bootstrap }}
-        <button class="btn btn-primary" type="submit"><i class="icon-plus"></i> Create</button>
+    {% include "form_horizontal.html" %}
     </form>
 {% endblock %}

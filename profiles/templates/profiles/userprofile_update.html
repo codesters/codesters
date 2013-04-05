@@ -1,12 +1,7 @@
 {% extends "profiles/settings_base.html" %}
-{% load bootstrap %}
 {% block head_title %}Profile Settings - {{ user }}{% endblock %}
 {% block page_title %}Profile Settings{% endblock %}
 
 {% block settings_content %}
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form|bootstrap }}
-    <button class="btn btn-primary" type="submit">Save</button>
-</form>
+{% include "form_horizontal.html" %}
 {% endblock %}

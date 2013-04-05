@@ -8,3 +8,4 @@ django-registration==0.8
 gunicorn==0.17.2
 ipython==0.13.1
 psycopg2==2.4.6
+django-widget-tweaks==1.1.2

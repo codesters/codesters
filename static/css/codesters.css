@@ -6,6 +6,10 @@ h1 a, h2 a, h3 a {
     color: #034482;
 }
 
+.field-error {
+    font-weight: bolder;
+}
+
 .profile-photo {
     height: 280px !important;
     padding: 10px;

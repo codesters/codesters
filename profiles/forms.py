@@ -12,4 +12,4 @@ class UserUpdateForm(ModelForm):
 class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = UserProfile
-        exclude = ('user', 'badges', 'chapters_completed')
+        fields = ('github', 'twitter', 'website', 'stackoverflow', 'coderwall', 'linkedin','bio')
