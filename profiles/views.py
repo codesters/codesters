@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView
-from guardian.mixins import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
@@ -65,17 +65,21 @@ class UserEntriesView(ListView):
         return context
 
 
-class UserUpdateView(LoginRequiredMixin, UpdateView):
+class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
     template_name = 'profiles/user_update.html'
     success_url = reverse_lazy('my_settings')
+    permission_required = 'auth.change_user'
+    return_403 = True
 
 
-class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
+class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = UserProfileUpdateForm
     model = UserProfile
     template_name = 'profiles/userprofile_update.html'
+    permission_required = 'profiles.change_userprofile'
+    return_403 = True
 
 
 class MySettingsView(LoginRequiredMixin, RedirectView):

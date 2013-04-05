@@ -4,7 +4,7 @@ from blogs.models import Blog, Entry, Tag
 from django.core.urlresolvers import reverse
 
 from django.shortcuts import get_object_or_404
-from guardian.mixins import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView, RedirectView
 
 from blogs.forms import EntryCreateForm, EntryUpdateForm, BlogUpdateForm
@@ -15,10 +15,12 @@ class BlogHomeView(LoginRequiredMixin, RedirectView):
         return reverse('blog_detail', kwargs={'pk':pk})
 
 #TODO Add permission
-class BlogUpdateView(LoginRequiredMixin, UpdateView):
+class BlogUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Blog
     form_class = BlogUpdateForm
     template_name = 'blogs/blog_update.html'
+    permission_required = 'blogs.change_blog'
+    return_403 = True
 
     def get_context_data(self, **kwargs):
         context = super(BlogUpdateView, self).get_context_data(**kwargs)
@@ -57,10 +59,12 @@ class EntryDetailView(DetailView):
         context['blog'] = entry.blog
         return context
 
-class EntryUpdateView(LoginRequiredMixin, UpdateView):
+class EntryUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Entry
     form_class = EntryUpdateForm
     template_name = 'blogs/entry_update.html'
+    permission_required = 'blogs.change_entry'
+    return_403 = True
 
     def get_context_data(self, **kwargs):
         context = super(EntryUpdateView, self).get_context_data(**kwargs)

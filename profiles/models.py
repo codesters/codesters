@@ -55,3 +55,23 @@ class UserProfile(models.Model):
 
     def get_entries_by_tag(self, slug):
         return self.user.blog.entry_set.filter(tags__slug=slug)
+
+
+from guardian.shortcuts import assign_perm
+from django.db.models.signals import post_save
+def create_user_permissions(sender, instance, created, **kwargs):
+    if created:
+        from django.contrib.auth.models import Group
+        admins = Group.objects.get(name='admins')
+        mods = Group.objects.get(name='mods')
+        assign_perm('change_userprofile', instance.user, instance)
+        assign_perm('delete_userprofile', instance.user, instance)
+        assign_perm('change_user', instance.user, instance.user)
+        assign_perm('change_userprofile', admins, instance)
+        assign_perm('delete_userprofile', admins, instance)
+        assign_perm('change_user', admins, instance.user)
+        assign_perm('change_userprofile', mods, instance)
+        assign_perm('delete_userprofile', mods, instance)
+        assign_perm('change_user', mods, instance.user)
+
+post_save.connect(create_user_permissions, sender=UserProfile)

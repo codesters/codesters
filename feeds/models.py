@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
 
+
 class Tag(models.Model):
     name = models.CharField(max_length=60, unique=True)
     slug = models.SlugField(default='')
@@ -49,3 +50,19 @@ class Feed(models.Model):
     def downvote(self, number=1):
         self.vote -= number
         self.save()
+
+from guardian.shortcuts import assign_perm
+from django.db.models.signals import post_save
+def create_feed_permission(sender, instance, created, **kwargs):
+    if created:
+        from django.contrib.auth.models import Group
+        admins = Group.objects.get(name='admins')
+        mods = Group.objects.get(name='mods')
+        assign_perm('change_feed', instance.created_by, instance)
+        assign_perm('delete_feed', instance.created_by, instance)
+        assign_perm('change_feed', admins, instance)
+        assign_perm('delete_feed', admins, instance)
+        assign_perm('change_feed', mods, instance)
+        assign_perm('delete_feed', mods, instance)
+
+post_save.connect(create_feed_permission, sender=Feed)

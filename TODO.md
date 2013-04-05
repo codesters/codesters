@@ -1,5 +1,6 @@
 #TODO
 
+- While saving any object, make sure to assign permission to the creator and others
 - Use select_related and prefetch_related tag wherever possible to reduce number of database queries. But use them with caution *READ django1.4docPDF page827 last para*.
 - Make users in advance with usernames projects, feeds, tracks, blog, codesters, admin.
 - Remove all unnecessary import from all files.
