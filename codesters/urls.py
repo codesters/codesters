@@ -10,8 +10,8 @@ urlpatterns = patterns('',
     url(r'^team/$', TeamView.as_view(), name='page_team'),
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
-    url(r'^accounts/settings/$', SettingsView.as_view(), name='my_settings'),
     url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
+    url(r'^users/(?P<username>[\w-]+)/$', user_redirect_view, name='user_redirect'),
 )
 
 urlpatterns += patterns('',

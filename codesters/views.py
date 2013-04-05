@@ -1,12 +1,18 @@
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
+from django.core.urlresolvers import reverse
 
-from django.views.generic import TemplateView, ListView
+
+from django.views.generic import TemplateView, ListView, RedirectView
 from guardian.mixins import LoginRequiredMixin
 
 from django.contrib.auth.models import User
 from blogs.models import Entry, Blog, Tag
+
+def user_redirect_view(request, username):
+    user = get_object_or_404(User, username=username)
+    return HttpResponseRedirect(reverse('user_detail', kwargs={'pk': user.pk,}))
 
 class ExploreView(ListView):
     template_name = 'explore.html'
@@ -20,6 +26,7 @@ class ExploreView(ListView):
         context['blogs'] = blogs
         context['users'] = users
         return context
+
 
 class SettingsView(TemplateView):
     template_name = 'profile.html'
