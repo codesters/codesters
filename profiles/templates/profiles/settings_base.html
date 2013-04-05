@@ -4,11 +4,12 @@
 
 {% block content %}
 <ul class="nav nav-tabs">
-    <li><a href="{% url userprofile_update user.userprofile.id %}">Profile Settings</a></li>
-    <li><a href="{% url user_update user.pk %}">Account Settings</a></li>
+    <li><a href="{% url userprofile_update user.userprofile.id %}">Profile</a></li>
+    <li><a href="{% url user_update user.pk %}">Account</a></li>
+    <li><a href="#">Change Password</a></li>
 </ul>
 <div class="row_fluid">
-    <div class="span6 offset3">
+    <div class="span10 offset2">
         {% block settings_content %}{% endblock %}
     </div>
 </div>

@@ -6,7 +6,7 @@ from profiles.models import UserProfile
 from feeds.models import Feed
 
 from django.shortcuts import get_object_or_404
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 
 from profiles.forms import UserUpdateForm, UserProfileUpdateForm
 
@@ -69,6 +69,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
     template_name = 'profiles/user_update.html'
+    success_url = reverse_lazy('my_settings')
 
 
 class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
