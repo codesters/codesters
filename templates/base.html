@@ -3,7 +3,7 @@
 {% block body %}
 <div class="header">
         <div class="heading container">
-            <h1>{% block page_title %}Codesters{% endblock %} <small>{% block page_subtitle %}simplifying learning{% endblock %}</small></h1>
+            <h1 id="page-title"><img src="{{ STATIC_URL }}img/logo-48.png" alt="Codesters Project"> {% block page_title %}Codesters{% endblock %} <small id="page-subtitle">{% block page_subtitle %}{% endblock %}</small></h1>
         </div>
     <div class="navbar navbar-static-top navbar-inverse">
         <div class="navbar-inner">

@@ -10,8 +10,8 @@
             <div class="span12 feed feed-{{ feed.feed_type.color }}">
                 <div class="row-fluid">
                     <div class="span1 vote">
-                        <a href="#"><img src="{{ STATIC_URL }}img/up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" /></a>
-                        <a href="#"><img src="{{ STATIC_URL }}img/down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" /></a>
+                        <a href="#"><i class="icon-thumbs-up icon-3x"></i> </a>
+                        <a href="#"><i class="icon-thumbs-down icon-3x"></i> </a>
                     </div>
                     <div class="span11 feed-data">
                         <h3><a href="{% url feed_redirect pk=feed.id %}">{{ feed.title }}</a> <small>{{ feed.url|website }}</small></h3>
