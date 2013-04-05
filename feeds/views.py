@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
 
-from guardian.mixins import LoginRequiredMixin
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse
 
@@ -97,8 +97,21 @@ class FeedCreateView(LoginRequiredMixin, CreateView):
         return super(FeedCreateView, self).form_valid(form)
 
 
-#TODO add permission mixin to check the owner or staff status
-class FeedUpdateView(LoginRequiredMixin, UpdateView):
+class FeedUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = FeedUpdateForm
     model = Feed
     template_name = 'feeds/feed_update.html'
+    permission_required = 'feeds.change_feed'
+    return_403 = True
+
+class TagCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView): #mixin require an object
+    model = Tag
+    template_name = 'feeds/tag_create.html'
+    permission_required = 'feeds.add_tag'
+    render_403 = True
+
+class TagUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Tag
+    template_name = 'feeds/tag_update.html'
+    permission_required = 'feeds.change_tag'
+    render_403 = True
