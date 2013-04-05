@@ -1,11 +1,6 @@
 {% extends "feeds/base.html" %}
-{% load bootstrap %}
 {% block feed_content %}
-<div class="span8 offset3">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form|bootstrap }}
-        <button class="btn btn-primary" type="submit"><i class="icon-plus"></i> Add</button>
-    </form>
+<div class="span8 offset1">
+    {% include "form_horizontal.html" %}
 </div>
 {% endblock %}

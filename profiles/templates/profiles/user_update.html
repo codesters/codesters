@@ -1,38 +1,8 @@
 {% extends "profiles/settings_base.html" %}
-{% load bootstrap %}
+{% load widget_tweaks %}
 {% block head_title %}Account Settings - {{ user }}{% endblock %}
 {% block page_title %}Account Settings{% endblock %}
 
 {% block settings_content %}
-<form action="" method="post" class="form-horizontal">
-    {% csrf_token %}
-    {% if form.non_field_errorr %}
-    {% for non_field_error in form.non_field_error %}
-    <div class="alert alert-error">
-        <button class="close" type="button" data-dismiss="alert">&times;</button>
-        {{ non_field_error }}
-    </div>
-    {% endfor %}
-    {% endif %}
-
-    {% for field in form.hidden_fields  %}
-    {{ field }}
-    {% endfor %}
-
-    {% for field in form.visible_fields %}
-    <div class="control-group{% if field.errors %} error{% endif %}">
-        <label for="{{ field.auto_id }}" class="control-label">{{ field.label }}: </label>
-        <div class="controls">
-            {{ field }}
-            {% for error in field.errors %}
-            <span class="help-inline">{{ error }}</span>
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-
-    <div class="form-actions">
-        <button class="btn btn-primary" type="submit">Save</button>
-    </div>
-</form>
+{% include "form_horizontal.html" %}
 {% endblock %}
