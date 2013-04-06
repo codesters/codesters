@@ -8,7 +8,7 @@ LEVELS = ['noob', 'beginner', 'intermediate', 'advanced']
 
 class Topic(models.Model):
     name = models.CharField(max_length=60, unique=True)
-    slug = models.SlugField(max_length=255, editable=False)
+    slug = models.SlugField(max_length=255)
     help_text = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
@@ -25,7 +25,7 @@ class Topic(models.Model):
 
 class ResourceType(models.Model):
     name = models.CharField(max_length=60, unique=True)
-    slug = models.SlugField(max_length=255, editable=False)
+    slug = models.SlugField(max_length=255)
     help_text = models.CharField(max_length=255, null=True, blank=True)
     color = models.CharField(max_length=20, default='purple', unique=True)
 
@@ -42,7 +42,7 @@ class ResourceType(models.Model):
 
 class Resource(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    slug = models.SlugField(max_length=255, blank=True, default='', editable=False)
+    slug = models.SlugField(max_length=255, blank=True, default='')
     url = models.URLField(unique=True)
     help_text = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True, default='')
