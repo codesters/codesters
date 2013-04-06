@@ -13,7 +13,7 @@
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="{% active request "^/$" %}"><a href="{% url 'page_home' %}"><i class="icon-home"></i> Home</a></li>
-                    <li class="{% active request "^/resource/" %}"><a href="{% url 'resource_list' %}"><i class="icon-pushpin"></i> Resources</a></li>
+                    <li class="{% active request "^/resource/" %}"><a href="{% url 'resource_home' %}"><i class="icon-pushpin"></i> Resources</a></li>
                     <li class="{% active request "^/track/" %}"><a href="{% url 'track_list' %}"><i class="icon-tasks"></i> Tracks</a></li>
                     <li class="{% active request "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
                     {% if user.is_authenticated %}

@@ -3,7 +3,8 @@ from django.conf.urls import patterns, include, url
 from resources.views import *
 
 urlpatterns = patterns('',
-    url(r'^$', ResourceListView.as_view(), name='resource_list'),
+    url(r'^$', ResourceHomeView.as_view(), name='resource_home'),
+    url(r'^recent/$', ResourceRecentListView.as_view(), name='resource_recent_list'),
     url(r'^popular/$', ResourcePopularListView.as_view(), name='resource_popular_list'),
     url(r'^type/(?P<slug>[-\w]+)/$', ResourceTypeListView.as_view(), name='resource_type_list'),
     url(r'^topic/(?P<slug>[-\w]+)/$', ResourceTopicListView.as_view(), name='resource_topic_list'),

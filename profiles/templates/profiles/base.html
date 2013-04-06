@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load url from future %}
+{% load navbar %}
 
 {% load gravatar %}
 {% block content %}
@@ -29,10 +30,14 @@
     </div>
     <div class="span9 profile-main">
         <ul class="nav nav-tabs">
-            <li><a href="{% url 'user_detail' pk=userinfo.pk %}"><i class="icon-info-sign"></i> Info</a></li>
-            <li><a href="{% url 'user_resources' pk=userinfo.pk %}"><i class="icon-pushpin"></i> Feeds</a></li>
-            <li><a href="{% url 'user_projects' pk=userinfo.pk %}"><i class="icon-briefcase"></i> Projects</a></li>
-            <li><a href="{% url 'user_snippets' pk=userinfo.pk %}"><i class="icon-quote-right"></i> Snippets</a></li>
+            {% url 'user_detail' userinfo.pk as info_tab %}
+            <li class="{% active request info_tab %}"><a href="{{ info_tab }}"><i class="icon-info-sign"></i> Info</a></li>
+            {% url 'user_snippets' pk=userinfo.pk as wall_tab %}
+            <li class="{% active request wall_tab %}"><a href="{{ wall_tab }}"><i class="icon-quote-right"></i> Wall</a></li>
+            {% url 'user_projects' pk=userinfo.pk as project_tab %}
+            <li class="{% active request  project_tab %}"><a href="{{ project_tab }}"><i class="icon-briefcase"></i> Projects</a></li>
+            {% url 'user_resources' userinfo.pk as resource_tab %}
+            <li class="{% active request  resource_tab %}"><a href="{{ resource_tab }}"><i class="icon-pushpin"></i> Shared Resources</a></li>
         </ul>
         <div class="row-fluid profile-content">
             {% block profile_content %}{% endblock %}

@@ -67,7 +67,6 @@ class UserProjectsView(TemplateView):
         context['userinfo'] = user
         return context
 
-
 class UserSnippetsView(ListView):
     context_object_name = 'snippets'
     template_name = 'profiles/user_snippets.html'
@@ -75,7 +74,7 @@ class UserSnippetsView(ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, pk=self.kwargs['pk'])
-        return user.wall.snippet_set.all()
+        return user.wall.snippet_set.all()[:5]
 
     def get_context_data(self,**kwargs):
         context = super(UserSnippetsView, self).get_context_data(**kwargs)
@@ -113,8 +112,12 @@ class MyTracksView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
 
 
-class MyProjectsView(LoginRequiredMixin, TemplateView):
-    template_name = 'coming_soon.html'
+class MyProjectsView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        user = self.request.user
+        return reverse('user_projects', kwargs={'pk':user.pk})
 
 
 class MyResourcesView(LoginRequiredMixin, RedirectView):

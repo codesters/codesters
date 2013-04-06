@@ -1,4 +1,4 @@
-<h2><i class="icon-topics"></i> Tags</h2>
+<h2><i class="icon-topics"></i> Topics</h2>
 <ul class="unstyled">
     {% for topic in topics %}
     <li><a href="{{ topic.get_absolute_url }}">{{ topic.name }} ({{ topic.resource_set.count }})</a></li>

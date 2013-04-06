@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 {% load url from future %}
+{% load navbar %}
 
 {% block content %}
 <div class="row-fluid">
     <div class="span9">
         <ul class="nav nav-tabs">
-            <li><a href="{% url 'resource_list' %}"><i class="icon-time"></i> Recent</a></li>
-            <li><a href="{% url 'resource_popular_list' %}"><i class="icon-fire"></i> Popular</a></li>
+            {% url 'resource_recent_list' as recent_tab %}
+            <li class="{% active request recent_tab %}"><a href="{{ recent_tab }}"><i class="icon-time"></i> Recent</a></li>
+            {% url 'resource_popular_list' as popular_tab %}
+            <li class="{% active request popular_tab %}"><a href="{{ popular_tab }}"><i class="icon-fire"></i> Popular</a></li>
             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-th-large"></i> Types <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'resource_type_list' slug="video" %}">Video</a></li>

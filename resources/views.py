@@ -2,21 +2,28 @@ from django.views.generic import TemplateView, ListView, DetailView, CreateView,
 
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import get_object_or_404
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse_lazy
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
-class ResourceListView(ListView):
-    queryset = Resource.objects.all().order_by('-created_on')
+class ResourceHomeView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self):
+        return reverse_lazy('resource_recent_list')
+
+
+class ResourceRecentListView(ListView):
+    queryset = Resource.objects.all().order_by('-created_at')
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
     paginate_by = 12
 
     def get_context_data(self, **kwargs):
-        context = super(ResourceListView, self).get_context_data(**kwargs)
+        context = super(ResourceRecentListView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct()
         context['topics'] = topics
         return context

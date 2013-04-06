@@ -9,4 +9,5 @@
     {% endfor %}
     {% include "pagination.html" %}
 </div>
+<a href="{{ userinfo.blog.get_absolute_url }}" class="btn btn-large btn-primary pull-right">visit {% ifequal user userinfo %}your{% else %}{{ userinfo }}'s{% endifequal %} wall <i class="icon-double-angle-right"></i></a>
 {% endblock %}
