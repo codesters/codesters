@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load url from future %}
+
 {% load gravatar %}
 {% block content %}
 <div class="row-fluid">
@@ -13,7 +15,7 @@
                 <ul class="nav nav-list ">
                     <li class="nav-header">{{ userinfo }}</li>
                     <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-user"></i> {{ userinfo.get_full_name|default:"(Not provided)" }}</a></li>
-                    <li><a href="{{ userinfo.blog.get_absolute_url }}"><i class="icon-folder-close"></i> Blog</a></li>
+                    <li><a href="{{ userinfo.wall.get_absolute_url }}"><i class="icon-folder-close"></i> Wall</a></li>
                     <li class="nav-header">Other Profiles</li>
                     {% if userinfo.userprofile.github %}<li><a href="http://github.com/{{ userinfo.userprofile.github }}"><i class="icon-github"></i> Github</a></li>{% endif %}
                     {% if userinfo.userprofile.twitter %}<li><a href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
@@ -27,10 +29,10 @@
     </div>
     <div class="span9 profile-main">
         <ul class="nav nav-tabs">
-            <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-info-sign"></i> Info</a></li>
-            <li><a href="{% url user_feeds pk=userinfo.pk %}"><i class="icon-pushpin"></i> Feeds</a></li>
-            <li><a href="{% url user_projects pk=userinfo.pk %}"><i class="icon-briefcase"></i> Projects</a></li>
-            <li><a href="{% url user_entries pk=userinfo.pk %}"><i class="icon-quote-right"></i> Entries</a></li>
+            <li><a href="{% url 'user_detail' pk=userinfo.pk %}"><i class="icon-info-sign"></i> Info</a></li>
+            <li><a href="{% url 'user_resources' pk=userinfo.pk %}"><i class="icon-pushpin"></i> Feeds</a></li>
+            <li><a href="{% url 'user_projects' pk=userinfo.pk %}"><i class="icon-briefcase"></i> Projects</a></li>
+            <li><a href="{% url 'user_snippets' pk=userinfo.pk %}"><i class="icon-quote-right"></i> Snippets</a></li>
         </ul>
         <div class="row-fluid profile-content">
             {% block profile_content %}{% endblock %}

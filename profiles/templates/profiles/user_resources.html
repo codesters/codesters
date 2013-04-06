@@ -1,0 +1,29 @@
+{% extends "profiles/base.html" %}
+{% load url from future %}
+
+{% load codesters %}
+{% block profile_content %}
+<div class="span12">
+    {% for resources in resourcess %}
+    <div class="row-fluid">
+        <div class="span12 resources resources-{{ resources.resources_type.color }}">
+            <div class="row-fluid">
+                <div class="span1 vote">
+                    <a href="#"><img src="{{ STATIC_URL }}img/up.png" height="55px" width="30px" alt="thumbs up" class="img-circle" /></a>
+                    <a href="#"><img src="{{ STATIC_URL }}img/down.png" height="55px" width="30px" alt="thumbs down" class="img-circle" /></a>
+                </div>
+                <div class="span11 resources-data">
+                    <h3><a href="{% url 'resources_redirect' pk=resources.id %}">{{ resources.title }}</a> <small>{{ resources.url|website }}</small></h3>
+                    <p><small>submitted  {{ resources.created_on|age }} in 
+                            <a href="{% url 'resources_type_list' slug=resources.resources_type.slug %}">{{ resources.resources_type }}</a>
+                    </small> </p>
+                    <a href="{% url 'resources_detail' pk=resources.id %}" class="btn btn-small"><i class="icon-comment"></i> Discuss - # comments</a> 
+                    {% if user.is_staff or resources.created_by.user == user %}<a href="{% url 'resources_update' pk=resources.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% include "pagination.html" %}
+</div>
+{% endblock %}

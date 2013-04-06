@@ -1,0 +1,18 @@
+{% extends "walls/base.html" %}
+{% block page_title %}Blog{% endblock %}
+{% block page_subtitle %}{{ wall.user.username }}{% endblock %}
+{% load codesters %}
+{% block wall_content %}
+    {% for snippet in snippet_list %}
+    <div class="bucket post-bucket">
+        <article class="post-item">
+            <h3 class="post-item-title"><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></h3>
+            <div class="post-item-meta">
+                <p>created {{ snippet.created_at|age }}</p>
+            </div>
+            <p class="post-item-snippet">{{ snippet.content|slice:":300" }}... <a href="{{ snippet.get_absolute_url }}">Read more</a></p>
+        </article>
+    </div>
+    {% endfor %}
+    {% include "pagination.html" %}
+{% endblock %}

@@ -36,8 +36,8 @@ THIRD_PARTY_APPS = (
 LOCAL_APPS = (
     'profiles',
     'tracks',
-    'blogs',
-    'feeds',
+    'walls',
+    'resources',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

@@ -1,0 +1,28 @@
+{% extends "resources/base.html" %}
+{% load url from future %}
+
+{% load codesters %}
+{% block resource_content %}
+<div class="row-fluid">
+    <div class="span9">
+        <h1><a href="{% url 'resource_redirect' pk=resource.id %}">{{ resource.title }}</a></h1>
+        <p><small>submitted {{ resource.created_at|age }} by 
+                <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
+                <a href="{% url 'resource_type_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
+            </small></p>
+    </div>
+</div>
+{% if resource.description %}
+<div class="row-fluid">
+    <div class="span9">
+        <p>{{ resource.description }}</p>
+    </div>
+</div>
+{% endif %}
+<div class="row-fluid">
+    <div class="span9">
+        <h3>Comments</h3>
+        <p>Coming Soon ...</p>
+    </div>
+</div>
+{% endblock %}

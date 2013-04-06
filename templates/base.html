@@ -1,62 +1,23 @@
 {% extends "bare_base.html" %}
+{% load url from future %}
 
 {% block body %}
 <div class="header">
         <div class="heading container">
             <h1 id="page-title"><img src="{{ STATIC_URL }}img/logo-48.png" alt="Codesters Project"> {% block page_title %}Codesters{% endblock %} <small id="page-subtitle">{% block page_subtitle %}{% endblock %}</small></h1>
         </div>
-    <div class="navbar navbar-static-top navbar-inverse">
-        <div class="navbar-inner">
-            <div class="container">
-                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/" class="brand hidden-desktop">codesters</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="{% url page_home %}"><i class="icon-home"></i> Home</a></li>
-                        <li><a href="{% url track_list %}"><i class="icon-tasks"></i> Tracks</a></li>
-                        <li><a href="{% url feed_list %}"><i class="icon-pushpin"></i> Feeds</a></li>
-                        <li><a href="{% url explore_home %}"><i class="icon-globe"></i> Explore</a></li>
-                        {% if user.is_authenticated %}
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{% url my_blog %}"><i class="icon-folder-close"></i> My Blog</a></li>
-                                <li><a href="{% url my_tracks %}"><i class="icon-tasks"></i> My tracks</a></li>
-                                <li><a href="{% url my_feeds %}"><i class="icon-pushpin"></i> My Feeds</a></li>
-                                <li><a href="{% url my_projects %}"><i class="icon-briefcase"></i> My Projects</a></li>
-                                <li><a href="{% url my_profile %}"><i class="icon-picture"></i> My Profile</a></li>
-                                <li class="divider"></li>
-                                <li><a href="{% url my_settings %}"><i class="icon-wrench"></i> Settings</a></li>
-                                <li><a href="{% url auth_logout %}"><i class="icon-signout"></i> Logout</a></li>
-                            </ul>
-                        </li>
-                        {% else %}
-                                <li><a href="{% url auth_login %}"><i class="icon-signin"></i> Login</a></li>
-                                <li><a href="{% url registration_register %}"><i class="icon-unlock"></i> Register</a></li>
-                        {% endif %}
-                    </ul>
-                    <form method="post" action="/search/" class="navbar-form pull-right">
-                        {% csrf_token %}
-                        <input type="text" class="search-query" placeholder="Search">
-                    </form>
-                </div><!--/.nav-collapse -->
-            </div><!--/.container -->
-        </div><!--/.navbar-inner -->
-    </div><!--/.navbar -->
+        {% include "navbar.html" %}
 </div><!--/.header -->
 <div class="content container">
     {% block content %}{% endblock %}
 </div><!--/.content -->
 <div class="footer">
     <div class="container">
-        <ul class="nav nav-pills">
-            <li><a href="{% url page_about %}">About</a></li>
-            <li><a href="{% url page_contact %}">Contact</a></li>
-            <li><a href="{% url page_team %}">Team</a></li>
-            <li><a href="{% url page_guidelines %}">Guidelines</a></li>
+        <ul class="nav nav-tabs">
+            <li><a href="{% url 'page_about' %}">About</a></li>
+            <li><a href="{% url 'page_contact' %}">Contact</a></li>
+            <li><a href="{% url 'page_team' %}">Team</a></li>
+            <li><a href="{% url 'page_guidelines' %}">Guidelines</a></li>
         </ul>
     </div>
 </div>

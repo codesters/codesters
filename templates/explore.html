@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load url from future %}
 
 {% block head_title %}Explore{% endblock %}
 {% block page_title %}Explore{% endblock %}
@@ -7,11 +8,11 @@
 {% block content %}
 <div class="row-fluid">
     <div class="span5 explore-box">
-        <h3>Recent Entries</h3>
+        <h3>Recent Snippets</h3>
         <ol class="explore-list unstyled">
-            {% for entry in entries %}
+            {% for snippet in snippet_list %}
             <li>
-                <h4><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a> <small><a href="{{ entry.blog.get_absolute_url }}">{{ entry.blog }}</a> by <a href="{{ entry.blog.user.get_absolute_url }}">{{ entry.blog.user }}</a></small></h4>
+                <h4><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> <small><a href="{{ snippet.wall.get_absolute_url }}">{{ snippet.wall }}</a> by <a href="{{ snippet.wall.user.get_absolute_url }}">{{ snippet.wall.user }}</a></small></h4>
             </li>
             {% endfor %}
         </ol>
@@ -27,12 +28,12 @@
 </div>
 <div class="row-fluid">
     <div class="span5 explore-box">
-        <h3>Popular Blogs</h3>
+        <h3>Popular Walls</h3>
         <ol class="explore-list unstyled">
-            {% for blog in blogs %}
+            {% for wall in walls %}
             <li>
-                <h4><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a> <small>by <a href="{{ blog.user.get_absolute_url }}">{{ blog.user }}</a></small></h4>
-                <p>{{ blog.subtitle }}</p>
+                <h4><a href="{{ wall.get_absolute_url }}">{{ wall.title }}</a> <small>by <a href="{{ wall.user.get_absolute_url }}">{{ wall.user }}</a></small></h4>
+                <p>{{ wall.subtitle }}</p>
             </li>
             {% endfor %}
         </ol>
@@ -42,7 +43,7 @@
         <ol class="explore-list unstyled">
             {% for person in users %}
             <li>
-                <a href="{% url user_detail pk=person.id %}">{{ person }}</a>
+                <a href="{% url 'user_detail' pk=person.id %}">{{ person }}</a>
             </li>
             {% endfor %}
         </ol>

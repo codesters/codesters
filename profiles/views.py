@@ -3,12 +3,31 @@ from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.contrib.auth.models import User
 from profiles.models import UserProfile
-from feeds.models import Feed
+from resources.models import Resource
+from walls.models import Wall
 
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse, reverse_lazy
 
-from profiles.forms import UserUpdateForm, UserProfileUpdateForm
+from profiles.forms import UserUpdateForm, UserProfileUpdateForm, WallUpdateForm
+
+class WallUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    model = Wall
+    form_class = WallUpdateForm
+    template_name = 'profiles/wall_update.html'
+    permission_required = 'walls.change_wall'
+    return_403 = True
+
+    def get_context_data(self, **kwargs):
+        context = super(WallUpdateView, self).get_context_data(**kwargs)
+        wall = get_object_or_404(Wall, pk=self.kwargs['pk'])
+        context['wall'] = wall
+        return context
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(WallUpdateView, self).form_valid(form)
+
 
 class UserDetailView(DetailView):
     context_object_name = 'userinfo'
@@ -23,17 +42,17 @@ class UserDetailView(DetailView):
         return context
 
 
-class UserFeedsView(ListView):
-    context_object_name = 'feeds'
-    template_name = 'profiles/user_feeds.html'
+class UserResourcesView(ListView):
+    context_object_name = 'resources'
+    template_name = 'profiles/user_resources.html'
     paginate_by = 12
 
     def get_queryset(self):
         user = get_object_or_404(User, pk=self.kwargs['pk'])
-        return user.feed_set.all()
+        return user.resource_set.all()
 
     def get_context_data(self,**kwargs):
-        context = super(UserFeedsView, self).get_context_data(**kwargs)
+        context = super(UserResourcesView, self).get_context_data(**kwargs)
         user = get_object_or_404(User, pk=self.kwargs['pk'])
         context['userinfo'] = user
         return context
@@ -49,17 +68,17 @@ class UserProjectsView(TemplateView):
         return context
 
 
-class UserEntriesView(ListView):
-    context_object_name = 'entries'
-    template_name = 'profiles/user_entries.html'
+class UserSnippetsView(ListView):
+    context_object_name = 'snippets'
+    template_name = 'profiles/user_snippets.html'
     paginate_by = 12
 
     def get_queryset(self):
         user = get_object_or_404(User, pk=self.kwargs['pk'])
-        return user.blog.entry_set.all()
+        return user.wall.snippet_set.all()
 
     def get_context_data(self,**kwargs):
-        context = super(UserEntriesView, self).get_context_data(**kwargs)
+        context = super(UserSnippetsView, self).get_context_data(**kwargs)
         user = get_object_or_404(User, pk=self.kwargs['pk'])
         context['userinfo'] = user
         return context
@@ -98,20 +117,20 @@ class MyProjectsView(LoginRequiredMixin, TemplateView):
     template_name = 'coming_soon.html'
 
 
-class MyFeedsView(LoginRequiredMixin, RedirectView):
+class MyResourcesView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
         user = self.request.user
-        return reverse('user_feeds', kwargs={'pk':user.pk})
+        return reverse('user_resources', kwargs={'pk':user.pk})
 
 
-class MyBlogView(LoginRequiredMixin, RedirectView):
+class MyWallView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
         user = self.request.user
-        return reverse('blog_detail', kwargs={'pk':user.blog.pk})
+        return reverse('wall_detail', kwargs={'pk':user.wall.pk})
 
 
 class MyProfileView(LoginRequiredMixin, RedirectView):

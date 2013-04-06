@@ -1,0 +1,35 @@
+{% extends "resources/base.html" %}
+{% load url from future %}
+
+
+{% load codesters %}
+
+{% block resource_content %}
+<div class="row-fluid">
+    <div class="span9">
+        {% for resource in resources %}
+        <div class="row-fluid">
+            <div class="span12 resource resource-{{ resource.resource_type.color }}">
+                <div class="row-fluid">
+                    <div class="span1 vote">
+                        <a href="#"><i class="icon-thumbs-up icon-3x"></i> </a>
+                        <a href="#"><i class="icon-thumbs-down icon-3x"></i> </a>
+                    </div>
+                    <div class="span11 resource-data">
+                        <h3><a href="{% url 'resource_redirect' pk=resource.id %}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
+                        <p><small>submitted  {{ resource.created_at|age  }} by 
+                                <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
+                                <a href="{% url 'resource_type_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
+                        </small> </p>
+                        <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-comments"></i> Discuss - # comments</a> 
+                        {% if user.is_staff or resource.created_by.user == user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% include "pagination.html" %}
+    </div>
+    <div class="span3 well">{% include "resources/topics.html" %}</div>
+</div>
+{% endblock %}

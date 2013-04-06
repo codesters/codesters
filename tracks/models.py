@@ -1,5 +1,5 @@
 from django.db import models
-from feeds.models import Feed
+from resources.models import Resource
 from django.contrib.auth.models import User
 
 class TrackCategory(models.Model):
@@ -52,7 +52,7 @@ class Chapter(models.Model):
     slug = models.SlugField()
     description = models.TextField(blank=True, default='')
     track = models.ForeignKey(Track)
-    feeds = models.ManyToManyField(Feed)
+    resources = models.ManyToManyField(Resource)
     exercise = models.ForeignKey(Exercise, null=True, blank=True)
 
     def __unicode__(self):
