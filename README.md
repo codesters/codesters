@@ -14,9 +14,15 @@ The plan is to make a platform for students to help them learn, share and collab
 
 ##Technologies Used
 
-+ Django 1.4
-+ MySQL database
++ Django 1.4.5
++ PostgreSQL (sqlite3 for dev)
 
+*For full requirements, see requirment.txt*
+
+
+##Install
+
+See INSTALL.md for full installation instructions.
 
 ## Contributors
 
