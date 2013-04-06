@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load url from future %}
+{% load active from codesters %}
 
 {% block page_subtitle %}{{ user }}{% endblock %}
-{% load navbar %}
 {% block content %}
 <ul class="nav nav-tabs">
 {% url 'userprofile_update' pk=user.userprofile.pk as profile %}
