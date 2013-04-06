@@ -1,7 +1,7 @@
 {% extends "walls/base.html" %}
 {% block page_title %}Blog{% endblock %}
 {% block page_subtitle %}{{ wall.user.username }}{% endblock %}
-{% load codesters %}
+{% load age from codesters %}
 {% block wall_content %}
     {% for snippet in snippet_list %}
     <div class="bucket post-bucket">

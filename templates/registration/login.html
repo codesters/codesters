@@ -3,25 +3,16 @@
 {% block page_title %}Login{% endblock %}
 {% block content %}
 
-<div class="span6 offset3">
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
+<div class="auth-form span6 offset3">
 <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+{% if form.errors %}
+<div class="alert alert-error"><button type="button" data-dismiss="alert" class="close">&times;</button>
+Your username and password didn't match. Please try again.
+</div>
+{% endif %}
+    {% include "base_form.html" %}
 <p><a class="btn btn-small" href="{% url auth_password_reset %}">Forgot your password?</a> <a class="btn btn-success btn-small" href="{% url registration_register %}">Need an account?</a></p>
-
-<input class="btn btn-primary" type="submit" value="Login" />
+<button class="btn btn-primary" type="submit"><i class="icon-signin"></i> Login</button>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 </div>

@@ -6,6 +6,10 @@ h1 a, h2 a, h3 a {
     color: #034482;
 }
 
+.auth-form {
+    margin-top: 20px;
+}
+
 .field-error {
     font-weight: bolder;
 }

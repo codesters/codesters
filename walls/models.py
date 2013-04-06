@@ -36,7 +36,7 @@ class Snippet(models.Model):
     content = models.TextField()
     tags = models.ManyToManyField(Tag, null=True, blank=True)
     published = models.BooleanField(default=True)
-    created_by = models.ForeignKey(User)
+    created_by = models.ForeignKey(User, editable=False)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 

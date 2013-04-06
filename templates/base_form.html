@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
     {% csrf_token %}
-    {% if form.non_field_errorr %}
-        {% for non_field_error in form.non_field_error %}
+    {% if form.non_field_errors %}
+        {% for non_field_error in form.non_field_errors %}
             <div class="alert alert-error">
                 <button class="close" type="button" data-dismiss="alert">&times;</button>
                 {{ non_field_error }}
@@ -30,5 +30,3 @@
             </div>
         </div>
     {% endfor %}
-
-        <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save</button>

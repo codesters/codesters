@@ -34,7 +34,7 @@ class SnippetCreateView(LoginRequiredMixin, CreateView):
 class SnippetDetailView(DetailView):
     model = Snippet
     context_object_name = 'snippet'
-    template_name = 'wall/snippet_detail.html'
+    template_name = 'walls/snippet_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(SnippetDetailView, self).get_context_data(**kwargs)
@@ -57,13 +57,13 @@ class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
 
 class SnippetListView(ListView):
     context_object_name = 'snippet_list'
-    template_name = 'wall/snippet_list.html'
+    template_name = 'walls/snippet_list.html'
     paginate_by = 12
 
     def get_queryset(self):
         wall = get_object_or_404(Wall, pk=self.kwargs['pk'])
-        entries = wall.snippet_set.all()
-        return entries
+        snippets = wall.snippet_set.all()
+        return snippets
 
     def get_context_data(self, **kwargs):
         context = super(SnippetListView, self).get_context_data(**kwargs)
