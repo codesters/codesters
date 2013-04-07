@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
+from codesters.utils import unique_slugify
 
 
 class Wall(models.Model):
@@ -48,7 +49,8 @@ class Snippet(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            slug_str = '%s' % self.title
+            unique_slugify(self, slug_str)
         self.created_by = self.wall.user # makes sure that created_by is the wall owner
         super(Snippet, self).save(*args, **kwargs)
 

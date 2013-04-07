@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.core.urlresolvers import reverse
+from codesters.utils import unique_slugify
 from django.template.defaultfilters import slugify
 
 LEVELS = ['noob', 'beginner', 'intermediate', 'advanced']
@@ -62,8 +63,10 @@ class Resource(models.Model):
         return reverse('resource_detail', kwargs={'pk': self.id})
 
     def save(self, *args, **kwargs):
+        #INFO Checks if present because admins have option to change slug
         if not self.slug:
-            self.slug = slugify(self.title)
+            slug_str = '%s' % self.title
+            unique_slugify(self, slug_str)
         if self.description and not self.help_text:
             self.help_text = description[:220]
         super(Resource, self).save(*args, **kwargs)

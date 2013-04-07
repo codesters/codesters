@@ -85,7 +85,7 @@ h1 a, h2 a, h3 a {
 }
 
 
-.feed {
+.resource {
     margin: 0 0 15px 0;
     padding: 5px 12px;
     min-height: 100px;
@@ -98,34 +98,34 @@ h1 a, h2 a, h3 a {
     padding: 18px 0 8px;
 }
 
-.feed-data {
+.resource-data {
     padding-left: 15px;
 }
 
-.feed-green {
+.resource-green {
     border-left: solid 7px #46a546;
 }
 
-.feed-blue {
+.resource-blue {
     border-left: solid 7px #049cdb;
 }
 
-.feed-red {
+.resource-red {
     border-left: solid 7px #9d261d;
 }
 
-.feed-yellow {
+.resource-yellow {
     border-left: solid 7px #ffc40d;
 }
 
-.feed-orange {
+.resource-orange {
     border-left: solid 7px #f89406;
 }
 
-.feed-pink {
+.resource-pink {
     border-left: solid 7px #c3325f;
 }
 
-.feed-purple {
+.resource-purple {
     border-left: solid 7px #7a43b6;
 }
