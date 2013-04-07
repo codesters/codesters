@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Codesters by codesters</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Codesters</h1>
+        <p>learn from the best of web</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/codesters/codesters" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/codesters/codesters/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/codesters/codesters/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>Introduction</h1>
+
+<p>The plan is to make a platform for students to help them learn, share and collaborate on Computer Science projects. Students who want to learn programming or web development can do so via tracks. We do not intend to write another <a href="http://codecademy.com/">Codecademy</a> like site, rather we want to become a library/recommendation hub for beginners. Tracks will include links to the most recommended tutorials/courses on the open web. We are primarily aiming Indian students now.</p>
+
+<h2>Version 1 feature expectations</h2>
+
+<ul>
+<li>User accounts with achivements.</li>
+<li>Users can share any link of interesting blog post or video or tutorial.</li>
+<li>Upvoting of these links will make it revelant for others to use it.</li>
+<li>Moderators can create tracks to let learn beginners programming and other concepts.</li>
+<li>Users can do separate lessons from track of their choice.</li>
+</ul><h2>Technologies Used</h2>
+
+<ul>
+<li>Django 1.4.5</li>
+<li>PostgreSQL (sqlite3 for dev)</li>
+</ul><p><em>For full requirements, see requirment.txt</em></p>
+
+<h2>Install</h2>
+
+<p><em>Make sure you have Python2.7.3, virtualenv, pip and sqlite3 installed</em></p>
+
+<ol>
+<li>Download or clone this repo.</li>
+<li>
+<p>Go to project home folder and run these commands:</p>
+
+<p>cp codesters/example_local_settings.py codesters/local_settings.py
+virtualenv venv
+source venv/bin/activate</p>
+</li>
+<li>
+<p>This will create a virtual environment and activate it. Now use pip to install dependencies with:</p>
+
+<p>pip install -r dev-requirements.txt</p>
+</li>
+<li>
+<p>Now we have to prepare a database:</p>
+
+<p>python manage.py syncdb</p>
+</li>
+<li>
+<p>It will ask you to provide username, email and password. Give them and run following migrations:</p>
+
+<p>python manage.py migrate guardian
+python manage.py migrate walls
+python manage.py migrate resources
+python manage.py migrate tracks
+python manage.py migrate profiles</p>
+</li>
+<li><p>Run django server and go to <a href="http://127.0.0.1:8000/admin/">http://127.0.0.1:8000/admin/</a></p></li>
+<li><p>Create two groups named <em>admins</em> and <em>mods</em> and you are good to go.</p></li>
+</ol><h2>Contributors</h2>
+
+<ul>
+<li><a href="http://nainomics.in/">Karambir Singh Nain</a></li>
+<li><a href="http://madil.in/">Mohammad Adil</a></li>
+<li><a href="http://mayank-jain.in/">Mayank Jain</a></li>
+</ul><h2>We need your help</h2>
+
+<ul>
+<li>We need Django developers for this project.</li>
+<li>None of us are a designer, if you can help or know someone who can, please <a href="mailto:akarambir@gmail.com">mail us</a>.</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/codesters">codesters</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="http://twitter.com/#!/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-28214247-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
