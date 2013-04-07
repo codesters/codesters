@@ -2,16 +2,19 @@
 {% load url from future %}
 
 {% block body %}
-<div class="header">
-        <div class="heading container">
-            <h1 id="page-title"><img src="{{ STATIC_URL }}img/logo-48.png" alt="Codesters Project"> {% block page_title %}Codesters{% endblock %} <small id="page-subtitle">{% block page_subtitle %}{% endblock %}</small></h1>
+{% include "navbar.html" %}
+
+<header style="background-image: url('{{ STATIC_URL }}img/header-light.png')">
+    <div class="container">
+        <div class="page-header">
+            <h1>{% block page_title %}Codesters{% endblock %} <small id="page-subtitle">{% block page_subtitle %}{% endblock %}</small></h1>
         </div>
-        {% include "navbar.html" %}
-</div><!--/.header -->
+    </div>
+</header><!--/.header -->
 <div class="content container">
     {% block content %}{% endblock %}
 </div><!--/.content -->
-<div class="footer">
+<div style="background-image: url('{{ STATIC_URL }}img/header-light.png')" class="footer">
     <div class="container">
         <ul class="nav nav-tabs">
             <li><a href="{% url 'page_about' %}">About</a></li>
@@ -20,5 +23,5 @@
             <li><a href="{% url 'page_guidelines' %}">Guidelines</a></li>
         </ul>
     </div>
-</div>
+
 {% endblock %}
