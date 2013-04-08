@@ -17,7 +17,7 @@
             {% url 'resource_list' slug="course" as course_tab %}
             <li class="{% active request course_tab %}"><a href="{{ course_tab }}"><i class="icon-sitemap"></i> Course</a></li>
             {% url 'resource_list' slug="documentation" as documentation_tab %}
-            <li class="{% active request documentation_tab %}"><a href="{{ documentation_tab }}"><i class="icon-folder-open"></i> Documentation</a></li>
+            <li class="{% active request documentation_tab %}"><a href="{{ documentation_tab }}"><i class="icon-book"></i> Documentation</a></li>
             {% if user.is_authenticated %}
             {% url 'resource_create' as create_tab %}
             <li class="pull-right {% active request create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
