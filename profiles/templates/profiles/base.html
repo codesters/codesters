@@ -39,7 +39,7 @@
             {% url 'user_resources' userinfo.pk as resource_tab %}
             <li class="{% active request  resource_tab %}"><a href="{{ resource_tab }}"><i class="icon-pushpin"></i> Shared Resources</a></li>
             {% ifequal user userinfo %}
-            <li class="pull-right"><a href="{% url 'my_settings' %"><i class="icon-edit"></i> Settings</a></li>
+            <li class="pull-right"><a href="{% url 'my_settings' %}"><i class="icon-edit"></i> Settings</a></li>
             {% endifequal %}
         </ul>
         <div class="row-fluid profile-content">
