@@ -35,7 +35,7 @@ THIRD_PARTY_APPS = (
 
 LOCAL_APPS = (
     'profiles',
-    'tracks',
+#    'tracks',
     'walls',
     'resources',
 )

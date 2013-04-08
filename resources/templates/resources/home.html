@@ -1,0 +1,43 @@
+{% extends "resources/base.html" %}
+{% load url from future %}
+
+{% block head_title %}Resources{% endblock %}
+{% block page_title %}Resources{% endblock %}
+{% block page_subtitle %}codesters project{% endblock %}
+
+{% block resource_content %}
+<div class="row-fluid">
+    <div class="span12 explore-box">
+        <h3>Topics</h3>
+        <ol class="explore-list unstyled">
+            {% for topic in topics %}
+            <li>
+                <h4><a href="{{ topic.get_absolute_url }}">{{  topic.name }}</a></h4>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span5 explore-box">
+        <h3>Popular Resources</h3>
+        <ol class="explore-list unstyled">
+            {% for resource in popular_resources %}
+            <li>
+                <h4><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></h4>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    <div class="span5 explore-box">
+        <h3>Recent Resources</h3>
+        <ol class="explore-list unstyled">
+            {% for resource in recent_resources %}
+            <li>
+                <h4><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></h4>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
+{% endblock %}

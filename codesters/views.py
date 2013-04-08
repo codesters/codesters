@@ -14,6 +14,10 @@ def user_redirect_view(request, username):
     user = get_object_or_404(User, username=username)
     return HttpResponseRedirect(reverse('user_detail', kwargs={'pk': user.pk,}))
 
+
+class TrackHomeView(TemplateView):
+    template_name = 'coming_soon.html'
+
 class ExploreView(ListView):
     template_name = 'explore.html'
     context_object_name = 'snippets'

@@ -1,19 +1,66 @@
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
-
-from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import get_object_or_404
+from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy
+from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
-class ResourceHomeView(RedirectView):
-    permanent = False
+def resource_home(request):
+    topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+    recent_resources = Resource.objects.all().order_by('-created_at')[:5]
+    popular_resources = Resource.objects.all().order_by('-vote')[:5]
+    ctx = {
+            'topics': topics,
+            'recent_resources': recent_resources,
+            'popular_resources': popular_resources,
+        }
+    return render_to_response('resources/home.html', ctx, context_instance=RequestContext(request))
 
-    def get_redirect_url(self):
-        return reverse_lazy('resource_recent_list')
+
+class ResourceTypeListView(ListView):
+    context_object_name = 'resources'
+    template_name = 'resources/resource_list.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        resource_type = get_object_or_404(ResourceType, slug=slug)
+        return Resource.objects.filter(resource_type=resource_type).order_by('-created_at')
+
+    def get_context_data(self, **kwargs):
+        context = super(ResourceTypeListView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        context['topics'] = topics
+        return context
+
+
+class ResourceListView(ListView):
+    context_object_name = 'resources'
+    template_name = 'resources/resource_list.html'
+    paginate_by = 12
+
+    def get_queryset(self):
+        slug = self.kwargs['slug']
+        order = {'recent':'-created_at', 'popular':'-vote'}
+        order_to_get = 'recent'
+        if 'o' in self.request.GET and order:
+            order_to_get = self.request.GET['o']
+        if slug=='all':
+            resources = Resource.objects.all().order_by(order[order_to_get])
+        else:
+            resource_type = get_object_or_404(ResourceType, slug=slug)
+            resources = Resource.objects.filter(resource_type=resource_type).order_by(order[order_to_get])
+        return resources
+
+    def get_context_data(self, **kwargs):
+        context = super(ResourceListView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        context['topics'] = topics
+        return context
 
 
 class ResourceRecentListView(ListView):
@@ -41,24 +88,6 @@ class ResourcePopularListView(ListView):
         context['topics'] = topics
         return context
 
-
-class ResourceTypeListView(ListView):
-    context_object_name = 'resources'
-    template_name = 'resources/resource_list.html'
-    paginate_by = 12
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-        resource_type = get_object_or_404(ResourceType, slug=slug)
-        return Resource.objects.filter(resource_type=resource_type)
-
-    def get_context_data(self, **kwargs):
-        context = super(ResourceTypeListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
-        context['topics'] = topics
-        return context
-
-
 class ResourceTopicListView(ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
@@ -67,7 +96,7 @@ class ResourceTopicListView(ListView):
     def get_queryset(self):
         slug = self.kwargs['slug']
         topic = get_object_or_404(Topic, slug=slug)
-        return topic.resource_set.all()
+        return topic.resource_set.all().order_by('-vote')
 
     def get_context_data(self, **kwargs):
         context = super(ResourceTopicListView, self).get_context_data(**kwargs)

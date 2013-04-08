@@ -20,5 +20,6 @@ urlpatterns += patterns('',
     url(r'^wall/', include('walls.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
-    url(r'^track/', include('tracks.urls')),
+#    url(r'^track/', include('tracks.urls')),
+    url(r'^track/', TrackHomeView.as_view(), name='track_list'),
 )
