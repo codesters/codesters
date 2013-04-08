@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from braces.views import SetHeadlineMixin
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
@@ -21,24 +22,7 @@ def resource_home(request):
     return render_to_response('resources/home.html', ctx, context_instance=RequestContext(request))
 
 
-class ResourceTypeListView(ListView):
-    context_object_name = 'resources'
-    template_name = 'resources/resource_list.html'
-    paginate_by = 12
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-        resource_type = get_object_or_404(ResourceType, slug=slug)
-        return Resource.objects.filter(resource_type=resource_type).order_by('-created_at')
-
-    def get_context_data(self, **kwargs):
-        context = super(ResourceTypeListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
-        context['topics'] = topics
-        return context
-
-
-class ResourceListView(ListView):
+class ResourceListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
     paginate_by = 12
@@ -54,6 +38,7 @@ class ResourceListView(ListView):
         else:
             resource_type = get_object_or_404(ResourceType, slug=slug)
             resources = Resource.objects.filter(resource_type=resource_type).order_by(order[order_to_get])
+        self.headline = slug+'s' #TODO Adding s for plural manually
         return resources
 
     def get_context_data(self, **kwargs):
@@ -63,40 +48,22 @@ class ResourceListView(ListView):
         return context
 
 
-class ResourceRecentListView(ListView):
-    queryset = Resource.objects.all().order_by('-created_at')
-    context_object_name = 'resources'
-    template_name = 'resources/resource_list.html'
-    paginate_by = 12
-
-    def get_context_data(self, **kwargs):
-        context = super(ResourceRecentListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
-        context['topics'] = topics
-        return context
-
-
-class ResourcePopularListView(ListView):
-    queryset = Resource.objects.all().order_by('-vote')
-    context_object_name = 'resources'
-    template_name = 'resources/resource_list.html'
-    paginate_by = 12
-
-    def get_context_data(self, **kwargs):
-        context = super(ResourcePopularListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
-        context['topics'] = topics
-        return context
-
-class ResourceTopicListView(ListView):
+class ResourceTopicListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
     paginate_by = 12
 
     def get_queryset(self):
         slug = self.kwargs['slug']
+        slug = self.kwargs['slug']
+        order = {'recent':'-created_at', 'popular':'-vote'}
+        order_to_get = 'popular'
+        if 'o' in self.request.GET and order:
+            order_to_get = self.request.GET['o']
         topic = get_object_or_404(Topic, slug=slug)
-        return topic.resource_set.all().order_by('-vote')
+        resources = topic.resource_set.all().order_by(order[order_to_get])
+        self.headline = slug+' Resources'
+        return resources
 
     def get_context_data(self, **kwargs):
         context = super(ResourceTopicListView, self).get_context_data(**kwargs)
@@ -113,38 +80,50 @@ class ResourceRedirectView(RedirectView):
         resource.upvote(1)
         return resource.url
 
-class ResourceDetailView(DetailView):
+
+class ResourceDetailView(SetHeadlineMixin, DetailView):
     model = Resource
     context_object_name = 'resource'
     template_name = 'resources/resource_detail.html'
 
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
+        self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
         resource.upvote(2)
         return resource
 
+    def get_context_data(self, **kwargs):
+        context = super(ResourceDetailView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        context['topics'] = topics
+        return context
 
-class ResourceCreateView(LoginRequiredMixin, CreateView):
+
+class ResourceCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
     form_class = ResourceCreateForm
     template_name = 'resources/resource_create.html'
+    headline = 'Add new Resource'
 
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(ResourceCreateView, self).form_valid(form)
 
 
-class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     form_class = ResourceUpdateForm
     model = Resource
     template_name = 'resources/resource_update.html'
+    headline = 'Edit Resource'
     permission_required = 'resources.change_resource'
     return_403 = True
+
 
 class TopicCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView): #mixin require an object, so make a get_object method
     model = Topic
     template_name = 'resources/topic_create.html'
     permission_required = 'resources.add_topic'
     render_403 = True
+
 
 class TopicUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Topic

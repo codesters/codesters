@@ -31,6 +31,7 @@ THIRD_PARTY_APPS = (
     'registration',
     'guardian',
     'widget_tweaks',
+    'braces',
 )
 
 LOCAL_APPS = (

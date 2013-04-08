@@ -1,6 +1,7 @@
+{% load active from codesters %}
 <h2><i class="icon-topics"></i> Topics</h2>
-<ul class="unstyled">
+<ul class="nav nav-list">
     {% for topic in topics %}
-    <li><a href="{{ topic.get_absolute_url }}">{{ topic.name }} ({{ topic.resource_set.count }})</a></li>
+    <li class="{% active request topic.get_absolute_url %}"><a href="{{ topic.get_absolute_url }}">{{ topic.name }} ({{ topic.resource_set.count }})</a></li>
     {% endfor %}
 </ul>

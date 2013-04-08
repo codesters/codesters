@@ -8,3 +8,4 @@ gunicorn==0.17.2
 ipython==0.13.1
 psycopg2==2.4.6
 django-widget-tweaks==1.1.2
+django-braces==1.0.0

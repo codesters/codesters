@@ -3,15 +3,6 @@
 
 {% block body %}
 {% include "navbar.html" %}
-{% if heading %}
-<header style="background-image: url('{{ STATIC_URL }}img/header-light.png')">
-    <div class="container">
-        <div class="page-header">
-            <h1>{% block page_title %}{{ heading }}{% endblock %}</small></h1>
-        </div>
-    </div>
-</header><!--/.header -->
-{% endif %}
 <div class="content container">
     {% block content %}{% endblock %}
 </div><!--/.content -->

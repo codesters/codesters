@@ -9,13 +9,13 @@
             {% url 'resource_list' slug="all" as all_tab %}
             <li class="{% active request all_tab %}"><a href="{{ all_tab }}"><i class="icon-asterisk"></i> All</a></li>
             {% url 'resource_list' slug="video" as video_tab %}
-            <li class="{% active request video_tab %}"><a href="{{ video_tab }}"><i class="icon-facetime-video"></i> Video</a></li>
+            <li class="{% active request video_tab %}"><a href="{{ video_tab }}"><i class="icon-facetime-video"></i> Videos</a></li>
             {% url 'resource_list' slug="tutorial" as tutorial_tab %}
-            <li class="{% active request tutorial_tab %}"><a href="{{ tutorial_tab }}"><i class="icon-lightbulb"></i> Tutorial</a></li>
+            <li class="{% active request tutorial_tab %}"><a href="{{ tutorial_tab }}"><i class="icon-lightbulb"></i> Tutorials</a></li>
             {% url 'resource_list' slug="blog-post" as blog_tab %}
-            <li class="{% active request blog_tab %}"><a href="{{ blog_tab }}"><i class="icon-quote-right"></i> Blog Post</a></li>
+            <li class="{% active request blog_tab %}"><a href="{{ blog_tab }}"><i class="icon-quote-right"></i> Blog Posts</a></li>
             {% url 'resource_list' slug="course" as course_tab %}
-            <li class="{% active request course_tab %}"><a href="{{ course_tab }}"><i class="icon-sitemap"></i> Course</a></li>
+            <li class="{% active request course_tab %}"><a href="{{ course_tab }}"><i class="icon-sitemap"></i> Courses</a></li>
             {% url 'resource_list' slug="documentation" as documentation_tab %}
             <li class="{% active request documentation_tab %}"><a href="{{ documentation_tab }}"><i class="icon-book"></i> Documentation</a></li>
             {% if user.is_authenticated %}
