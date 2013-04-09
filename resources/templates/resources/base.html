@@ -8,8 +8,8 @@
         <ul class="nav nav-pills">
             {% url 'resource_list' slug="all" as all_tab %}
             <li class="{% active request all_tab %}"><a href="{{ all_tab }}"><i class="icon-asterisk"></i> All</a></li>
-            {% url 'resource_list' slug="video" as video_tab %}
-            <li class="{% active request video_tab %}"><a href="{{ video_tab }}"><i class="icon-facetime-video"></i> Videos</a></li>
+            {% url 'resource_list' slug="media" as media_tab %}
+            <li class="{% active request media_tab %}"><a href="{{ media_tab }}"><i class="icon-facetime-video"></i> Media</a></li>
             {% url 'resource_list' slug="tutorial" as tutorial_tab %}
             <li class="{% active request tutorial_tab %}"><a href="{{ tutorial_tab }}"><i class="icon-lightbulb"></i> Tutorials</a></li>
             {% url 'resource_list' slug="blog-post" as blog_tab %}

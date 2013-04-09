@@ -6,9 +6,9 @@
 <div class="content container">
     {% block content %}{% endblock %}
 </div><!--/.content -->
-<div style="background-image: url('{{ STATIC_URL }}img/header-light.png')" class="footer">
+<div class="footer" style="background-image:url('{{ STATIC_URL }}img/footer.png')">
     <div class="container">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-pills">
             <li><a href="{% url 'page_about' %}">About</a></li>
             <li><a href="{% url 'page_contact' %}">Contact</a></li>
             <li><a href="{% url 'page_team' %}">Team</a></li>

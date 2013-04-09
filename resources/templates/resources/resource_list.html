@@ -13,11 +13,6 @@
         {% for resource in resources %}
         <div class="row-fluid">
             <div class="span12 resource resource-{{ resource.resource_type.color }}">
-                <div class="row-fluid">
-                    <div class="span1 vote">
-                        <a href="#"><i class="icon-thumbs-up icon-3x"></i> </a>
-                    </div>
-                    <div class="span11 resource-data">
                         <h3><a href="{% url 'resource_redirect' pk=resource.id %}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
                         <p><small>submitted  {{ resource.created_at|age  }} by 
                                 <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
@@ -25,8 +20,6 @@
                         </small> </p>
                         <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-comments"></i> Discuss - # comments</a> 
                         {% if user.is_staff or resource.created_by.user == user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
-                    </div>
-                </div>
             </div>
         </div>
         {% endfor %}

@@ -68,7 +68,7 @@ class Resource(models.Model):
             slug_str = '%s' % self.title
             unique_slugify(self, slug_str)
         if self.description and not self.help_text:
-            self.help_text = description[:220]
+            self.help_text = self.description[:220]
         super(Resource, self).save(*args, **kwargs)
 
     def upvote(self, number=1):
