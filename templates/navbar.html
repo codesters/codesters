@@ -21,7 +21,6 @@
                     <li class="dropdown {% active request '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
-                            <li><a href="{% url 'my_wall' %}"><i class="icon-folder-close"></i> My Wall</a></li>
                             <li><a href="{% url 'my_tracks' %}"><i class="icon-tasks"></i> My tracks</a></li>
                             <li><a href="{% url 'my_projects' %}"><i class="icon-briefcase"></i> My Projects</a></li>
                             <li><a href="{% url 'my_profile' %}"><i class="icon-picture"></i> My Profile</a></li>

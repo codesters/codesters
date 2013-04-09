@@ -16,30 +16,28 @@
                 <ul class="nav nav-list ">
                     <li class="nav-header">{{ userinfo }}</li>
                     <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-user"></i> {{ userinfo.get_full_name|default:"(Not provided)" }}</a></li>
-                    <li><a href="{{ userinfo.wall.get_absolute_url }}"><i class="icon-folder-close"></i> Wall</a></li>
                     <li class="nav-header">Other Profiles</li>
                     {% if userinfo.userprofile.github %}<li><a href="http://github.com/{{ userinfo.userprofile.github }}"><i class="icon-github"></i> Github</a></li>{% endif %}
                     {% if userinfo.userprofile.twitter %}<li><a href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
                     {% if userinfo.userprofile.website %}<li><a href="{{ userinfo.userprofile.website }}"><i class="icon-external-link"></i> Website</a></li>{% endif %}
-                    {% if userinfo.userprofile.stackoverflow %}<li><a href="{{ userinfo.userprofile.stackoverflow }}"><i class="icon-cogs"></i> Stackoverflow</a></li>{% endif %}
-                    {% if userinfo.userprofile.coderwall %}<li><a href="{{ userinfo.userprofile.coderwall }}"><i class="icon-spinner"></i> Coderwall</a></li>{% endif %}
-                    {% if userinfo.userprofile.linkedin %}<li><a href="{{ userinfo.userprofile.linkedin }}"><i class="icon-linkedin"></i> Linkedin</a></li>{% endif %}
+                    {% if userinfo.userprofile.stackoverflow %}<li><a href="http://stackoverflow.com/users/{{ userinfo.userprofile.stackoverflow }}"><i class="icon-cogs"></i> Stackoverflow</a></li>{% endif %}
+                    {% if userinfo.userprofile.facebook %}<li><a href="http://facebook.com/{{ userinfo.userprofile.facebook }}"><i class="icon-facebook"></i> Facebook</a></li>{% endif %}
                 </ul>
             </div>
         </div>
     </div>
     <div class="span9 profile-main">
         <ul class="nav nav-tabs">
-            {% url 'user_detail' userinfo.pk as info_tab %}
+            {% url 'user_info' userinfo.username as info_tab %}
             <li class="{% active request info_tab %}"><a href="{{ info_tab }}"><i class="icon-info-sign"></i> Info</a></li>
-            {% url 'user_snippets' pk=userinfo.pk as wall_tab %}
-            <li class="{% active request wall_tab %}"><a href="{{ wall_tab }}"><i class="icon-quote-right"></i> Wall</a></li>
-            {% url 'user_projects' pk=userinfo.pk as project_tab %}
+            {% url 'user_snippets' username=userinfo.username as snippet_tab %}
+            <li class="{% active request snippet_tab %}"><a href="{{ snippet_tab }}"><i class="icon-quote-right"></i> Snippets</a></li>
+            {% url 'user_projects' username=userinfo.username as project_tab %}
             <li class="{% active request  project_tab %}"><a href="{{ project_tab }}"><i class="icon-briefcase"></i> Projects</a></li>
-            {% url 'user_resources' userinfo.pk as resource_tab %}
+            {% url 'user_resources' userinfo.username as resource_tab %}
             <li class="{% active request  resource_tab %}"><a href="{{ resource_tab }}"><i class="icon-pushpin"></i> Shared Resources</a></li>
             {% ifequal user userinfo %}
-            <li class="pull-right"><a href="{% url 'my_settings' %}"><i class="icon-edit"></i> Settings</a></li>
+            <li class="pull-right"><a href="{% url 'create_snippet' userinfo.username %}"><i class="icon-plus"></i> Add New</a></li>
             {% endifequal %}
         </ul>
         <div class="row-fluid profile-content">

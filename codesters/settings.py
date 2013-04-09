@@ -26,18 +26,19 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    'south',
+#    'south',
     'django_extensions',
     'registration',
     'guardian',
     'widget_tweaks',
     'braces',
+#    'jsonfield'
 )
 
 LOCAL_APPS = (
     'profiles',
 #    'tracks',
-    'walls',
+#    'walls',
     'resources',
 )
 

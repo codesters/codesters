@@ -12,14 +12,14 @@ urlpatterns = patterns('',
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
     url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
     url(r'^users/(?P<username>[\w-]+)/$', user_redirect_view, name='user_redirect'),
+    url(r'^track/', TrackHomeView.as_view(), name='track_list'),
 )
 
 urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^wall/', include('walls.urls')),
+#    url(r'^wall/', include('walls.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
 #    url(r'^track/', include('tracks.urls')),
-    url(r'^track/', TrackHomeView.as_view(), name='track_list'),
 )

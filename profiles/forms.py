@@ -2,8 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from django.contrib.auth.models import User
-from profiles.models import UserProfile
-from walls.models import Wall
+from profiles.models import UserProfile, Snippet
 
 class UserUpdateForm(ModelForm):
     class Meta:
@@ -13,9 +12,14 @@ class UserUpdateForm(ModelForm):
 class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('github', 'twitter', 'website', 'stackoverflow', 'coderwall', 'linkedin','bio')
+        fields = ('github', 'twitter', 'stackoverflow', 'facebook', 'website', 'bio')
 
-class WallUpdateForm(ModelForm):
+class SnippetCreateForm(ModelForm):
     class Meta:
-        model = Wall
-        exclude = ('user',)
+        model = Snippet
+        fields = ('title', 'content', 'published')
+
+class SnippetUpdateForm(ModelForm):
+    class Meta:
+        model = Snippet
+        fields = ('title', 'content', 'published')
