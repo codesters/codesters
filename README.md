@@ -1,20 +1,27 @@
 #Codesters
 ----
 
-The plan is to make a platform for students to help them learn, share and collaborate on Computer Science projects. Students who want to learn programming or web development can do so via tracks. We do not intend to write another [Codecademy](http://codecademy.com/) like site, rather we want to become a library/recommendation hub for beginners. Tracks will include links to the most recommended tutorials/courses on the open web. We are primarily aiming Indian students now.
+We are developing knowledge library for learning programming. The best resources to learn something(related to computer science) on the web are scattered and newcomers waste lot of time to go through choices of tools, then where to learn and all. We aim to elinimate this by recommending beginners the best resource for a tool or language. And who will decide which is best, its the users themselves(plus some AI behind the door).
 
 ##Version 1 feature expectations
 
-+ User accounts with achivements.
-+ Users can share any link of interesting blog post or video or tutorial.
-+ Upvoting of these links will make it revelant for others to use it.
-+ Moderators can create tracks to let learn beginners programming and other concepts.
-+ Users can do separate lessons from track of their choice.
++ Users can share any link of interesting blog post or video or tutorial in the Resource Section.
++ Resources will be divided in topics around 4 levels(noob, beginner, intermediate, advanced).
++ Users can share snippets on their wall to share their views and experiences in learning.
+
+##Later features
+
++ Mods and more active users will be able to edit wiki like content in the topics and resources.
++ Tracks will be introduced to give teachers/tutors ability to create content for the their students and distribute them.
++ Users can follow other interesting users.
 
 
-##Technologies Used
+##Tools Used
 
 + Django 1.4.5
++ django-registration
++ django-guardian
++ django-braces
 + PostgreSQL (sqlite3 for dev)
 
 *For full requirements, see requirment.txt*
