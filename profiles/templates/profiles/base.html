@@ -37,7 +37,7 @@
             {% url 'user_resources' userinfo.username as resource_tab %}
             <li class="{% active request  resource_tab %}"><a href="{{ resource_tab }}"><i class="icon-pushpin"></i> Shared Resources</a></li>
             {% ifequal user userinfo %}
-            <li class="pull-right"><a href="{% url 'create_snippet' userinfo.username %}"><i class="icon-plus"></i> Add New</a></li>
+            <li class="pull-right"><a href="{% url 'snippet_create' %}"><i class="icon-plus"></i> Add New</a></li>
             {% endifequal %}
         </ul>
         <div class="row-fluid profile-content">

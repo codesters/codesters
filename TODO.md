@@ -1,5 +1,7 @@
 #TODO
 
+- Raise 404 if user is inactive.
+- Filter Snippets and resource when show is True.
 - Add proper regex to match recent and popular tabs in resources.
 - Make heading template context variable and remove whole page_title if not used.
 - reduce main navbar height a bit by changing logo icon to 18px.

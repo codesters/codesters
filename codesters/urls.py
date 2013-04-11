@@ -3,6 +3,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 from codesters.views import *
+from profiles.views import SnippetDetailView, SnippetUpdateView, SnippetCreateView
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
@@ -13,6 +14,9 @@ urlpatterns = patterns('',
     url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
     url(r'^users/(?P<username>[\w-]+)/$', user_redirect_view, name='user_redirect'),
     url(r'^track/', TrackHomeView.as_view(), name='track_list'),
+    url(r'^snippet/new/$', SnippetCreateView.as_view(), name='snippet_create'),
+    url(r'^snippet/(?P<pk>\d+)/$', SnippetDetailView.as_view(), name='snippet_detail'),
+    url(r'^snippet/(?P<pk>\d+)/edit/$', SnippetUpdateView.as_view(), name='snippet_update'),
 )
 
 urlpatterns += patterns('',

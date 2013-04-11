@@ -10,6 +10,13 @@
             <li class="{% active request '.+recent$' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
             <li class="{% active request popular_tab %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
         </ul>
+        {% if not resources %}
+        <div class="row-fluid">
+            <div class="span12">
+                <h3>Sorry, there are no resources here.</h3>
+            </div>
+        </div>
+        {% endif %}
         {% for resource in resources %}
         <div class="row-fluid">
             <div class="span12 resource resource-{{ resource.resource_type.color }}">

@@ -75,16 +75,16 @@ class UserSnippetsView(ListView):
         return context
 
 
+class SnippetDetailView(DetailView):
+    model = Snippet
+    context_object_name = 'snippet'
+    template_name = 'profiles/snippet_detail.html'
+
+
 class SnippetCreateView(LoginRequiredMixin, CreateView):
     model = Snippet
     form_class = SnippetCreateForm
     template_name = 'profiles/snippet_create.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SnippetCreateView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
     def form_valid(self, form):
         user = get_object_or_404(User, username =self.request.user.username)
@@ -98,12 +98,6 @@ class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView)
     template_name = 'profiles/snippet_update.html'
     permission_required = 'profiles.change_snippet'
     return_403 = True
-
-    def get_context_data(self, **kwargs):
-        context = super(SnippetUpdateView, self).get_context_data(**kwargs)
-        profile = Wall.objects.get(user=self.request.user)
-        context['profile'] = profile
-        return context
 
 
 class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):

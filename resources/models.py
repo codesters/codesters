@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from codesters.utils import unique_slugify
 from django.template.defaultfilters import slugify
 
-LEVELS = ['noob', 'beginner', 'intermediate', 'advanced']
+LEVELS = ['beginner', 'intermediate', 'advanced']
 
 class Topic(models.Model):
     name = models.CharField(max_length=60, unique=True)
@@ -79,18 +79,11 @@ class Resource(models.Model):
         self.vote -= number
         self.save()
 
-#from guardian.shortcuts import assign_perm
-#from django.db.models.signals import post_save
-#def create_resource_permission(sender, instance, created, **kwargs):
-#    if created:
-#        from django.contrib.auth.models import Group
-#        admins = Group.objects.get(name='admins')
-#        mods = Group.objects.get(name='mods')
-#        assign_perm('change_resource', instance.created_by, instance)
-#        assign_perm('delete_resource', instance.created_by, instance)
-#        assign_perm('change_resource', admins, instance)
-#        assign_perm('delete_resource', admins, instance)
-#        assign_perm('change_resource', mods, instance)
-#        assign_perm('delete_resource', mods, instance)
-#
-#post_save.connect(create_resource_permission, sender=Resource)
+from guardian.shortcuts import assign_perm
+from django.db.models.signals import post_save
+def create_resource_permission(sender, instance, created, **kwargs):
+    if created:
+        assign_perm('change_resource', instance.created_by, instance)
+        assign_perm('delete_resource', instance.created_by, instance)
+
+post_save.connect(create_resource_permission, sender=Resource)

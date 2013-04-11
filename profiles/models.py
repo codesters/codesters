@@ -1,15 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
-#from tracks.models import Chapter, Badge
-
 from django.core.urlresolvers import reverse
+from django.dispatch import receiver
+from registration.signals import user_activated
 
-#from django.dispatch import receiver
-#from registration.signals import user_activated
-#
-#@receiver(user_activated)
-#def create_user_profile(sender, user, request, **kwargs):
-#    user_profile = UserProfile.objects.create(user=user)
+@receiver(user_activated)
+def create_user_profile(sender, user, request, **kwargs):
+    user_profile = UserProfile.objects.create(user=user)
+    from guardian.shortcuts import assign_perm
+    assign_perm('change_userprofile', user, user_profile)
+    assign_perm('delete_userprofile', user, user_profile)
+    assign_perm('change_user', user, user)
 
 #TODO make a project model and add user projects field as foreign key
 class Project(models.Model):
@@ -36,13 +37,16 @@ class Badge(models.Model):
 class Snippet(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
-    published = models.BooleanField(default=True)
+    published = models.BooleanField(default=True) #TODO rename to show
     user = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('snippet_detail', kwargs={'pk': self.pk})
 
 
 
@@ -65,21 +69,3 @@ class UserProfile(models.Model):
         return reverse('user_detail', kwargs={'username': self.user.username})
 
 
-#from guardian.shortcuts import assign_perm
-#from django.db.models.signals import post_save
-#def create_user_permissions(sender, instance, created, **kwargs):
-#    if created:
-#        from django.contrib.auth.models import Group
-#        admins = Group.objects.get(name='admins')
-#        mods = Group.objects.get(name='mods')
-#        assign_perm('change_userprofile', instance.user, instance)
-#        assign_perm('delete_userprofile', instance.user, instance)
-#        assign_perm('change_user', instance.user, instance.user)
-#        assign_perm('change_userprofile', admins, instance)
-#        assign_perm('delete_userprofile', admins, instance)
-#        assign_perm('change_user', admins, instance.user)
-#        assign_perm('change_userprofile', mods, instance)
-#        assign_perm('delete_userprofile', mods, instance)
-#        assign_perm('change_user', mods, instance.user)
-#
-#post_save.connect(create_user_permissions, sender=UserProfile)

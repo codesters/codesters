@@ -14,7 +14,6 @@ urlpatterns = patterns('',
     url(r'^(?P<username>\w+)/resources/$', UserResourcesView.as_view(), name='user_resources'),
     url(r'^(?P<username>\w+)/projects/$', UserProjectsView.as_view(), name='user_projects'),
     url(r'^(?P<username>\w+)/snippets/$', UserSnippetsView.as_view(), name='user_snippets'),
-    url(r'^(?P<username>\w+)/snippets/new/$', SnippetCreateView.as_view(), name='create_snippet'),
 #    url(r'^(?P<pk>\d+)/settings/wall/$', WallUpdateView.as_view(), name='wall_update'),
     url(r'^(?P<username>\w+)/settings/core/$', UserUpdateView.as_view(), name='user_update'),
     url(r'^(?P<username>\w+)/settings/info/$', UserProfileUpdateView.as_view(), name='userprofile_update'), #takes UserProfile pk

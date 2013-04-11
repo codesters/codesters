@@ -7,17 +7,19 @@
     <div class="span12">
         <ul class="nav nav-pills">
             {% url 'resource_list' slug="all" as all_tab %}
-            <li class="{% active request all_tab %}"><a href="{{ all_tab }}"><i class="icon-asterisk"></i> All</a></li>
-            {% url 'resource_list' slug="media" as media_tab %}
-            <li class="{% active request media_tab %}"><a href="{{ media_tab }}"><i class="icon-facetime-video"></i> Media</a></li>
-            {% url 'resource_list' slug="tutorial" as tutorial_tab %}
-            <li class="{% active request tutorial_tab %}"><a href="{{ tutorial_tab }}"><i class="icon-lightbulb"></i> Tutorials</a></li>
-            {% url 'resource_list' slug="blog-post" as blog_tab %}
-            <li class="{% active request blog_tab %}"><a href="{{ blog_tab }}"><i class="icon-quote-right"></i> Blog Posts</a></li>
-            {% url 'resource_list' slug="course" as course_tab %}
-            <li class="{% active request course_tab %}"><a href="{{ course_tab }}"><i class="icon-sitemap"></i> Courses</a></li>
-            {% url 'resource_list' slug="documentation" as documentation_tab %}
-            <li class="{% active request documentation_tab %}"><a href="{{ documentation_tab }}"><i class="icon-book"></i> Documentation</a></li>
+            <li class="{% active request all_tab %}"><a href="{{ all_tab }}">All</a></li>
+            {% url 'resource_list' slug="programming" as programming_tab %}
+            <li class="{% active request programming_tab %}"><a href="{{ programming_tab }}">Programming</a></li>
+            {% url 'resource_list' slug="web" as web_tab %}
+            <li class="{% active request web_tab %}"><a href="{{ web_tab }}">Web Development</a></li>
+            {% url 'resource_list' slug="tool" as tool_tab %}
+            <li class="{% active request tool_tab %}"><a href="{{ tool_tab }}">Dev Tools</a></li>
+            {% url 'resource_list' slug="database" as database_tab %}
+            <li class="{% active request database_tab %}"><a href="{{ database_tab }}">Database</a></li>
+            {% url 'resource_list' slug="system" as system_tab %}
+            <li class="{% active request system_tab %}"><a href="{{ system_tab }}">System</a></li>
+            {% url 'resource_list' slug="other" as other_tab %}
+            <li class="{% active request other_tab %}"><a href="{{ other_tab }}">Others</a></li>
             {% if user.is_authenticated %}
             {% url 'resource_create' as create_tab %}
             <li class="pull-right {% active request create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
