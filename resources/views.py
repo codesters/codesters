@@ -35,10 +35,11 @@ class ResourceListView(SetHeadlineMixin, ListView):
             order_to_get = self.request.GET['o']
         if slug=='all':
             resources = Resource.objects.all().order_by(order[order_to_get])
+            self.headline = str(slug).capitalize() + ' Resources'
         else:
             resource_type = get_object_or_404(ResourceType, slug=slug)
             resources = Resource.objects.filter(resource_type=resource_type).order_by(order[order_to_get])
-        self.headline = slug+'s' #TODO Adding s for plural manually
+            self.headline = str(resource_type.name).capitalize() + ' Resources'
         return resources
 
     def get_context_data(self, **kwargs):
@@ -62,7 +63,7 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
             order_to_get = self.request.GET['o']
         topic = get_object_or_404(Topic, slug=slug)
         resources = topic.resource_set.all().order_by(order[order_to_get])
-        self.headline = slug+' Resources'
+        self.headline = str(topic.name).capitalize() +' Resources'
         return resources
 
     def get_context_data(self, **kwargs):

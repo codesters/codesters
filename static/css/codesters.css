@@ -57,6 +57,11 @@
     max-height: 250px;
 }
 
+#user-info {
+    min-height: 180px;
+    margin-bottom: 20px;
+}
+
 .info-page {
     min-height: 380px !important;
     padding: 30px;

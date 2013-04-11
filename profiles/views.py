@@ -3,7 +3,7 @@ from django.views.generic import DetailView, RedirectView, TemplateView, ListVie
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from django.contrib.auth.models import User
-from profiles.models import UserProfile, Snippet
+from profiles.models import UserProfile, Snippet, SavedResource, TopicFollow
 from resources.models import Resource
 
 from django.shortcuts import get_object_or_404
@@ -30,7 +30,11 @@ class UserInfoView(DetailView):
         context = super(UserInfoView, self).get_context_data(**kwargs)
         user = get_object_or_404(User, username=self.kwargs['username'])
         userprofile = get_object_or_404(UserProfile, user=user) #redundancy check for user may exist but his profile not
+        saved_resources = SavedResource.objects.filter(user=user)
+        topics_follow = TopicFollow.objects.filter(user=user)
         context['userprofile'] = userprofile
+        context['saved_resources'] = saved_resources
+        context['topics_follow'] = topics_follow
         return context
 
 
@@ -121,18 +125,6 @@ class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateV
 
     def get_object(self):
         return self.request.user.userprofile
-
-
-class MyTracksView(LoginRequiredMixin, TemplateView):
-    template_name = 'coming_soon.html'
-
-
-class MyProjectsView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self):
-        user = self.request.user
-        return reverse('user_projects', kwargs={'username':user.username})
 
 
 class MyResourcesView(LoginRequiredMixin, RedirectView):

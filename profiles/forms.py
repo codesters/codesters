@@ -17,9 +17,9 @@ class UserProfileUpdateForm(ModelForm):
 class SnippetCreateForm(ModelForm):
     class Meta:
         model = Snippet
-        fields = ('title', 'content', 'published')
+        fields = ('title', 'content', 'show')
 
 class SnippetUpdateForm(ModelForm):
     class Meta:
         model = Snippet
-        fields = ('title', 'content', 'published')
+        fields = ('title', 'content', 'show')

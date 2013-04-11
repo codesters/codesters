@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from resources.models import Topic, Resource
 from django.core.urlresolvers import reverse
 from django.dispatch import receiver
 from registration.signals import user_activated
@@ -37,7 +38,7 @@ class Badge(models.Model):
 class Snippet(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
-    published = models.BooleanField(default=True) #TODO rename to show
+    show = models.BooleanField(default=True)
     user = models.ForeignKey(User)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
@@ -69,3 +70,24 @@ class UserProfile(models.Model):
         return reverse('user_detail', kwargs={'username': self.user.username})
 
 
+class SavedResource(models.Model):
+    user = models.ForeignKey(User)
+    resource = models.ForeignKey(Resource)
+    saved_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        unique_together = (('user', 'resource'),)
+
+    def __unicode__(self):
+        return '%s %s' %(self.user, self.resource)
+
+class TopicFollow(models.Model):
+    user = models.ForeignKey(User)
+    topic = models.ForeignKey(Topic)
+    followed_at = models.DateTimeField(auto_now_add=True, editable=False)
+
+    class Meta:
+        unique_together = (('user','topic'),)
+
+    def __unicode__(self):
+        return '%s %s' %(self.user, self.topic)
