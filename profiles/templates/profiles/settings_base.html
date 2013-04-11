@@ -5,14 +5,12 @@
 {% block page_subtitle %}{{ user }}{% endblock %}
 {% block content %}
 <ul class="nav nav-tabs">
-{% url 'userprofile_update' username=user.username as profile %}
+{% url 'userprofile_update' as profile %}
     <li class="{% active request profile %}"><a href="{{ profile }}">Profile</a></li>
-{% url 'user_update' user.username as account %}
+{% url 'user_update' as account %}
 <li class="{% active request account %}"><a href="{{ account }}">Account</a></li>
-{% url 'user_password' user.username as password %}
-{% if password %}
+{% url 'auth_password_change' as password %}
 <li class="{% active request password %}"><a href="{{ password }}">Change Password</a></li>
-{% endif %}
 </ul>
 <div class="row_fluid">
     <div class="span8 offset1">

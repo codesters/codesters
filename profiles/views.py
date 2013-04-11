@@ -109,8 +109,7 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     return_403 = True
 
     def get_object(self):
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        return user
+        return self.request.user
 
 
 class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
@@ -121,16 +120,7 @@ class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateV
     return_403 = True
 
     def get_object(self):
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        return user.userprofile
-
-
-class MySettingsView(LoginRequiredMixin, RedirectView):
-    permanent = False
-
-    def get_redirect_url(self):
-        user = self.request.user
-        return reverse('userprofile_update', kwargs={'username': user.username})
+        return self.request.user.userprofile
 
 
 class MyTracksView(LoginRequiredMixin, TemplateView):
