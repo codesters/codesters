@@ -32,13 +32,11 @@ THIRD_PARTY_APPS = (
     'guardian',
     'widget_tweaks',
     'braces',
-#    'jsonfield'
 )
 
 LOCAL_APPS = (
     'profiles',
 #    'tracks',
-#    'walls',
     'resources',
 )
 
