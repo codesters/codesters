@@ -12,7 +12,7 @@ class UserUpdateForm(ModelForm):
 class UserProfileUpdateForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('github', 'twitter', 'stackoverflow', 'facebook', 'website', 'bio')
+        fields = ('github', 'twitter', 'stackoverflow', 'facebook', 'website', 'gravatar_email', 'bio')
 
 class SnippetCreateForm(ModelForm):
     class Meta:

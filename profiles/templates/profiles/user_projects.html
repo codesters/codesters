@@ -1,14 +1,21 @@
 {% extends "profiles/base.html" %}
 {% load url from future %}
 
-{% block head_title %}User - projects{% endblock %}
-
-{% block page_title %}Coming Soon{% endblock %}
-
-{% block page_subtitle %}Projects{% endblock %}
-
+{% load codesters %}
 {% block profile_content %}
 <div class="span12">
-    {% include "coming_soon_snippet.html" %}
+    {% for project in projects %}
+    <h3>{{ project.title }}</h3>
+    <p>
+        <a href="{{ project.url }}" class="btn">Project Website</a>
+        {% if project.source_url %}
+        <a href="{{ project.source_url }}" class="btn success">Source</a>
+        {% endif %}
+    </p>
+    <p>{{ project.description }}</p>
+    {% empty %}
+    <h3>No projects listed</h3>
+    {% endfor %}
+    {% include "pagination.html" %}
 </div>
 {% endblock %}

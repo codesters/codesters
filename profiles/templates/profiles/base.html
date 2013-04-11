@@ -8,7 +8,11 @@
     <div class="span3 profile-sidebar well">
         <div class="row-fluid">
             <div class="span12 profile-photo">
+                {% if userinfo.userprofile.gravatar_email %}
+                <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="{% gravatar_url userinfo.userprofile.gravatar_email %}" alt="{{ userinfo }} photo - codesters" /></a>
+                {% else %}
                 <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="{% gravatar_url userinfo.email %}" alt="{{ userinfo }} photo - codesters" /></a>
+                {% endif %}
             </div>
         </div>
         <div class="row-fluid">
@@ -31,7 +35,7 @@
             {% url 'user_info' userinfo.username as info_tab %}
             <li class="{% active request info_tab %}"><a href="{{ info_tab }}"><i class="icon-info-sign"></i> Info</a></li>
             {% url 'user_snippets' username=userinfo.username as snippet_tab %}
-            <li class="{% active request snippet_tab %}"><a href="{{ snippet_tab }}"><i class="icon-quote-right"></i> Snippets</a></li>
+            <li class="{% active request snippet_tab %}"><a href="{{ snippet_tab }}"><i class="icon-quote-right"></i> Wall</a></li>
             {% url 'user_projects' username=userinfo.username as project_tab %}
             <li class="{% active request  project_tab %}"><a href="{{ project_tab }}"><i class="icon-briefcase"></i> Projects</a></li>
             {% url 'user_resources' userinfo.username as resource_tab %}

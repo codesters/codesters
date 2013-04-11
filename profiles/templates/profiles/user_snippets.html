@@ -5,7 +5,9 @@
 {% block profile_content %}
 <div class="span12">
     {% for snippet in snippets %}
-            <h3><a href="{% url 'snippet_detail' pk=snippet.pk %}">{{ snippet.title }}</a> <small>created {{ snippet.created_at|age }}</small></h3>
+        <h3><a href="{% url 'snippet_detail' pk=snippet.pk %}">{{ snippet.title }}</a> <small>created {{ snippet.created_at|age }}</small></h3>
+    {% empty %}
+    <h3>Wall is empty</h3>
     {% endfor %}
     {% include "pagination.html" %}
 </div>
