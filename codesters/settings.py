@@ -73,6 +73,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+ABSOLUTE_URL_OVERRIDES = {
+        'auth.user': lambda u: "/profile/%s/" % u.username,
+}
 
 ACCOUNT_ACTIVATION_DAYS = 7
 ANONYMOUS_USER_ID = -1

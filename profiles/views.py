@@ -194,7 +194,7 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMix
     form_class = UserUpdateForm
     model = User
     template_name = 'profiles/user_update.html'
-    success_url = reverse_lazy('my_settings')
+    success_url = reverse_lazy('my_profile')
     permission_required = 'auth.change_user'
     headline = 'Change Account Settings'
     return_403 = True
