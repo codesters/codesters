@@ -1,8 +1,6 @@
 {% extends "profiles/base.html" %}
 {% load url from future %}
 
-{% block head_title %}{{ userinfo }}{% endblock %}
-
 {% block profile_content %}
 <div class="span12" id="user-info">
     <p>{{ userinfo.userprofile.bio|default:"Bio not provided" }}</p>

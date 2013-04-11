@@ -2,11 +2,10 @@
 {% load url from future %}
 
 {% load codesters %}
-
 {% block content %}
 <div class="row-fluid">
     <div class="span12">
-        <h1>by <a href="{% url 'user_detail' snippet.user.username %}">{{ snippet.user }}</a></h1>
+        <h1><a href="{% url 'user_detail' snippet.user.username %}">{{ snippet.user }} Wall</a></h1>
         <hr />
     </div>
 </div>

@@ -11,5 +11,7 @@ urlpatterns = patterns('',
     url(r'^(?P<username>\w+)/info/$', UserInfoView.as_view(), name='user_info'),
     url(r'^(?P<username>\w+)/resources/$', UserResourcesView.as_view(), name='user_resources'),
     url(r'^(?P<username>\w+)/projects/$', UserProjectsView.as_view(), name='user_projects'),
+    url(r'^(?P<username>\w+)/projects/(?P<pk>\d+)/edit/$', ProjectUpdateView.as_view(), name='project_update'),
+    url(r'^(?P<username>\w+)/projects/new/$', ProjectCreateView.as_view(), name='project_create'),
     url(r'^(?P<username>\w+)/snippets/$', UserSnippetsView.as_view(), name='user_snippets'),
 )

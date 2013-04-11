@@ -17,8 +17,8 @@ def create_user_profile(sender, user, request, **kwargs):
 class Project(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField(blank=True, null=True)
-    url = models.URLField(unique=True)
-    source_url = models.URLField(unique=True, null=True, blank=True)
+    url = models.URLField()
+    source_url = models.URLField(null=True, blank=True)
     user = models.ForeignKey(User)
 
     def __unicode__(self):

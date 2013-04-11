@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 
 from django.contrib.auth.models import User
-from profiles.models import UserProfile, Snippet
+from profiles.models import UserProfile, Snippet, Project
 
 class UserUpdateForm(ModelForm):
     class Meta:
@@ -23,3 +23,14 @@ class SnippetUpdateForm(ModelForm):
     class Meta:
         model = Snippet
         fields = ('title', 'content', 'show')
+
+class ProjectCreateForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = ('title', 'url', 'source_url', 'description')
+
+
+class ProjectUpdateForm(ModelForm):
+    class Meta:
+        model = Project
+        fields = ('title', 'url', 'source_url', 'description')

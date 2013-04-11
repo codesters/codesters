@@ -40,9 +40,6 @@
             <li class="{% active request  project_tab %}"><a href="{{ project_tab }}"><i class="icon-briefcase"></i> Projects</a></li>
             {% url 'user_resources' userinfo.username as resource_tab %}
             <li class="{% active request  resource_tab %}"><a href="{{ resource_tab }}"><i class="icon-pushpin"></i> Shared Resources</a></li>
-            {% ifequal user userinfo %}
-            <li class="pull-right"><a href="{% url 'snippet_create' %}"><i class="icon-plus"></i> Add New Snippet</a></li>
-            {% endifequal %}
         </ul>
         <div class="row-fluid profile-content">
             {% block profile_content %}{% endblock %}

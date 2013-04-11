@@ -18,11 +18,11 @@ We are developing knowledge library for learning programming. The best resources
 
 ##Tools Used
 
-+ Django 1.4.5
-+ django-registration
-+ django-guardian
-+ django-braces
-+ PostgreSQL (sqlite3 for dev)
++ [Django 1.4.5](https://www.djangoproject.com/)
++ [django-registration](https://django-registration.readthedocs.org/en/latest/)
++ [django-guardian](https://github.com/lukaszb/django-guardian)
++ [django-braces](https://github.com/brack3t/django-braces/)
++ MySQL (sqlite3 for dev)
 
 *For full requirements, see requirment.txt*
 
