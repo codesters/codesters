@@ -1,17 +1,17 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 
-{% load codesters %}
+{% load age from codesters %}
 {% block resource_content %}
 <div class="row-fluid">
     <div class="span9">
         <div class="row-fluid">
-                <h1><a href="{% url 'resource_redirect' pk=resource.id %}">{{ resource.title }}</a></h1>
+            <h1><a href="{{ resource.url }}">{{ resource.title }}</a></h1>
                 <p><small>submitted {{ resource.created_at|age }} by 
                         <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
                         <a href="{% url 'resource_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
                     </small></p>
-                    <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small"><i class="icon-save"></i> Save</a>
+                    <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
         </div>
         {% if resource.description %}
         <div class="row-fluid">

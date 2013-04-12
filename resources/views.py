@@ -14,7 +14,7 @@ from resources.forms import ResourceCreateForm, ResourceUpdateForm
 def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct()
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
-    popular_resources = Resource.objects.all().order_by('-created_at')[:5]
+    popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
     ctx = {
             'topics': topics,
             'recent_resources': recent_resources,
@@ -90,12 +90,18 @@ class ResourceDetailView(SetHeadlineMixin, DetailView):
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
         self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
+        try:
+            sr = SavedResource.objects.get(user=self.request.user, resource=resource)
+            self.already_saved = True
+        except SavedResource.DoesNotExist:
+            self.already_saved = False
         return resource
 
     def get_context_data(self, **kwargs):
         context = super(ResourceDetailView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct()
         context['topics'] = topics
+        context['already_saved'] = self.already_saved
         return context
 
 
