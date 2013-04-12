@@ -7,19 +7,28 @@ from braces.views import SetHeadlineMixin
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
+from profiles.models import SavedResource
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
 def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct()
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
-    popular_resources = Resource.objects.all().order_by('-vote')[:5]
+    popular_resources = Resource.objects.all().order_by('-created_at')[:5]
     ctx = {
             'topics': topics,
             'recent_resources': recent_resources,
             'popular_resources': popular_resources,
         }
     return render_to_response('resources/home.html', ctx, context_instance=RequestContext(request))
+
+class ResourceSaveView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, pk):
+        resource = get_object_or_404(Resource, pk=pk)
+        SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
+        return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
 class ResourceListView(SetHeadlineMixin, ListView):
@@ -29,7 +38,7 @@ class ResourceListView(SetHeadlineMixin, ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-vote'}
+        order = {'recent':'-created_at', 'popular':'-rating_votes'}
         order_to_get = 'recent'
         if 'o' in self.request.GET and order:
             order_to_get = self.request.GET['o']
@@ -57,7 +66,7 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
     def get_queryset(self):
         slug = self.kwargs['slug']
         slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-vote'}
+        order = {'recent':'-created_at', 'popular':'-rating_votes'}
         order_to_get = 'popular'
         if 'o' in self.request.GET and order:
             order_to_get = self.request.GET['o']
@@ -78,7 +87,6 @@ class ResourceRedirectView(RedirectView):
 
     def get_redirect_url(self, pk):
         resource = get_object_or_404(Resource, pk=pk)
-        resource.upvote(1)
         return resource.url
 
 
@@ -90,7 +98,6 @@ class ResourceDetailView(SetHeadlineMixin, DetailView):
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
         self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
-        resource.upvote(2)
         return resource
 
     def get_context_data(self, **kwargs):

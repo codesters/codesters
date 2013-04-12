@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = (
     'guardian',
     'widget_tweaks',
     'braces',
+    'djangoratings',
 )
 
 LOCAL_APPS = (

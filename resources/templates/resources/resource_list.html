@@ -1,7 +1,7 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 {% load age website active from codesters %}
-
+{% load ratings %}
 {% block resource_content %}
 <div class="row-fluid">
     <div class="span9">
@@ -19,6 +19,14 @@
                         </small> </p>
                         <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-comments"></i> Discuss - # comments</a> 
                         {% if user.is_staff or resource.created_by.user == user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
+                        {% rating_by_request request on resource.rating as vote %}
+                        <div class="btn-group">
+                            <a href="{% url 'resource_rate' object_id=resource.pk score=1 %}" class="btn btn-small"><i class="icon-star{% if vote > 0 %}{% else %}-empty{% endif %}"></i> </a>
+                            <a href="{% url 'resource_rate' object_id=resource.pk score=2 %}" class="btn btn-small"><i class="icon-star{% if vote > 1 %}{% else %}-empty{% endif %}"></i> </a>
+                            <a href="{% url 'resource_rate' object_id=resource.pk score=3 %}" class="btn btn-small"><i class="icon-star{% if vote > 2 %}{% else %}-empty{% endif %}"></i> </a>
+                            <a href="{% url 'resource_rate' object_id=resource.pk score=4 %}" class="btn btn-small"><i class="icon-star{% if vote > 3 %}{% else %}-empty{% endif %}"></i> </a>
+                            <a href="{% url 'resource_rate' object_id=resource.pk score=5 %}" class="btn btn-small"><i class="icon-star{% if vote > 4 %}{% else %}-empty{% endif %}"></i> </a>
+                        </div>
             </div>
         </div>
         {% empty %}

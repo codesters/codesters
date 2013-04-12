@@ -11,6 +11,7 @@
                         <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
                         <a href="{% url 'resource_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
                     </small></p>
+                    <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small"><i class="icon-save"></i> Save</a>
         </div>
         {% if resource.description %}
         <div class="row-fluid">
