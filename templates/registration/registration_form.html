@@ -1,12 +1,13 @@
 {% extends "registration/registration_base.html" %}
+{% load url from future %}
 {% block head_title %}Register for an account{% endblock %}
-{% block page_title %}Register{% endblock %}
-{% block page_subtitle %}for an account{% endblock %}
 {% block content %}
 <div class="auth-form span6 offset3">
+    <h2>Register <small>for an account</small></h2>
 <form method="post" action="">{% csrf_token %}
     {% include "base_form.html" %}
-    <button class="btn btn-primary" type="submit"><i class="icon-envelope"></i> Send activation Email</button>
+    <button class="btn btn-primary" type="submit"><i class="icon-unlock"></i> Register</button>
 </form>
+<p>Already have an account? <a href="{% url 'auth_login' %}">Login</a></p>
 </div>
 {% endblock %}
