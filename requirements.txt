@@ -9,4 +9,5 @@ ipython==0.13.1
 #psycopg2==2.4.6
 django-widget-tweaks==1.1.2
 django-braces==1.0.0
+django-ratings==0.3.7
 MYSQL-python==1.2.4
