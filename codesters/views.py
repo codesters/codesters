@@ -2,11 +2,9 @@ from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
-
-
 from django.views.generic import TemplateView, ListView, RedirectView
 from guardian.mixins import LoginRequiredMixin
-
+from braces.views import SetHeadlineMixin
 from django.contrib.auth.models import User
 
 def user_redirect_view(request, username):
@@ -14,40 +12,31 @@ def user_redirect_view(request, username):
     return HttpResponseRedirect(reverse('user_detail', kwargs={'username': user.username,}))
 
 
-class ExploreView(TemplateView):
+class ExploreView(SetHeadlineMixin, TemplateView):
     template_name = 'coming_soon.html'
+    headline = 'Explore - Coming Soon'
 
-class TrackHomeView(TemplateView):
+
+class TrackHomeView(SetHeadlineMixin, TemplateView):
     template_name = 'coming_soon.html'
-
-#class ExploreView(ListView):
-#    template_name = 'explore.html'
-#    context_object_name = 'snippets'
-#    queryset = Snippet.objects.filter(published=True)
-#
-#    def get_context_data(self, **kwargs):
-#        context = super(ExploreView, self).get_context_data(**kwargs)
-#        walls = Wall.objects.all()
-#        users = User.objects.filter(is_active=True).exclude(pk=-1)
-#        context['walls'] = walls
-#        context['users'] = users
-#        return context
+    headline = 'Tracks - Coming Soon'
 
 
-class SettingsView(TemplateView):
-    template_name = 'profile.html'
-
-class HomeView(TemplateView):
+class HomeView(SetHeadlineMixin, TemplateView):
     template_name = 'index.html'
+    headline = 'Welcome'
 
-class AboutView(TemplateView):
+
+class AboutView(SetHeadlineMixin, TemplateView):
     template_name = 'about.html'
+    headline = 'About Us'
 
-class TeamView(TemplateView):
-    template_name = 'team.html'
 
-class ContactView(TemplateView):
+class ContactView(SetHeadlineMixin, TemplateView):
     template_name = 'contact.html'
+    headline = 'Contact Us'
 
-class GuidelinesView(TemplateView):
+
+class GuidelinesView(SetHeadlineMixin, TemplateView):
     template_name = 'guidelines.html'
+    headline = 'Guidelines'

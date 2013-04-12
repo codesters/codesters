@@ -8,7 +8,6 @@ from profiles.views import SnippetDetailView, SnippetUpdateView, SnippetCreateVi
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
     url(r'^about/$', AboutView.as_view(), name='page_about'),
-    url(r'^team/$', TeamView.as_view(), name='page_team'),
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
     url(r'^explore/$', ExploreView.as_view(), name='explore_home'),
