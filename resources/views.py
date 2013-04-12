@@ -82,14 +82,6 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
         return context
 
 
-class ResourceRedirectView(RedirectView):
-    permanent = False
-
-    def get_redirect_url(self, pk):
-        resource = get_object_or_404(Resource, pk=pk)
-        return resource.url
-
-
 class ResourceDetailView(SetHeadlineMixin, DetailView):
     model = Resource
     context_object_name = 'resource'

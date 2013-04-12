@@ -12,7 +12,7 @@
         {% for resource in resources %}
         <div class="row-fluid">
             <div class="span12 resource resource-{{ resource.resource_type.color }}">
-                        <h3><a href="{% url 'resource_redirect' pk=resource.id %}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
+                <h3><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
                         <p><small>submitted  {{ resource.created_at|age  }} by 
                                 <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
                                 <a href="{% url 'resource_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
