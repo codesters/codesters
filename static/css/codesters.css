@@ -133,11 +133,14 @@
 .footer ul li {
     display: inline;
     padding: 5px 5px;
-    text-decoration: none;
 }
 
 .footer a {
     color: #ffffff;
+}
+
+.social a{
+    text-decoration: none;
 }
 
 .resource {
