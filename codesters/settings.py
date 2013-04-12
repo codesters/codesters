@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = (
     'guardian',
     'widget_tweaks',
     'braces',
+    'djangoratings',
 )
 
 LOCAL_APPS = (
@@ -80,6 +81,8 @@ ABSOLUTE_URL_OVERRIDES = {
 ACCOUNT_ACTIVATION_DAYS = 7
 ANONYMOUS_USER_ID = -1
 GUARDIAN_RENDER_403 = True
+
+RATINGS_VOTES_PER_IP = 20
 
 ALLOWED_HOSTS = []
 
