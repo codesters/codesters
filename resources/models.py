@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from djangoratings.fields import RatingField
 
 from django.core.urlresolvers import reverse
 from codesters.utils import unique_slugify
@@ -51,7 +52,7 @@ class Resource(models.Model):
     level = models.CharField(max_length=30, choices=zip(LEVELS, LEVELS))
     topics = models.ManyToManyField(Topic)
     created_by = models.ForeignKey(User)
-    vote = models.IntegerField(default=0, editable=False)
+    rating = RatingField(range=5, weight=10, can_change_vote=True, allow_anonymous=True, use_cookies=True, allow_delete=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     show = models.BooleanField(default=True)
@@ -70,14 +71,6 @@ class Resource(models.Model):
         if self.description and not self.help_text:
             self.help_text = self.description[:220]
         super(Resource, self).save(*args, **kwargs)
-
-    def upvote(self, number=1):
-        self.vote += number
-        self.save()
-
-    def downvote(self, number=1):
-        self.vote -= number
-        self.save()
 
 
 from guardian.shortcuts import assign_perm
