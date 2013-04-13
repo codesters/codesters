@@ -34,7 +34,7 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
 class ResourceListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 12
+    paginate_by = 16
 
     def get_queryset(self):
         slug = self.kwargs['slug']
@@ -61,7 +61,7 @@ class ResourceListView(SetHeadlineMixin, ListView):
 class ResourceTopicListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 12
+    paginate_by = 16
 
     def get_queryset(self):
         slug = self.kwargs['slug']

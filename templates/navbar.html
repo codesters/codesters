@@ -17,7 +17,9 @@
                     <li class="{% active request "^/track/" %}"><a href="{% url 'track_list' %}"><i class="icon-tasks"></i> Tracks</a></li>
                     <li class="{% active request "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
                     {% if user.is_authenticated %}
+                    {% if user.is_staff %}
                     <li><a href="/admin/"><i class="icon-dashboard"></i> Admin</a></li>
+                    {% endif %}
                     <li class="dropdown {% active request '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
