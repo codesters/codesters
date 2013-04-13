@@ -4,7 +4,6 @@
 - when vote is done, redirect to previous page.
 - Raise 404 if user is inactive.
 - Add proper regex to match recent and popular tabs in resources.
-- Make heading template context variable and remove whole page_title if not used.
 - Use select_related and prefetch_related tag wherever possible to reduce number of database queries. But use them with caution *READ django1.4docPDF page827 last para*.
 - Make users in advance with usernames projects, feeds, tracks, blog, codesters, admin.
 - Add something to do the numbering/sequencing of chapters in tracks.
@@ -12,6 +11,7 @@
 
 #DONE
 
+- Make heading template context variable and remove whole page_title if not used.
 - Figure out how to record a person's vote
 - Filter Snippets and resource when show is True.
 - reduce main navbar height a bit by changing logo icon to 18px.

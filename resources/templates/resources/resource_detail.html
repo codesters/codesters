@@ -1,6 +1,6 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
-
+{% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 {% load age from codesters %}
 {% block resource_content %}
 <div class="row-fluid">
