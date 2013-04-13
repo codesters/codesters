@@ -6,8 +6,8 @@
 <div class="row-fluid">
     <div class="span9">
         <ul class="nav nav-tabs">
-            <li class="{% active request '.+recent$' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
-            <li class="{% active request popular_tab %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
+            <li class="{% active resquest.path '.+recent$' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
+            <li class="{% active resquest.path popular_tab %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
         </ul>
         {% for resource in resources %}
         <div class="row-fluid">

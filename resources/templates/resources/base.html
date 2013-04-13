@@ -7,22 +7,22 @@
     <div class="span12">
         <ul class="nav nav-pills">
             {% url 'resource_list' slug="all" as all_tab %}
-            <li class="{% active request all_tab %}"><a href="{{ all_tab }}">All</a></li>
+            <li class="{% active request.path all_tab %}"><a href="{{ all_tab }}">All</a></li>
             {% url 'resource_list' slug="programming" as programming_tab %}
-            <li class="{% active request programming_tab %}"><a href="{{ programming_tab }}">Programming</a></li>
+            <li class="{% active request.path programming_tab %}"><a href="{{ programming_tab }}">Programming</a></li>
             {% url 'resource_list' slug="web" as web_tab %}
-            <li class="{% active request web_tab %}"><a href="{{ web_tab }}">Web Development</a></li>
+            <li class="{% active request.path web_tab %}"><a href="{{ web_tab }}">Web Development</a></li>
             {% url 'resource_list' slug="tool" as tool_tab %}
-            <li class="{% active request tool_tab %}"><a href="{{ tool_tab }}">Dev Tools</a></li>
+            <li class="{% active request.path tool_tab %}"><a href="{{ tool_tab }}">Dev Tools</a></li>
             {% url 'resource_list' slug="database" as database_tab %}
-            <li class="{% active request database_tab %}"><a href="{{ database_tab }}">Database</a></li>
+            <li class="{% active request.path database_tab %}"><a href="{{ database_tab }}">Database</a></li>
             {% url 'resource_list' slug="system" as system_tab %}
-            <li class="{% active request system_tab %}"><a href="{{ system_tab }}">System</a></li>
+            <li class="{% active request.path system_tab %}"><a href="{{ system_tab }}">System</a></li>
             {% url 'resource_list' slug="other" as other_tab %}
-            <li class="{% active request other_tab %}"><a href="{{ other_tab }}">Others</a></li>
+            <li class="{% active request.path other_tab %}"><a href="{{ other_tab }}">Others</a></li>
             {% if user.is_authenticated %}
             {% url 'resource_create' as create_tab %}
-            <li class="pull-right {% active request create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
+            <li class="pull-right {% active request.path create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
             {% endif %}
         </ul>
     </div>

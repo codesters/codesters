@@ -58,6 +58,8 @@ MEDIA_ROOT = ''
 
 MEDIA_URL = '/media/'
 
+STATIC_URL = '/static/'
+
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'assets')
 
 STATICFILES_DIRS = (
@@ -85,7 +87,6 @@ GUARDIAN_RENDER_403 = True
 RATINGS_VOTES_PER_IP = 20
 
 ALLOWED_HOSTS = []
-
 TIME_ZONE = 'Asia/Kolkata'
 
 LANGUAGE_CODE = 'en-us'
@@ -165,8 +166,3 @@ try:
     from local_settings import *
 except ImportError:
     pass
-
-if PROD:
-    STATIC_URL = 'https://googledrive.com/host/0B7JHXm1IKzlFQnowLUVsSTJfTkE/'
-else:
-    STATIC_URL = '/static/'

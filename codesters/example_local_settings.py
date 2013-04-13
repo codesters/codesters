@@ -1,6 +1,6 @@
 DEBUG = True
 
-PROD = False
+ALLOWED_HOSTS = ['127.0.0.1']
 
 EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
