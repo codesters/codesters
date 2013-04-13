@@ -91,9 +91,10 @@ class ResourceDetailView(SetHeadlineMixin, DetailView):
         resource = super(ResourceDetailView, self).get_object()
         self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
         try:
-            sr = SavedResource.objects.get(user=self.request.user, resource=resource)
+            user = User.objects.get(id=self.request.user.id)
+            sr = SavedResource.objects.get(user=user, resource=resource)
             self.already_saved = True
-        except SavedResource.DoesNotExist:
+        except:
             self.already_saved = False
         return resource
 
