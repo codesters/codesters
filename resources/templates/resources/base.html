@@ -12,6 +12,8 @@
             <li class="{% active request.path programming_tab %}"><a href="{{ programming_tab }}">Programming</a></li>
             {% url 'resource_list' slug="web" as web_tab %}
             <li class="{% active request.path web_tab %}"><a href="{{ web_tab }}">Web Development</a></li>
+            {% url 'resource_list' slug="mobile" as mobile_tab %}
+            <li class="{% active request.path mobile_tab %}"><a href="{{ mobile_tab }}">Mobile Development</a></li>
             {% url 'resource_list' slug="tool" as tool_tab %}
             <li class="{% active request.path tool_tab %}"><a href="{{ tool_tab }}">Dev Tools</a></li>
             {% url 'resource_list' slug="database" as database_tab %}
