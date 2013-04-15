@@ -4,6 +4,18 @@
 {% block head_title %}{{ headline }}{% endblock %}
 {% block body %}
 {% include "navbar.html" %}
+{% block messages %}
+{% if messages %}
+<div class="container">
+    {% for message in messages %}
+        <div class="message alert alert-{% if message.tags %}{{ message.tags }}{% endif %}">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        {{ message }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
 <div class="content container">
     {% block content %}{% endblock %}
 </div><!--/.content -->

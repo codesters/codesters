@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, include, url
 
 from resources.views import *
-from djangoratings.views import AddRatingFromModel
 
 urlpatterns = patterns('',
     url(r'^$', resource_home, name='resource_home'),
@@ -11,9 +10,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/save/$', ResourceSaveView.as_view(), name='resource_save'),
     url(r'^(?P<pk>\d+)/edit/$', ResourceUpdateView.as_view(), name='resource_update'),
     url(r'^new/$', ResourceCreateView.as_view(), name='resource_create'),
-    url(r'^rate/(?P<object_id>\d+)/(?P<score>\d+)/$', AddRatingFromModel(), {
-        'app_label':'resources',
-        'model':'resource',
-        'field_name':'rating',
-        }, name='resource_rate'),
+    url(r'^rate/(?P<object_id>\d+)/(?P<score>\d+)/$', AddRatingToResource(), name='resource_rate'),
 )

@@ -9,6 +9,7 @@ from resources.models import Resource
 
 from django.shortcuts import get_object_or_404
 from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib import messages
 
 from profiles.forms import UserUpdateForm, UserProfileUpdateForm, SnippetCreateForm, SnippetUpdateForm, ProjectCreateForm, ProjectUpdateForm
 
@@ -194,13 +195,17 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMix
     form_class = UserUpdateForm
     model = User
     template_name = 'profiles/user_update.html'
-    success_url = reverse_lazy('my_profile')
+#    success_url = reverse_lazy('my_profile')
     permission_required = 'auth.change_user'
     headline = 'Change Account Settings'
     return_403 = True
 
     def get_object(self):
         return self.request.user
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your settings have been saved')
+        return reverse_lazy('my_profile')
 
 
 class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
@@ -213,6 +218,10 @@ class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHead
 
     def get_object(self):
         return self.request.user.userprofile
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your settings have been saved')
+        return reverse_lazy('my_profile')
 
 
 class MyResourcesView(LoginRequiredMixin, RedirectView):

@@ -1,9 +1,14 @@
+from django.contrib.contenttypes.models import ContentType
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import HttpResponse, Http404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
+from django.contrib import messages
+from djangoratings.views import AddRatingView
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
@@ -29,6 +34,23 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
         resource = get_object_or_404(Resource, pk=pk)
         SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
         return reverse_lazy('resource_detail', kwargs={'pk':pk})
+
+
+class AddRatingToResource(AddRatingView):
+    model = 'resource'
+    app_label = 'resources'
+    field_name ='rating'
+    def __call__(self, request, model, app_label, object_id, field_name, score):
+        """__call__(request, model, app_label, object_id, field_name, score)
+
+        Adds a vote to the specified model field."""
+        try:
+            content_type = ContentType.objects.get(model=model, app_label=app_label)
+        except ContentType.DoesNotExist:
+            raise Http404('Invalid `model` or `app_label`.')
+
+        return super(AddRatingFromModel, self).__call__(request, content_type.id,
+                                                        object_id, field_name, score)
 
 
 class ResourceListView(SetHeadlineMixin, ListView):
