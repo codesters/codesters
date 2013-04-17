@@ -1,10 +1,10 @@
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
 from django.contrib import messages
@@ -27,6 +27,29 @@ def resource_home(request):
         }
     return render_to_response('resources/home.html', ctx, context_instance=RequestContext(request))
 
+def rate_resource(request, object_id, score):
+    model = 'resource'
+    app_label = 'resources'
+    field_name ='rating'
+    try:
+        content_type = ContentType.objects.get(model=model, app_label=app_label)
+    except ContentType.DoesNotExist:
+        raise Http404('Invalid `model` or `app_label`.')
+    params = {
+            'content_type_id': content_type.id,
+            'object_id': object_id,
+            'field_name': field_name,
+            'score': score,
+        }
+    response = AddRatingView()(request, **params)
+    if response.status_code == 200:
+        if response.content == 'Vote recorded.':
+            messages.success(request, 'Thanks, Your Vote is recorded')
+    else:
+        messages.error(request, 'Sorry, Something went wrong')
+    return HttpResponseRedirect(reverse('resource_home')) #TODO redirect to page the user was on
+
+
 class ResourceSaveView(LoginRequiredMixin, RedirectView):
     permanent = False
 
@@ -34,23 +57,6 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
         resource = get_object_or_404(Resource, pk=pk)
         SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
         return reverse_lazy('resource_detail', kwargs={'pk':pk})
-
-
-class AddRatingToResource(AddRatingView):
-    model = 'resource'
-    app_label = 'resources'
-    field_name ='rating'
-    def __call__(self, request, model, app_label, object_id, field_name, score):
-        """__call__(request, model, app_label, object_id, field_name, score)
-
-        Adds a vote to the specified model field."""
-        try:
-            content_type = ContentType.objects.get(model=model, app_label=app_label)
-        except ContentType.DoesNotExist:
-            raise Http404('Invalid `model` or `app_label`.')
-
-        return super(AddRatingFromModel, self).__call__(request, content_type.id,
-                                                        object_id, field_name, score)
 
 
 class ResourceListView(SetHeadlineMixin, ListView):
@@ -61,7 +67,7 @@ class ResourceListView(SetHeadlineMixin, ListView):
     def get_queryset(self):
         slug = self.kwargs['slug']
         order = {'recent':'-created_at', 'popular':'-rating_votes'}
-        order_to_get = 'recent'
+        order_to_get = 'popular'
         if 'o' in self.request.GET and order:
             order_to_get = self.request.GET['o']
         if slug=='all':

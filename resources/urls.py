@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.auth.decorators import login_required
 
 from resources.views import *
 
@@ -10,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^(?P<pk>\d+)/save/$', ResourceSaveView.as_view(), name='resource_save'),
     url(r'^(?P<pk>\d+)/edit/$', ResourceUpdateView.as_view(), name='resource_update'),
     url(r'^new/$', ResourceCreateView.as_view(), name='resource_create'),
-    url(r'^rate/(?P<object_id>\d+)/(?P<score>\d+)/$', AddRatingToResource(), name='resource_rate'),
+    url(r'^rate/(?P<object_id>\d+)/(?P<score>\d+)/$', login_required(rate_resource), name='resource_rate'),
 )

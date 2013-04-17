@@ -52,7 +52,7 @@ class Resource(models.Model):
     level = models.CharField(max_length=30, choices=zip(LEVELS, LEVELS))
     topics = models.ManyToManyField(Topic)
     created_by = models.ForeignKey(User)
-    rating = RatingField(range=5, weight=10, can_change_vote=True, allow_anonymous=True, use_cookies=True, allow_delete=True)
+    rating = RatingField(range=5, weight=10, use_cookies=True, allow_delete=True)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     show = models.BooleanField(default=True)
