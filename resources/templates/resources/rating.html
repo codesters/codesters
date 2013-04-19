@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load ratings %}
 {% rating_by_user user on resource.rating as vote %}
 {% if vote > 0 %}
