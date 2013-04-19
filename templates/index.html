@@ -13,9 +13,11 @@
 <div class="row-fluid marketing marketing-1">
     <h1>Hub for learning</h1>
     <p>Wasted a lot of time in finding the resource to learn from? We have the best resources available on web for learning any topic.</p>
+    {% if not user.is_authenticated %}
     <p>
     <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
     </p>
+    {% endif %}
 </div>
 <div class="row-fluid marketing marketing-2">
     <h2>We do 3 things for you...</h2>
@@ -63,8 +65,12 @@
     <h2>Interested?</h2>
     <hr />
     <div class="span4 offset4">
+        {% if user.is_authenticated %}
+        <a href="/profile" class="btn btn-primary btn-large"> Get Started </a>
+        {% else %}
         <a href="{% url 'page_about' %}" class="btn btn-large">Learn More</a>
         <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
+        {% endif %}
     </div>
 </div>
 {% endblock %}
