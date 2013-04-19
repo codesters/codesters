@@ -5,8 +5,8 @@
 <div class="row-fluid">
     <div class="span9">
         <ul class="nav nav-tabs">
-            <li class="{% active resquest.path '.+recent$' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
-            <li class="{% active resquest.path popular_tab %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
+            <li class="{% active request.path 'recent' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
+            <li class="{% active request.path 'popular' %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
         </ul>
         {% for resource in resources %}
         <div class="row-fluid">
@@ -14,8 +14,8 @@
                 <h3><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
                         <p><small>submitted  {{ resource.created_at|age  }} by 
                                 <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
-                                <a href="{% url 'resource_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
-                        </small> </p>
+                            </small>{{ resource.level|capfirst }} level
+                        </p>
                         <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-file"></i> Details</a> 
 
                         {% if user.is_authenticated %}

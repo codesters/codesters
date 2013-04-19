@@ -73,6 +73,10 @@
     line-height: 1.4em;
 }
 
+.topic {
+    margin: 15px 0px;
+}
+
 .explore-box {
     padding: 10px;
 }
@@ -87,6 +91,10 @@
 
 .explore-box h3 {
     border-bottom: solid 1px #aaa;
+}
+
+.explore-box li {
+    margin-bottom: 13px;
 }
 
 .logo {

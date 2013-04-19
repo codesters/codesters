@@ -22,10 +22,8 @@
             <li class="{% active request.path system_tab %}"><a href="{{ system_tab }}">System</a></li>
             {% url 'resource_list' slug="other" as other_tab %}
             <li class="{% active request.path other_tab %}"><a href="{{ other_tab }}">Others</a></li>
-            {% if user.is_authenticated %}
             {% url 'resource_create' as create_tab %}
             <li class="pull-right {% active request.path create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
-            {% endif %}
         </ul>
     </div>
 </div><!-- /subnavbar row-fluid -->
