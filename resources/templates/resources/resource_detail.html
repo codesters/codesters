@@ -1,7 +1,6 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 {% load age from codesters %}
-{% load ratings %}
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 {% block resource_content %}
 <div class="row-fluid">
@@ -15,18 +14,7 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
 
-                        {% rating_by_user user on resource.rating as vote %}
-                        {% if vote > 1 %}
-                        <a href="#" class="btn btn-small disabled">Voted</a>
-                        {% else %}
-                        <div class="btn-group">
-                            <a href="{% url 'resource_rate' object_id=resource.pk score=1 %}" class="btn btn-small"><i class="icon-star{% if vote > 0 %}{% else %}-empty{% endif %}"></i> </a>
-                            <a href="{% url 'resource_rate' object_id=resource.pk score=2 %}" class="btn btn-small"><i class="icon-star{% if vote > 1 %}{% else %}-empty{% endif %}"></i> </a>
-                            <a href="{% url 'resource_rate' object_id=resource.pk score=3 %}" class="btn btn-small"><i class="icon-star{% if vote > 2 %}{% else %}-empty{% endif %}"></i> </a>
-                            <a href="{% url 'resource_rate' object_id=resource.pk score=4 %}" class="btn btn-small"><i class="icon-star{% if vote > 3 %}{% else %}-empty{% endif %}"></i> </a>
-                            <a href="{% url 'resource_rate' object_id=resource.pk score=5 %}" class="btn btn-small"><i class="icon-star{% if vote > 4 %}{% else %}-empty{% endif %}"></i> </a>
-                        </div>
-                        {% endif %}
+                        {% include "resources/rating.html" %}
 
                         {% ifequal resource.created_by user%}
                         <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>

@@ -66,7 +66,7 @@ class ResourceListView(SetHeadlineMixin, ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-rating_votes'}
+        order = {'recent':'-created_at', 'popular':'-rating_score'}
         order_to_get = 'popular'
         if 'o' in self.request.GET and order:
             order_to_get = self.request.GET['o']
@@ -94,7 +94,7 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
     def get_queryset(self):
         slug = self.kwargs['slug']
         slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-rating_votes'}
+        order = {'recent':'-created_at', 'popular':'-rating_score'}
         order_to_get = 'popular'
         if 'o' in self.request.GET and order:
             order_to_get = self.request.GET['o']
