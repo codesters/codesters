@@ -17,7 +17,7 @@ from profiles.models import SavedResource
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
 def resource_home(request):
-    topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+    topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
     popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
     ctx = {
@@ -47,7 +47,7 @@ def rate_resource(request, object_id, score):
             messages.success(request, 'Thanks, Your Vote is recorded')
     else:
         messages.error(request, 'Sorry, Something went wrong')
-    return HttpResponseRedirect(reverse('resource_home')) #TODO redirect to page the user was on
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 class ResourceSaveView(LoginRequiredMixin, RedirectView):
@@ -81,7 +81,7 @@ class ResourceListView(SetHeadlineMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ResourceListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
         return context
 
@@ -105,7 +105,7 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ResourceTopicListView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
         return context
 
@@ -128,7 +128,7 @@ class ResourceDetailView(SetHeadlineMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ResourceDetailView, self).get_context_data(**kwargs)
-        topics = Topic.objects.filter(resource__title__isnull=False).distinct()
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
         context['already_saved'] = self.already_saved
         return context

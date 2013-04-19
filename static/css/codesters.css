@@ -14,7 +14,7 @@
 }
 
 .marketing {
-    padding: 70px 10px 60px;
+    padding: 70px 50px 60px;
 }
 
 .marketing p {
@@ -75,7 +75,6 @@
 
 .explore-box {
     padding: 10px;
-    height: 300px;
 }
 
 .explore-box h3, .explore-box h4, .explore-box p {
@@ -88,10 +87,6 @@
 
 .explore-box h3 {
     border-bottom: solid 1px #aaa;
-}
-
-.explore-box li {
-    border-bottom: solid 1px #eee;
 }
 
 .logo {

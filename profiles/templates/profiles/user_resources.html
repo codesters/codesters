@@ -13,7 +13,7 @@
                     <p><small>submitted  {{ resource.created_on|age }} in 
                             <a href="{% url 'resource_list' slug=resource.resource_type.slug %}">{{ resource.resource_type }}</a>
                     </small> </p>
-                    <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-comment"></i> Discuss - # comments</a> 
+                    <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-file"></i> Details</a> 
                     {% if user.is_staff or resource.created_by.user == user %}<a href="{% url 'resource_update' pk=resource.pk %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endif %}
                 </div>
             </div>
