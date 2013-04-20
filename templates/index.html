@@ -13,10 +13,10 @@
 <div class="row-fluid marketing marketing-1">
     <h1>Hub for learning</h1>
     <p>Wasted a lot of time in finding the resource to learn from? We have the best resources available on web for learning any topic.</p>
-    {% if not user.is_authenticated %}
-    <p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'page_about' %}" class="btn btn-large"> Learn More <i class="icon-double-angle-right"></i></a> 
+    {% else %}
     <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
-    </p>
     {% endif %}
 </div>
 <div class="row-fluid marketing marketing-2">
@@ -33,7 +33,7 @@
             <i class="icon-group icon-4x market"></i>
               <h3>Peer Help</h3>
               <p>Seek help and guidance from other people, fellow learners or experts. Here people are always ready to help.</p>
-              <p><a class="btn" href="{% url 'page_about' %}#feeds">How to seek help <i class="icon-double-angle-right"></i></a></p>
+              <p><a class="btn" href="{% url 'page_about' %}#help">How to seek help <i class="icon-double-angle-right"></i></a></p>
         </div>
         <div class="span4">
             <i class="icon-comments icon-4x market"></i>
@@ -65,10 +65,8 @@
     <h2>Interested?</h2>
     <hr />
     <div class="span4 offset4">
-        {% if user.is_authenticated %}
-        <a href="/profile" class="btn btn-primary btn-large"> Get Started </a>
-        {% else %}
         <a href="{% url 'page_about' %}" class="btn btn-large">Learn More</a>
+        {% if not user.is_authenticated %}
         <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
         {% endif %}
     </div>
