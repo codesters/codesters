@@ -66,16 +66,19 @@ class ResourceListView(SetHeadlineMixin, ListView):
 
     def get_queryset(self):
         slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-rating_score'}
-        order_to_get = 'popular'
-        if 'o' in self.request.GET and order:
-            order_to_get = self.request.GET['o']
+        level_to_get = None
+        if 'level' in self.request.GET:
+            level_to_get = self.request.GET['level']
         if slug=='all':
-            resources = Resource.objects.all().order_by(order[order_to_get])
+            resources = Resource.objects.all()
+            if level_to_get:
+                resources = resources.filter(level=level_to_get)
             self.headline = str(slug).capitalize() + ' Resources'
         else:
             resource_type = get_object_or_404(ResourceType, slug=slug)
-            resources = Resource.objects.filter(resource_type=resource_type).order_by(order[order_to_get])
+            resources = Resource.objects.filter(resource_type=resource_type)
+            if level_to_get:
+                resources = resources.filter(level=level_to_get)
             self.headline = str(resource_type.name).capitalize() + ' Resources'
         return resources
 
