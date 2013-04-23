@@ -7,6 +7,12 @@ from django import template
 register = template.Library()
 
 @register.simple_tag
+def check_active(path, word):
+    if word in path:
+        return 'active'
+    return ''
+
+@register.simple_tag
 def active(path, pattern):
     import re
     if re.search(pattern, path):

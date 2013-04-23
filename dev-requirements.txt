@@ -6,3 +6,5 @@ django-registration==0.8
 gunicorn==0.17.2
 ipython==0.13.1
 django-widget-tweaks==1.1.2
+django-braces==1.0.0
+django-ratings==0.3.7

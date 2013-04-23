@@ -12,10 +12,12 @@
 {% block content %}
 <div class="row-fluid marketing marketing-1">
     <h1>Hub for learning</h1>
-    <p>Learn and share the best resources for learning on web. Make your projects and get peer reviews</p>
-    <p>
+    <p>Wasted a lot of time in finding the resource to learn from? We have the best resources available on web for learning any topic.</p>
+    {% if user.is_authenticated %}
+    <a href="{% url 'page_about' %}" class="btn btn-large"> Learn More <i class="icon-double-angle-right"></i></a> 
+    {% else %}
     <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
-    </p>
+    {% endif %}
 </div>
 <div class="row-fluid marketing marketing-2">
     <h2>We do 3 things for you...</h2>
@@ -30,31 +32,31 @@
         <div class="span4">
             <i class="icon-group icon-4x market"></i>
               <h3>Peer Help</h3>
-              <p>Seek help and guidance from other people, fellow learners or moderators. Here people are always ready.</p>
-              <p><a class="btn" href="{% url 'page_about' %}#feeds">How to seek help <i class="icon-double-angle-right"></i></a></p>
+              <p>Seek help and guidance from other people, fellow learners or experts. Here people are always ready to help.</p>
+              <p><a class="btn" href="{% url 'page_about' %}#help">How to seek help <i class="icon-double-angle-right"></i></a></p>
         </div>
         <div class="span4">
             <i class="icon-comments icon-4x market"></i>
-              <h3>Share your Ideas</h3>
+              <h3>Build your Social circle</h3>
               <p>Got a trick to share? or any project you wanna talk about? Share any of these with others on your wall. And look at what other people are pursuing.</p>
               <p><a class="btn" href="{% url 'page_about' %}#walls">Learn More <i class="icon-double-angle-right"></i></a></p>
         </div>
     </div>
 </div>
 <div class="row-fluid marketing marketing-3">
-    <h2>Not just these...</h2>
+    <h2>More coming soon...</h2>
     <hr />
     <div class="row-fluid">
         <div class="span6">
             <i class="icon-tasks icon-4x market"></i>
               <h3>Tracks</h3>
-              <p>Learn from the resources recommended by people who know things. We have hand picked every one of the resource for you.</p>
-              <p><a class="btn" href="{% url 'page_about' %}#tracks">How its done <i class="icon-double-angle-right"></i></a></p>
+              <p>Want to specialize in an area but do not know where to go next? Tracks will cover pre-defined formats to become a professional in any area.</p>
+              <p><a class="btn" href="{% url 'page_about' %}#tracks">How it will be done <i class="icon-double-angle-right"></i></a></p>
         </div>
         <div class="span6">
             <i class="icon-desktop icon-4x market"></i>
-              <h3>Dedicated Screens</h3>
-              <p>Seek help and guidance from other people, fellow learners or moderators. Here people are always ready.</p>
+              <h3>Explore</h3>
+              <p>You can have a look at what is hot in the market, which technology is in demand and a lot more.</p>
               <p><a class="btn" href="{% url 'page_about' %}#feeds">How to seek help <i class="icon-double-angle-right"></i></a></p>
         </div>
     </div>
@@ -64,7 +66,9 @@
     <hr />
     <div class="span4 offset4">
         <a href="{% url 'page_about' %}" class="btn btn-large">Learn More</a>
+        {% if not user.is_authenticated %}
         <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
+        {% endif %}
     </div>
 </div>
 {% endblock %}

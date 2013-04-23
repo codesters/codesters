@@ -1,16 +1,19 @@
 #TODO
 
-- Edit button in resource list to come only to the creator.
-- when vote is done, redirect to previous page.
+- Add options to view Level wise list of resources in any topic.
+- Make Create and Update forms more user friendly by making text field as block level.
+- Autofocus on first field in Login, Register views.
 - Raise 404 if user is inactive.
-- Add proper regex to match recent and popular tabs in resources.
 - Use select_related and prefetch_related tag wherever possible to reduce number of database queries. But use them with caution *READ django1.4docPDF page827 last para*.
 - Make users in advance with usernames projects, feeds, tracks, blog, codesters, admin.
 - Add something to do the numbering/sequencing of chapters in tracks.
-- Add feed list view from a domain with domain template tag filter.
+- Add resource list view from a domain with domain template tag filter.
 
 #DONE
 
+- Add proper regex to match recent and popular tabs in resources.
+- when vote is done, redirect to previous page.
+- Edit button in resource list to come only to the creator.
 - Make heading template context variable and remove whole page_title if not used.
 - Figure out how to record a person's vote
 - Filter Snippets and resource when show is True.

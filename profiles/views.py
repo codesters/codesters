@@ -87,6 +87,7 @@ class ProjectCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         return super(ProjectCreateView, self).form_valid(form)
 
     def get_success_url(self):
+        messages.success(self.request, 'New Project have been added to your profile')
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
 
     def get_context_data(self,**kwargs):
@@ -108,6 +109,7 @@ class ProjectUpdateView(LoginRequiredMixin, SetHeadlineMixin, UpdateView):
         return super(ProjectUpdateView, self).form_valid(form)
 
     def get_success_url(self):
+        messages.success(self.request, 'Your changes have been saved')
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
 
     def get_context_data(self,**kwargs):
@@ -133,7 +135,7 @@ class UserSnippetsView(SetHeadlineMixin, ListView):
         context['userinfo'] = user
         return context
 
-#TODO first implement a view_resource permission in models then add a Permission required mixin here
+#TODO first implement a view_snippet permission in models then add a Permission required mixin here
 class UserHiddenSnippetsView(SetHeadlineMixin, ListView):
     context_object_name = 'snippets'
     template_name = 'profiles/user_snippets.html'
@@ -176,6 +178,7 @@ class SnippetCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         return super(SnippetCreateView, self).form_valid(form)
 
     def get_success_url(self):
+        messages.success(self.request, 'New Snippet have been created')
         return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
 
 
@@ -188,6 +191,7 @@ class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadline
     return_403 = True
 
     def get_success_url(self):
+        messages.success(self.request, 'Your changes have been saved')
         return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
 
 
@@ -195,7 +199,6 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMix
     form_class = UserUpdateForm
     model = User
     template_name = 'profiles/user_update.html'
-#    success_url = reverse_lazy('my_profile')
     permission_required = 'auth.change_user'
     headline = 'Change Account Settings'
     return_403 = True
@@ -204,8 +207,8 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMix
         return self.request.user
 
     def get_success_url(self):
-        messages.success(self.request, 'Your settings have been saved')
-        return reverse_lazy('my_profile')
+        messages.success(self.request, 'Your account settings have been saved')
+        return reverse_lazy('user_update')
 
 
 class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
@@ -220,8 +223,8 @@ class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHead
         return self.request.user.userprofile
 
     def get_success_url(self):
-        messages.success(self.request, 'Your settings have been saved')
-        return reverse_lazy('my_profile')
+        messages.success(self.request, 'Your profile settings have been saved')
+        return reverse_lazy('userprofile_update')
 
 
 class MyResourcesView(LoginRequiredMixin, RedirectView):
