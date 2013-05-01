@@ -26,7 +26,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-#    'south',
+    'south',
     'django_extensions',
     'registration',
     'guardian',
