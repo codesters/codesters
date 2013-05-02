@@ -6,8 +6,6 @@ PROJECT_ROOT = os.path.join(ROOT, '..')
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROD = True
-
 ADMINS = (
      ('Karambir Singh Nain', 'karambir@codesters.org'),
      ('Mohammad Adil', 'adil@codesters.org'),
