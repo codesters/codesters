@@ -5,8 +5,9 @@
 <div class="row-fluid">
     <div class="span9">
         <ul class="nav nav-tabs">
-            <li class="{% check_active request.get_full_path 'recent' %}"><a href="?o=recent"><i class="icon-time"></i> Recent</a></li>
-            <li class="{% check_active request.get_full_path 'popular' %}"><a href="?o=popular"><i class="icon-fire"></i> Popular</a></li>
+            <li class="{% check_active request.get_full_path 'beginner' %}"><a href="?level=beginner"><i class="icon-time"></i> Beginner</a></li>
+            <li class="{% check_active request.get_full_path 'intermediate' %}"><a href="?level=intermediate"><i class="icon-fire"></i> Intermediate</a></li>
+            <li class="{% check_active request.get_full_path 'advanced' %}"><a href="?level=advanced"><i class="icon-fire"></i> Advanced</a></li>
         </ul>
         {% for resource in resources %}
         <div class="row-fluid">
