@@ -3,6 +3,7 @@
 {% load age website active check_active from codesters %}
 {% block resource_content %}
 <div class="row-fluid">
+    <div class="span3 well">{% include "resources/topics.html" %}</div>
     <div class="span9">
         <ul class="nav nav-tabs">
             <li class="{% check_active request.get_full_path 'beginner' %}"><a href="?level=beginner"><i class="icon-time"></i> Beginner</a></li>
@@ -36,6 +37,5 @@
         {% endfor %}
     {% include "pagination.html" %}
     </div>
-    <div class="span3 well">{% include "resources/topics.html" %}</div>
 </div>
 {% endblock %}

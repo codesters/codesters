@@ -1,6 +1,7 @@
 import os
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+PROJECT_ROOT = os.path.join(ROOT, '..')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -156,14 +157,3 @@ LOGGING = {
         },
     }
 }
-
-try:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
-except ImportError:
-    pass
-
-try:
-    from local_settings import *
-except ImportError:
-    pass
