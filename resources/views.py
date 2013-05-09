@@ -59,34 +59,48 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
         return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
-class ResourceListView(SetHeadlineMixin, ListView):
+class ResourceAllListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
     paginate_by = 16
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
         level_to_get = None
         if 'level' in self.request.GET:
             level_to_get = self.request.GET['level']
-        if slug=='all':
-            resources = Resource.objects.all()
-            if level_to_get:
-                resources = resources.filter(level=level_to_get)
-            self.headline = str(slug).capitalize() + ' Resources'
-        else:
-            resource_type = get_object_or_404(ResourceType, slug=slug)
-            resources = Resource.objects.filter(resource_type=resource_type)
-            if level_to_get:
-                resources = resources.filter(level=level_to_get)
-            self.headline = str(resource_type.name).capitalize() + ' Resources'
+        resources = Resource.objects.all()
+        if level_to_get:
+            resources = resources.filter(level=level_to_get)
+        self.headline = 'All Resources'
         return resources
 
     def get_context_data(self, **kwargs):
-        context = super(ResourceListView, self).get_context_data(**kwargs)
+        context = super(ResourceAllListView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
         return context
+
+
+def topic_home(request, slug):
+    level_to_get = None
+    if 'level' in request.GET:
+        level_to_get = request.GET['level']
+    current_topic = get_object_or_404(Topic, slug=slug)
+    resources = current_topic.resource_set.all()
+    if level_to_get:
+        resources = resources.filter(level=level_to_get)
+
+
+    headline = str(current_topic.name).capitalize() +' Resources'
+    topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+
+    ctx = {
+        'current_topic': current_topic,
+        'resources': resources,
+        'headline': headline,
+        'topics': topics
+    }
+    return render_to_response('resources/resource_list.html', ctx, context_instance=RequestContext(request))
 
 
 class ResourceTopicListView(SetHeadlineMixin, ListView):
@@ -95,14 +109,14 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
     paginate_by = 16
 
     def get_queryset(self):
+        level_to_get = None
         slug = self.kwargs['slug']
-        slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-rating_score'}
-        order_to_get = 'popular'
-        if 'o' in self.request.GET and order:
-            order_to_get = self.request.GET['o']
+        if 'level' in self.request.GET:
+            level_to_get = self.request.GET['level']
         topic = get_object_or_404(Topic, slug=slug)
-        resources = topic.resource_set.all().order_by(order[order_to_get])
+        resources = topic.resource_set.all()
+        if level_to_get:
+                resources = resources.filter(level=level_to_get)
         self.headline = str(topic.name).capitalize() +' Resources'
         return resources
 
@@ -110,6 +124,8 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
         context = super(ResourceTopicListView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
+        topic = get_object_or_404(Topic, slug=self.kwargs['slug'])
+        context['current_topic'] = topic
         return context
 
 
@@ -146,6 +162,12 @@ class ResourceCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         form.instance.created_by = self.request.user
         return super(ResourceCreateView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(ResourceCreateView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+        context['topics'] = topics
+        return context
+
 
 class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     form_class = ResourceUpdateForm
@@ -154,6 +176,12 @@ class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlin
     headline = 'Edit Resource'
     permission_required = 'resources.change_resource'
     return_403 = True
+
+    def get_context_data(self, **kwargs):
+        context = super(ResourceUpdateView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+        context['topics'] = topics
+        return context
 
 
 class TopicCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView): #mixin require an object, so make a get_object method
