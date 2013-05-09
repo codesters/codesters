@@ -75,6 +75,9 @@
 
 .topic {
     margin: 15px 0px;
+    background: #efefef;
+    box-shadow: 1px 1px 1px 1px #c6c6c6;
+    text-align: center;
 }
 
 .explore-box {
