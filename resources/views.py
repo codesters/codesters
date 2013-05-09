@@ -81,6 +81,28 @@ class ResourceAllListView(SetHeadlineMixin, ListView):
         return context
 
 
+def topic_home(request, slug):
+    level_to_get = None
+    if 'level' in request.GET:
+        level_to_get = request.GET['level']
+    current_topic = get_object_or_404(Topic, slug=slug)
+    resources = current_topic.resource_set.all()
+    if level_to_get:
+        resources = resources.filter(level=level_to_get)
+
+
+    headline = str(current_topic.name).capitalize() +' Resources'
+    topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+
+    ctx = {
+        'current_topic': current_topic,
+        'resources': resources,
+        'headline': headline,
+        'topics': topics
+    }
+    return render_to_response('resources/resource_list.html', ctx, context_instance=RequestContext(request))
+
+
 class ResourceTopicListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
