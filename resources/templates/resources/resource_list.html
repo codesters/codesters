@@ -14,6 +14,11 @@
         <div class="span6">
         </div>
     </div>
+    {% if current_topic.description %}
+    <div class="row-fluid topic-about">
+        {{ current_topic.description|linebreaks }}
+    </div>
+    {% endif %}
     {% for resource in resources %}
     <div class="row-fluid">
         <div class="span12 resource resource-{{ resource.resource_type.color }}">

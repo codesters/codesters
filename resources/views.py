@@ -102,6 +102,8 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
         context = super(ResourceTopicListView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
+        topic = get_object_or_404(Topic, slug=self.kwargs['slug'])
+        context['current_topic'] = topic
         return context
 
 
