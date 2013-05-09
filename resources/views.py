@@ -59,31 +59,23 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
         return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
-class ResourceListView(SetHeadlineMixin, ListView):
+class ResourceAllListView(SetHeadlineMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
     paginate_by = 16
 
     def get_queryset(self):
-        slug = self.kwargs['slug']
         level_to_get = None
         if 'level' in self.request.GET:
             level_to_get = self.request.GET['level']
-        if slug=='all':
-            resources = Resource.objects.all()
-            if level_to_get:
-                resources = resources.filter(level=level_to_get)
-            self.headline = str(slug).capitalize() + ' Resources'
-        else:
-            resource_type = get_object_or_404(ResourceType, slug=slug)
-            resources = Resource.objects.filter(resource_type=resource_type)
-            if level_to_get:
-                resources = resources.filter(level=level_to_get)
-            self.headline = str(resource_type.name).capitalize() + ' Resources'
+        resources = Resource.objects.all()
+        if level_to_get:
+            resources = resources.filter(level=level_to_get)
+        self.headline = 'All Resources'
         return resources
 
     def get_context_data(self, **kwargs):
-        context = super(ResourceListView, self).get_context_data(**kwargs)
+        context = super(ResourceAllListView, self).get_context_data(**kwargs)
         topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
         context['topics'] = topics
         return context
@@ -95,14 +87,14 @@ class ResourceTopicListView(SetHeadlineMixin, ListView):
     paginate_by = 16
 
     def get_queryset(self):
+        level_to_get = None
         slug = self.kwargs['slug']
-        slug = self.kwargs['slug']
-        order = {'recent':'-created_at', 'popular':'-rating_score'}
-        order_to_get = 'popular'
-        if 'o' in self.request.GET and order:
-            order_to_get = self.request.GET['o']
+        if 'level' in self.request.GET:
+            level_to_get = self.request.GET['level']
         topic = get_object_or_404(Topic, slug=slug)
-        resources = topic.resource_set.all().order_by(order[order_to_get])
+        resources = topic.resource_set.all()
+        if level_to_get:
+                resources = resources.filter(level=level_to_get)
         self.headline = str(topic.name).capitalize() +' Resources'
         return resources
 

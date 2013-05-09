@@ -1,4 +1,7 @@
 {% extends "resources/base.html" %}
+{% block back_button %}
+            <li><a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'resource_list' %}{% endif %}">Back</a></li>
+{% endblock %}
 {% block resource_content %}
 <div class="span8 offset1">
     {% include "form_horizontal.html" %}
