@@ -138,6 +138,12 @@ class ResourceCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         form.instance.created_by = self.request.user
         return super(ResourceCreateView, self).form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(ResourceCreateView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+        context['topics'] = topics
+        return context
+
 
 class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     form_class = ResourceUpdateForm
@@ -146,6 +152,12 @@ class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlin
     headline = 'Edit Resource'
     permission_required = 'resources.change_resource'
     return_403 = True
+
+    def get_context_data(self, **kwargs):
+        context = super(ResourceUpdateView, self).get_context_data(**kwargs)
+        topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
+        context['topics'] = topics
+        return context
 
 
 class TopicCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView): #mixin require an object, so make a get_object method

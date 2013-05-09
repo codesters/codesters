@@ -4,33 +4,28 @@
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 {% block resource_content %}
 <div class="row-fluid">
-    <div class="span9">
-        <div class="row-fluid">
-            <h1><a href="{{ resource.url }}">{{ resource.title }}</a></h1>
-                <p><small>submitted {{ resource.created_at|age }} by 
-                        <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
-                    </small>{{ resource.level|capfirst }} level
-                    </p>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
+    <h1><a href="{{ resource.url }}">{{ resource.title }}</a></h1>
+        <p><small>submitted {{ resource.created_at|age }} by 
+                <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
+            </small>{{ resource.level|capfirst }} level
+            </p>
+            {% if user.is_authenticated %}
+                <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
 
-                        {% include "resources/rating.html" %}
+                {% include "resources/rating.html" %}
 
-                        {% ifequal resource.created_by user%}
-                        <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
-                        {% endifequal %}
-                    {% endif %}
-        </div>
-        {% if resource.description %}
-        <div class="row-fluid">
-                <p>{{ resource.description|linebreaksbr }}</p>
-        </div>
-        {% endif %}
-        <div class="row-fluid">
-                <h3>Comments</h3>
-                <p>Coming Soon ...</p>
-        </div>
-    </div>
-    <div class="span3 well">{% include "resources/topics.html" %}</div>
+                {% ifequal resource.created_by user%}
+                <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
+                {% endifequal %}
+            {% endif %}
+</div>
+{% if resource.description %}
+<div class="row-fluid">
+        <p>{{ resource.description|linebreaksbr }}</p>
+</div>
+{% endif %}
+<div class="row-fluid">
+        <h3>Comments</h3>
+        <p>Coming Soon ...</p>
 </div>
 {% endblock %}

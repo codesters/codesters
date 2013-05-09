@@ -2,40 +2,42 @@
 {% load url from future %}
 {% load age website active check_active from codesters %}
 {% block resource_content %}
-<div class="row-fluid">
-    <div class="span3 well">{% include "resources/topics.html" %}</div>
-    <div class="span9">
-        <ul class="nav nav-tabs">
-            <li class="{% check_active request.get_full_path 'beginner' %}"><a href="?level=beginner"><i class="icon-time"></i> Beginner</a></li>
-            <li class="{% check_active request.get_full_path 'intermediate' %}"><a href="?level=intermediate"><i class="icon-fire"></i> Intermediate</a></li>
-            <li class="{% check_active request.get_full_path 'advanced' %}"><a href="?level=advanced"><i class="icon-fire"></i> Advanced</a></li>
-        </ul>
-        {% for resource in resources %}
-        <div class="row-fluid">
-            <div class="span12 resource resource-{{ resource.resource_type.color }}">
-                <h3><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
-                        <p><small>submitted  {{ resource.created_at|age  }} by 
-                                <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
-                            </small>{{ resource.level|capfirst }} level
-                        </p>
-                        <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-file"></i> Details</a> 
-
-                        {% if user.is_authenticated %}
-
-                        {% include "resources/rating.html" %}
-
-                        {% ifequal resource.created_by user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endifequal %}
-                        {% endif %}
-            </div>
+    <div class="row-fluid resource-buttons">
+        <div class="span5">
+            Level:
+            <select id="level" name="Level" onchange="window.open(this.options[this.selectedIndex].value, '_top', '_self')">
+                <option value="?level=beginner" {% check_active request.get_full_path 'beginner' %}>Beginner</option>
+                <option value="?level=intermediate" {% check_active request.get_full_path 'intermediate' %}>Intermediate</option>
+                <option value="?level=advanced" {% check_active request.get_full_path 'advanced' %}>Advanced</option>
+            </select>
         </div>
-        {% empty %}
-        <div class="row-fluid">
-            <div class="span12">
-                <h3>Sorry, there are no resources here.</h3>
-            </div>
+        <div class="span6">
         </div>
-        {% endfor %}
-    {% include "pagination.html" %}
     </div>
-</div>
+    {% for resource in resources %}
+    <div class="row-fluid">
+        <div class="span12 resource resource-{{ resource.resource_type.color }}">
+            <h3><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
+                    <p><small>submitted  {{ resource.created_at|age  }} by 
+                            <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
+                        </small>{{ resource.level|capfirst }} level
+                    </p>
+                    <a href="{% url 'resource_detail' pk=resource.id %}" class="btn btn-small"><i class="icon-file"></i> Details</a> 
+
+                    {% if user.is_authenticated %}
+
+                    {% include "resources/rating.html" %}
+
+                    {% ifequal resource.created_by user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endifequal %}
+                    {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <div class="row-fluid">
+        <div class="span12">
+            <h3>Sorry, there are no resources here.</h3>
+        </div>
+    </div>
+    {% endfor %}
+{% include "pagination.html" %}
 {% endblock %}
