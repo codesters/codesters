@@ -41,7 +41,15 @@ class UserInfoView(SetHeadlineMixin, DetailView):
         return context
 
 
-class UserResourcesView(SetHeadlineMixin, ListView):
+class UserInfoMixin(object):
+    def get_context_data(self,**kwargs):
+        context = super(UserInfoMixin, self).get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs['username'])
+        context['userinfo'] = user
+        return context
+
+
+class UserResourcesView(SetHeadlineMixin, UserInfoMixin, ListView):
     context_object_name = 'resources'
     template_name = 'profiles/user_resources.html'
     paginate_by = 12
@@ -51,14 +59,8 @@ class UserResourcesView(SetHeadlineMixin, ListView):
         self.headline = str(user.username) + ' shared Resources'
         return user.resource_set.all()
 
-    def get_context_data(self,**kwargs):
-        context = super(UserResourcesView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
-
-class UserProjectsView(SetHeadlineMixin, ListView):
+class UserProjectsView(SetHeadlineMixin, UserInfoMixin, ListView):
     context_object_name = 'projects'
     template_name = 'profiles/user_projects.html'
     paginate_by = 12
@@ -68,14 +70,8 @@ class UserProjectsView(SetHeadlineMixin, ListView):
         self.headline = str(user.username) + ' Projects'
         return user.project_set.all()
 
-    def get_context_data(self,**kwargs):
-        context = super(UserProjectsView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
-
-class ProjectCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, SetHeadlineMixin, UserInfoMixin, CreateView):
     model = Project
     form_class = ProjectCreateForm
     template_name = 'profiles/project_form.html'
@@ -90,14 +86,8 @@ class ProjectCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
         messages.success(self.request, 'New Project have been added to your profile')
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
 
-    def get_context_data(self,**kwargs):
-        context = super(ProjectCreateView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
-
-class ProjectUpdateView(LoginRequiredMixin, SetHeadlineMixin, UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, SetHeadlineMixin, UserInfoMixin, UpdateView):
     model = Project
     form_class = ProjectUpdateForm
     template_name = 'profiles/project_form.html'
@@ -112,14 +102,8 @@ class ProjectUpdateView(LoginRequiredMixin, SetHeadlineMixin, UpdateView):
         messages.success(self.request, 'Your changes have been saved')
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
 
-    def get_context_data(self,**kwargs):
-        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
-
-class UserSnippetsView(SetHeadlineMixin, ListView):
+class UserSnippetsView(SetHeadlineMixin, UserInfoMixin, ListView):
     context_object_name = 'snippets'
     template_name = 'profiles/user_snippets.html'
     paginate_by = 12
@@ -128,12 +112,6 @@ class UserSnippetsView(SetHeadlineMixin, ListView):
         user = get_object_or_404(User, username=self.kwargs['username'])
         self.headline = str(user.username) + ' Wall'
         return Snippet.objects.filter(user=user).filter(show=True)
-
-    def get_context_data(self,**kwargs):
-        context = super(UserSnippetsView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
 
 #TODO first implement a view_snippet permission in models then add a Permission required mixin here
 class UserHiddenSnippetsView(SetHeadlineMixin, ListView):
