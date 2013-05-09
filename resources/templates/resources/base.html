@@ -4,16 +4,18 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span12">
-        <ul class="nav nav-pills">
-            {% block back_button %}
-            {% endblock %}
-            {% url 'resource_create' as create_tab %}
-            <li class="pull-right {% active request.path create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New Resource</a></li>
-        </ul>
+    <div class="container">
+        {% block resource_page %}
+        <div class="row-fluid">
+            <div class="span3 well">{% include "resources/topics.html" %}</div>
+            <div class="span9">
+                <div class="row-fluid well well-small">
+                    <h1>{% block resource_heading %}{{ headline }}{% endblock %}</h1>
+                </div>
+                {% block resource_content %}{% endblock %}
+            </div>
+        </div>
+        {% endblock %}
     </div>
-</div><!-- /subnavbar row-fluid -->
-<div class="row-fluid">
-    <div class="container">{% block resource_content %}{% endblock %}</div>
 </div>
 {% endblock %}

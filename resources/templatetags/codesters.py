@@ -9,7 +9,7 @@ register = template.Library()
 @register.simple_tag
 def check_active(path, word):
     if word in path:
-        return 'active'
+        return 'selected=""'
     return ''
 
 @register.simple_tag
