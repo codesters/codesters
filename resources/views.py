@@ -91,7 +91,7 @@ def topic_home(request, slug):
         resources = resources.filter(level=level_to_get)
 
 
-    headline = str(current_topic.name).capitalize() +' Resources'
+    headline = str(current_topic.name).capitalize()
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {

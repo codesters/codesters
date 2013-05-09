@@ -20,7 +20,6 @@
 5. It will ask you to provide username, email and password. Give them and run following migrations:
 
     python manage.py migrate guardian
-    python manage.py migrate walls
     python manage.py migrate resources
     python manage.py migrate tracks
     python manage.py migrate profiles

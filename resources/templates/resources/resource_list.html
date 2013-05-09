@@ -40,7 +40,7 @@
     {% empty %}
     <div class="row-fluid">
         <div class="span12">
-            <h3>Sorry, there are no resources here.</h3>
+            <h3>Sorry, there are no resources here. Why don't you add something here. <a href="{% url 'resource_create' %}">Add new Resource</a></h3>
         </div>
     </div>
     {% endfor %}

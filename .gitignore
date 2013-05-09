@@ -5,3 +5,4 @@ codesters/settings/local.py
 codesters/settings/prod.py
 *.db
 assets/*
+gunicorn.conf.py

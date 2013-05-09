@@ -3,9 +3,9 @@
 
 <ul class="nav nav-list">
     {% url 'resource_create' as create_tab %}
-    <li class="{% active request.path create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New Resource</a></li>
+    <li class="{% active request.path create_tab %}"><a title="Add new resource that you want to share" href="{{ create_tab }}"><i class="icon-plus"></i> Add New Resource</a></li>
     <li class="nav-header">Topics</li>
     {% for topic in topics %}
-    <li class="{% active request.path topic.get_absolute_url %}"><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></li>
+    <li class="{% active request.path topic.get_absolute_url %}"><a title="{{ topic.help_text }}" href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></li>
     {% endfor %}
 </ul>
