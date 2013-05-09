@@ -23,6 +23,8 @@ class Topic(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+        if self.description and not self.help_text:
+            self.help_text = self.description[:220]
         super(Topic, self).save(*args, **kwargs)
 
 class ResourceType(models.Model):

@@ -3,13 +3,17 @@
 
 {% block head_title %}Resources{% endblock %}
 
-{% block resource_content %}
+{% block resource_page %}
 <div class="row-fluid">
     <div class="span12 explore-box">
         <h3>Topics</h3>
             {% for topic in topics %}
-            <div class="span2 topic">
-                <h4><a href="{{ topic.get_absolute_url }}">{{  topic.name }}</a></h4>
+            <div class="span2">
+                <a href="{{ topic.get_absolute_url }}">
+                    <div class="span12 topic">
+                        <h4>{{  topic.name }}</h4>
+                    </div>
+                </a>
             </div>
             {% endfor %}
     </div>

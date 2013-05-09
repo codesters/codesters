@@ -1,12 +1,14 @@
 from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
+from django.views.generic import RedirectView
 
 from resources.views import *
 
 urlpatterns = patterns('',
     url(r'^$', resource_home, name='resource_home'),
-    url(r'^type/(?P<slug>[-\w]+)/$', ResourceListView.as_view(), name='resource_list'),
-    url(r'^topic/(?P<slug>[-\w]+)/$', ResourceTopicListView.as_view(), name='resource_topic_list'),
+    url(r'^type/(?P<slug>[-\w]+)/$', RedirectView.as_view(url='/resource/all/', permanent=True), name='old_resource_list'),
+    url(r'^all/$', ResourceAllListView.as_view(), name='resource_list'),
+    url(r'^topic/(?P<slug>[-\w]+)/$', topic_home, name='resource_topic_list'),
     url(r'^(?P<pk>\d+)/$', ResourceDetailView.as_view(), name='resource_detail'),
     url(r'^(?P<pk>\d+)/save/$', ResourceSaveView.as_view(), name='resource_save'),
     url(r'^(?P<pk>\d+)/edit/$', ResourceUpdateView.as_view(), name='resource_update'),

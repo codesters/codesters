@@ -4,30 +4,18 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span12">
-        <ul class="nav nav-pills">
-            {% url 'resource_list' slug="all" as all_tab %}
-            <li class="{% active request.path all_tab %}"><a href="{{ all_tab }}">All</a></li>
-            {% url 'resource_list' slug="programming" as programming_tab %}
-            <li class="{% active request.path programming_tab %}"><a href="{{ programming_tab }}">Programming</a></li>
-            {% url 'resource_list' slug="web" as web_tab %}
-            <li class="{% active request.path web_tab %}"><a href="{{ web_tab }}">Web Development</a></li>
-            {% url 'resource_list' slug="mobile" as mobile_tab %}
-            <li class="{% active request.path mobile_tab %}"><a href="{{ mobile_tab }}">Mobile Development</a></li>
-            {% url 'resource_list' slug="tool" as tool_tab %}
-            <li class="{% active request.path tool_tab %}"><a href="{{ tool_tab }}">Dev Tools</a></li>
-            {% url 'resource_list' slug="database" as database_tab %}
-            <li class="{% active request.path database_tab %}"><a href="{{ database_tab }}">Database</a></li>
-            {% url 'resource_list' slug="system" as system_tab %}
-            <li class="{% active request.path system_tab %}"><a href="{{ system_tab }}">System</a></li>
-            {% url 'resource_list' slug="other" as other_tab %}
-            <li class="{% active request.path other_tab %}"><a href="{{ other_tab }}">Others</a></li>
-            {% url 'resource_create' as create_tab %}
-            <li class="pull-right {% active request.path create_tab %}"><a href="{{ create_tab }}"><i class="icon-plus"></i> Add New</a></li>
-        </ul>
+    <div class="container">
+        {% block resource_page %}
+        <div class="row-fluid">
+            <div class="span3 well">{% include "resources/topics.html" %}</div>
+            <div class="span9">
+                <div class="row-fluid well well-small">
+                    <h1>{% block resource_heading %}{{ headline }}{% endblock %}</h1>
+                </div>
+                {% block resource_content %}{% endblock %}
+            </div>
+        </div>
+        {% endblock %}
     </div>
-</div><!-- /subnavbar row-fluid -->
-<div class="row-fluid">
-    <div class="container">{% block resource_content %}{% endblock %}</div>
 </div>
 {% endblock %}
