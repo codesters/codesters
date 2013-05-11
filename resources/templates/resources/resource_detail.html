@@ -9,8 +9,9 @@
                 <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
             </small>{{ resource.level|capfirst }} level
             </p>
+            <a href="{{ resource.url }}" class="btn btn-small btn-info">Go to link</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'resource_save' pk=resource.pk %}" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
+                <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
 
                 {% include "resources/rating.html" %}
 
@@ -20,7 +21,7 @@
             {% endif %}
 </div>
 {% if resource.description %}
-<div class="row-fluid">
+<div class="row-fluid" id="resource-description">
         <p>{{ resource.description|linebreaksbr }}</p>
 </div>
 {% endif %}

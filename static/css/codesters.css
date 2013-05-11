@@ -1,10 +1,25 @@
+#all-resources-button {
+    margin-top: 60px;
+}
+
+#resource-description {
+    margin: 15px 10px;
+}
+
 #level {
     width: 150px;
 }
 
+.featured-resource h4 {
+    height: 45px;
+}
+
 .resource-content {
-    padding-left: 5px;
     padding-bottom: 10px;
+}
+
+.resource-content p {
+    padding: 0 10px;
 }
 
 .well-small {
@@ -147,9 +162,9 @@
     }
 }
 
-@media (max-widht: 768px) {
+@media (max-width: 768px) {
     .sidebar {
-        margin-top: 10px;
+        margin-top: 50px;
     }
 }
 
