@@ -7,13 +7,13 @@
     <div class="container">
         {% block resource_page %}
         <div class="row-fluid">
-            <div class="span3 well">{% include "resources/topics.html" %}</div>
-            <div class="span9">
+            <div class="span9 pull-right">
                 <div class="row-fluid well well-small">
                     <h1>{% block resource_heading %}{{ headline }}{% endblock %}</h1>
                 </div>
                 {% block resource_content %}{% endblock %}
             </div>
+            <div class="span3 well">{% include "resources/topics.html" %}</div>
         </div>
         {% endblock %}
     </div>
