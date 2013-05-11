@@ -1,8 +1,8 @@
 *.pyc
 *.swp
 venv/*
-codesters/settings/local.py
-codesters/settings/prod.py
+codesters/local_settings.py
+codesters/prod_settings.py
 *.db
 assets/*
 gunicorn.conf.py
