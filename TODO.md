@@ -1,5 +1,7 @@
 #TODO
 
+- Make an option "ALL" in level select input in resource list templates and make it work with js.
+- Add each topic image from wikipedia.
 - Make Create and Update forms more user friendly by making text field as block level.
 - Autofocus on first field in Login, Register views.
 - Raise 404 if user is inactive.
