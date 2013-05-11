@@ -6,12 +6,12 @@ from resources.models import Resource, Topic
 class ResourceCreateForm(ModelForm):
     class Meta:
         model = Resource
-        exclude = ('created_by', 'slug')
+        exclude = ('created_by', 'slug', 'help_text')
 
 class ResourceUpdateForm(ModelForm):
     class Meta:
         model = Resource
-        exclude = ('created_by','slug')
+        exclude = ('created_by','slug', 'help_text')
 
 class TopicCreateForm(ModelForm):
     class Meta:
