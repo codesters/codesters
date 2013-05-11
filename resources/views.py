@@ -102,6 +102,15 @@ def topic_home(request, slug):
         'headline': headline,
         'topics': topics
     }
+
+    resourcetypes = {}
+    res_types = ResourceType.objects.all()
+    for res_type in res_types:
+        result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
+        if len(result) > 0:
+            resourcetypes[result[0].resource_type.slug] = result[0]
+    ctx['resourcetypes'] = resourcetypes
+
     return render_to_response('resources/resource_list.html', ctx, context_instance=RequestContext(request))
 
 
