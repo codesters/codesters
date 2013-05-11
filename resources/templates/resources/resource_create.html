@@ -1,7 +1,13 @@
 {% extends "resources/base.html" %}
+{% load url from future %}
 {% block resource_content %}
-<a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'resource_list' %}{% endif %}">Back</a>
-<div class="span8 offset1">
-    {% include "form_horizontal.html" %}
+<p>
+    <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'resource_home' %}{% endif %}" class="btn"><i class="icon-double-angle-left"></i> Back</a>
+</p>
+<div class="span7 offset2">
+<form action="" method="post">
+    {% include "base_form_block.html" %}
+    <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save</button>
+</form>
 </div>
 {% endblock %}

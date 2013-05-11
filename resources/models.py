@@ -48,7 +48,7 @@ class ResourceType(models.Model):
 class Resource(models.Model):
     title = models.CharField(max_length=255, unique=True)
     slug = models.SlugField(max_length=255, blank=True, default='')
-    url = models.URLField(unique=True)
+    url = models.URLField(verify_exists=True, unique=True)
     help_text = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True, default='')
     resource_type = models.ForeignKey(ResourceType)

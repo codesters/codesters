@@ -17,11 +17,7 @@
         <div class="control-group{% if field.errors %} error{% endif %}">
             <label for="{{ field.auto_id }}" class="control-label">{{ field.label }}{% if field.field.required %}*{% endif %} </label>
             <div class="controls">
-                {% ifequal field|widget_type "textarea" %}
-                    {{ field|add_class:"input-block-level" }}
-                {% else %}
-                    {{ field|add_class:"span3" }}
-                {% endifequal %}
+                {{ field|add_class:"input-block-level" }}
 
                 {% if field.errors %} {% for error in field.errors %}
                     <span class="help-inline field-error">{{ error }}</span>

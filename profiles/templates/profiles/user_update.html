@@ -1,6 +1,10 @@
 {% extends "profiles/settings_base.html" %}
 
-{% load widget_tweaks %}
 {% block settings_content %}
-{% include "form_horizontal.html" %}
+<div class="span6 offset3">
+    <form action="" method="post">
+        {% include "base_form_block.html" %}
+        <button class="btn btn-primary"><i class="icon-save"></i> Save</button>
+    </form>
+</div>
 {% endblock %}

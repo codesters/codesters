@@ -2,9 +2,9 @@
 {% block head_title %}Login{% endblock %}
 {% block content %}
 
-<div class="auth-form span6 offset3">
-    <h2>Login <small>to your account</small></h2>
-<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+<div class="container">
+<form method="post" class="auth-form" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
+    <h2 class="auth-form-heading">Login <small>to your account</small></h2>
 {% if form.errors %}
 <div class="alert alert-error"><button type="button" data-dismiss="alert" class="close">&times;</button>
 Your username and password didn't match. Please try again.
