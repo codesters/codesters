@@ -1,3 +1,12 @@
+#level {
+    width: 150px;
+}
+
+.resource-content {
+    padding-left: 5px;
+    padding-bottom: 10px;
+}
+
 .well-small {
     padding: -5px;
 }
@@ -138,6 +147,12 @@
     }
 }
 
+@media (max-widht: 768px) {
+    .sidebar {
+        margin-top: 10px;
+    }
+}
+
 .footer {
     left: 0;
     right: 0;
@@ -177,6 +192,34 @@
 
 .resource-data {
     padding-left: 15px;
+}
+
+.topic-green {
+    border-top: solid 7px #46a546;
+}
+
+.topic-blue {
+    border-top: solid 7px #049cdb;
+}
+
+.topic-red {
+    border-top: solid 7px #9d261d;
+}
+
+.topic-yellow {
+    border-top: solid 7px #ffc40d;
+}
+
+.topic-orange {
+    border-top: solid 7px #f89406;
+}
+
+.topic-pink {
+    border-top: solid 7px #c3325f;
+}
+
+.topic-purple {
+    border-top: solid 7px #7a43b6;
 }
 
 .resource-green {

@@ -25,7 +25,7 @@ def resource_home(request):
             'recent_resources': recent_resources,
             'popular_resources': popular_resources,
         }
-    return render_to_response('resources/home.html', ctx, context_instance=RequestContext(request))
+    return render_to_response('resources/resource_home.html', ctx, context_instance=RequestContext(request))
 
 def rate_resource(request, object_id, score):
     model = 'resource'
@@ -84,21 +84,12 @@ class ResourceAllListView(SetHeadlineMixin, SidebarMixin, ListView):
 
 
 def topic_home(request, slug):
-    level_to_get = None
-    if 'level' in request.GET:
-        level_to_get = request.GET['level']
     current_topic = get_object_or_404(Topic, slug=slug)
-    resources = current_topic.resource_set.all()
-    if level_to_get:
-        resources = resources.filter(level=level_to_get)
-
-
     headline = str(current_topic.name).capitalize()
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {
         'current_topic': current_topic,
-        'resources': resources,
         'headline': headline,
         'topics': topics
     }
@@ -111,7 +102,7 @@ def topic_home(request, slug):
             resourcetypes[result[0].resource_type.slug] = result[0]
     ctx['resourcetypes'] = resourcetypes
 
-    return render_to_response('resources/resource_list.html', ctx, context_instance=RequestContext(request))
+    return render_to_response('resources/topic_home.html', ctx, context_instance=RequestContext(request))
 
 
 class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
@@ -121,14 +112,23 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
 
     def get_queryset(self):
         level_to_get = None
+        res_type = None
         slug = self.kwargs['slug']
+        try:
+            res_type = self.kwargs['res_type']
+        except KeyError:
+            pass
         if 'level' in self.request.GET:
             level_to_get = self.request.GET['level']
         topic = get_object_or_404(Topic, slug=slug)
         resources = topic.resource_set.all()
+        self.headline = 'All ' + str(topic.name).capitalize() +' Resources'
+        if res_type:
+            res_type = get_object_or_404(ResourceType, slug=res_type)
+            resources = resources.filter(resource_type=res_type)
+            self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + ')'
         if level_to_get:
-                resources = resources.filter(level=level_to_get)
-        self.headline = str(topic.name).capitalize() +' Resources'
+            resources = resources.filter(level=level_to_get)
         return resources
 
     def get_context_data(self, **kwargs):

@@ -1,0 +1,28 @@
+{% extends "resources/base.html" %}
+{% load url from future %}
+{% load age website active check_active from codesters %}
+{% block resource_content %}
+    {% if current_topic.description %}
+    <div class="row-fluid topic-about">
+        {{ current_topic.description|linebreaks }}
+    </div>
+    {% endif %}
+
+    <div class="row-fluid">
+        <h3>Resources</h3>
+        <ul class="thumbnails">
+            {% for k,v in resourcetypes.items %}
+            <li class="span4">
+                <div class="thumbnail topic-{{ v.resource_type.color }}">
+                    <img src="{{ STATIC_URL }}img/{{ k }}.png" alt="{{ k }}" height=200px width=300px title="{{ k }}" />
+                    <h4><a href="{{ v.get_absolute_url }}">{{ v.title }}</a></h4>
+                    <p>{{ v.help_text }}...</p>
+                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-primary">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Get all {{ current_topic.name }} resources</a>
+    </div>
+
+{% endblock %}

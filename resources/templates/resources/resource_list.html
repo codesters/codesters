@@ -1,9 +1,12 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
-{% load age website active check_active from codesters %}
+{% load age website check_active from codesters %}
 {% block resource_content %}
     <div class="row-fluid resource-buttons">
-        <div class="span5">
+        <div class="span9">
+        {% include "resources/resource_type_nav.html" %}
+        </div>
+        <div class="span3 pull-right">
             Level:
             <select id="level" name="Level" onchange="window.open(this.options[this.selectedIndex].value, '_top', '_self')">
                 <option value="?level=beginner" {% check_active request.get_full_path 'beginner' %}>Beginner</option>
@@ -14,31 +17,11 @@
         <div class="span6">
         </div>
     </div>
-    {% if current_topic.description %}
-    <div class="row-fluid topic-about">
-        {{ current_topic.description|linebreaks }}
-    </div>
-    {% endif %}
-
-    <div class="row-fluid">
-        <ul class="thumbnails">
-            {% for k,v in resourcetypes.items %}
-            <li class="span4">
-                <div class="thumbnail topic-{{ v.resource_type.color }}">
-                    <img src="{{ STATIC_URL }}img/{{ k }}.png" alt="{{ k }}" height=200px width=300px  />
-                    <h4><a href="{{ v.get_absolute_url }}">{{ v.title }}</a></h4>
-                    <p>{{ v.help_text }}...</p>
-                    <a href="#" class="btn btn-primary">More {{ v.resource_type }} <i class="icon-caret-right"></i></a>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
 
     {% for resource in resources %}
     <div class="row-fluid">
         <div class="span12 resource resource-{{ resource.resource_type.color }}">
-            <h3><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
+            <h3><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
                     <p><small>submitted  {{ resource.created_at|age  }} by 
                             <a href="{{ resource.created_by.userprofile.get_absolute_url }}">{{ resource.created_by }}</a> in 
                         </small>{{ resource.level|capfirst }} level

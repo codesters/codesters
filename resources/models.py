@@ -18,7 +18,7 @@ class Topic(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('resource_topic_list', kwargs={'slug': self.slug})
+        return reverse('resource_topic_home', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.slug:
