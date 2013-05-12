@@ -1,12 +1,14 @@
+import json
+
 from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView, View
 from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy, reverse
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from braces.views import SetHeadlineMixin
+from braces.views import SetHeadlineMixin, AjaxResponseMixin, JSONResponseMixin
 from django.contrib import messages
 from djangoratings.views import AddRatingView
 
@@ -57,6 +59,43 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
         resource = get_object_or_404(Resource, pk=pk)
         SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
         return reverse_lazy('resource_detail', kwargs={'pk':pk})
+
+def resource_save(request):
+    print 'Function called'
+    success = 'false'
+    res = 0
+    id = request.GET.get('id', None)
+    print 'id received', id
+    if id:
+        try:
+            resource = Resource.objects.get(pk=int(id))
+        except ObjectDoesNotExist:
+            print 'resource not found'
+            return Http404()
+        try:
+            SavedResource.objects.get_or_create(user=request.user, resource=resource)
+            success = 'true'
+        except ObjectDoesNotExist:
+            print 'already saved'
+        res = resource.id
+    response_dict = "{'success': '%s', 'resource': %s }" %(success, res)
+    print response_dict
+    return HttpResponse(json.dumps(response_dict), content_type="application/json")
+
+#class ResourceSave(LoginRequiredMixin, JSONResponseMixin, AjaxResponseMixin, View):
+#    def get_ajax(self, request, *args, **kwargs):
+#        if request.GET['id']:
+#            resource = get_object_or_404(Resource, pk=int(id))
+#            SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
+#            json_dict = {
+#                'status': 'saved'
+#            }
+#        else:
+#            json_dict = {
+#                'status': 'fail'
+#            }
+#        return self.render_json_response(json_dict)
+
 
 
 class SidebarMixin(object):

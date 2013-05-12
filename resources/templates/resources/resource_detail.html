@@ -11,7 +11,7 @@
             </p>
             <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
+                <a href="#" title="Save this resource to your profile" id="save-resource" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
 
                 {% include "resources/rating.html" %}
 
@@ -29,4 +29,20 @@
         <h3>Comments</h3>
         <p>Coming Soon ...</p>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $('#save-resource').click(function() {
+        $.ajax({
+            url: '{% url 'resource_save' %}',
+            data: {'id':{{ resource.pk }} },
+            dataType: 'json',
+            success: function(data) {
+                $('#save-resource').text('Saved..');
+                $('#save-resource').addClass('disabled');
+            },
+        });
+    });
+</script>
 {% endblock %}
