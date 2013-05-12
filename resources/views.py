@@ -127,7 +127,7 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
             res_type = get_object_or_404(ResourceType, slug=res_type)
             resources = resources.filter(resource_type=res_type)
             self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + ')'
-        if level_to_get:
+        if level_to_get and level_to_get != 'all':
             resources = resources.filter(level=level_to_get)
         return resources
 

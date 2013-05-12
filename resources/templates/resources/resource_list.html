@@ -9,6 +9,7 @@
         <div class="span3 pull-right">
             Level:
             <select id="level" name="Level" onchange="window.open(this.options[this.selectedIndex].value, '_top', '_self')">
+                <option value="?level=all" {% check_active request.get_full_path 'all' %}>All</option>
                 <option value="?level=beginner" {% check_active request.get_full_path 'beginner' %}>Beginner</option>
                 <option value="?level=intermediate" {% check_active request.get_full_path 'intermediate' %}>Intermediate</option>
                 <option value="?level=advanced" {% check_active request.get_full_path 'advanced' %}>Advanced</option>
