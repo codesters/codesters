@@ -12,7 +12,7 @@ from djangoratings.views import AddRatingView
 
 from django.contrib.auth.models import User
 from resources.models import Resource, Topic, ResourceType
-from profiles.models import SavedResource
+from profiles.models import SavedResource, TopicFollow
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
@@ -82,6 +82,14 @@ class ResourceAllListView(SetHeadlineMixin, SidebarMixin, ListView):
         self.headline = 'All Resources'
         return resources
 
+
+class TopicFollowView(LoginRequiredMixin, RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, slug):
+        topic = get_object_or_404(Topic, slug=slug)
+        TopicFollow.objects.get_or_create(user=self.request.user, topic=topic)
+        return reverse_lazy('resource_topic_home', kwargs={'slug':slug})
 
 def topic_home(request, slug):
     current_topic = get_object_or_404(Topic, slug=slug)
