@@ -7,7 +7,7 @@
     {% if current_topic.description %}
     <div class="row-fluid topic-about">
         {% if user.is_authenticated %}
-        <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info pull-right" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}"><i class="icon-follow"></i> {% if current_topic|isfollow:user %}Unfollow{% else %}Follow this Topic{% endif %}</a>
+        <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info pull-right" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
         {% endif %}
         {{ current_topic.description|linebreaks }}
         <p class="muted"><br />NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
