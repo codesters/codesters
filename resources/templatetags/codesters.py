@@ -4,6 +4,8 @@ from urlparse import urlparse
 from django.core.urlresolvers import reverse
 from django import template
 
+from profiles.models import SavedResource
+
 register = template.Library()
 
 @register.simple_tag
@@ -39,3 +41,11 @@ def domain(url):
 def website(url):
     u = urlparse(url)
     return u[1]
+
+@register.filter
+def issaved(resource, user):
+    try:
+        SavedResource.objects.get(resource=resource, user=user)
+        return True
+    except SavedResource.DoesNotExist:
+        return False

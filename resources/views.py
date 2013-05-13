@@ -135,7 +135,7 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
             res_type = get_object_or_404(ResourceType, slug=res_type)
             resources = resources.filter(resource_type=res_type)
             self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + ')'
-        if level_to_get:
+        if level_to_get and level_to_get != 'all':
             resources = resources.filter(level=level_to_get)
         return resources
 
@@ -154,17 +154,10 @@ class ResourceDetailView(SetHeadlineMixin, SidebarMixin, DetailView):
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
         self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
-        try:
-            user = User.objects.get(id=self.request.user.id)
-            sr = SavedResource.objects.get(user=user, resource=resource)
-            self.already_saved = True
-        except:
-            self.already_saved = False
         return resource
 
     def get_context_data(self, **kwargs):
         context = super(ResourceDetailView, self).get_context_data(**kwargs)
-        context['already_saved'] = self.already_saved
         return context
 
 

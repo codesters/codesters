@@ -1,6 +1,6 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
-{% load age from codesters %}
+{% load age issaved from codesters %}
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 {% block resource_heading %}{{ resource.title }}{% endblock %}
 {% block resource_content %}
@@ -11,7 +11,7 @@
             </p>
             <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
             {% if user.is_authenticated %}
-                <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if already_saved %}disabled{% endif %}"><i class="icon-save"></i> {% if already_saved %}Saved{% else %}Save{% endif %}</a>
+                <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
 
                 {% include "resources/rating.html" %}
 
