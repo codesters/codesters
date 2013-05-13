@@ -14,10 +14,6 @@ select[multiple] {
     width: 150px;
 }
 
-.featured-resource h4 {
-    height: 45px;
-}
-
 .resource-content {
     padding-bottom: 10px;
 }
@@ -234,34 +230,6 @@ padding: 7px 9px;
 
 .resource-data {
     padding-left: 15px;
-}
-
-.topic-green {
-    border-top: solid 7px #46a546;
-}
-
-.topic-blue {
-    border-top: solid 7px #049cdb;
-}
-
-.topic-red {
-    border-top: solid 7px #9d261d;
-}
-
-.topic-yellow {
-    border-top: solid 7px #ffc40d;
-}
-
-.topic-orange {
-    border-top: solid 7px #f89406;
-}
-
-.topic-pink {
-    border-top: solid 7px #c3325f;
-}
-
-.topic-purple {
-    border-top: solid 7px #7a43b6;
 }
 
 .resource-green {

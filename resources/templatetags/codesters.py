@@ -4,7 +4,7 @@ from urlparse import urlparse
 from django.core.urlresolvers import reverse
 from django import template
 
-from profiles.models import SavedResource
+from profiles.models import SavedResource, TopicFollow
 
 register = template.Library()
 
@@ -41,6 +41,14 @@ def domain(url):
 def website(url):
     u = urlparse(url)
     return u[1]
+
+@register.filter
+def isfollow(topic, user):
+    try:
+        TopicFollow.objects.get(topic=topic, user=user)
+        return True
+    except TopicFollow.DoesNotExist:
+        return False
 
 @register.filter
 def issaved(resource, user):
