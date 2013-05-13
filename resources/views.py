@@ -88,7 +88,11 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
 
     def get_redirect_url(self, slug):
         topic = get_object_or_404(Topic, slug=slug)
-        TopicFollow.objects.get_or_create(user=self.request.user, topic=topic)
+        try:
+            tf = TopicFollow.objects.get(user=self.request.user, topic=topic)
+            tf.delete()
+        except TopicFollow.DoesNotExist:
+            TopicFollow.objects.create(user=self.request.user, topic=topic)
         return reverse_lazy('resource_topic_home', kwargs={'slug':slug})
 
 def topic_home(request, slug):
