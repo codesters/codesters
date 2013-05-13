@@ -62,6 +62,7 @@ class UserProfile(models.Model):
     facebook = models.CharField('Facebook Username', max_length=30, null=True, blank=True)
     website = models.URLField('Your Website/Blog', null=True, blank=True)
     badges = models.ManyToManyField(Badge, null=True, blank=True)
+    receive_email = models.BooleanField(default=True)
 
     def __unicode__(self):
         return self.user.username
