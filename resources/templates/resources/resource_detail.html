@@ -20,6 +20,10 @@
                 {% endifequal %}
             {% endif %}
 </div>
+<div class="pull-right clearfix">
+{% include "share.html" %}
+</div>
+
 {% if resource.description %}
 <div class="row-fluid" id="resource-description">
         <p>{{ resource.description|linebreaksbr }}</p>

@@ -1,3 +1,6 @@
+.addthis_toolbox {
+    padding: 10px 0;
+}
 select[multiple] {
     height: 240px !important;
 }

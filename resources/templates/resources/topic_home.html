@@ -4,6 +4,9 @@
 
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
 {% block resource_content %}
+
+    {% include "share.html" %}
+
     {% if current_topic.description %}
     <div class="row-fluid topic-about">
         {% if user.is_authenticated %}
