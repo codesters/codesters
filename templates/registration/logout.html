@@ -4,5 +4,5 @@
 {% block content %}
 <h3>Successfully logged out!</h3>
 <p class="lead">Thank you for spending some time with us :)</p>
-<p>If you have any suggestion or complaints, <a href="{% url 'page_contact' %}">Contact Us</a></p>
+<a class="btn btn-primary" href="{% url 'auth_login' %}"><i class="icon-signin"></i> Login Again</a>
 {% endblock %}
