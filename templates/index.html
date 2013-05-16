@@ -10,15 +10,38 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid marketing marketing-1">
-    <h1>Hub for learning</h1>
-    <p>Wasted a lot of time in finding the resource to learn from? We have the best resources available on web for learning any topic.</p>
+<div class="row-fluid marketing marketing-head">
+    <h1>Hub to learn Programming</h1>
+    <p class="lead">Want to learn programming, but wasted a lot of time in finding the right resource to learn from?<br /> We have the best resources available on web for learning any computer science topic.</p>
+</div>
+<div class="row-fluid marketing">
+    <h3>Find:</h3>
+    <ul class="lead">
+        <li>free online courses provided by websites like Coursera, Udacity and EDx.</li>
+        <li>free courses from top universities like MIT, Harvard, Stanford and IITs.</li>
+        <li>help tutorials and videos made by experts in niche topics.</li>
+        <li>and lots of official documentation.</li>
+    </ul>
+</div>
+<div class="row-fluid marketing marketing-head">
+    <h3>Most popular Topics:</h3>
+    <div class="row-fluid">
+        <ul class="thumbnails">
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='c' %}"><img src="" alt="C" /></a></li>
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='java' %}"><img src="" alt="Java" /></a></li>
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='python' %}"><img src="" alt="Python" /></a></li>
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='django' %}"><img src="" alt="Django" /></a></li>
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='linux' %}"><img src="" alt="Linux" /></a></li>
+            <li class="span2"><a href="{% url 'resource_topic_home' slug='php' %}"><img src="" alt="PHP" /></a></li>
+        </ul>
+    </div>
     {% if user.is_authenticated %}
-    <a href="{% url 'page_about' %}" class="btn btn-large"> Learn More <i class="icon-double-angle-right"></i></a> 
+    <a href="{% url 'page_about' %}" class="btn btn-primary btn-large"> Learn More <i class="icon-double-angle-right"></i></a> 
     {% else %}
-    <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Get Started <i class="icon-double-angle-right"></i></a> 
+    <a href="{% url 'registration_register' %}" class="btn btn-primary btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
     {% endif %}
 </div>
+<!--
 <div class="row-fluid marketing marketing-2">
     <h2>We do 3 things for you...</h2>
     <hr />
@@ -71,6 +94,6 @@
         {% endif %}
     </div>
 </div>
+--!>
 {% endblock %}
-<hr>
 

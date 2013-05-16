@@ -1,3 +1,12 @@
+.footer-links {
+    min-height: 30px;
+    vertical-align: middle;
+}
+
+.social-plugins {
+    margin-top: 15px;
+}
+
 .addthis_toolbox {
     padding: 10px 0;
 }
@@ -36,22 +45,33 @@ select[multiple] {
     font-size: 42px;
 }
 
-.marketing, .marketing h1, .marketing h2, .marketing h3 {
-    color: #ffffff;
-}
-
 .market {
     font-size: 160px;
 }
 
 .marketing {
-    padding: 70px 20px 60px;
-    text-align: center;
+    padding:0 20px 20px;
+    max-width: 768px;
+    margin: auto;
 }
 
+.marketing-head {
+    text-align: center;
+    padding: 70px 20px 30px;
+}
+
+.marketing li {
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+
 .marketing p {
+    margin: 30px auto;
     text-align: center;
     font-size: 18px;
+    max-width: 468;
 }
 
 .marketing-1 {
@@ -214,7 +234,7 @@ padding: 7px 9px;
     color: #ffffff;
 }
 
-.social a{
+.social-links a{
     text-decoration: none;
 }
 
