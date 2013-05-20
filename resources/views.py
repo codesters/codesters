@@ -157,7 +157,7 @@ class ResourceDetailView(SetHeadlineMixin, SidebarMixin, DetailView):
 
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
-        self.headline = str(resource.title) + ' (' + str(resource.resource_type) + ') | Resource'
+        self.headline = str(resource.title) + """ (""" + str(resource.resource_type) + """) | Resource"""
         return resource
 
     def get_context_data(self, **kwargs):
