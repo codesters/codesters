@@ -40,6 +40,12 @@
     {% else %}
     <a href="{% url 'registration_register' %}" class="btn btn-primary register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
     {% endif %}
+        <div class="row-fluid">
+            <div class="marketing marketing-head">
+                <div class="span6">{% include "facebook_like.html" %}</div>
+                <div class="span6">{% include "google_plus.html" %}</div>
+            </div>
+        </div>
 </div>
 
 {% endblock %}

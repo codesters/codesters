@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="span12 resource resource-{{ resource.resource_type.color }}">
             <h3><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
-                    <p><small>submitted  {{ resource.created_at|age  }} 
+            <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a>
                             in 
                         </small>{{ resource.level|capfirst }} level
                     </p>
