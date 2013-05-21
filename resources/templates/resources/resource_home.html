@@ -8,14 +8,20 @@
     <div class="span12 explore-box">
         <h3>Select a Topic to start learning</h3>
             {% for topic in topics %}
-            <div class="span2">
-                {% if topic.thumbnail %}<img src="{{ topic.thumbnail.url }}" alt="{{ topic.name }}" />{% endif %}
+	    <div class="span2 topic">
                 <a title="{{ topic.help_text }}" href="{{ topic.get_absolute_url }}">
-                    <div class="span12 topic">
-                        <h4>{{  topic.name }}</h4>
-                    </div>
+			<div class="topic-name">
+				<span>{{ topic.name }}</span>
+			</div>
+			<div class="image">
+			{% if topic.thumbnail %}
+				<img src="{{ topic.thumbnail.url }}" alt="{{ topic.name }}" />
+			{% else %}
+				<img src="{{ STATIC_URL }}img/topic.png" alt="default topic image" />
+			{% endif %}
+			</div>
                 </a>
-            </div>
+	    </div>
             {% endfor %}
     </div>
 </div>
@@ -25,7 +31,7 @@
         <ol class="explore-list unstyled">
             {% for resource in popular_resources %}
             <li>
-                <h4><a title="{{ resource.help_text }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></h4>
+                <p><a title="{{ resource.help_text }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
             </li>
             {% endfor %}
         </ol>
@@ -35,7 +41,7 @@
         <ol class="explore-list unstyled">
             {% for resource in recent_resources %}
             <li>
-                <h4><a title="{{ resource.help_text }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></h4>
+                <p><a title="{{ resource.help_text }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
             </li>
             {% endfor %}
         </ol>
