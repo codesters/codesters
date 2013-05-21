@@ -4,6 +4,7 @@ South==0.7.6
 django-extensions==1.0.3
 django-guardian
 django-registration==0.8
+django-disqus==0.4.1
 gunicorn==0.17.2
 ipython==0.13.1
 #psycopg2==2.4.6

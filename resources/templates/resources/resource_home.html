@@ -9,6 +9,7 @@
         <h3>Select a Topic to start learning</h3>
             {% for topic in topics %}
             <div class="span2">
+                {% if topic.thumbnail %}<img src="{{ topic.thumbnail.url }}" alt="{{ topic.name }}" />{% endif %}
                 <a title="{{ topic.help_text }}" href="{{ topic.get_absolute_url }}">
                     <div class="span12 topic">
                         <h4>{{  topic.name }}</h4>

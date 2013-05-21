@@ -13,6 +13,7 @@ class Topic(models.Model):
     slug = models.SlugField(max_length=255)
     help_text = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='topics', null=True, blank=True)
     official_website = models.URLField(null=True, blank=True)
 
     def __unicode__(self):
