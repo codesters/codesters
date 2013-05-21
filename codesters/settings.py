@@ -31,6 +31,7 @@ THIRD_PARTY_APPS = (
     'widget_tweaks',
     'braces',
     'djangoratings',
+    'disqus',
 )
 
 LOCAL_APPS = (
@@ -83,6 +84,10 @@ ANONYMOUS_USER_ID = -1
 GUARDIAN_RENDER_403 = True
 
 RATINGS_VOTES_PER_IP = 20
+
+
+DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
+DISQUS_WEBSITE_SHORTNAME = 'codesters'
 
 ALLOWED_HOSTS = []
 TIME_ZONE = 'Asia/Kolkata'

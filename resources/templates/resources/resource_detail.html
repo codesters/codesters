@@ -1,6 +1,8 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 {% load age issaved from codesters %}
+{% load disqus_tags %}
+
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 {% block resource_heading %}{{ resource.title }}{% endblock %}
 {% block resource_content %}
@@ -30,7 +32,6 @@
 </div>
 {% endif %}
 <div class="row-fluid">
-        <h3>Comments</h3>
-        <p>Coming Soon ...</p>
+        {% disqus_show_comments %}
 </div>
 {% endblock %}
