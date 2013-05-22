@@ -1,14 +1,6 @@
 {% extends "base.html" %}
 {% load url from future %}
 
-{% block extra_head %}
-<style type="text/css">
-    .navbar {
-        margin-bottom: -20px;
-    }
-</style>
-{% endblock %}
-
 {% block content %}
 <div class="row-fluid marketing marketing-head">
     <h1>Hub to learn Programming</h1>
@@ -35,11 +27,7 @@
             <li class="span2"><a href="{% url 'resource_topic_home' slug='php' %}"><img    src="{{ STATIC_URL }}img/php.png" alt="PHP" /></a></li>
         </ul>
     </div>
-    {% if user.is_authenticated %}
-    <a href="{% url 'page_about' %}" class="btn btn-primary btn-large"> Learn More <i class="icon-double-angle-right"></i></a> 
-    {% else %}
-    <a href="{% url 'registration_register' %}" class="btn btn-primary register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
-    {% endif %}
+    <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-primary register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
         <div class="row-fluid">
             <div class="marketing marketing-head">
                 <div class="span6">{% include "facebook_like.html" %}</div>
@@ -47,6 +35,5 @@
             </div>
         </div>
 </div>
-
 {% endblock %}
 

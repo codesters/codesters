@@ -74,7 +74,7 @@ AUTHENTICATION_BACKENDS = (
         'guardian.backends.ObjectPermissionBackend',
 )
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/resource/'
 ABSOLUTE_URL_OVERRIDES = {
         'auth.user': lambda u: "/profile/%s/" % u.username,
 }
