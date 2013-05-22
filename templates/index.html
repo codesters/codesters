@@ -27,13 +27,16 @@
             <li class="span2"><a href="{% url 'resource_topic_home' slug='php' %}"><img    src="{{ STATIC_URL }}img/php.png" alt="PHP" /></a></li>
         </ul>
     </div>
-    <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-primary register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
-        <div class="row-fluid">
-            <div class="marketing marketing-head">
-                <div class="span6">{% include "facebook_like.html" %}</div>
-                <div class="span6">{% include "google_plus.html" %}</div>
-            </div>
+
+    <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-success register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
+
+    <div class="row-fluid">
+        <div class="span12 marketing marketing-head">
+            <div class="span4">{% include "snippets/facebook_like.html" %}</div>
+            <div class="span4">{% include "snippets/twitter.html" %}</div>
+            <div class="span4">{% include "snippets/google_plus.html" %}</div>
         </div>
+    </div>
 </div>
 {% endblock %}
 

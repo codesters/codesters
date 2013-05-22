@@ -5,6 +5,9 @@
     border: 1px solid rgb(153, 153, 153);
     border-top: 0;
 }
+.topic a {
+    text-decoration: none;
+}
 
 .topic img {
     height: 68px;
@@ -26,6 +29,7 @@
 
 .register-button {
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 .footer-links {
     min-height: 20px;
@@ -176,20 +180,8 @@ padding: 7px 9px;
     line-height: 1.4em;
 }
 
-.explore-box {
-    padding: 10px;
-}
-
-.explore-box h3, .explore-box h4, .explore-box p {
-    margin: 5px 0 3px;
-}
-
 .explore-box p {
     color: #999999;
-}
-
-.explore-box h3 {
-    border-bottom: solid 1px #aaa;
 }
 
 .explore-box li {
