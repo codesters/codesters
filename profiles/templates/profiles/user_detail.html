@@ -9,13 +9,13 @@
     <div class="span7">
         <h3>Saved Resources:</h3>
         {% for saved_resource in saved_resources %}
-        <h4><a href="{{ saved_resource.resource.get_absolute_url }}">{{ saved_resource.resource.title }}</a></h4>
+        <p><a href="{{ saved_resource.resource.get_absolute_url }}">{{ saved_resource.resource.title }}</a></p>
         {% endfor %}
     </div>
     <div class="span4 offset1">
         <h3>Topics Followed:</h3>
         {% for topic_follow in topics_follow %}
-        <h4><a href="{{ topic_follow.topic.get_absolute_url }}">{{ topic_follow.topic.name }}</a></h4>
+        <p><a href="{{ topic_follow.topic.get_absolute_url }}">{{ topic_follow.topic.name }}</a></p>
         {% endfor %}
     </div>
 </div>
