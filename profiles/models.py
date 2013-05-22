@@ -98,5 +98,8 @@ from django.contrib.auth.signals import user_logged_in
 def check_userprofile_details(sender, request, user, **kwargs):
     if not user.first_name:
         request.session['no_name'] = True
+    topic_list = TopicFollow.objects.filter(user=user)
+    if not topic_list:
+        request.session['no_topic'] = True
 
 user_logged_in.connect(check_userprofile_details)

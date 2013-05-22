@@ -23,7 +23,12 @@ def resource_home(request):
 
     #Check various session values for user details and show appropriate info
     if request.session.get('no_name', False):
-        messages.warning(request, 'Fill in your profile details for personel recommendations by going to your account settings.')
+        messages.info(request, 'Please fill in your profile details by going to your account settings.')
+        request.session['no_name'] = False
+
+    if request.session.get('no_topic', False):
+        messages.warning(request, 'It seems you are not following any topic. Follow topics by clicking on it below and get personalized recommendations')
+        request.session['no_topic'] = False
 
     ctx = {
             'topics': topics,
