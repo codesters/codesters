@@ -92,3 +92,11 @@ class TopicFollow(models.Model):
 
     def __unicode__(self):
         return '%s %s' %(self.user, self.topic)
+
+from django.contrib.auth.signals import user_logged_in
+
+def check_userprofile_details(sender, request, user, **kwargs):
+    if not user.first_name:
+        request.session['no_name'] = True
+
+user_logged_in.connect(check_userprofile_details)

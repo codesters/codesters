@@ -20,6 +20,11 @@ def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
     popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
+
+    #Check various session values for user details and show appropriate info
+    if request.session.get('no_name', False):
+        messages.warning(request, 'Fill in your profile details for personel recommendations by going to your account settings.')
+
     ctx = {
             'topics': topics,
             'recent_resources': recent_resources,
