@@ -14,6 +14,9 @@
 
     {% if current_topic.description %}
     <div class="row-fluid topic-about">
+        {% if current_topic.thumbnail %}
+            <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" />
+        {% endif %}
         {{ current_topic.description|linebreaks }}
         <p class="muted"><br />NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
     </div>
@@ -44,7 +47,7 @@
 
 {% block extra_js %}
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).load(function() {
         var maxHeight = 0;
         $('.thumbnail').each(function(){ 
             if($(this).height() > maxHeight) { 
