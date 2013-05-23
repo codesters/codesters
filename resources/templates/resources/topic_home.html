@@ -15,7 +15,7 @@
     {% if current_topic.description %}
     <div class="row-fluid topic-about">
         {% if current_topic.thumbnail %}
-            <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" />
+            <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
         {% endif %}
         {{ current_topic.description|linebreaks }}
         <p class="muted"><br />NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
