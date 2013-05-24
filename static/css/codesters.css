@@ -84,6 +84,11 @@ select[multiple] {
 .marketing h1 {
     font-size: 54px;
 }
+
+.marketing h1, .marketing h2 {
+    color: #46a546;
+}
+
 .marketing h2 {
     font-size: 42px;
 }

@@ -48,7 +48,7 @@
 
 {% block extra_js %}
 <script type="text/javascript">
-    $(document).load(function() {
+    $(document).ready(function() {
         var maxHeight = 0;
         $('.thumbnail').each(function(){ 
             if($(this).height() > maxHeight) { 
