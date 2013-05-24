@@ -20,6 +20,11 @@
                 {% ifequal resource.created_by user%}
                 <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
                 {% endifequal %}
+
+            {% else %}
+
+            <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+
             {% endif %}
 </div>
 <div class="pull-right clearfix">

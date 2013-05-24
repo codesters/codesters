@@ -2,7 +2,7 @@
 {% load ratings %}
 {% rating_by_user user on resource.rating as vote %}
 {% if vote > 0 %}
-<a href="#" class="btn btn-small disabled">Voted</a>
+<a href="#" class="btn btn-small disabled">Already Voted</a>
 {% else %}
 <div class="btn-group">
     <a href="{% url 'resource_rate' object_id=resource.pk score=1 %}" class="btn btn-small"><i class="icon-star{% if vote > 0 %}{% else %}-empty{% endif %}"></i> </a>
