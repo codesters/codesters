@@ -5,8 +5,15 @@
 
 {% block resource_page %}
 <div class="row-fluid">
+    <div class="span12">
+        <div class="span7">
+            <h3>Select a topic to start learning</h3>
+        </div>
+        <div class="span4">
+            <a href="i{% url 'resource_create' %}" class="btn btn-danger pull-right" title="Add new resource that you want to share" ><i class="icon-plus"></i> Add new Resource</a>
+        </div>
+    </div>
     <div class="span12 explore-box">
-        <h3>Select a Topic to start learning</h3>
             {% for topic in topics %}
             <article class="span2 topic">
                 <a title="{{ topic.help_text|slice:":120" }}" href="{{ topic.get_absolute_url }}">

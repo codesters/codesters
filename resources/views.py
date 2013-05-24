@@ -101,8 +101,10 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
         try:
             tf = TopicFollow.objects.get(user=self.request.user, topic=topic)
             tf.delete()
+            messages.success(self.request, 'You have stopped following this topic.')
         except TopicFollow.DoesNotExist:
             TopicFollow.objects.create(user=self.request.user, topic=topic)
+            messages.success(self.request, 'You are now following this topic.')
         return reverse_lazy('resource_topic_home', kwargs={'slug':slug})
 
 def topic_home(request, slug):

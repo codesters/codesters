@@ -3,9 +3,11 @@
 }
 
 .topic {
-    height: 100px;
+    height: 200px;
     border: 1px #aaa;
     margin-top: 30px;
+    margin-left: 0 !important;
+    margin-right: 20px;
     border: 1px solid rgb(153, 153, 153);
     border-top: 0;
 }
@@ -14,7 +16,7 @@
 }
 
 .topic img {
-    height: 68px;
+    height: 160px;
     width: 100%;
     max-width: 250px;
     margin: 0 auto;

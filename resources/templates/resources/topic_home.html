@@ -7,13 +7,14 @@
 
 <div class="row-fluid">
         {% if user.is_authenticated %}
-        <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
+        <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small pull-right" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
         {% endif %}
     {% include "snippets/share_this.html" %}
 </div>
 
     {% if current_topic.description %}
     <div class="row-fluid topic-about">
+        <h3>About {{ current_topic.name }}</h3>
         {% if current_topic.thumbnail %}
             <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
         {% endif %}
@@ -31,7 +32,7 @@
                     <a href="{{ v.get_absolute_url }}"><img src="{{ STATIC_URL }}img/{{ k }}.png" alt="{{ k }}" height=200px width=300px title="{{ k }}" /></a>
                     <h4><a href="{{ v.get_absolute_url }}">{{ v.title }}</a></h4>
                     <p>{{ v.help_text|slice:":100" }}...</p>
-                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
+                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-warning">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
                 </div>
             </li>
             {% endfor %}

@@ -74,21 +74,6 @@ AUTHENTICATION_BACKENDS = (
         'guardian.backends.ObjectPermissionBackend',
 )
 
-LOGIN_REDIRECT_URL = '/resource/'
-ABSOLUTE_URL_OVERRIDES = {
-        'auth.user': lambda u: "/profile/%s/" % u.username,
-}
-
-ACCOUNT_ACTIVATION_DAYS = 7
-ANONYMOUS_USER_ID = -1
-GUARDIAN_RENDER_403 = True
-
-RATINGS_VOTES_PER_IP = 20
-
-
-DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
-DISQUS_WEBSITE_SHORTNAME = 'codesters'
-
 ALLOWED_HOSTS = []
 TIME_ZONE = 'Asia/Kolkata'
 
@@ -160,6 +145,28 @@ LOGGING = {
     }
 }
 
+#DJANGO extended settings we are using
+LOGIN_REDIRECT_URL = '/resource/'
+ABSOLUTE_URL_OVERRIDES = {
+        'auth.user': lambda u: "/profile/%s/" % u.username,
+}
+
+#Django-Registration Settings
+ACCOUNT_ACTIVATION_DAYS = 7
+
+
+#Django-Guardian Settings
+ANONYMOUS_USER_ID = -1
+GUARDIAN_RENDER_403 = True
+
+#Django-Ratings Settings
+RATINGS_VOTES_PER_IP = 20
+
+#Disqus Settings
+DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
+DISQUS_WEBSITE_SHORTNAME = 'codesters'
+
+#Import Local and Prod settings
 try:
     from local_settings import *
 except ImportError:
