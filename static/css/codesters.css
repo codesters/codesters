@@ -16,10 +16,13 @@
 }
 
 .topic img {
-    height: 160px;
+    height: 100%;
     width: 100%;
-    max-width: 250px;
     margin: 0 auto;
+}
+
+.topic-image {
+    height: 168px;
 }
 
 .topic-name {
