@@ -7,9 +7,11 @@
 {% block resource_heading %}{{ resource.title }}{% endblock %}
 {% block resource_content %}
 <div class="row-fluid">
-        <p><small>submitted {{ resource.created_at|age }} by 
-                <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
-            </small>{{ resource.level|capfirst }} level
+            <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
+            {% for topic in resource.topics.all %}
+            {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
+            {% endfor %}</small>
+                        ({{ resource.level|capfirst }} level)
             </p>
             <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
             {% if user.is_authenticated %}

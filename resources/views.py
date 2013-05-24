@@ -22,9 +22,9 @@ def resource_home(request):
     popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
 
     #Check various session values for user details and show appropriate info
-    if request.session.get('no_name', False):
-        messages.info(request, 'Please fill in your profile details by going to your account settings.')
-        request.session['no_name'] = False
+    #if request.session.get('no_name', False):
+    #    messages.info(request, 'Please fill in your profile details by going to your account settings.')
+    #    request.session['no_name'] = False
 
     if request.session.get('no_topic', False):
         messages.warning(request, 'It seems you are not following any topic. Follow topics by clicking on it below and get personalized recommendations')
@@ -150,7 +150,7 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
         if res_type:
             res_type = get_object_or_404(ResourceType, slug=res_type)
             resources = resources.filter(resource_type=res_type)
-            self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + ')'
+            self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + 's)'
         if level_to_get and level_to_get != 'all':
             resources = resources.filter(level=level_to_get)
         return resources

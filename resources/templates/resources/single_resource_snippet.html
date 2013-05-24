@@ -4,18 +4,23 @@
     <div class="row-fluid">
         <div class="span12 resource resource-{{ resource.resource_type.color }}">
             <h3><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h3>
-            <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a>
-                            in 
-                        </small>{{ resource.level|capfirst }} level
-                    </p>
-                    <a href="{{ resource.url }}" class="btn btn-info btn-small"><i class="icon-link"></i> Open Webpage</a> 
+            <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
+            {% for topic in resource.topics.all %}
+            {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
+            {% endfor %}</small>
+                        ({{ resource.level|capfirst }} level)
+            </p>
+            <a href="{{ resource.url }}" class="btn btn-info btn-small"><i class="icon-link"></i> Open Webpage</a> 
 
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
 
-                    {% include "resources/rating.html" %}
+            {% include "resources/rating.html" %}
 
-                    {% ifequal resource.created_by user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endifequal %}
-                    {% endif %}
+            {% ifequal resource.created_by user %}<a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>{% endifequal %}
+
+            {% else %}
+                <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+            {% endif %}
         </div>
     </div>
