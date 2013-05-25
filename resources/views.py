@@ -18,8 +18,6 @@ from resources.forms import ResourceCreateForm, ResourceUpdateForm
 
 def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
-    recent_resources = Resource.objects.all().order_by('-created_at')[:5]
-    popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
 
     #Check various session values for user details and show appropriate info
     #if request.session.get('no_name', False):
@@ -32,8 +30,6 @@ def resource_home(request):
 
     ctx = {
             'topics': topics,
-            'recent_resources': recent_resources,
-            'popular_resources': popular_resources,
         }
     return render_to_response('resources/resource_home.html', ctx, context_instance=RequestContext(request))
 

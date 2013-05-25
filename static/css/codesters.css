@@ -24,6 +24,7 @@
     border: 1px solid rgb(153, 153, 153);
     border-top: 0;
     max-width: 280px;
+    overflow: hidden;
 }
 .topic a {
     text-decoration: none;
@@ -36,7 +37,7 @@
 }
 
 .topic-image {
-    height: 168px;
+    height: 169px;
 }
 
 .topic-name {
