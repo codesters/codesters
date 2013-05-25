@@ -16,6 +16,9 @@ class Topic(models.Model):
     thumbnail = models.ImageField(upload_to='topics', null=True, blank=True)
     official_website = models.URLField(null=True, blank=True)
 
+    class Meta:
+        ordering = ['name',]
+
     def __unicode__(self):
         return self.name
 

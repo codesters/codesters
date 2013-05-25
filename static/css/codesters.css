@@ -1,3 +1,16 @@
+.featured-resource h4 {
+    font-size: 20px;
+}
+
+.thumbnails li.span4 {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+.message {
+    margin-top: 15px;
+}
+
 .topic-about img {
     max-width: 320px;
 }
