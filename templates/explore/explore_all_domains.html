@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block head_title %}Explore all domains according to resources submitted{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span7 offset2 explore-box">
+        <h3>All Domains</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Domain name</th>
+                    <th># Resources Submitted</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for domain, count in popular_domains %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="http://{{ domain }}">{{ domain }}</a></td>
+                    <td> {{ count }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

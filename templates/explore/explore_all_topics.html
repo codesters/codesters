@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block head_title %}Topics popularity according to resources submitted and followed by user{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span7 offset2 explore-box">
+        <h3>Topics Popularity</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Topic</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for topic in popular_topics %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a></td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

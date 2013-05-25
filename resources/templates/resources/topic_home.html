@@ -3,6 +3,7 @@
 {% load isfollow from codesters %}
 
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
+{% block resource_heading %}{{ current_topic.name }}{% endblock %}
 {% block resource_content %}
 
 <div class="row-fluid">
@@ -27,7 +28,7 @@
             <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
         {% endif %}
         {{ current_topic.description|linebreaks }}
-        <p class="muted"><br />NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
+        <p class="muted disclaimer">NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
     </div>
     {% endif %}
 

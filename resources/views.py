@@ -105,7 +105,7 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
 
 def topic_home(request, slug):
     current_topic = get_object_or_404(Topic, slug=slug)
-    headline = str(current_topic.name).capitalize()
+    headline = str(current_topic.name).capitalize() + """ - learn from the best tutorials, online courses, offline courses and official documentation"""
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {

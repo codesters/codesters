@@ -8,9 +8,7 @@ from django.db.models import Count
 from django.contrib.auth.models import User
 from resources.models import Topic, Resource
 
-def explore_home(request):
-    active_users = User.objects.annotate(no_of_resources=Count('resource')).order_by('-no_of_resources')
-    popular_topics = Topic.objects.annotate(no_of_resources=Count('resource')).order_by('-no_of_resources')
+def popular_domains_mixin(number='more'):
     resources = Resource.objects.all()
     cnt = Counter()
     domains = []
@@ -18,6 +16,26 @@ def explore_home(request):
         domains.append(urlparse(resource.url)[1])
     for domain in domains:
         cnt[domain] += 1
+    if number=='less': return cnt.most_common(5)
+    else: return cnt.most_common()
+
+def explore_all_domains(request):
+    ctx = {
+            'popular_domains': popular_domains_mixin()
+    }
+    return render_to_response('explore/explore_all_domains.html', ctx, context_instance=RequestContext(request))
+
+def explore_all_topics(request):
+    popular_topics = Topic.objects.annotate(no_of_resources=Count('resource')).order_by('-no_of_resources')
+    ctx = {
+            'popular_topics': popular_topics,
+    }
+    return render_to_response('explore/explore_all_topics.html', ctx, context_instance=RequestContext(request))
+
+
+def explore_home(request):
+    active_users = User.objects.annotate(no_of_resources=Count('resource')).order_by('-no_of_resources')
+    popular_topics = Topic.objects.annotate(no_of_resources=Count('resource')).order_by('-no_of_resources')
 
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
     popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
@@ -25,12 +43,12 @@ def explore_home(request):
     ctx = {
             'active_users': active_users[:4],
             'popular_topics': popular_topics[:5],
-            'popular_domains': cnt.most_common(5),
+            'popular_domains': popular_domains_mixin(number='less'),
             'recent_resources': recent_resources,
             'popular_resources': popular_resources,
             'headline': 'Explore'
     }
-    return render_to_response('explore_home.html', ctx, context_instance=RequestContext(request))
+    return render_to_response('explore/explore_home.html', ctx, context_instance=RequestContext(request))
 
 class ExploreView(SetHeadlineMixin, TemplateView):
     template_name = 'coming_soon.html'

@@ -4,7 +4,9 @@
 {% load disqus_tags %}
 
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
+
 {% block resource_heading %}{{ resource.title }}{% endblock %}
+
 {% block resource_content %}
 <div class="row-fluid">
             <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
