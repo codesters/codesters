@@ -32,6 +32,7 @@ THIRD_PARTY_APPS = (
     'braces',
     'djangoratings',
     'disqus',
+    'djcelery',
 )
 
 LOCAL_APPS = (
@@ -165,6 +166,10 @@ RATINGS_VOTES_PER_IP = 20
 #Disqus Settings
 DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
 DISQUS_WEBSITE_SHORTNAME = 'codesters'
+
+#Celery Settings
+import djcelery
+djcelery.setup_loader()
 
 #Import Local and Prod settings
 try:
