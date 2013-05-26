@@ -170,6 +170,7 @@ DISQUS_WEBSITE_SHORTNAME = 'codesters'
 #Celery Settings
 import djcelery
 djcelery.setup_loader()
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 
 #Import Local and Prod settings
 try:
