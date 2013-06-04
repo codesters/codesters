@@ -10,6 +10,11 @@
     color: rgb(84, 144, 202);
 }
 
+#sidebar {
+    background-color: rgb(250, 250, 250);
+    padding: 0;
+}
+
 #sidebar li {
     line-height: 18px;
 }
@@ -91,7 +96,7 @@ select[multiple] {
 }
 
 #all-resources-button {
-    margin-top: 60px;
+    margin-top: 40px;
 }
 
 #resource-description {
@@ -300,20 +305,15 @@ padding: 7px 9px;
 }
 
 .resource {
-    margin: 0 0 15px 0;
-    padding: 5px 12px;
-    min-height: 100px;
-    background-color: rgb(245, 245, 245);
-    border: 1px solid rgb(221, 221, 221);
+    display: inline-block !important;
+    margin-left: 0 !important;
+    margin-right: 7px;
+    min-height: 180px !important;
 }
 
 .vote {
     overflow: hidden;
     padding: 18px 0 8px;
-}
-
-.resource-data {
-    padding-left: 15px;
 }
 
 .resource-green {
@@ -342,4 +342,60 @@ padding: 7px 9px;
 
 .resource-purple {
     border-left: solid 7px #7a43b6;
+}
+
+.label-green {
+    background-color: #46a546;
+}
+
+.label-blue {
+    background-color: #049cdb;
+}
+
+.label-red {
+    background-color: #9d261d;
+}
+
+.label-yellow {
+    background-color: #ffc40d;
+}
+
+.label-orange {
+    background-color: #f89406;
+}
+
+.label-pink {
+    background-color: #c3325f;
+}
+
+.label-purple {
+    background-color: #7a43b6;
+}
+
+.badge-green {
+    background-color: #46a546;
+}
+
+.badge-blue {
+    background-color: #049cdb;
+}
+
+.badge-red {
+    background-color: #9d261d;
+}
+
+.badge-yellow {
+    background-color: #ffc40d;
+}
+
+.badge-orange {
+    background-color: #f89406;
+}
+
+.badge-pink {
+    background-color: #c3325f;
+}
+
+.badge-purple {
+    background-color: #7a43b6;
 }

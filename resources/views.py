@@ -62,7 +62,10 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, pk):
         resource = get_object_or_404(Resource, pk=pk)
         SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
-        return reverse_lazy('resource_detail', kwargs={'pk':pk})
+        if self.request.META['HTTP_REFERER']:
+            return self.request.META['HTTP_REFERER']
+        else:
+            return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
 class SidebarMixin(object):

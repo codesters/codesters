@@ -15,7 +15,7 @@
             {% if user.is_authenticated %}
             <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small pull-right" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
             {% else %}
-            <a href="{% url 'auth_login' %}?next={% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-warning btn-small pull-right"><i class="icon-info"></i> Login to follow this Topic</a>
+            <a href="{% url 'auth_login' %}?next={% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small pull-right"><i class="icon-info"></i> Login to follow this Topic</a>
             {% endif %}
         </div>
     </div>
@@ -38,17 +38,17 @@
             {% for k,v in resourcetypes.items %}
             <li class="span4">
                 <div class="thumbnail featured-resource">
-                    <a href="{{ v.get_absolute_url }}"><img src="{{ STATIC_URL }}img/{{ k }}.png" alt="{{ k }}" height=200px width=300px title="{{ k }}" /></a>
-                    <h4><a href="{{ v.get_absolute_url }}">{{ v.title }}</a></h4>
-                    <p>{{ v.help_text|slice:":100" }}...</p>
-                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-warning">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
+                    <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
+                    <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
+                    <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...More</a></p>
+                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
                 </div>
             </li>
             {% endfor %}
         </ul>
         <div class="row-fluid" id="all-resources-button">
             <div class="span5 offset4">
-                <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-large btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>
+                <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>
             </div>
         </div>
     </div>
