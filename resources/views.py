@@ -108,7 +108,7 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
 
 def topic_home(request, slug):
     current_topic = get_object_or_404(Topic, slug=slug)
-    headline = str(current_topic.name).capitalize() + """ - learn from the best tutorials, online courses, offline courses and official documentation"""
+    headline = unicode(current_topic.name).capitalize() + """ - learn from the best tutorials, online courses, offline courses and official documentation"""
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {
@@ -149,11 +149,11 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
             level_to_get = self.request.GET['level']
         topic = get_object_or_404(Topic, slug=slug)
         resources = topic.resource_set.all()
-        self.headline = 'All ' + str(topic.name).capitalize() +' Resources'
+        self.headline = 'All ' + unicode(topic.name).capitalize() +' Resources'
         if res_type:
             res_type = get_object_or_404(ResourceType, slug=res_type)
             resources = resources.filter(resource_type=res_type)
-            self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + 's)'
+            self.headline = unicode(topic.name).capitalize() +' Resources' + ' (' + unicode(res_type.name) + 's)'
         if level_to_get and level_to_get != 'all':
             resources = resources.filter(level=level_to_get)
         return resources
@@ -172,7 +172,7 @@ class ResourceDetailView(SetHeadlineMixin, SidebarMixin, DetailView):
 
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
-        self.headline = str(resource.title) + """ (""" + str(resource.resource_type) + """) | Resource"""
+        self.headline = unicode(resource.title) + """ (""" + unicode(resource.resource_type) + """) | Resource"""
         return resource
 
     def get_context_data(self, **kwargs):
