@@ -41,14 +41,9 @@ topic_dict = {
         'queryset': Topic.objects.all(),
 }
 
-profile_dict = {
-        'queryset': UserProfile.objects.all()
-}
-
 sitemaps = {
     'topic': GenericSitemap(topic_dict, priority=0.8),
     'resource': GenericSitemap(resource_dict, priority=0.6),
-    'profile': GenericSitemap(profile_dict, priority=0.4),
 }
 
 urlpatterns += patterns('',
