@@ -1,6 +1,10 @@
 from django.conf.urls import patterns, include, url
+from django.contrib.sitemaps import GenericSitemap
 from django.contrib import admin
 admin.autodiscover()
+
+from resources.models import Resource, Topic
+from profiles.models import UserProfile
 
 from codesters.views import *
 from profiles.views import SnippetDetailView, SnippetUpdateView, SnippetCreateView, UserUpdateView, UserProfileUpdateView
@@ -25,4 +29,28 @@ urlpatterns += patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
+)
+
+
+resource_dict = {
+        'queryset': Resource.objects.filter(show=True),
+        'date_field': 'updated_at',
+}
+
+topic_dict = {
+        'queryset': Topic.objects.all(),
+}
+
+profile_dict = {
+        'queryset': UserProfile.objects.all()
+}
+
+sitemaps = {
+    'topic': GenericSitemap(topic_dict, priority=0.8),
+    'resource': GenericSitemap(resource_dict, priority=0.6),
+    'profile': GenericSitemap(profile_dict, priority=0.4),
+}
+
+urlpatterns += patterns('',
+    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
