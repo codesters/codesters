@@ -79,6 +79,24 @@ class Resource(models.Model):
             self.help_text = self.description[:220]
         super(Resource, self).save(*args, **kwargs)
 
+class FeaturedResource(models.Model):
+    topic = models.ForeignKey(Topic)
+    resource_type = models.ForeignKey(ResourceType)
+    resource = models.ForeignKey(Resource)
+
+    class Meta:
+        unique_together = ('topic', 'resource_type')
+
+    def __unicode__(self):
+        return '%s - %s' %(self.topic, self.resource_type)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.resource_type != self.resource.resource_type:
+            raise ValidationError("Selected resource type does not match with given resource's type.")
+        if not self.topic in self.resource.topics.all():
+            raise ValidationError("Selected resource does not have given topic.")
+
 
 from guardian.shortcuts import assign_perm
 from django.db.models.signals import post_save

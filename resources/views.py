@@ -11,7 +11,7 @@ from django.contrib import messages
 from djangoratings.views import AddRatingView
 
 from django.contrib.auth.models import User
-from resources.models import Resource, Topic, ResourceType
+from resources.models import Resource, Topic, ResourceType, FeaturedResource
 from profiles.models import SavedResource, TopicFollow
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
@@ -120,9 +120,13 @@ def topic_home(request, slug):
     resourcetypes = {}
     res_types = ResourceType.objects.all()
     for res_type in res_types:
-        result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
-        if len(result) > 0:
-            resourcetypes[result[0].resource_type.slug] = result[0]
+        try:
+            result = FeaturedResource.objects.get(topic=current_topic, resource_type=res_type)
+            resourcetypes[result.resource_type.slug] = result.resource
+        except FeaturedResource.DoesNotExist:
+            result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
+            if len(result) > 0:
+                resourcetypes[result[0].resource_type.slug] = result[0]
     ctx['resourcetypes'] = resourcetypes
 
     return render_to_response('resources/topic_home.html', ctx, context_instance=RequestContext(request))

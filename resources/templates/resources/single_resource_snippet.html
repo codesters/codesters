@@ -8,7 +8,6 @@
     {% for topic in resource.topics.all %}
     {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
     {% endfor %}</small>
-                ({{ resource.level|capfirst }} level)
     </p>
     <hr style="margin:9px 0"/>
     <p>{{ resource.help_text }} <a href="{{ resource.get_absolute_url }}">... More</a></p>
