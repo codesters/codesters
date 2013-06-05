@@ -16,24 +16,26 @@
             {% endfor %}</small>
                         ({{ resource.level|capfirst }} level)
             </p>
-            <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
-            {% if user.is_authenticated %}
-                <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
+            <div class="row-fluid" id="resource-buttons">
+                <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
 
-                {% include "resources/rating.html" %}
+                    {% include "resources/rating.html" %}
 
-                {% ifequal resource.created_by user%}
-                <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
-                {% endifequal %}
+                    {% ifequal resource.created_by user%}
+                    <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
+                    {% endifequal %}
 
-            {% else %}
+                {% else %}
 
-            <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+                <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
 
-            {% endif %}
-</div>
-<div class="pull-right clearfix">
-{% include "snippets/share_this.html" %}
+                {% endif %}
+            </div>
+            <div class="row-fluid">
+            {% include "snippets/share_this.html" %}
+            </div>
 </div>
 
 {% if resource.description %}

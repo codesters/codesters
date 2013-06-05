@@ -72,7 +72,7 @@
         <ol class="explore-list unstyled">
             {% for resource in popular_resources %}
             <li>
-                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
+                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
             </li>
             {% endfor %}
         </ol>
@@ -82,7 +82,7 @@
         <ol class="explore-list unstyled">
             {% for resource in recent_resources %}
             <li>
-                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.get_absolute_url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
+                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
             </li>
             {% endfor %}
         </ol>

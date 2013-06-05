@@ -1,5 +1,23 @@
+#resource-buttons a {
+    margin-bottom: 5px;
+}
+
+.navbar-inner {
+    border-radius: 0;
+}
+
+#sidebar li.nav-header {
+    font-size: 15px;
+    margin-top: 9px;
+}
+
+#sidebar a.btn {
+    border-radius: 0;
+}
+
 #resource-title h1 {
-    font-size: 38px;
+    font-size: 26px;
+    line-height: 32px;
 }
 
 .resource h4 a {

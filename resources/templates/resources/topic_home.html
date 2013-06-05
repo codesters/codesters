@@ -44,6 +44,8 @@
                     <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
                 </div>
             </li>
+            {% empty %}
+            <p>No resources submitted till now</p>
             {% endfor %}
         </ul>
         <div class="row-fluid" id="all-resources-button">
