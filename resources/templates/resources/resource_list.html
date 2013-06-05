@@ -3,10 +3,10 @@
 {% load check_active from codesters %}
 {% block resource_content %}
     <div class="row-fluid resource-buttons">
-        <div class="span10">
+        <div class="span9">
         {% include "resources/resource_type_nav.html" %}
         </div>
-        <div class="span2">
+        <div class="span3">
             Level
             <select id="level" name="Level" onchange="window.open(this.options[this.selectedIndex].value, '_top', '_self')">
                 <option value="?level=all" {% check_active request.get_full_path 'all' %}>All</option>

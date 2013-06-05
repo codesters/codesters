@@ -1,0 +1,402 @@
+#resource-title h1 {
+    font-size: 38px;
+}
+
+.resource h4 a {
+    color: rgb(63, 73, 68);
+}
+
+.resource h4 a:hover {
+    color: rgb(84, 144, 202);
+}
+
+#sidebar {
+    background-color: rgb(250, 250, 250);
+    padding: 0;
+}
+
+#sidebar li {
+    line-height: 18px;
+}
+
+.disclaimer {
+    margin: 30px 10px;
+}
+.featured-resource h4 {
+    font-size: 20px;
+}
+
+.thumbnails li.span4 {
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+.message {
+    margin-top: 15px;
+}
+
+.topic-about img {
+    max-width: 320px;
+}
+
+.topic {
+    height: 200px;
+    border: 1px #aaa;
+    margin-top: 30px;
+    margin-left: 0 !important;
+    margin-right: 20px;
+    border: 1px solid rgb(153, 153, 153);
+    border-top: 0;
+    max-width: 280px;
+    overflow: hidden;
+}
+.topic a {
+    text-decoration: none;
+}
+
+.topic img {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.topic-image {
+    height: 169px;
+}
+
+.topic-name {
+    min-height: 24px;
+    background-color: rgb(81, 163, 81);
+    background-image: linear-gradient(to bottom, rgb(98, 196, 98), rgb(81, 163, 81));
+    padding: 3px 5px;
+    color: white;
+    font-size: 15px;
+    letter-spacing: 0.1em;
+    line-height: 20px;
+}
+
+.register-button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.footer-links {
+    min-height: 20px;
+    vertical-align: middle;
+}
+
+.social-plugins {
+    margin-top: 10px;
+}
+
+.addthis_toolbox {
+    padding: 10px 0;
+}
+select[multiple] {
+    height: 240px !important;
+}
+
+#all-resources-button {
+    margin-top: 25px;
+    margin-bottom: 20px;
+}
+
+#resource-description {
+    margin: 15px 10px;
+}
+
+#level {
+    width: 150px;
+}
+
+.resource-content {
+    padding-bottom: 10px;
+}
+
+.resource-content p {
+    padding: 0 10px;
+}
+
+.well-small {
+    padding: -5px;
+}
+
+.marketing h1 {
+    font-size: 54px;
+}
+
+.marketing h1, .marketing h2 {
+    color: #46a546;
+}
+
+.marketing h2 {
+    font-size: 42px;
+}
+
+.market {
+    font-size: 160px;
+}
+
+.marketing {
+    max-width: 768px;
+    margin: auto;
+}
+
+.marketing-head {
+    text-align: center;
+    padding: 30px 20px 10px;
+}
+
+.marketing li {
+    text-align: left;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+
+
+.marketing p {
+    margin: 30px auto;
+    text-align: center;
+    font-size: 18px;
+    max-width: 468;
+}
+
+.marketing-1 {
+    background-color: #9D261D;
+}
+
+.marketing-2 {
+    background-color: #3F7EB0;
+}
+
+.marketing-3 {
+    background-color: #2C323C;
+}
+
+.marketing-4 {
+    background-color: #8aad3a;
+}
+
+
+.auth-form {
+max-width: 300px;
+padding: 19px 29px 29px;
+margin: 0 auto 20px;
+background-color: #f5f5f5;
+border: 1px solid #e5e5e5;
+-webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+        border-radius: 5px;
+-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+   -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+        box-shadow: 0 1px 2px rgba(0,0,0,.05);
+}
+.auth-form .auth-form-heading,
+.auth-form .checkbox {
+margin-bottom: 10px;
+text-align: center;
+}
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
+font-size: 16px;
+height: auto;
+margin-bottom: 15px;
+padding: 7px 9px;
+}
+
+
+.field-error {
+    font-weight: bolder;
+}
+
+.profile-photo {
+    height: 280px !important;
+    padding: 10px;
+}
+
+.profile-photo img {
+    min-height: 200px;
+    max-height: 250px;
+}
+
+#user-info {
+    min-height: 180px;
+    margin-bottom: 20px;
+}
+
+.info-page {
+    min-height: 380px !important;
+    padding: 30px;
+}
+
+.info-page p, .info-page li {
+    color: #444444;
+    font-size: 18px;
+    line-height: 1.4em;
+}
+
+.explore-box p {
+    color: #999999;
+}
+
+.explore-box li {
+    margin-bottom: 13px;
+}
+
+.logo {
+    line-height: 50px;
+    margin: 20px 0 0;
+    vertical-align: middle;
+    font-size: 24px;
+}
+
+.content {
+    margin-top: 20px;
+    min-height: 530px;
+}
+
+.navbar .brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  float: right;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+
+@media (max-width: 979px) {
+  /* Unfloat brand */
+  .navbar .brand {
+      float: left;
+      margin-left: 0;
+      padding-right: 10px;
+    }
+}
+
+@media (max-width: 767px) {
+    #sidebar {
+        margin-top: 50px;
+    }
+    .navbar, .footer {
+        margin-left: -20px !important;
+        margin-right: -20px !important;
+    }
+}
+
+.footer {
+    left: 0;
+    right: 0;
+    padding: 30px 10px 20px;
+    background-color: rgb(250, 250, 250);
+    background-image: linear-gradient(to bottom, rgb(242, 242, 242), rgb(255, 255, 255));
+    border: 1px solid #e3e3e3;
+    border-bottom: none;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.footer ul li {
+    display: inline;
+    padding: 5px 5px;
+}
+
+
+.social-links a{
+    text-decoration: none;
+}
+
+.resource {
+    display: inline-block !important;
+    margin-left: 0 !important;
+    margin-right: 7px;
+    min-height: 180px !important;
+}
+
+.vote {
+    overflow: hidden;
+    padding: 18px 0 8px;
+}
+
+.resource-green {
+    border-left: solid 7px #46a546;
+}
+
+.resource-blue {
+    border-left: solid 7px #049cdb;
+}
+
+.resource-red {
+    border-left: solid 7px #9d261d;
+}
+
+.resource-yellow {
+    border-left: solid 7px #ffc40d;
+}
+
+.resource-orange {
+    border-left: solid 7px #f89406;
+}
+
+.resource-pink {
+    border-left: solid 7px #c3325f;
+}
+
+.resource-purple {
+    border-left: solid 7px #7a43b6;
+}
+
+.label-green {
+    background-color: #46a546;
+}
+
+.label-blue {
+    background-color: #049cdb;
+}
+
+.label-red {
+    background-color: #9d261d;
+}
+
+.label-yellow {
+    background-color: #ffc40d;
+}
+
+.label-orange {
+    background-color: #f89406;
+}
+
+.label-pink {
+    background-color: #c3325f;
+}
+
+.label-purple {
+    background-color: #7a43b6;
+}
+
+.badge-green {
+    background-color: #46a546;
+}
+
+.badge-blue {
+    background-color: #049cdb;
+}
+
+.badge-red {
+    background-color: #9d261d;
+}
+
+.badge-yellow {
+    background-color: #ffc40d;
+}
+
+.badge-orange {
+    background-color: #f89406;
+}
+
+.badge-pink {
+    background-color: #c3325f;
+}
+
+.badge-purple {
+    background-color: #7a43b6;
+}
