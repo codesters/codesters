@@ -7,7 +7,7 @@ from resources.models import Resource, Topic
 from profiles.models import UserProfile
 
 from codesters.views import *
-from profiles.views import SnippetDetailView, SnippetUpdateView, SnippetCreateView, UserUpdateView, UserProfileUpdateView
+from profiles.views import UserUpdateView, UserProfileUpdateView
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
@@ -17,9 +17,6 @@ urlpatterns = patterns('',
     url(r'^explore/$', explore_home, name='explore_home'),
     url(r'^explore/domain/all/$', explore_all_domains, name='explore_all_domains'),
     url(r'^explore/topic/all/$', explore_all_topics, name='explore_all_topics'),
-    url(r'^snippet/new/$', SnippetCreateView.as_view(), name='snippet_create'),
-    url(r'^snippet/(?P<pk>\d+)/$', SnippetDetailView.as_view(), name='snippet_detail'),
-    url(r'^snippet/(?P<pk>\d+)/edit/$', SnippetUpdateView.as_view(), name='snippet_update'),
     url(r'^accounts/settings/core/$', UserUpdateView.as_view(), name='user_update'),
     url(r'^accounts/settings/info/$', UserProfileUpdateView.as_view(), name='userprofile_update'),
 )

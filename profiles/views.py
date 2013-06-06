@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect, Http404
-from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView, CreateView
+from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView, CreateView, DeleteView
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
 
@@ -26,7 +26,7 @@ class UserInfoView(SetHeadlineMixin, DetailView):
 
     def get_object(self):
         user = get_object_or_404(User, username=self.kwargs['username'])
-        self.headline = str(user.username) + ' info'
+        self.headline = unicode(user.username) + ' info'
         return user
 
     def get_context_data(self, **kwargs):
@@ -56,7 +56,7 @@ class UserResourcesView(SetHeadlineMixin, UserInfoMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs['username'])
-        self.headline = str(user.username) + ' shared Resources'
+        self.headline = unicode(user.username) + ' shared Resources'
         return user.resource_set.all()
 
 
@@ -67,7 +67,7 @@ class UserProjectsView(SetHeadlineMixin, UserInfoMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs['username'])
-        self.headline = str(user.username) + ' Projects'
+        self.headline = unicode(user.username) + ' Projects'
         return user.project_set.all()
 
 
@@ -103,6 +103,16 @@ class ProjectUpdateView(LoginRequiredMixin, SetHeadlineMixin, UserInfoMixin, Upd
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
 
 
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'profiles.delete_project'
+    return_403 = True
+    model = Project
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your project have been removed')
+        return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
+
+
 class UserSnippetsView(SetHeadlineMixin, UserInfoMixin, ListView):
     context_object_name = 'snippets'
     template_name = 'profiles/user_snippets.html'
@@ -110,7 +120,7 @@ class UserSnippetsView(SetHeadlineMixin, UserInfoMixin, ListView):
 
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs['username'])
-        self.headline = str(user.username) + ' Wall'
+        self.headline = unicode(user.username) + ' Wall'
         return Snippet.objects.filter(user=user).filter(show=True)
 
 #TODO first implement a view_snippet permission in models then add a Permission required mixin here
@@ -138,7 +148,7 @@ class SnippetDetailView(SetHeadlineMixin, DetailView):
     def get_object(self):
         snippet = get_object_or_404(Snippet, pk=self.kwargs['pk'])
         if snippet.show:
-            self.headline = str(snippet.title) + ' | Wall'
+            self.headline = unicode(snippet.title) + """ | """ + unicode(self.request.user.username) + """ Wall"""
             return snippet
         else:
             raise Http404
@@ -170,6 +180,16 @@ class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadline
 
     def get_success_url(self):
         messages.success(self.request, 'Your changes have been saved')
+        return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
+
+
+class SnippetDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'profiles.delete_snippet'
+    return_403 = True
+    model = Snippet
+
+    def get_success_url(self):
+        messages.success(self.request, 'Your snippet have been deleted')
         return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
 
 

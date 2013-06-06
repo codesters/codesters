@@ -46,6 +46,15 @@
 .featured-resource h4 a {
     color: rgb(63, 73, 68);
 }
+.featured-resource h4 a:hover {
+    color: rgb(84, 144, 202);
+}
+.snippets h3 a {
+    color: rgb(63, 73, 68);
+}
+.snippets h3 a:hover {
+    color: rgb(84, 144, 202);
+}
 
 .thumbnails li.span4 {
     margin-left: 0;
