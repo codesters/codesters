@@ -68,6 +68,21 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
             return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
+class ResourceFeatureView(LoginRequiredMixin, RedirectView):
+    permanent = False
+    permission_required = 'resources.change_featuredresource'
+    return_403 = True
+
+    def get_redirect_url(self, pk, slug):
+        resource = get_object_or_404(Resource, pk=pk)
+        topic = get_object_or_404(Topic, slug=slug)
+        resource.make_featured(topic=topic)
+        if self.request.META['HTTP_REFERER']:
+            return self.request.META['HTTP_REFERER']
+        else:
+            return reverse_lazy('resource_detail', kwargs={'pk':pk})
+
+
 class SidebarMixin(object):
     def get_context_data(self, **kwargs):
         context = super(SidebarMixin, self).get_context_data(**kwargs)

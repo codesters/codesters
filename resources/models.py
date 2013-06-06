@@ -79,6 +79,32 @@ class Resource(models.Model):
             self.help_text = self.description[:220]
         super(Resource, self).save(*args, **kwargs)
 
+    def check_featured(self):
+        for topic in self.topics.all():
+            try:
+                fr = FeaturedResource.objects.get(resource=self, topic=topic, resource_type=self.resource_type)
+                return True
+            except FeaturedResource.DoesNotExist:
+                pass
+        return False
+
+
+    def make_featured(self, topic=None):
+        if self.topics.count()==1:
+            t = self.topics.all()[0]
+        elif topic:
+            if topic in self.topics.all():
+                t = topic
+        else:
+            return False
+        try:
+            fr = FeaturedResource.objects.get(topic=t, resource_type=self.resource_type)
+            fr.resource = self
+            fr.save()
+        except FeaturedResource.DoesNotExist:
+            fr = FeaturedResource.objects.create(topic=t, resource_type=self.resource_type, resource=self)
+        return True
+
 class FeaturedResource(models.Model):
     topic = models.ForeignKey(Topic)
     resource_type = models.ForeignKey(ResourceType)
