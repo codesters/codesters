@@ -20,7 +20,7 @@
                     <a href="{{ project.source_url }}" class="btn success"><i class="icon-code"></i> Source</a>
                     {% endif %}
                     {% ifequal user userinfo %}
-                    <form class="form form-inline pull-right" action="{% url 'project_delete' username=userinfo.username pk=project.id %}" method="post">{% csrf_token %}
+                    <form class="form form-inline" action="{% url 'project_delete' username=userinfo.username pk=project.id %}" method="post">{% csrf_token %}
                         <a href="{% url 'project_update' username=userinfo.username pk=project.pk %}" class="btn"><i class="icon-edit"></i> Edit</a>
                         <button type="submit" class="btn btn-small btn-danger"><i class="icon-remove"> Remove</i></button>
                     </form>
