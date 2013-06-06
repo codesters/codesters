@@ -23,6 +23,6 @@
         <a href="{% url 'resource_feature' pk=resource.id slug=current_topic.slug %}" class="btn btn-small {% if resource.check_featured %}btn-inverse disabled{% endif %}"><i class="icon-fire"></i></a>
         {% endif %}
     {% else %}
-        <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-info btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+    <a href="{% url 'auth_login' %}?next={{ request.path }}" class="btn btn-info btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
     {% endif %}
 </li>

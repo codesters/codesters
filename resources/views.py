@@ -94,7 +94,7 @@ class SidebarMixin(object):
 class ResourceAllListView(SetHeadlineMixin, SidebarMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 16
+    paginate_by = 12
 
     def get_queryset(self):
         level_to_get = None
@@ -123,7 +123,7 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
 
 def topic_home(request, slug):
     current_topic = get_object_or_404(Topic, slug=slug)
-    headline = unicode(current_topic.name).capitalize() + """ - learn from the best tutorials, online courses, offline courses and official documentation"""
+    headline = """Learn """ + unicode(current_topic.name).capitalize() + """ - from the best tutorials and online courses"""
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {
@@ -150,7 +150,7 @@ def topic_home(request, slug):
 class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 16
+    paginate_by = 12
 
     def get_queryset(self):
         level_to_get = None
