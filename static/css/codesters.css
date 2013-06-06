@@ -1,5 +1,23 @@
+#resource-buttons a {
+    margin-bottom: 5px;
+}
+
+.navbar-inner {
+    border-radius: 0;
+}
+
+#sidebar li.nav-header {
+    font-size: 15px;
+    margin-top: 9px;
+}
+
+#sidebar a.btn {
+    border-radius: 0;
+}
+
 #resource-title h1 {
-    font-size: 38px;
+    font-size: 26px;
+    line-height: 32px;
 }
 
 .resource h4 a {
@@ -23,7 +41,7 @@
     margin: 30px 10px;
 }
 .featured-resource h4 {
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .thumbnails li.span4 {
@@ -96,7 +114,8 @@ select[multiple] {
 }
 
 #all-resources-button {
-    margin-top: 40px;
+    margin-top: 25px;
+    margin-bottom: 20px;
 }
 
 #resource-description {
@@ -264,19 +283,22 @@ padding: 7px 9px;
           transition: all .2s linear;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 979px) {
   /* Unfloat brand */
   .navbar .brand {
       float: left;
       margin-left: 0;
-      padding-left: 10px;
       padding-right: 10px;
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     #sidebar {
         margin-top: 50px;
+    }
+    .navbar, .footer {
+        margin-left: -20px !important;
+        margin-right: -20px !important;
     }
 }
 
@@ -284,8 +306,8 @@ padding: 7px 9px;
     left: 0;
     right: 0;
     padding: 30px 10px 20px;
-    background-color: #2C3E50;
-    color: #ffffff !important;
+    background-color: rgb(250, 250, 250);
+    background-image: linear-gradient(to bottom, rgb(242, 242, 242), rgb(255, 255, 255));
     border: 1px solid #e3e3e3;
     border-bottom: none;
     border-radius: 4px 4px 4px 4px;
@@ -296,9 +318,6 @@ padding: 7px 9px;
     padding: 5px 5px;
 }
 
-.footer a {
-    color: #ffffff;
-}
 
 .social-links a{
     text-decoration: none;
