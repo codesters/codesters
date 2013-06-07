@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="row-fluid">
-    <div class="span7 offset2 explore-box">
+    <div class="span8 offset2 explore-box">
         <h3>Most Active Users</h3>
         <table class="table table-bordered">
             <thead>
@@ -26,7 +26,7 @@
     </div>
 </div>
 <div class="row-fluid">
-    <div class="span5 explore-box">
+    <div class="span6 explore-box">
         <h3>Popular Topics <small>(<a href="{% url 'explore_all_topics' %}">Browse all</a>)</small></h3>
         <table class="table table-bordered">
             <thead>
@@ -44,7 +44,7 @@
             </tbody>
         </table>
     </div>
-    <div class="span5 explore-box">
+    <div class="span6 explore-box">
         <h3>Popular Domains <small>(<a href="{% url 'explore_all_domains' %}">Browse all</a>)</small></h3>
         <table class="table table-bordered">
             <thead>
@@ -67,25 +67,51 @@
     </div>
 </div>
 <div class="row-fluid">
-    <div class="span5 explore-box">
+    <div class="span12 explore-box">
         <h3>Popular Resources</h3>
-        <ol class="explore-list unstyled">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Topics</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for resource in popular_resources %}
-            <li>
-                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
-            </li>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a></td>
+                    <td>{% for topic in resource.topics.all %}{% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>{% endfor %}</td>
+                    <td><a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></td>
             {% endfor %}
-        </ol>
+            </tbody>
+        </table>
     </div>
-    <div class="span5 explore-box">
-        <h3>Recent Resources</h3>
-        <ol class="explore-list unstyled">
+</div>
+<div class="row-fluid">
+    <div class="span12 explore-box">
+        <h3>Recent Resources <small>(<a href="{% url 'explore_recent_resources' %}">Browse More</a>)</small></h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Topics</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
             {% for resource in recent_resources %}
-            <li>
-                <p><a title="{{ resource.help_text|slice:":120" }}" href="{{ resource.url }}">{{ resource.title }}</a> <small>({{ resource.resource_type }})</a> by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></small></p>
-            </li>
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a></td>
+                    <td>{% for topic in resource.topics.all %}{% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>{% endfor %}</td>
+                    <td><a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></td>
             {% endfor %}
-        </ol>
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}

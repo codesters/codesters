@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block head_title %}Recent Resources submitted on Codesters{% endblock %}
+{% block content %}
+<div class="row-fluid">
+    <div class="span12 explore-box">
+        <h3>{{ headline }}</h3>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Topics</th>
+                    <th>Time(IST)</th>
+                    <th>User</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for resource in resources %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{{ resource.get_absolute_url }}">{{ resource.title }}</a></td>
+                    <td>{% for topic in resource.topics.all %}{% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>{% endfor %}</td>
+                    <td>{{ resource.created_at }}</td>
+                    <td><a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></td>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
