@@ -5,7 +5,7 @@
 1. Download or clone this repo.
 2. Go to project home folder and run these commands:
 
-    cp codesters/example_local_settings.py codesters/local_settings.py
+    cp codesters/example_local.py codesters/local_settings.py
     virtualenv venv
     source venv/bin/activate
 
@@ -21,9 +21,10 @@
 
     python manage.py migrate guardian
     python manage.py migrate resources
-    python manage.py migrate tracks
     python manage.py migrate profiles
 
 5. Run django server and go to [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
-6. Create two groups named *admins* and *mods* and you are good to go.
+6. Create Resource Types named Book, Ebook, Tutorial, Online Course, Other.
+
+7. Go to home page.
