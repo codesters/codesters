@@ -17,7 +17,7 @@
                     <li class="{% active request.path "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
                     {% if user.is_authenticated %}
                     {% if user.is_staff %}
-                    <li><a href="/admin/"><i class="icon-dashboard"></i> Admin</a></li>
+                    <li class="{% active request.path "^/admin/" %}"><a href="/admin/"><i class="icon-dashboard"></i> Admin</a></li>
                     {% endif %}
                     <li class="dropdown {% active request.path '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
