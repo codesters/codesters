@@ -28,6 +28,8 @@ We are developing knowledge library for learning programming. The best resources
 + [django-braces](https://github.com/brack3t/django-braces/)
 + [django-ratings](https://github.com/dcramer/django-ratings/)
 + MySQL (sqlite3 for dev)
++ [django-haystack](http://haystacksearch.org/)
++ [elasticsearch](http://elasticsearch.org/)
 
 *For full requirements, see requirment.txt*
 
