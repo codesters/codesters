@@ -1,3 +1,9 @@
+#markdown-text {
+    margin-bottom: 40px;
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+}
+
 #resource-buttons a {
     margin-bottom: 5px;
 }
