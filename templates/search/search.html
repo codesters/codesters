@@ -1,5 +1,5 @@
 {% extends 'base_search.html' %}
-{% load widget_tweaks %}
+{% load markup %}
 {% load age website from codesters %}
 {% block content %}
 <div class="row-fluid">
@@ -36,14 +36,15 @@
                             <li class="span6 thumbnail resource">
                                 {% if result.object.updated_at %}
                                     <span class="badge pull-right">Snippet</span>
-                                    <h4><a href="result.object.url ">{{ result.object.title }}</a></h4>
+                                    <h4><a href="{{ result.object.get_absolute_url}}">{{ result.object.title }}</a></h4>
                                     <p><small> submitted {{ result.object.created_at|age }} by <a href="{{ result.object.user.get_absolute_url }}">{{ result.object.user }}</a></small></p>
-                                    <p>{{ result.object.content }}</p>
+                                    <p>{{ result.object.content|markdown:"safe" }}</p>
                             
                                 {% else %}
                                     <span class="badge pull-right">Project</span>
-                                    <h4><a href="result.object.url ">{{ result.object.title }}</a></h4>
+                                    <h4>{{ result.object.title }}</h4>
                                     <p><small> submitted {{ result.object.created_at|age }} by <a href="{{ result.object.user.get_absolute_url }}">{{ result.object.user }}</a></small></p>
+                                    <p></p>
                                 {% endif%}
                             </li>
                         {% endif %}{% empty %}
