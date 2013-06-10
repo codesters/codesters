@@ -1,3 +1,24 @@
+.markdown-text {
+    margin-bottom: 40px;
+    padding: 10px;
+}
+
+.markdown-text h1 {
+    font-size: 22px;
+}
+
+.markdown-text h2 {
+    font-size: 20px;
+}
+
+.markdown-text h3 {
+    font-size: 18px;
+}
+
+.markdown-text h4 {
+    font-size: 16px;
+}
+
 #resource-buttons a {
     margin-bottom: 5px;
 }
@@ -136,14 +157,6 @@ select[multiple] {
 
 #level {
     width: 150px;
-}
-
-.resource-content {
-    padding-bottom: 10px;
-}
-
-.resource-content p {
-    padding: 0 10px;
 }
 
 .well-small {

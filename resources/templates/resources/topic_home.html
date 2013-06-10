@@ -3,9 +3,14 @@
 {% load isfollow from codesters %}
 
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
-{% block resource_heading %}{{ current_topic.name }}{% endblock %}
-{% block resource_content %}
 
+{% block extra_head %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
+{% endblock %}
+
+{% block resource_heading %}{{ current_topic.name }}{% endblock %}
+
+{% block resource_content %}
 <div class="row-fluid">
     <div class="span12">
         <div class="span7">
@@ -21,40 +26,41 @@
     </div>
 </div>
 
-    {% if current_topic.description %}
-    <div class="row-fluid topic-about">
-        <h3>About {{ current_topic.name }}</h3>
-        {% if current_topic.thumbnail %}
-            <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
-        {% endif %}
-        {{ current_topic.description|linebreaks }}
-        <p class="muted disclaimer">NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
-    </div>
-    {% endif %}
+{% if current_topic.description %}
+<div class="row-fluid topic-about">
+<h3>About {{ current_topic.name }}</h3>
+<section class="span12 markdown-text">
+{% if current_topic.thumbnail %}
+<img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
+{% endif %}
+{{ current_topic.description }}
+</section>
+<p class="muted disclaimer">NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
+</div>
+{% endif %}
 
-    <div class="row-fluid">
-        <h3>Featured Resources</h3>
-        <ul class="thumbnails">
-            {% for k,v in resourcetypes.items %}
-            <li class="span4">
-                <div class="thumbnail featured-resource">
-                    <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
-                    <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
-                    <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...More</a></p>
-                    <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
-                </div>
-            </li>
-            {% empty %}
-            <p class="lead">Sorry, No resources submitted till now</p>
-            {% endfor %}
-        </ul>
-        <div class="row-fluid" id="all-resources-button">
-            <div class="span5 offset4">
-                <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>
+<div class="row-fluid">
+    <h3>Featured Resources</h3>
+    <ul class="thumbnails">
+        {% for k,v in resourcetypes.items %}
+        <li class="span4">
+            <div class="thumbnail featured-resource">
+                <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
+                <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
+                <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...More</a></p>
+                <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
             </div>
+        </li>
+        {% empty %}
+        <p class="lead">Sorry, No resources submitted till now</p>
+        {% endfor %}
+    </ul>
+    <div class="row-fluid" id="all-resources-button">
+        <div class="span5 offset4">
+            <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>
         </div>
     </div>
-
+</div>
 {% endblock %}
 
 {% block extra_js %}
@@ -69,4 +75,6 @@
         $('.thumbnail').height(maxHeight);
     });
 </script>
+
+{% include "snippets/markdown_show.html" %}
 {% endblock %}

@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load url from future %}
 {% load disqus_tags %}
+{% load age from codesters %}
 
-{% block meta_description %}{{ snippet.content|slice:":100" }} - by {{ snippet.user }} {% endblock %}
+{% block extra_head %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
+{% endblock %}
 
-{% load codesters %}
 {% block content %}
 <div class="row-fluid">
     <div class="span12">
@@ -12,23 +14,31 @@
         <hr />
     </div>
 </div>
-<div class="row-fluid">
-    <div class="span12">
-    <h1>{{ snippet.title }}</h1>
-    <p><small>created {{ snippet.created_at|age }}</small></p>
-    {% ifequal user snippet.user %}
-    <a href="{% url 'snippet_update' username=snippet.user.username pk=snippet.pk %}" class="btn btn-small pull-right btn-primary"><i class="icon-edit"></i> Edit Snippet</a>
-    {% endifequal %}
-    </div>
-    <div class="span12">
-    {% include "snippets/share_this.html" %}
-    </div>
+<article class="row-fluid">
 
-    <div class="span10 offset1">
-    {{ snippet.content|linebreaks }}
-    </div>
-    <div class="span10 offset1">
-        {% disqus_show_comments %}
-    </div>
+<header class="span12">
+<h1>{{ snippet.title }}</h1>
+<p><small>created {{ snippet.created_at|age }}</small></p>
+{% ifequal user snippet.user %}
+<a href="{% url 'snippet_update' username=snippet.user.username pk=snippet.pk %}" class="btn btn-small pull-right btn-primary"><i class="icon-edit"></i> Edit Snippet</a>
+{% endifequal %}
+</header>
+
+<div class="span12">
+{% include "snippets/share_this.html" %}
 </div>
+
+<section class="span10 offset1 markdown-text">
+{{ snippet.content }}
+</section>
+
+<footer class="span10 offset1">
+    {% disqus_show_comments %}
+</footer>
+
+</article>
+{% endblock %}
+
+{% block extra_js %}
+{% include "snippets/markdown_show.html" %}
 {% endblock %}
