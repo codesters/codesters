@@ -18,4 +18,4 @@ wsgiref==0.1.2
 Markdown==2.3.1
 django-haystack==2.0.0
 pyelasticsearch==0.5
-reqquests==1.2.3
+requests==1.2.3
