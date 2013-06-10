@@ -3,6 +3,10 @@
 {% load age issaved from codesters %}
 {% load disqus_tags %}
 
+{% block extra_head %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
+{% endblock %}
+
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 
 {% block resource_heading %}{{ resource.title }}{% endblock %}
@@ -56,12 +60,15 @@
 </div>
 
 {% if resource.description %}
-<div class="row-fluid" id="resource-description">
-        <p>{{ resource.description|linebreaksbr }}</p>
+<div class="row-fluid markdown-text" id="resource-description">
+{{ resource.description }}
 </div>
 {% endif %}
 <div class="row-fluid">
-    <h3>Have a question? Ask here...</h3>
         {% disqus_show_comments %}
 </div>
+{% endblock %}
+
+{% block extra_js %}
+{% include "snippets/markdown_show.html" %}
 {% endblock %}
