@@ -70,3 +70,58 @@ def _slug_strip(value, separator='-'):
             re_sep = re.escape(separator)
         value = re.sub(r'^%s+|%s+$' % (re_sep, re_sep), '', value)
     return value
+
+
+import requests, json, collections
+highest = 0
+
+# Used by get_initial_ratings
+def total(a, d, f, g, r, t):
+    """ Takes the total likes, +1's, ranks, etc from Alexa, Delicious, Facebook, Google+, Reddit, Twitter as arguments and returns total points according to their weight given below """
+    global highest  # global variable for taking highest points
+    a = 30000000 - a  # making alexa ranks in increasing order
+
+    # weight of points for each domain in percentage
+    alexa = 10
+    facebook = 15
+    googleplus = 25
+    twitter = 25
+    reddit = 15
+    delicious = 10
+
+    total = (facebook/100.0*f) + (googleplus/100.0*g) + (twitter/100.0*t) + (alexa/100.0*a) + (reddit/100.0*r) + (delicious/100.0*d)
+    if total > highest:
+        highest = total
+    return total
+
+# Used by get_initial_ratings
+def ratings(points):
+    """ Takes the total points of a url coming from total() as argument and returns the rating out of five """
+    return int(points/highest*5)
+
+# Used by get_initial_ratings
+def convert(data):
+    """ Takes unicode data as argument and returns string data """
+    if isinstance(data, unicode):
+        return str(data)
+    elif isinstance(data, collections.Mapping):
+        return dict(map(convert, data.iteritems()))
+    elif isinstance(data, collections.Iterable):
+        return type(data)(map(convert, data))
+    else:
+        return data
+
+def get_initial_ratings(resource):
+    """ Takes resource context as argument and returns its initial ratings using its likes, tweets, ranks, etc """
+
+    url = resource.url
+    alexa = convert(requests.get("http://api.camcimcumcem.com/alexa/rank/?domain=%s&output=json" %url).json())
+    all_ranks = convert(requests.get("http://api.sharedcount.com/?url=%s" %url).json())
+
+    # for making alexa rank with no data to be count as zero
+    if alexa['rank'] == 'no data':
+        alexa['rank'] = '30000000'
+
+    vote = ratings(total(int(alexa['rank']), int(all_ranks['Delicious']), int(all_ranks['Facebook']['total_count']), int(all_ranks['GooglePlusOne']), int(all_ranks['Reddit']), int(all_ranks['Twitter'])))
+
+    return
