@@ -19,10 +19,17 @@
             {% include "snippets/share_this.html" %}
         </div>
         <div class="span5">
+            <div class="btn-group">
+                <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic %}">Rss</a></li>
+                    <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic %}">Atom</a></li>
+                </ul>
+            </div>
             {% if user.is_authenticated %}
-            <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small pull-right" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
+            <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
             {% else %}
-            <a href="{% url 'auth_login' %}?next={% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small pull-right"><i class="icon-info"></i> Login to follow this Topic</a>
+            <a href="{% url 'auth_login' %}?next={% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small"><i class="icon-info"></i> Login to follow this Topic</a>
             {% endif %}
         </div>
     </div>

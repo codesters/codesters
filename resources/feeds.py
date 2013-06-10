@@ -10,7 +10,7 @@ class RecentResourcesRss(Feed):
     description_template = "feeds/resources.html"
 
     def items(self):
-        return Resource.objects.order_by('-created_at')
+        return Resource.objects.order_by('-created_at')[:10]
 
     def item_title(self, item):
         return item.title
@@ -37,7 +37,7 @@ class TopicRecentResourcesRss(Feed):
         return "feed for recent resources shared on codesters for %s" %obj.name
 
     def items(self, obj):
-        return obj.resource_set.all().order_by('-created_at')
+        return obj.resource_set.all().order_by('-created_at')[:10]
 
     def item_title(self, item):
         return item.title
