@@ -1,0 +1,12 @@
+{% extends "bare_base.html" %}
+{% load url from future %}
+
+{% block head_title %}Search{% endblock head_title %}
+{% block body %}
+{% include "snippets/navbar.html" %}
+<div class="content container">
+    {% block content %}{% endblock content %}
+</div><!--/.content -->
+
+{% include "snippets/footer.html" %}
+{% endblock body %}

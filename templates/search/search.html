@@ -1,22 +1,17 @@
-{% extends 'base_search.html' %}
+{% extends 'search/base.html' %}
 {% load age website from codesters %}
 {% load markup %}
 {% block content %}
 <div class="row-fluid">
     <div class="span3">
-        <form class="form-search" method="get" action=".">
-            {% for field in form %}
-                <h3>{{ field.label }} : </h3>
-                    {{ field }}
-            {% endfor %}
+        <form class="form-search" method="get" action="">
+            {% include "snippets/forms/form_base_without_csrf.html" %}
             <button class="btn" type="submit">Submit</button>
         </form>
     </div>
     <div class="span9"> 
         {% if query %}
-            <div class="page-header">
-                <h2>Results</h2>
-            </div>
+        <h3>Results for "{{ query }}"</h3>
             <div class="row-fluid">
                 <ul class="thumbnails">
                     {% for result in page.object_list %}
