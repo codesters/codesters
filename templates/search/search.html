@@ -1,5 +1,6 @@
 {% extends 'base_search.html' %}
 {% load age website from codesters %}
+{% load markup %}
 {% block content %}
 <div class="row-fluid">
     <div class="span3">
@@ -37,6 +38,7 @@
                                     <span class="badge pull-right">Snippet</span>
                                     <h4><a href="{{ result.object.get_absolute_url}}">{{ result.object.title }}</a></h4>
                                     <p><small> submitted {{ result.object.created_at|age }} by <a href="{{ result.object.user.get_absolute_url }}">{{ result.object.user }}</a></small></p>
+                                    <p>{{ result.object.content|markdown:"safe" }}</p>
                                 {% else %}
                                     <span class="badge pull-right">Project</span>
                                     <h4>{{ result.object.title }}</h4>
