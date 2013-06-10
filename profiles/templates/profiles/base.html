@@ -32,6 +32,9 @@
                     {% if userinfo.userprofile.website %}<li><a href="{{ userinfo.userprofile.website }}"><i class="icon-external-link"></i> Website</a></li>{% endif %}
                     {% if userinfo.userprofile.stackoverflow %}<li><a href="http://stackoverflow.com/users/{{ userinfo.userprofile.stackoverflow }}"><i class="icon-cogs"></i> Stackoverflow</a></li>{% endif %}
                     {% if userinfo.userprofile.facebook %}<li><a href="http://facebook.com/{{ userinfo.userprofile.facebook }}"><i class="icon-facebook"></i> Facebook</a></li>{% endif %}
+                    <li class="nav-header">Subscribe to {{ userinfo.username }}'s Wall</li>
+                    <li><a href="{% url 'user_snippet_rss' username=userinfo.username %}"><i class="icon-rss"></i> Rss</a></li>
+                    <li><a href="{% url 'user_snippet_atom' username=userinfo.username %}"><i class="icon-rss-sign"></i> Atom</a></li>
                 </ul>
             </div>
         </div>

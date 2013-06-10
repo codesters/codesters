@@ -20,14 +20,18 @@
 
 <header class="span12">
 <h1>{{ snippet.title }}</h1>
-<p><small>created {{ snippet.created_at|age }}</small></p>
+<p><small>added {{ snippet.created_at|age }}</small>
 {% ifequal user snippet.user %}
-<a href="{% url 'snippet_update' username=snippet.user.username pk=snippet.pk %}" class="btn btn-small pull-right btn-primary"><i class="icon-edit"></i> Edit Snippet</a>
-{% endifequal %}
+<a href="{% url 'snippet_update' username=snippet.user.username pk=snippet.pk %}" class="btn btn-small pull-right btn-primary"><i class="icon-edit"></i> Edit</a>
+{% endifequal %}</p>
 </header>
 
 <div class="span12">
-{% include "snippets/share_this.html" %}
+<ul class="nav nav-pills pull-right">
+    <li class="disabled"><a href="#">Subscribe for Updates</a></li>
+    <li><a href="{% url 'user_snippet_rss' username=snippet.user.username %}"><i class="icon-rss"></i> Rss</a></li>
+    <li><a href="{% url 'user_snippet_atom' username=snippet.user.username %}"><i class="icon-rss-sign"></i> Atom</a></li>
+</ul>
 </div>
 
 <section class="span10 offset1 markdown-text">
