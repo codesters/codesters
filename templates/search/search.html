@@ -18,6 +18,7 @@
             </div>
         </ul>
             {% for result in page.object_list %}
+                {% if result.object.resourse_type %}
                 <li class="span6 thumbnail resource">
                     <span class="badge pull-right badge-{{ result.object.resource_type.color }}">{{ result.object.resource_type }}</span>
                     <h4><a href="{{ result.object.url }}">{{ result.object.title }}</a> <small> {{ result.object.url|website }} </small></h4>
@@ -26,6 +27,20 @@
                             {% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>
                         {% endfor %}</small>
                     </p>
+                </li>
+                {% else %}
+                    <li class="span6 thumbnail resourse">
+                        {% if result.object.updated_at %}
+                        <span class="badge pull-right">Snippet</span>
+                        <h4><a href="result.object.url ">{{ result.object.title }}</a>
+                        <p><small> submitted {{ result.object.created_at|age }} by <a href="{{ result.object.user.get_absolute_url }}">{{ result.object.user }}</a></small></p>
+                        {% else %}
+                        <span class="badge pull-right">Project</span>
+                        <h4><a href="result.object.url ">{{ result.object.title }}</a>
+                        <p><small> submitted {{ result.object.created_at|age }} by <a href="{{ result.object.user.get_absolute_url }}">{{ result.object.user }}</a></small></p>
+                        {% endif%}
+                    </li>
+                {% endif %}
                 <hr style="margin:9px 0"/>
             <p>{{ result.object.help_text }} <a href="{{ result.object.get_absolute_url }}">... More</a></p>
             {% empty %}
