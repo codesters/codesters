@@ -1,0 +1,28 @@
+{% load widget_tweaks %}
+{% csrf_token %}
+{% if form.non_field_errors %}
+    {% for non_field_error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <button class="close" type="button" data-dismiss="alert">&times;</button>
+            {{ non_field_error }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% for field in form.hidden_fields  %}
+    {{ field }}
+{% endfor %}
+
+{% for field in form.visible_fields %}
+    <div class="control-group{% if field.errors %} error{% endif %}">
+        <label for="{{ field.auto_id }}" class="control-label">{{ field.label }}{% if field.field.required %}*{% endif %} </label>
+        <div class="controls">
+            {{ field|add_class:"input-block-level" }}
+
+            {% if field.errors %} {% for error in field.errors %}
+                <span class="help-inline field-error">{{ error }}</span>
+            {% endfor %} {% endif %}
+            {% if field.help_text %}<span class="help-block"><em>{{ field.help_text|safe }}</em></span>{% endif %}
+        </div>
+    </div>
+{% endfor %}
