@@ -1,25 +1,34 @@
-{% extends 'base.html' %}
-
+{% extends 'base_search.html' %}
+{% load age website from codesters %}
 {% block content %}
-    <h2>Search</h2>
-
-    <form method="get" action=".">
+<div class="row-fluid">
+    <div class="span4">
+        <form class="form-search" method="get" action=".">
             {{ form.as_p }}
-            <button class="btn btn-primary" type="submit" value="Search">Search</button>
-
+            <button class="btn" type="submit" value="Search">Search</button>
+        </form>
+    </div>
+    <div class="span8"> 
         {% if query %}
-            <h3>Results</h3>
-
+            <div class="page-header">
+                <h2>Results</h2>
+            </div>
+        </ul>
             {% for result in page.object_list %}
-                <p>
-                    <a href="{{ result.object.get_absolute_url }}">{{ result.object.title }}</a>
-                    <p class="muted">{{ result.object.created_by }}</p>
-                    <p>{{ result.object.help_text }}</p>
-                </p>
+                <li class="span12 thumbnail resource">
+                    <span class="badge pull-right badge-{{ result.object.resource_type.color }}">{{ result.object.resource_type }}</span>
+                    <h3><a href="{{ result.object.url }}">{{ result.object.title }}</a> <small> {{ result.object.url|website }} </small></h3>
+                    <p><small>submitted  {{ result.object.created_at|age  }} by <a href="{{ result.object.created_by.get_absolute_url }}">{{ result.object.created_by }}</a> in 
+                        {% for topic in result.object.topics.all %}
+                            {% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>
+                        {% endfor %}</small>
+                    </p>
+                <hr style="margin:9px 0"/>
+            <p>{{ result.object.help_text }} <a href="{{ result.object.get_absolute_url }}">... More</a></p>
             {% empty %}
                 <p>No results found.</p>
             {% endfor %}
-
+        </ul>
             {% if page.has_previous or page.has_next %}
                 <div>
                     {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
@@ -30,5 +39,6 @@
         {% else %}
             {# Show some example queries to run, maybe query syntax, something else? #}
         {% endif %}
-    </form>
+    </div>
+</div>
 {% endblock %}
