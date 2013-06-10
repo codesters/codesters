@@ -3,6 +3,11 @@
 
 {% block head_title %}Resources - Select a topic to start learning{% endblock %}
 
+{% block extra_head %}
+<link rel="alternate" type="application/atom+xml" title="Recent Resources-Rss" href="{% url 'resource_feed_rss' %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources-Atom" href="{% url 'resource_feed_atom' %}" />
+{% endblock %}
+
 {% block resource_page %}
 <div class="row-fluid">
     <div class="span12">

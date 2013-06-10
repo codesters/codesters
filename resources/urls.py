@@ -2,11 +2,17 @@ from django.conf.urls import patterns, include, url
 from django.contrib.auth.decorators import login_required
 from django.views.generic import RedirectView
 
-from resources.views import *
+from .views import *
+from .feeds import RecentResourcesRss, TopicRecentResourcesRss, RecentResourcesAtom, TopicRecentResourcesAtom
+
 
 urlpatterns = patterns('',
     url(r'^$', resource_home, name='resource_home'),
+    url(r'^rss/$', RecentResourcesRss(), name='resource_feed_rss'),
+    url(r'^atom/$', RecentResourcesAtom(), name='resource_feed_atom'),
     url(r'^topic/(?P<slug>[-\w]+)/$', topic_home, name='resource_topic_home'),
+    url(r'^topic/(?P<topic_slug>[-\w]+)/rss/$', TopicRecentResourcesRss(), name='topic_feed_rss'),
+    url(r'^topic/(?P<topic_slug>[-\w]+)/atom/$', TopicRecentResourcesAtom(), name='topic_feed_atom'),
     url(r'^topic/(?P<slug>[-\w]+)/follow/$', TopicFollowView.as_view(), name='topic_follow'),
     url(r'^topic/(?P<slug>[-\w]+)/all/$', ResourceTopicListView.as_view(), name='resource_topic_list_all'),
     url(r'^topic/(?P<slug>[-\w]+)/offline/$', RedirectView.as_view(url='/resource/', permanent=True)), #Removed offline resource_type

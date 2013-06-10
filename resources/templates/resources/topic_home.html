@@ -5,6 +5,11 @@
 
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
 
+{% block extra_head %}
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Rss" href="{% url 'topic_feed_rss' topic_slug=current_topic %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Atom" href="{% url 'topic_feed_atom' topic_slug=current_topic %}" />
+{% endblock %}
+
 {% block resource_heading %}{{ current_topic.name }}{% endblock %}
 
 {% block resource_content %}

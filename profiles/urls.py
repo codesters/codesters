@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 
-from profiles.views import *
+from .views import *
+from .feeds import UserRecentSnippetsRss, UserRecentSnippetsAtom
 
 urlpatterns = patterns('',
     url(r'^$', MyProfileView.as_view(), name='my_profile'),
@@ -13,6 +14,8 @@ urlpatterns = patterns('',
     url(r'^(?P<username>\w+)/project/(?P<pk>\d+)/edit/$', ProjectUpdateView.as_view(), name='project_update'),
     url(r'^(?P<username>\w+)/project/(?P<pk>\d+)/delete/$', ProjectDeleteView.as_view(), name='project_delete'),
     url(r'^(?P<username>\w+)/snippets/$', UserSnippetsView.as_view(), name='user_snippets'),
+    url(r'^(?P<username>\w+)/snippets/rss/$', UserRecentSnippetsRss(), name='user_snippet_rss'),
+    url(r'^(?P<username>\w+)/snippets/atom/$', UserRecentSnippetsAtom(), name='user_snippet_atom'),
     url(r'^(?P<username>\w+)/snippet/new/$', SnippetCreateView.as_view(), name='snippet_create'),
     url(r'^(?P<username>\w+)/snippet/(?P<pk>\d+)/$', SnippetDetailView.as_view(), name='snippet_detail'),
     url(r'^(?P<username>\w+)/snippet/(?P<pk>\d+)/edit/$', SnippetUpdateView.as_view(), name='snippet_update'),

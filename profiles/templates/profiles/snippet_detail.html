@@ -4,6 +4,11 @@
 {% load age from codesters %}
 {% load markup %}
 
+{% block extra_head %}
+<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ snippet.user.username }}-Rss" href="{% url 'user_snippet_rss' username=snippet.user.username %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ snippet.user.username }}-Atom" href="{% url 'user_snippet_atom' username=snippet.user.username %}" />
+{% endblock %}
+
 {% block content %}
 <div class="row-fluid">
     <div class="span12">

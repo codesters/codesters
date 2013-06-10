@@ -3,6 +3,12 @@
 {% load active from codesters %}
 
 {% load gravatar %}
+
+{% block extra_head %}
+<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ userinfo.username }}-Rss" href="{% url 'user_snippet_rss' username=userinfo.username %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ userinfo.username }}-Atom" href="{% url 'user_snippet_atom' username=userinfo.username %}" />
+{% endblock %}
+
 {% block content %}
 <div class="row-fluid">
     <div class="span3 profile-sidebar well well-small">
