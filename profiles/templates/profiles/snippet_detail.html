@@ -2,10 +2,7 @@
 {% load url from future %}
 {% load disqus_tags %}
 {% load age from codesters %}
-
-{% block extra_head %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
-{% endblock %}
+{% load markup %}
 
 {% block content %}
 <div class="row-fluid">
@@ -29,7 +26,8 @@
 </div>
 
 <section class="span10 offset1 markdown-text">
-{{ snippet.content }}
+{{ snippet.content|markdown:"safe" }}
+{% include "snippets/share_this.html" %}
 </section>
 
 <footer class="span10 offset1">
@@ -37,8 +35,4 @@
 </footer>
 
 </article>
-{% endblock %}
-
-{% block extra_js %}
-{% include "snippets/markdown_show.html" %}
 {% endblock %}

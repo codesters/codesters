@@ -1,12 +1,9 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 {% load isfollow from codesters %}
+{% load markup %}
 
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
-
-{% block extra_head %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
-{% endblock %}
 
 {% block resource_heading %}{{ current_topic.name }}{% endblock %}
 
@@ -33,7 +30,7 @@
 {% if current_topic.thumbnail %}
 <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
 {% endif %}
-{{ current_topic.description }}
+{{ current_topic.description|markdown:"safe" }}
 </section>
 <p class="muted disclaimer">NOTE: Above information has been taken from wikipedia and/or official websites of topics.</p>
 </div>
@@ -75,6 +72,4 @@
         $('.thumbnail').height(maxHeight);
     });
 </script>
-
-{% include "snippets/markdown_show.html" %}
 {% endblock %}

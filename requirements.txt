@@ -15,3 +15,4 @@ django-widget-tweaks==1.1.2
 gunicorn==0.17.2
 python-dateutil==2.1
 wsgiref==0.1.2
+Markdown==2.3.1

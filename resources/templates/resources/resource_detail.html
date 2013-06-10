@@ -2,10 +2,7 @@
 {% load url from future %}
 {% load age issaved from codesters %}
 {% load disqus_tags %}
-
-{% block extra_head %}
-<script type="text/javascript" src="{{ STATIC_URL }}js/Markdown.Converter.js"></script>
-{% endblock %}
+{% load markup %}
 
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 
@@ -61,14 +58,10 @@
 
 {% if resource.description %}
 <div class="row-fluid markdown-text" id="resource-description">
-{{ resource.description }}
+{{ resource.description|markdown:"safe" }}
 </div>
 {% endif %}
 <div class="row-fluid">
         {% disqus_show_comments %}
 </div>
-{% endblock %}
-
-{% block extra_js %}
-{% include "snippets/markdown_show.html" %}
 {% endblock %}

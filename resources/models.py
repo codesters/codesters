@@ -29,7 +29,7 @@ class Topic(models.Model):
         if not self.slug:
             self.slug = slugify(self.name)
         if self.description and not self.help_text:
-            self.help_text = self.description[:220]
+            self.help_text = self.description.replace("\n", " ")[:220]
         super(Topic, self).save(*args, **kwargs)
 
 class ResourceType(models.Model):
@@ -76,7 +76,7 @@ class Resource(models.Model):
             slug_str = '%s' % self.title
             unique_slugify(self, slug_str)
         if self.description and not self.help_text:
-            self.help_text = self.description[:220]
+            self.help_text = self.description.replace("\n", " ")[:220]
         super(Resource, self).save(*args, **kwargs)
 
     def check_featured(self):
