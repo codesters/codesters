@@ -1,11 +1,14 @@
 {% extends 'base_search.html' %}
+{% load widget_tweaks %}
 {% load age website from codesters %}
 {% block content %}
 <div class="row-fluid">
     <div class="span3">
         <form class="form-search" method="get" action=".">
-            {{ form.as_p }}
-            <button class="btn" type="submit" value="Search">Search</button>
+            {% for field in form %}
+                <h3>{{ field.label }} : </h3>
+                    {{ field }}
+            {% endfor %}
         </form>
     </div>
     <div class="span9"> 
