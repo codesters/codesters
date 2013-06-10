@@ -2,22 +2,22 @@
 {% load age website from codesters %}
 {% block content %}
 <div class="row-fluid">
-    <div class="span4">
+    <div class="span3">
         <form class="form-search" method="get" action=".">
             {{ form.as_p }}
             <button class="btn" type="submit" value="Search">Search</button>
         </form>
     </div>
-    <div class="span8"> 
+    <div class="span9"> 
         {% if query %}
             <div class="page-header">
                 <h2>Results</h2>
             </div>
         </ul>
             {% for result in page.object_list %}
-                <li class="span12 thumbnail resource">
+                <li class="span6 thumbnail resource">
                     <span class="badge pull-right badge-{{ result.object.resource_type.color }}">{{ result.object.resource_type }}</span>
-                    <h3><a href="{{ result.object.url }}">{{ result.object.title }}</a> <small> {{ result.object.url|website }} </small></h3>
+                    <h4><a href="{{ result.object.url }}">{{ result.object.title }}</a> <small> {{ result.object.url|website }} </small></h4>
                     <p><small>submitted  {{ result.object.created_at|age  }} by <a href="{{ result.object.created_by.get_absolute_url }}">{{ result.object.created_by }}</a> in 
                         {% for topic in result.object.topics.all %}
                             {% if not forloop.first %}, {% endif %}<a href="{{ topic.get_absolute_url }}">{{ topic.name }}</a>
