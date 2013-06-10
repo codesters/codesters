@@ -13,6 +13,19 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
+
+HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'haystack',
+        },
+}
+
+
 DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -26,6 +39,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'haystack',
     'south',
     'django_extensions',
     'registration',
