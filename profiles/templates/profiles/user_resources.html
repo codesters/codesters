@@ -3,11 +3,29 @@
 
 {% block profile_content %}
 <div class="span12">
-    {% for resource in resources %}
-    {% include "resources/single_resource_snippet.html" %}
-    {% empty %}
-    <h3>No resources submitted till now.</h3>
-    {% endfor %}
+    <div class="row-fluid">
+        <ul class="thumbnails">
+        {% for resource in resources %}
+            {% include "resources/single_resource_snippet.html" %}
+        {% empty %}
+            <p>No resources submitted till now.</p>
+        {% endfor %}
+        </ul>
+    </div>
     {% include "pagination.html" %}
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var maxHeight = 0;
+        $('.thumbnail').each(function(){ 
+            if($(this).height() > maxHeight) { 
+                maxHeight = $(this).height(); 
+            }
+            });
+        $('.thumbnail').height(maxHeight);
+    });
+</script>
 {% endblock %}

@@ -6,15 +6,20 @@
 <div class="row-fluid">
     {% ifequal user userinfo %}
     <ul class="nav nav-pills">
-        <li class="pull-right"><a href="#"><i class="icon-cloud"></i> Hidden Snipets</a></li>
-        <li class="pull-right"><a href="{% url 'snippet_create' %}"><i class="icon-plus"></i> Add New Snippet</a></li>
+        <li class="pull-right"><a href="{% url 'snippet_create' username=userinfo.username %}"><i class="icon-plus"></i> Add New Snippet</a></li>
     </ul>
     {% endifequal %}
-    <div class="span12">
+    <div class="span12 snippets">
         {% for snippet in snippets %}
-            <h3><a href="{% url 'snippet_detail' pk=snippet.pk %}">{{ snippet.title }}</a> <small>created {{ snippet.created_at|age }}</small></h3>
+        <h3><i class="icon-angle-right"></i> <a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a> <small>created {{ snippet.created_at|age }}</small></h3>
+            {% ifequal user userinfo %}
+            <form class="form form-inline" action="{% url 'snippet_delete' username=userinfo.username pk=snippet.id %}" method="post">{% csrf_token %}
+            <a href="{% url 'snippet_update' username=userinfo.username pk=snippet.id %}" class="btn btn-mini"><i class="icon-edit"></i> Edit</a>
+            <button type="submit" class="btn btn-mini btn-danger"><i class="icon-remove"> Remove</i></button>
+            </form>
+            {% endifequal %}
         {% empty %}
-        <h3>Wall is empty</h3>
+        <p>Wall is empty</p>
         {% endfor %}
         {% include "pagination.html" %}
     </div>

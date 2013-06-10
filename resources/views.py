@@ -11,7 +11,7 @@ from django.contrib import messages
 from djangoratings.views import AddRatingView
 
 from django.contrib.auth.models import User
-from resources.models import Resource, Topic, ResourceType
+from resources.models import Resource, Topic, ResourceType, FeaturedResource
 from profiles.models import SavedResource, TopicFollow
 
 from resources.forms import ResourceCreateForm, ResourceUpdateForm
@@ -62,7 +62,25 @@ class ResourceSaveView(LoginRequiredMixin, RedirectView):
     def get_redirect_url(self, pk):
         resource = get_object_or_404(Resource, pk=pk)
         SavedResource.objects.get_or_create(user=self.request.user, resource=resource)
-        return reverse_lazy('resource_detail', kwargs={'pk':pk})
+        if self.request.META['HTTP_REFERER']:
+            return self.request.META['HTTP_REFERER']
+        else:
+            return reverse_lazy('resource_detail', kwargs={'pk':pk})
+
+
+class ResourceFeatureView(LoginRequiredMixin, RedirectView):
+    permanent = False
+    permission_required = 'resources.change_featuredresource'
+    return_403 = True
+
+    def get_redirect_url(self, pk, slug):
+        resource = get_object_or_404(Resource, pk=pk)
+        topic = get_object_or_404(Topic, slug=slug)
+        resource.make_featured(topic=topic)
+        if self.request.META['HTTP_REFERER']:
+            return self.request.META['HTTP_REFERER']
+        else:
+            return reverse_lazy('resource_detail', kwargs={'pk':pk})
 
 
 class SidebarMixin(object):
@@ -76,7 +94,7 @@ class SidebarMixin(object):
 class ResourceAllListView(SetHeadlineMixin, SidebarMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 16
+    paginate_by = 12
 
     def get_queryset(self):
         level_to_get = None
@@ -105,7 +123,7 @@ class TopicFollowView(LoginRequiredMixin, RedirectView):
 
 def topic_home(request, slug):
     current_topic = get_object_or_404(Topic, slug=slug)
-    headline = str(current_topic.name).capitalize() + """ - learn from the best tutorials, online courses, offline courses and official documentation"""
+    headline = """Learn """ + unicode(current_topic.name).capitalize() + """ - from the best tutorials and online courses"""
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
 
     ctx = {
@@ -117,9 +135,13 @@ def topic_home(request, slug):
     resourcetypes = {}
     res_types = ResourceType.objects.all()
     for res_type in res_types:
-        result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
-        if len(result) > 0:
-            resourcetypes[result[0].resource_type.slug] = result[0]
+        try:
+            result = FeaturedResource.objects.get(topic=current_topic, resource_type=res_type)
+            resourcetypes[result.resource_type.slug] = result.resource
+        except FeaturedResource.DoesNotExist:
+            result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
+            if len(result) > 0:
+                resourcetypes[result[0].resource_type.slug] = result[0]
     ctx['resourcetypes'] = resourcetypes
 
     return render_to_response('resources/topic_home.html', ctx, context_instance=RequestContext(request))
@@ -128,7 +150,7 @@ def topic_home(request, slug):
 class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
     context_object_name = 'resources'
     template_name = 'resources/resource_list.html'
-    paginate_by = 16
+    paginate_by = 12
 
     def get_queryset(self):
         level_to_get = None
@@ -142,11 +164,11 @@ class ResourceTopicListView(SetHeadlineMixin, SidebarMixin, ListView):
             level_to_get = self.request.GET['level']
         topic = get_object_or_404(Topic, slug=slug)
         resources = topic.resource_set.all()
-        self.headline = 'All ' + str(topic.name).capitalize() +' Resources'
+        self.headline = 'All ' + unicode(topic.name).capitalize() +' Resources'
         if res_type:
             res_type = get_object_or_404(ResourceType, slug=res_type)
             resources = resources.filter(resource_type=res_type)
-            self.headline = str(topic.name).capitalize() +' Resources' + ' (' + str(res_type.name) + 's)'
+            self.headline = unicode(topic.name).capitalize() +' Resources' + ' (' + unicode(res_type.name) + 's)'
         if level_to_get and level_to_get != 'all':
             resources = resources.filter(level=level_to_get)
         return resources
@@ -165,7 +187,7 @@ class ResourceDetailView(SetHeadlineMixin, SidebarMixin, DetailView):
 
     def get_object(self):
         resource = super(ResourceDetailView, self).get_object()
-        self.headline = str(resource.title) + """ (""" + str(resource.resource_type) + """) | Resource"""
+        self.headline = unicode(resource.title) + """ (""" + unicode(resource.resource_type) + """) | Resource"""
         return resource
 
     def get_context_data(self, **kwargs):

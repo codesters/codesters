@@ -5,11 +5,11 @@
 {% block content %}
 <ul class="nav nav-tabs">
 {% url 'userprofile_update' as profile %}
-    <li class="{% active request.path profile %}"><a href="{{ profile }}">Profile</a></li>
+<li class="{% active request.path profile %}"><a href="{{ profile }}"><i class="icon-picture"></i> Profile</a></li>
 {% url 'user_update' as account %}
-<li class="{% active request.path account %}"><a href="{{ account }}">Account</a></li>
+<li class="{% active request.path account %}"><a href="{{ account }}"><i class="icon-cogs"></i> Account</a></li>
 {% url 'auth_password_change' as password %}
-<li class="{% active request.path password %}"><a href="{{ password }}">Change Password</a></li>
+<li class="{% active request.path password %}"><a href="{{ password }}"><i class="icon-unlock"></i> Change Password</a></li>
 </ul>
 <div class="row_fluid">
     <div class="span8 offset1">

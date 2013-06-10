@@ -11,23 +11,26 @@
     {% endifequal %}
     <div class="span12">
         {% for project in projects %}
-        <div class="row-fluid well user-project">
+        <div class="row-fluid well well-small user-project">
             <div class="span12">
                 <h3>{{ project.title }}</h3>
                 <p>
-                    <a href="{{ project.url }}" class="btn">Project Website</a>
+                    <a href="{{ project.url }}" class="btn btn-primary"><i class="icon-link"></i> Project Website</a>
                     {% if project.source_url %}
-                    <a href="{{ project.source_url }}" class="btn success">Source</a>
+                    <a href="{{ project.source_url }}" class="btn success"><i class="icon-code"></i> Source</a>
                     {% endif %}
+                    {% ifequal user userinfo %}
+                    <form class="form form-inline" action="{% url 'project_delete' username=userinfo.username pk=project.id %}" method="post">{% csrf_token %}
+                        <a href="{% url 'project_update' username=userinfo.username pk=project.pk %}" class="btn btn-mini"><i class="icon-edit"></i> Edit</a>
+                        <button type="submit" class="btn btn-mini btn-danger"><i class="icon-remove"> Remove</i></button>
+                    </form>
+                    {% endifequal %}
                 </p>
-                <p>{{ project.description }}</p>
-                {% ifequal user userinfo %}
-                <a href="{% url 'project_update' username=userinfo.username pk=project.pk %}" class="btn"><i class="icon-pencil"></i> Edit</a>
-                {% endifequal %}
+                <p>{{ project.description|default:"No description given" }}</p>
             </div>
         </div>
         {% empty %}
-        <h3>No projects listed</h3>
+        <p>No projects listed</p>
         {% endfor %}
         {% include "pagination.html" %}
     </div>

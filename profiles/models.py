@@ -2,16 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from resources.models import Topic, Resource
 from django.core.urlresolvers import reverse
-from django.dispatch import receiver
-from registration.signals import user_activated
-
-@receiver(user_activated)
-def create_user_profile(sender, user, request, **kwargs):
-    user_profile = UserProfile.objects.create(user=user)
-    from guardian.shortcuts import assign_perm
-    assign_perm('change_userprofile', user, user_profile)
-    assign_perm('delete_userprofile', user, user_profile)
-    assign_perm('change_user', user, user)
 
 #TODO make a project model and add user projects field as foreign key
 class Project(models.Model):
@@ -47,7 +37,7 @@ class Snippet(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('snippet_detail', kwargs={'pk': self.pk})
+        return reverse('snippet_detail', kwargs={'username': self.user.username, 'pk': self.pk})
 
 
 
@@ -93,7 +83,21 @@ class TopicFollow(models.Model):
     def __unicode__(self):
         return '%s %s' %(self.user, self.topic)
 
+#SIGNALS
+
+from django.dispatch import receiver
+from guardian.shortcuts import assign_perm
+from django.db.models.signals import post_save
 from django.contrib.auth.signals import user_logged_in
+from registration.signals import user_activated
+
+@receiver(user_activated)
+def create_user_profile(sender, user, request, **kwargs):
+    user_profile = UserProfile.objects.create(user=user)
+    from guardian.shortcuts import assign_perm
+    assign_perm('change_userprofile', user, user_profile)
+    assign_perm('delete_userprofile', user, user_profile)
+    assign_perm('change_user', user, user)
 
 def check_userprofile_details(sender, request, user, **kwargs):
     if not user.first_name:
@@ -102,4 +106,16 @@ def check_userprofile_details(sender, request, user, **kwargs):
     if not topic_list:
         request.session['no_topic'] = True
 
+def create_project_permission(sender, instance, created, **kwargs):
+    if created:
+        assign_perm('change_project', instance.user, instance)
+        assign_perm('delete_project', instance.user, instance)
+
+def create_snippet_permission(sender, instance, created, **kwargs):
+    if created:
+        assign_perm('change_snippet', instance.user, instance)
+        assign_perm('delete_snippet', instance.user, instance)
+
 user_logged_in.connect(check_userprofile_details)
+post_save.connect(create_snippet_permission, sender=Snippet)
+post_save.connect(create_project_permission, sender=Project)

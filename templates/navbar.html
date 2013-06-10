@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/" class="brand"><img src="{{ STATIC_URL }}img/codesters-transparent.png" alt="Codesters"></a>
+            <a href="/" class="brand">Codesters</a>
             <div class="nav-collapse collapse">
                 <ul class="nav">
                     <li class="{% active request.path "^/$" %}"><a href="{% url 'page_home' %}"><i class="icon-home"></i> Home</a></li>
@@ -17,14 +17,25 @@
                     <li class="{% active request.path "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
                     {% if user.is_authenticated %}
                     {% if user.is_staff %}
-                    <li><a href="/admin/"><i class="icon-dashboard"></i> Admin</a></li>
+                    <li class="{% active request.path "^/admin/" %}"><a href="/admin/"><i class="icon-dashboard"></i> Admin</a></li>
                     {% endif %}
                     <li class="dropdown {% active request.path '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
                             <li><a href="{% url 'my_profile' %}"><i class="icon-picture"></i> My Profile</a></li>
+                            <li><a href="{% url 'user_snippets' username=user.username %}"><i class="icon-quote-right"></i> My Wall</a></li>
+                            <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
                             <li class="divider"></li>
-                            <li><a href="{% url 'userprofile_update' %}"><i class="icon-wrench"></i> Settings</a></li>
+                            <li class="nav-header"><i class="icon-plus"> Add New</i></li>
+                            <li><a href="{% url 'resource_create' %}">Resource</a></li>
+                            <li><a href="{% url 'snippet_create' username=user.username %}">Snippet</a></li>
+                            <li><a href="{% url 'project_create' username=user.username %}">Project</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown {% active request.path '^/accounts/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Account <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'userprofile_update' %}"><i class="icon-picture"></i> Profile Settings</a></li>
+                            <li><a href="{% url 'user_update' %}"><i class="icon-cogs"></i> Account Settings</a></li>
+                            <li><a href="{% url 'auth_password_change' %}"><i class="icon-unlock"></i> Password Change</a></li>
                             <li><a href="{% url 'auth_logout' %}"><i class="icon-signout"></i> Logout</a></li>
                         </ul>
                     </li>

@@ -1,0 +1,28 @@
+{% load markup %}
+{% load url from future %}
+
+<table class="table table-bordered table-stripped">
+    <tbody>
+        <tr>
+            <td>Resource Type:</td> <td>{{ obj.resource_type }}</td>
+        </tr>
+        <tr>
+            <td>Topics:</td>
+            <td>
+                {% for topic in obj.topics.all %}
+                {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
+                {% endfor %}
+            </td>
+        </tr>
+        <tr>
+            <td>Submitted by:</td>
+            <td><a href="{{ obj.created_by.get_absolute_url }}">{{ obj.created_by }}</a></td>
+        </tr>
+        <tr>
+            <td>Date Submitted</td> <td>{{ obj.created_at|date:"D d M Y"  }}</td>
+        </tr>
+    </tbody>
+</table>
+<h2>Description:</h2>
+
+{{ obj.description|markdown:"safe" }}

@@ -6,8 +6,8 @@
         <div class="span9">
         {% include "resources/resource_type_nav.html" %}
         </div>
-        <div class="span3 pull-right">
-            Level:
+        <div class="span3">
+            Level
             <select id="level" name="Level" onchange="window.open(this.options[this.selectedIndex].value, '_top', '_self')">
                 <option value="?level=all" {% check_active request.get_full_path 'all' %}>All</option>
                 <option value="?level=beginner" {% check_active request.get_full_path 'beginner' %}>Beginner</option>
@@ -15,19 +15,33 @@
                 <option value="?level=advanced" {% check_active request.get_full_path 'advanced' %}>Advanced</option>
             </select>
         </div>
-        <div class="span6">
-        </div>
     </div>
 
-    {% for resource in resources %}
-        {% include "resources/single_resource_snippet.html" %}
-    {% empty %}
     <div class="row-fluid">
-        <div class="span12">
-            <h3>Sorry, there are no resources here. Why don't you add something here. <a href="{% url 'resource_create' %}">Add new Resource</a></h3>
-        </div>
+        <ul class="thumbnails">
+        {% for resource in resources %}
+            {% include "resources/single_resource_snippet.html" %}
+        {% empty %}
+            <div class="span12">
+                <p class="lead">Sorry, there are no resources here. Why don't you <a href="{% url 'resource_create' %}">add something here. </a></p>
+            </div>
+        {% endfor %}
+        </ul>
     </div>
-    {% endfor %}
 
 {% include "pagination.html" %}
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var maxHeight = 0;
+        $('.thumbnail').each(function(){ 
+            if($(this).height() > maxHeight) { 
+                maxHeight = $(this).height(); 
+            }
+            });
+        $('.thumbnail').height(maxHeight);
+    });
+</script>
 {% endblock %}

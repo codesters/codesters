@@ -17,12 +17,12 @@ class UserProfileUpdateForm(ModelForm):
 class SnippetCreateForm(ModelForm):
     class Meta:
         model = Snippet
-        fields = ('title', 'content', 'show')
+        fields = ('title', 'content')
 
 class SnippetUpdateForm(ModelForm):
     class Meta:
         model = Snippet
-        fields = ('title', 'content', 'show')
+        fields = ('title', 'content')
 
 class ProjectCreateForm(ModelForm):
     class Meta:
