@@ -13,19 +13,6 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
-
-HAYSTACK_SEARCH_RESULTS_PER_PAGE = 20
-
-HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
-            'URL': 'http://127.0.0.1:9200/',
-            'INDEX_NAME': 'haystack',
-        },
-}
-
-
 DJANGO_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,6 +148,17 @@ LOGGING = {
     }
 }
 
+#HAYSTACK settings
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
+HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+            'URL': 'http://127.0.0.1:9200/',
+            'INDEX_NAME': 'haystack',
+        },
+}
+
 #DJANGO extended settings we are using
 LOGIN_REDIRECT_URL = '/resource/'
 ABSOLUTE_URL_OVERRIDES = {
@@ -176,7 +174,7 @@ ANONYMOUS_USER_ID = -1
 GUARDIAN_RENDER_403 = True
 
 #Django-Ratings Settings
-RATINGS_VOTES_PER_IP = 20
+RATINGS_VOTES_PER_IP = 2000 #TODO all votes are essentially from 127.0.0.1. This can lead to problems
 
 #Disqus Settings
 DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
