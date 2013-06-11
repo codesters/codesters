@@ -1,3 +1,14 @@
+.search-result {
+    margin-left: 2px !important;
+    margin-bottom: 18px;
+}
+
+.form-search .control-label {
+    font-size: 18px;
+    font-weight: 300%;
+    margin: 10px 0;
+}
+
 .markdown-text {
     margin-bottom: 40px;
     padding: 10px;

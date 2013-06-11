@@ -27,7 +27,9 @@ urlpatterns += patterns('',
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
+    url(r'^search/', include('haystack.urls')),
 )
+
 
 
 resource_dict = {

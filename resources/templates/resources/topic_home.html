@@ -6,8 +6,8 @@
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
 
 {% block extra_head %}
-<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Rss" href="{% url 'topic_feed_rss' topic_slug=current_topic %}" />
-<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Atom" href="{% url 'topic_feed_atom' topic_slug=current_topic %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Rss" href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Atom" href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}" />
 {% endblock %}
 
 {% block resource_heading %}{{ current_topic.name }}{% endblock %}
@@ -19,17 +19,15 @@
             {% include "snippets/share_this.html" %}
         </div>
         <div class="span5">
-            <div class="btn-group">
+            <div class="btn-group pull-right">
                 <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic %}">Rss</a></li>
-                    <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic %}">Atom</a></li>
+                    <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}">Rss</a></li>
+                    <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}">Atom</a></li>
                 </ul>
             </div>
             {% if user.is_authenticated %}
             <a href="{% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small" title="{% if current_topic|isfollow:user %}You are already following this topic. Click to unfollow{% else %}Click to follow this topic and get updates on your profile{% endif %}">{% if current_topic|isfollow:user %}<i class="icon-heart-empty"></i> Unfollow{% else %}<i class="icon-heart"></i> Follow this Topic{% endif %}</a>
-            {% else %}
-            <a href="{% url 'auth_login' %}?next={% url 'topic_follow' slug=current_topic.slug %}" class="btn btn-info btn-small"><i class="icon-info"></i> Login to follow this Topic</a>
             {% endif %}
         </div>
     </div>

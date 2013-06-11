@@ -1,0 +1,4 @@
+{{ object.title }}
+{{ object.content }}
+{{ object.user }}
+{{ object.updated_at }}
