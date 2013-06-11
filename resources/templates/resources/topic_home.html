@@ -6,8 +6,8 @@
 {% block meta_description %}{{ current_topic.description|slice:":200" }}{% endblock %}
 
 {% block extra_head %}
-<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Rss" href="{% url 'topic_feed_rss' topic_slug=current_topic %}" />
-<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Atom" href="{% url 'topic_feed_atom' topic_slug=current_topic %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Rss" href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}" />
+<link rel="alternate" type="application/atom+xml" title="Recent Resources for {{ current_topic.name }}-Atom" href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}" />
 {% endblock %}
 
 {% block resource_heading %}{{ current_topic.name }}{% endblock %}
@@ -22,8 +22,8 @@
             <div class="btn-group">
                 <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic %}">Rss</a></li>
-                    <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic %}">Atom</a></li>
+                    <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}">Rss</a></li>
+                    <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}">Atom</a></li>
                 </ul>
             </div>
             {% if user.is_authenticated %}
