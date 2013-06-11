@@ -9,7 +9,7 @@
         <a class="btn {% check_active_button request.get_full_path 'online' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="online" %}">Online Courses</a>
         <a class="btn {% check_active_button request.get_full_path 'other' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="other" %}">Others</a>
     </div>
-    <div class="btn-group">
+    <div class="btn-group pull-right">
         <button class="btn">Select Level: </button>
         <button class="btn dropdown-toggle" data-toggle="dropdown">
             <span class="caret"></span>

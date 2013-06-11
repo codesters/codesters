@@ -1,11 +1,12 @@
 {% extends "profiles/base.html" %}
 {% load url from future %}
+{% load markup %}
 
 {% block meta_description %}{{ userinfo.get_full_name }} - {{ userinfo.userprofile.bio }}{% endblock %}
 
 {% block profile_content %}
 <div class="span12" id="user-info">
-    <p>{{ userinfo.userprofile.bio|default:"Bio not provided" }}</p>
+    {{ userinfo.userprofile.bio|markdown:"safe"|default:"Bio not provided" }}
 </div>
 <div class="row-fluid">
     <div class="span7">
