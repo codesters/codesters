@@ -1,9 +1,24 @@
 {% load url from future %}
-    <ul class="nav nav-pills">
-        <li><a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}">All</a></li>
-        <li><a href="{% url 'resource_topic_list' slug=current_topic.slug res_type="book" %}">Books</a></li>
-        <li><a href="{% url 'resource_topic_list' slug=current_topic.slug res_type="ebook" %}">Ebooks</a></li>
-        <li><a href="{% url 'resource_topic_list' slug=current_topic.slug res_type="tutorial" %}">Tutorials</a></li>
-        <li><a href="{% url 'resource_topic_list' slug=current_topic.slug res_type="online" %}">Online Courses</a></li>
-        <li><a href="{% url 'resource_topic_list' slug=current_topic.slug res_type="other" %}">Others</a></li>
-    </ul>
+{% load check_active check_active_button from codesters %}
+<div class="btn-toolbar">
+    <div class="btn-group">
+        <a class="btn {% check_active_button request.get_full_path 'all' %}" href="{% url 'resource_topic_list_all' slug=current_topic.slug %}">All</a>
+        <a class="btn {% check_active_button request.get_full_path 'book' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="book" %}">Books</a>
+        <a class="btn {% check_active_button request.get_full_path 'ebook' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="ebook" %}">Ebooks</a>
+        <a class="btn {% check_active_button request.get_full_path 'tutorial' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="tutorial" %}">Tutorials</a>
+        <a class="btn {% check_active_button request.get_full_path 'online' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="online" %}">Online Courses</a>
+        <a class="btn {% check_active_button request.get_full_path 'other' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="other" %}">Others</a>
+    </div>
+    <div class="btn-group">
+        <button class="btn">Select Level: </button>
+        <button class="btn dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li class="{% check_active request.get_full_path 'all' %}"><a href="?level=all">All</a></li>
+                <li class="{% check_active request.get_full_path 'beginner' %}"><a href="?level=beginner">Beginner</a></li>
+                <li class="{% check_active request.get_full_path 'intermediate' %}"><a href="?level=intermediate">Intermediate</a></li>
+                <li class="{% check_active request.get_full_path 'advanced' %}"><a href="?level=advanced">Advanced</a></li>
+        </ul>
+    </div>
+</div>
