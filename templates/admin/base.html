@@ -26,7 +26,7 @@
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
 {% if user.is_authenticated %}
-{% include "navbar.html" %}
+{% include "snippets/navbar.html" %}
 {% endif %}
 <!-- Container -->
 <div id="container">
