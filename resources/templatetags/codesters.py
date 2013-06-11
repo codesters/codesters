@@ -9,9 +9,20 @@ from profiles.models import SavedResource, TopicFollow
 register = template.Library()
 
 @register.simple_tag
-def check_active(path, word):
+def check_active_button(path, word):
+    word = '/' + word
     if word in path:
-        return 'selected=""'
+        return 'active'
+    return ''
+
+@register.simple_tag
+def check_active(path, word):
+    if word=='all':
+        if '?' not in path:
+            return 'active'
+    word = '=' + word
+    if word in path:
+        return 'active'
     return ''
 
 @register.simple_tag
