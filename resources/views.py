@@ -1,20 +1,20 @@
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponse, HttpResponseRedirect, Http404
-from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
-from django.template import RequestContext
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy, reverse
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.template import RequestContext
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
-from django.contrib import messages
 from djangoratings.views import AddRatingView
 
 from django.contrib.auth.models import User
-from resources.models import Resource, Topic, ResourceType, FeaturedResource
+from django.contrib.contenttypes.models import ContentType
+from .models import Resource, Topic, ResourceType, FeaturedResource
 from profiles.models import SavedResource, TopicFollow
 
-from resources.forms import ResourceCreateForm, ResourceUpdateForm
+from .forms import ResourceCreateForm, ResourceUpdateForm
 
 def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
@@ -197,7 +197,7 @@ class ResourceDetailView(SetHeadlineMixin, SidebarMixin, DetailView):
 
 class ResourceCreateView(LoginRequiredMixin, SetHeadlineMixin, SidebarMixin, CreateView):
     form_class = ResourceCreateForm
-    template_name = 'resources/resource_create.html'
+    model = Resource
     headline = 'Add new Resource'
 
     def form_valid(self, form):
@@ -208,21 +208,20 @@ class ResourceCreateView(LoginRequiredMixin, SetHeadlineMixin, SidebarMixin, Cre
 class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, SidebarMixin, UpdateView):
     form_class = ResourceUpdateForm
     model = Resource
-    template_name = 'resources/resource_update.html'
     headline = 'Edit Resource'
     permission_required = 'resources.change_resource'
     return_403 = True
 
 
-class TopicCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView): #mixin require an object, so make a get_object method
+class TopicCreateView(SetHeadlineMixin, SidebarMixin, CreateView):
     model = Topic
-    template_name = 'resources/topic_create.html'
     permission_required = 'resources.add_topic'
-    render_403 = True
+    headline = 'Create New Topic'
 
 
-class TopicUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+class TopicUpdateView(PermissionRequiredMixin, SetHeadlineMixin, SidebarMixin, UpdateView):
     model = Topic
-    template_name = 'resources/topic_update.html'
     permission_required = 'resources.change_topic'
     render_403 = True
+    return_403 = True
+    headline = 'Edit Topic'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from resources.models import ResourceType, Topic, Resource, FeaturedResource
+from .models import ResourceType, Topic, Resource, FeaturedResource
 
 class ResourceTypeAdmin(admin.ModelAdmin):
     list_display=('name', 'color')
