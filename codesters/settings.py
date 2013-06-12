@@ -20,10 +20,13 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.comments',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.markup',
 )
+
+COMMENTS_APP = 'comments'
 
 THIRD_PARTY_APPS = (
     'haystack',
@@ -38,6 +41,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'comments',
     'profiles',
 #    'tracks',
     'resources',
