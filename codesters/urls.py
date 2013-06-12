@@ -28,6 +28,7 @@ urlpatterns += patterns('',
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
     url(r'^search/', include('haystack.urls')),
+    url(r'^comments/', include('django.contrib.comments.urls')),
 )
 
 

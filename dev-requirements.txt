@@ -10,7 +10,6 @@ celery==3.0.19
 distribute==0.6.36
 django-braces==1.0.0
 django-celery==3.0.17
-django-disqus==0.4.1
 django-extensions==1.0.3
 django-guardian
 django-ratings==0.3.7
@@ -28,3 +27,4 @@ requests==1.2.3
 simplejson==3.3.0
 pyelasticsearch==0.5
 django-haystack==2.0.0
+django-threadedcomments==0.9.0

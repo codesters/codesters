@@ -20,13 +20,12 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'threadedcomments',
     'django.contrib.comments',
     'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.markup',
 )
-
-COMMENTS_APP = 'comments'
 
 THIRD_PARTY_APPS = (
     'haystack',
@@ -37,11 +36,9 @@ THIRD_PARTY_APPS = (
     'widget_tweaks',
     'braces',
     'djangoratings',
-    'disqus',
 )
 
 LOCAL_APPS = (
-    'comments',
     'profiles',
 #    'tracks',
     'resources',
@@ -151,6 +148,9 @@ LOGGING = {
         },
     }
 }
+
+#Comments app settings
+COMMENTS_APP = 'threadedcomments'
 
 #HAYSTACK settings
 HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'

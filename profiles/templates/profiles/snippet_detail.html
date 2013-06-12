@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load url from future %}
-{% load disqus_tags %}
 {% load age from codesters %}
 {% load markup %}
 
@@ -36,8 +35,10 @@
 {% include "snippets/share_this.html" %}
 </section>
 
-<footer class="span10 offset1">
-    {% disqus_show_comments %}
+<footer class="span10 offset1 comments">
+    <h2>Discuss here: </h2>
+    {% render_comment_list for resource %}
+    {% render_comment_form for resource %}
 </footer>
 
 </article>

@@ -1,8 +1,8 @@
 {% extends "resources/base.html" %}
 {% load url from future %}
 {% load age issaved from codesters %}
-{% load disqus_tags %}
 {% load markup %}
+{% load threadedcomments_tags %}
 
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 
@@ -70,7 +70,9 @@
 {{ resource.description|markdown:"safe" }}
 </div>
 {% endif %}
-<div class="row-fluid">
-        {% disqus_show_comments %}
+<div class="row-fluid comments">
+    <h2>Discuss here: </h2>
+    {% render_comment_list for resource %}
+    {% render_comment_form for resource %}
 </div>
 {% endblock %}
