@@ -1,18 +1,16 @@
+from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse, reverse_lazy
+from django.contrib import messages
 from django.http import HttpResponseRedirect, Http404
 from django.views.generic import DetailView, RedirectView, TemplateView, ListView, UpdateView, CreateView, DeleteView
 from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
 
 from django.contrib.auth.models import User
-from profiles.models import UserProfile, Snippet, SavedResource, TopicFollow, Project
+from .models import UserProfile, Snippet, SavedResource, TopicFollow, Project
 from resources.models import Resource
 
-from django.shortcuts import get_object_or_404
-from django.core.urlresolvers import reverse, reverse_lazy
-from django.contrib import messages
-
-from profiles.forms import UserUpdateForm, UserProfileUpdateForm, SnippetCreateForm, SnippetUpdateForm, ProjectCreateForm, ProjectUpdateForm
-
+from .forms import UserUpdateForm, UserProfileUpdateForm, SnippetCreateForm, SnippetUpdateForm, ProjectCreateForm, ProjectUpdateForm
 
 def user_redirect_view(request, username):
     user = get_object_or_404(User, username=username)
@@ -157,7 +155,6 @@ class SnippetDetailView(SetHeadlineMixin, DetailView):
 class SnippetCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
     model = Snippet
     form_class = SnippetCreateForm
-    template_name = 'profiles/snippet_create.html'
     headline = 'Create New Snippet'
 
     def form_valid(self, form):
@@ -173,7 +170,6 @@ class SnippetCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
 class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     model = Snippet
     form_class = SnippetUpdateForm
-    template_name = 'profiles/snippet_update.html'
     permission_required = 'profiles.change_snippet'
     headline = 'Edit Snippet'
     return_403 = True
@@ -196,7 +192,7 @@ class SnippetDeleteView(PermissionRequiredMixin, DeleteView):
 class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
-    template_name = 'profiles/user_update.html'
+    template_name = 'profiles/user_form.html'
     permission_required = 'auth.change_user'
     headline = 'Change Account Settings'
     return_403 = True
@@ -212,7 +208,7 @@ class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMix
 class UserProfileUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
     form_class = UserProfileUpdateForm
     model = UserProfile
-    template_name = 'profiles/userprofile_update.html'
+    template_name = 'profiles/user_form.html'
     permission_required = 'profiles.change_userprofile'
     headline = 'Change Profile Settings'
     return_403 = True
