@@ -2,9 +2,10 @@
 {% load url from future %}
 {% block head_title %}Register for an account{% endblock %}
 {% block content %}
-<div class="container">
-<form method="post" class="auth-form" action="">{% csrf_token %}
+<div class="auth-form">
+<form method="post" action="">{% csrf_token %}
     <h2>Register <small>for an account</small></h2>
+    <hr />
     {% include "snippets/forms/form_base.html" %}
     <button class="btn btn-primary" type="submit"><i class="icon-unlock"></i> Register</button>
     <p>Already have an account? <a href="{% url 'auth_login' %}">Login</a></p>

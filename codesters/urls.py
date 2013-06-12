@@ -1,13 +1,13 @@
 from django.conf.urls import patterns, include, url
-from django.contrib.sitemaps import GenericSitemap
 from django.contrib import admin
 admin.autodiscover()
 
 from resources.models import Resource, Topic
 from profiles.models import UserProfile
 
-from codesters.views import *
+from .views import *
 from profiles.views import UserUpdateView, UserProfileUpdateView
+from .sitemaps import sitemaps
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
@@ -30,21 +30,6 @@ urlpatterns += patterns('',
     url(r'^search/', include('haystack.urls')),
 )
 
-
-
-resource_dict = {
-        'queryset': Resource.objects.filter(show=True),
-        'date_field': 'updated_at',
-}
-
-topic_dict = {
-        'queryset': Topic.objects.all(),
-}
-
-sitemaps = {
-    'topic': GenericSitemap(topic_dict, priority=0.8),
-    'resource': GenericSitemap(resource_dict, priority=0.6),
-}
 
 urlpatterns += patterns('',
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),

@@ -11,4 +11,4 @@ class ResourceIndex(indexes.SearchIndex, indexes.Indexable):
         return Resource
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(updated_at__lte=datetime.datetime.now())
+        return self.get_model().objects.filter(show=True).filter(updated_at__lte=datetime.datetime.now())

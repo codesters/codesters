@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from resources.models import Resource, Topic
+from .models import Resource, Topic
 
 class ResourceCreateForm(ModelForm):
     class Meta:

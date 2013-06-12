@@ -9,17 +9,26 @@
 {% block resource_heading %}{{ resource.title }}{% endblock %}
 
 {% block resource_content %}
-<div class="row-fluid" id="resource-buttons">
+<div class="btn-toolbar" id="resource-buttons">
+    <div class="btn-group">
     <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
+    </div>
+
     {% if user.is_authenticated %}
+
+    <div class="btn-group">
         <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
-        {% include "resources/rating.html" %}
         {% ifequal resource.created_by user%}
         <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
         {% endifequal %}
+    </div>
+        {% include "resources/rating.html" %}
     {% else %}
+    <div class="btn-group">
     <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+    </div>
     {% endif %}
+
 </div>
 
 <div class="row-fluid">
