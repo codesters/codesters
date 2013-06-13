@@ -209,14 +209,20 @@ select[multiple] {
 
 .marketing h1 {
     font-size: 54px;
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.marketing h1, .marketing h2 {
-    color: #46a546;
+.marketing-head p {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .marketing h2 {
-    font-size: 42px;
+    font-size: 40px;
+    padding: 30px 0;
 }
 
 .market {
@@ -230,7 +236,15 @@ select[multiple] {
 
 .marketing-head {
     text-align: center;
-    padding: 30px 20px 10px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+.marketing-head h4 {
+    padding: 15px;
+    border: 1px solid #e3e3e3;
+    color: #eeeeee;
+    background-color: rgb(42, 42, 42);
 }
 
 .marketing li {
@@ -355,10 +369,62 @@ padding: 7px 9px;
   padding-left: 0;
   margin-left: 20px;
   float: right;
+  font-weight: bold;
+  color: #000;
   text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
   -webkit-transition: all .2s linear;
      -moz-transition: all .2s linear;
           transition: all .2s linear;
+}
+
+.jumbotron {
+  position: relative;
+  padding: 40px 0;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
+  background: #103648; /* Old browsers */
+  background: -moz-linear-gradient(45deg,  #103648 0%, #487284 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#103648), color-stop(100%,#487284)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(45deg,  #103648 0%,#487284 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(45deg,  #103648 0%,#487284 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(45deg,  #103648 0%,#487284 100%); /* IE10+ */
+  background: linear-gradient(45deg,  #103648 0%,#487284 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#103648', endColorstr='#487284',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
+}
+
+.jumbotron h1 {
+  font-size: 80px;
+  font-weight: bold;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.jumbotron p {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.25;
+  margin-bottom: 30px;
+}
+
+.mast-head {
+  padding: 70px 0 80px;
+  margin-bottom: 0;
+  margin-top: -10px;
+  margin-left: -10px !important;
+  color: #fff;
+}
+.mast-head h1 {
+  font-size: 100px;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.mast-head p {
+  font-size: 36px;
+  font-weight: 200;
+  line-height: 1.25;
 }
 
 @media (max-width: 979px) {
@@ -370,6 +436,17 @@ padding: 7px 9px;
     }
     .content {
         padding-right: 10px;
+    }
+    .mast-head {
+      margin-right: -10px;
+    }
+    .mast-head h1 {
+        font-size: 54px;
+    }
+    .mast-head p.lead {
+        font-size: 18px;
+        line-height: 24px;
+        margin: 20px auto;
     }
 }
 
@@ -388,13 +465,16 @@ padding: 7px 9px;
         width: 120px;
         margin: auto;
     }
-    .marketing-head h1 {
+    .mast-head h1 {
         font-size: 36px;
     }
-    .marketing-head p.lead {
+    .mast-head p.lead {
         font-size: 16px;
         line-height: 24px;
         margin: 20px auto;
+    }
+    .marketing li {
+        font-size: 16px;
     }
 }
 
