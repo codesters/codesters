@@ -1,7 +1,7 @@
 {% load url from future %}
 {% load active from codesters %}
 
-<div class="navbar navbar-fixed-top navbar-inverse">
+<div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
             <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -37,16 +37,16 @@
                             <li><a href="{% url 'auth_logout' %}"><i class="icon-signout"></i> Logout</a></li>
                         </ul>
                     </li>
+                    {% if user.is_staff %}
+                    <li class="{% active request.path '^/admin/' %}"><a href="/admin/"><i class="icon-dashboard"></i> Manage</a></li>
+                    {% endif %}
                     {% else %}
                         <li class="{% active request.path "^/accounts/login/$" %}"><a href="{% url 'auth_login' %}"><i class="icon-signin"></i> Login</a></li>
                         <li class="{% active request.path "^/accounts/register/$" %}"><a href="{% url 'registration_register' %}"><i class="icon-unlock"></i> Register</a></li>
                     {% endif %}
                 </ul>
-                {% if user.is_staff %}
-                <a class="btn btn-small btn-success" href="/admin/"><i class="icon-dashboard"></i> Admin</a>
-                {% endif %}
                 <form class="navbar-search" method="get" action="/search/">
-                    <input type="text" class="search-query" placeholder="Search" name="q">
+                    <input type="text" class="search-query" placeholder="Search anything" name="q">
                 </form>   
             </div><!--/.nav-collapse -->
         </div><!--/.container -->

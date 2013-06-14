@@ -1,3 +1,8 @@
+.navbar-inner {
+    background-color: rgb(243, 243, 243);
+    background-image: linear-gradient(rgb(249, 249, 249), rgb(243, 243, 243));
+    background-repeat: repeat-x;
+}
 
 .explore-page {
     padding-right: 10px;
@@ -174,6 +179,10 @@ body {
     vertical-align: middle;
 }
 
+.footer-links a {
+    color: #333;
+}
+
 .social-plugins {
     margin-top: 10px;
 }
@@ -238,13 +247,6 @@ select[multiple] {
     text-align: center;
     padding-top: 40px;
     padding-bottom: 40px;
-}
-
-.marketing-head h4 {
-    padding: 15px;
-    border: 1px solid #e3e3e3;
-    color: #eeeeee;
-    background-color: rgb(42, 42, 42);
 }
 
 .marketing li {
@@ -370,16 +372,27 @@ padding: 7px 9px;
   margin-left: 20px;
   float: right;
   font-weight: bold;
-  color: #000;
+  color: #666;
   text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
   -webkit-transition: all .2s linear;
      -moz-transition: all .2s linear;
           transition: all .2s linear;
 }
 
-.jumbotron {
+.navbar .brand:hover {
+    color: #888;
+}
+
+.home-share {
+    margin-bottom: 10px;
+}
+
+.home-content {
+  margin-bottom: 0;
+  margin-top: -10px;
+  margin-left: -10px !important;
   position: relative;
-  padding: 40px 0;
+  padding: 40px 10px;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
@@ -410,12 +423,10 @@ padding: 7px 9px;
 }
 
 .mast-head {
-  padding: 70px 0 80px;
-  margin-bottom: 0;
-  margin-top: -10px;
-  margin-left: -10px !important;
+  padding: 70px 0 50px;
   color: #fff;
 }
+
 .mast-head h1 {
   font-size: 100px;
   line-height: 1;
@@ -425,6 +436,10 @@ padding: 7px 9px;
   font-size: 36px;
   font-weight: 200;
   line-height: 1.25;
+}
+
+.media {
+    text-align: left;
 }
 
 @media (max-width: 979px) {
@@ -437,7 +452,7 @@ padding: 7px 9px;
     .content {
         padding-right: 10px;
     }
-    .mast-head {
+    .home-content {
       margin-right: -10px;
     }
     .mast-head h1 {
@@ -466,7 +481,10 @@ padding: 7px 9px;
         margin: auto;
     }
     .mast-head h1 {
-        font-size: 36px;
+        font-size: 42px;
+    }
+    .marketing h2 {
+        font-size: 34px;
     }
     .mast-head p.lead {
         font-size: 16px;
@@ -501,6 +519,8 @@ padding: 7px 9px;
     margin-left: 0 !important;
     margin-right: 7px;
     min-height: 180px !important;
+    background-color: rgb(251, 251, 251);
+    padding: 15px 20px 5px 20px;
 }
 
 .vote {
