@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.db.models import Count
 from django.contrib.auth.models import User
 from resources.models import Topic, Resource
+from profiles.models import Snippet
 
 def popular_domains_mixin(number='more'):
     resources = Resource.objects.all()
@@ -56,8 +57,11 @@ def explore_home(request):
     recent_resources = Resource.objects.all().order_by('-created_at')[:5]
     popular_resources = Resource.objects.all().order_by('-rating_votes')[:5]
 
+    recent_snippets = Snippet.objects.all().order_by('-updated_at')[:5]
+
     ctx = {
             'active_users': active_users[:4],
+            'recent_snippets': recent_snippets,
             'popular_topics': popular_topics[:5],
             'popular_domains': popular_domains_mixin(number='less'),
             'recent_resources': recent_resources,
