@@ -423,7 +423,7 @@ padding: 7px 9px;
 }
 
 .mast-head {
-  padding: 70px 0 50px;
+  padding: 70px 0 40px;
   color: #fff;
 }
 
@@ -440,6 +440,11 @@ padding: 7px 9px;
 
 .media {
     text-align: left;
+    margin-bottom: 35px;
+}
+
+.media-heading {
+    margin-bottom: 12px;
 }
 
 @media (max-width: 979px) {
@@ -479,6 +484,9 @@ padding: 7px 9px;
     .topic-images img {
         width: 120px;
         margin: auto;
+    }
+    .masthead {
+        padding: 40px 0 20px;
     }
     .mast-head h1 {
         font-size: 42px;
