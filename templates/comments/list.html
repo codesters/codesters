@@ -1,0 +1,10 @@
+{% load comments %}
+<div class="span12">
+  {% get_comment_list for resource as comment_list %}
+  {% for comment in comment_list %}
+   <blockquote>
+     <p><a href="/profile/{{ comment.user }}">{{ comment.user_name }}</a><small class="muted pull-right">{{ comment.submit_date }}</small></p>
+     <p><strong> {{ comment.comment }}</strong></p>
+   </blockquote>
+  {% endfor %}
+</div>
