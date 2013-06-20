@@ -27,14 +27,14 @@
                     <li class="nav-header">{{ userinfo }}</li>
                     <li><a href="{{ userinfo.userprofile.get_absolute_url }}"><i class="icon-user"></i> {{ userinfo.get_full_name|default:"(Not provided)" }}</a></li>
                     <li class="nav-header">Other Profiles</li>
-                    {% if userinfo.userprofile.github %}<li><a href="http://github.com/{{ userinfo.userprofile.github }}"><i class="icon-github"></i> Github</a></li>{% endif %}
-                    {% if userinfo.userprofile.twitter %}<li><a href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
-                    {% if userinfo.userprofile.website %}<li><a href="{{ userinfo.userprofile.website }}"><i class="icon-external-link"></i> Website</a></li>{% endif %}
-                    {% if userinfo.userprofile.stackoverflow %}<li><a href="http://stackoverflow.com/users/{{ userinfo.userprofile.stackoverflow }}"><i class="icon-cogs"></i> Stackoverflow</a></li>{% endif %}
-                    {% if userinfo.userprofile.facebook %}<li><a href="http://facebook.com/{{ userinfo.userprofile.facebook }}"><i class="icon-facebook"></i> Facebook</a></li>{% endif %}
+                    {% if userinfo.userprofile.website %}<li><a title="{{ userinfo.username }} website" href="{{ userinfo.userprofile.website }}"><i class="icon-external-link"></i> Website/Blog</a></li>{% endif %}
+                    {% if userinfo.userprofile.github %}<li><a title="{{ userinfo.username }} github profile" href="http://github.com/{{ userinfo.userprofile.github }}"><i class="icon-github"></i> Github</a></li>{% endif %}
+                    {% if userinfo.userprofile.twitter %}<li><a title="{{ userinfo.username }} twitter profile" href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
+                    {% if userinfo.userprofile.stackoverflow %}<li><a title="{{ userinfo.username }} stackoverflow profile" href="http://stackoverflow.com/users/{{ userinfo.userprofile.stackoverflow }}"><i class="icon-stackexchange"></i> Stackoverflow</a></li>{% endif %}
+                    {% if userinfo.userprofile.facebook %}<li><a title="{{ userinfo.username }} facebook profile" href="http://facebook.com/{{ userinfo.userprofile.facebook }}"><i class="icon-facebook"></i> Facebook</a></li>{% endif %}
                     <li class="nav-header">Subscribe to {{ userinfo.username }}'s Wall</li>
-                    <li><a href="{% url 'user_snippet_rss' username=userinfo.username %}"><i class="icon-rss"></i> Rss</a></li>
-                    <li><a href="{% url 'user_snippet_atom' username=userinfo.username %}"><i class="icon-rss-sign"></i> Atom</a></li>
+                    <li><a title="Subscribe to {{ userinfo.username }} wall rss feed" href="{% url 'user_snippet_rss' username=userinfo.username %}"><i class="icon-rss"></i> Rss</a></li>
+                    <li><a title="Subscribe to {{ userinfo.username }} wall atom feed" href="{% url 'user_snippet_atom' username=userinfo.username %}"><i class="icon-rss-sign"></i> Atom</a></li>
                 </ul>
             </div>
         </div>
