@@ -2,42 +2,75 @@
 {% load url from future %}
 
 {% block content %}
-<div class="row-fluid marketing marketing-head">
-    <h1>Hub to learn Programming</h1>
-    <p class="lead">Want to learn programming, but wasted a lot of time in finding the right resource to learn from?<br /> We have the best resources available on web for learning any computer science topic.</p>
-    <h4><em>Concentrate on learning, not searching where to learn from.</em></h4>
-</div>
-<div class="row-fluid marketing">
-    <h3>Find:</h3>
-    <ul class="lead">
-        <li>free online courses provided by websites like Coursera, Udacity and EDx.</li>
-        <li>free courses from top universities like MIT, Harvard, Stanford and IITs.</li>
-        <li>help tutorials and videos made by experts in niche topics.</li>
-        <li>and lots of official documentation.</li>
-    </ul>
-</div>
-<div class="row-fluid marketing marketing-head">
-    <h3>Most popular Topics:</h3>
-    <div class="row-fluid topic-images">
-        <ul class="unstyled">
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='linux' %}"><img  src="{{ STATIC_URL }}img/linux.png" alt="Linux" /></a></li>
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='c' %}"><img      src="{{ STATIC_URL }}img/c.png" alt="C" /></a></li>
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='java' %}"><img   src="{{ STATIC_URL }}img/java.png" alt="Java" /></a></li>
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='python' %}"><img src="{{ STATIC_URL }}img/python.png" alt="Python" /></a></li>
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='django' %}"><img src="{{ STATIC_URL }}img/django.png" alt="Django" /></a></li>
-            <li class="span2"><a href="{% url 'resource_topic_home' slug='php' %}"><img    src="{{ STATIC_URL }}img/php.png" alt="PHP" /></a></li>
-        </ul>
+<div class="home-content">
+<div class="row-fluid">
+    <div class="span12 jumbotron mast-head">
+        <h1>Hub to learn Programming</h1>
+        <p class="lead">Want to learn programming, but wasted a lot of time in finding the right resource? We have the best resources curated for you.</p>
+        <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-danger register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
     </div>
-
-    <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-success register-button btn-large"> Start learning Now <i class="icon-double-angle-right"></i></a> 
-
-    <div class="row-fluid">
-        <div class="span12 marketing marketing-head">
-            <div class="span4">{% include "snippets/facebook_like.html" %}</div>
-            <div class="span4">{% include "snippets/twitter.html" %}</div>
-            <div class="span4">{% include "snippets/google_plus.html" %}</div>
+</div>
+<div class="row-fluid">
+<div class="marketing marketing-head">
+    <h2>What you will get here?</h2>
+    <div class="media">
+        <img src="{{ STATIC_URL }}img/main-universities.jpg" height=128 width=128  alt="free university course" class="pull-left img-circle" />
+        <div class="media-body">
+            <h4 class="media-heading">Courses from Top Universties</h4>
+            Several Top universities like MIT, Harvard, Stanford, IIT offer videos and class notes of the courses they teach in their campus. Find if your favourite computer science topic is provided by them and get to learn through the Web.
         </div>
     </div>
+    <div class="media">
+        <img src="{{ STATIC_URL }}img/main-tutorials.jpg"  height=128 width=128 alt="best tutorals" class="pull-left img-circle" />
+        <div class="media-body">
+            <h4 class="media-heading">Most recommended Tutorials from Experts</h4>
+            Web is full of articles, short videos from people explaining topics in all areas around computer science. But how do you know which tutorial is best to follow? We have the best recommended tutorials from experts curated just for you.
+        </div>
+    </div>
+    <div class="media">
+        <img src="{{ STATIC_URL }}img/main-books.jpg"  height=128 width=128 alt="most recommended cse books and ebooks" class="pull-left img-circle" />
+        <div class="media-body">
+            <h4 class="media-heading">Best Books/Ebooks recommendations</h4>
+            When it comes to content quality, books often leave behind every other type of resource, because they go through most editing. They are there for you, online and offline, whenever you want.
+        </div>
+    </div>
+    <div class="media">
+        <img src="{{ STATIC_URL }}img/main-moocs.png" height=128 width=128 alt="free online course" class="pull-left img-circle" />
+        <div class="media-body">
+            <h4 class="media-heading">Online courses from MOOCs</h4>
+            There are several companies/websites like Coursera, Udacity, Edx running Massive Open Online Courses(MOOC) to help people learn anytime and from anywhere. But keeping track of these can be tedious. Here you can get the best online courses provided by them.
+        </div>
+    </div>
+    <div class="media">
+        <img src="{{ STATIC_URL }}img/main-help.jpg" height=128 width=128 alt="colleaborate on learning" class="pull-left img-circle" />
+        <div class="media-body">
+            <h4 class="media-heading">Learn with others</h4>
+            Share your progress with others. Show what you have made, ask questions from peers and experts. We have study groups around a topic to help you.
+        </div>
+    </div>
+</div>
+</div>
+<div class="row-fluid">
+    <div class="marketing marketing-head">
+        <h2>Checkout the most popular Topics:</h2>
+        <div class="row-fluid topic-images">
+            <ul class="unstyled">
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='java' %}"><img   src="{{ STATIC_URL }}img/java.png" alt="Learn Java" /></a></li>
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='linux' %}"><img  src="{{ STATIC_URL }}img/linux.png" alt="Learn Linux" /></a></li>
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='python' %}"><img src="{{ STATIC_URL }}img/python.jpg" alt="Learn Python" /></a></li>
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='c' %}"><img      src="{{ STATIC_URL }}img/c.png" alt="Learn C" /></a></li>
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='django' %}"><img src="{{ STATIC_URL }}img/django.png" alt="Learn Django" /></a></li>
+                <li class="span2"><a href="{% url 'resource_topic_home' slug='php' %}"><img    src="{{ STATIC_URL }}img/php.png" alt="Learn PHP" /></a></li>
+            </ul>
+        </div>
+
+        <div class="btn-group">
+        <a href="{% url 'page_about' %}" class="btn btn-success btn-large"><i class="icon-info"></i> Know More</a>
+        <a href="{% if user.is_authenticated %}{% url 'resource_home' %}{% else %}{% url 'registration_register' %}{% endif %}" class="btn btn-danger register-button btn-large"> Start Learning <i class="icon-double-angle-right"></i></a> 
+        </div>
+
+    </div>
+</div>
 </div>
 {% endblock %}
 

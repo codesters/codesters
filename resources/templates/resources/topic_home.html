@@ -20,6 +20,7 @@
         </div>
         <div class="span5">
             <div class="btn-group pull-right">
+                {% if user.is_staff %} <a href="{% url 'topic_update' slug=current_topic.slug %}" class="btn btn-small btn-danger"><i class="icon-edit"></i> Edit</a> {% endif %}
                 <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}">Rss</a></li>
@@ -54,7 +55,7 @@
             <div class="thumbnail featured-resource">
                 <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
                 <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
-                <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...More</a></p>
+                <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...Details</a></p>
                 <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
             </div>
         </li>

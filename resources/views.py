@@ -2,6 +2,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render_to_response
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.contrib import messages
+from django.utils.datastructures import SortedDict
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import RequestContext
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, RedirectView
@@ -132,17 +133,17 @@ def topic_home(request, slug):
         'topics': topics
     }
 
-    resourcetypes = {}
-    res_types = ResourceType.objects.all()
+    resourcetypes = []
+    res_types = ResourceType.objects.all().order_by('name')
     for res_type in res_types:
         try:
             result = FeaturedResource.objects.get(topic=current_topic, resource_type=res_type)
-            resourcetypes[result.resource_type.slug] = result.resource
+            resourcetypes.append((result.resource_type.slug, result.resource))
         except FeaturedResource.DoesNotExist:
             result = current_topic.resource_set.filter(resource_type=res_type).order_by('-rating_votes')
             if len(result) > 0:
-                resourcetypes[result[0].resource_type.slug] = result[0]
-    ctx['resourcetypes'] = resourcetypes
+                resourcetypes.append((result[0].resource_type.slug, result[0]))
+    ctx['resourcetypes'] = SortedDict(resourcetypes)
 
     return render_to_response('resources/topic_home.html', ctx, context_instance=RequestContext(request))
 
