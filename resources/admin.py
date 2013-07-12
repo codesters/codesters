@@ -10,7 +10,10 @@ class TopicAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ['name',]}
 
 class ResourceAdmin(admin.ModelAdmin):
-    list_display=('title', 'resource_type', 'url')
+    list_display=('title', 'resource_type', 'created_by', 'url')
+    list_filter = ['resource_type', 'show']
+    date_hierarchy = 'created_at'
+    search_fields = ['title', 'description', 'url']
 
 class FeaturedResourceAdmin(admin.ModelAdmin):
     list_display=('topic', 'resource_type', 'resource')
