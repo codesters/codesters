@@ -31,12 +31,12 @@
 
 </div>
 
-<div class="row-fluid">
+<div class="row">
 {% include "snippets/share_this.html" %}
 </div>
 
-<div class="row-fluid">
-    <div class="span8 offset2">
+<div class="row">
+    <div class="col-8 offset2">
         <table class="table table-bordered table-stripped">
             <tbody> {% with approval=resource.rating.get_real_percent %}
                 <tr class="{% if approval >= 60 %}success{% endif %}">
@@ -66,11 +66,11 @@
 </div>
 
 {% if resource.description %}
-<div class="row-fluid markdown-text" id="resource-description">
+<div class="row markdown-text" id="resource-description">
 {{ resource.description|markdown:"safe" }}
 </div>
 {% endif %}
-<div class="row-fluid">
+<div class="row">
         {% disqus_show_comments %}
 </div>
 {% endblock %}

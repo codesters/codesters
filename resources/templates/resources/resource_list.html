@@ -2,18 +2,18 @@
 {% load url from future %}
 {% load check_active from codesters %}
 {% block resource_content %}
-    <div class="row-fluid resource-buttons">
-        <div class="span12">
+    <div class="row resource-buttons">
+        <div class="col-12">
         {% include "resources/resource_type_nav.html" %}
         </div>
     </div>
 
-    <div class="row-fluid">
+    <div class="row">
         <ul class="thumbnails">
         {% for resource in resources %}
             {% include "resources/single_resource_snippet.html" %}
         {% empty %}
-            <div class="span12">
+            <div class="col-12">
                 <p class="lead">Sorry, there are no resources here. Why don't you <a href="{% url 'resource_create' %}">add something here. </a></p>
             </div>
         {% endfor %}

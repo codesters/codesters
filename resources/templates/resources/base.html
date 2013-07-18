@@ -3,18 +3,18 @@
 {% load active from codesters %}
 
 {% block content %}
-<div class="row-fluid">
+<div class="row">
     <div class="container">
         {% block resource_page %}
-        <div class="row-fluid">
-            <div class="span9 resource-content">
-                <div class="row-fluid well-small" id="resource-title">
+        <div class="row">
+            <div class="col-9 resource-content">
+                <div class="row well-small" id="resource-title">
                     <h1>{% block resource_heading %}{{ headline }}{% endblock %}</h1>
                     <hr />
                 </div>
                 {% block resource_content %}{% endblock %}
             </div>
-            <div class="span3 well" id="sidebar">{% include "resources/topics.html" %}</div>
+            <div class="col-3 well" id="sidebar">{% include "resources/topics.html" %}</div>
         </div>
         {% endblock %}
     </div>

@@ -9,22 +9,22 @@
 {% endblock %}
 
 {% block resource_page %}
-<div class="row-fluid">
-    <div class="span12">
-        <div class="span7">
+<div class="row">
+    <div class="col-12">
+        <div class="col-7">
             <h3>Select a topic to start learning</h3>
             <hr />
         </div>
-        <div class="span5">
+        <div class="col-5">
             <a href="{% url 'resource_create' %}" id="resource-add-button" class="btn btn-danger pull-right" title="Add new resource that you want to share" ><i class="icon-plus"></i> Add new Resource</a>
         </div>
     </div>
-    <div class="span12 explore-box">
+    <div class="col-12 explore-box">
             {% for topic in topics %}
-            <article class="span2 topic">
+            <article class="col-2 topic">
                 <a title="{{ topic.help_text|slice:":120" }}" href="{{ topic.get_absolute_url }}">
                     <div class="topic-name">
-                            <span>{{ topic.name }}</span>
+                            <col->{{ topic.name }}</span>
                     </div>
                     <div class="topic-image">
                     {% if topic.thumbnail %}
@@ -38,7 +38,7 @@
             {% endfor %}
     </div>
 </div>
-<div class="row-fluid">
+<div class="row">
     <p class="muted disclaimer">Disclaimer: Above images are used just for illustrative purposes. Topic logos are trademarks of their respective companies and organizations.</p>
     <p>Subscribe for Updates: <a class="btn btn-small" href="{% url 'resource_feed_rss' %}"><i class="icon-rss"></i> Rss</a> <a class="btn btn-small" href="{% url 'resource_feed_atom' %}"><i class="icon-rss-sign"></i> Atom</a></p>
 </div>

@@ -13,15 +13,15 @@
 {% block resource_heading %}{{ current_topic.name }}{% endblock %}
 
 {% block resource_content %}
-<div class="row-fluid">
-    <div class="span12">
-        <div class="span7">
+<div class="row">
+    <div class="col-12">
+        <div class="col-7">
             {% include "snippets/share_this.html" %}
         </div>
-        <div class="span5">
+        <div class="col-5">
             <div class="btn-group pull-right">
                 {% if user.is_staff %} <a href="{% url 'topic_update' slug=current_topic.slug %}" class="btn btn-small btn-danger"><i class="icon-edit"></i> Edit</a> {% endif %}
-                <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <span class="caret"></span></a>
+                <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <col- class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}">Rss</a></li>
                     <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}">Atom</a></li>
@@ -35,9 +35,9 @@
 </div>
 
 {% if current_topic.description %}
-<div class="row-fluid topic-about">
+<div class="row topic-about">
 <h3>About {{ current_topic.name }}</h3>
-<section class="span12 markdown-text">
+<section class="col-12 markdown-text">
 {% if current_topic.thumbnail %}
 <img src="{{ current_topic.thumbnail.url }}" alt="{{ current_topic.name }} logo" class="pull-right" />
 {% endif %}
@@ -47,13 +47,13 @@
 </div>
 {% endif %}
 
-<div class="row-fluid">
+<div class="row">
     <h3>Featured Resources</h3>
     <ul class="thumbnails">
         {% for k,v in resourcetypes.items %}
-        <li class="span4">
+        <li class="col-4">
             <div class="thumbnail featured-resource">
-                <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
+                <col- class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
                 <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
                 <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...Details</a></p>
                 <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
@@ -63,8 +63,8 @@
         <p class="lead">Sorry, No resources submitted till now</p>
         {% endfor %}
     </ul>
-    <div class="row-fluid" id="all-resources-button">
-        <div class="span5 offset4">
+    <div class="row" id="all-resources-button">
+        <div class="col-5 offset4">
             <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>
         </div>
     </div>

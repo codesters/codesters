@@ -1,9 +1,3 @@
-.navbar-inner {
-    background-color: rgb(243, 243, 243);
-    background-image: linear-gradient(rgb(249, 249, 249), rgb(243, 243, 243));
-    background-repeat: repeat-x;
-}
-
 .explore-page {
     padding-right: 10px;
 }
@@ -366,22 +360,6 @@ padding: 7px 9px;
     padding: 10px 0 0 10px;
 }
 
-.navbar .brand {
-  padding-right: 0;
-  padding-left: 0;
-  margin-left: 20px;
-  float: right;
-  font-weight: bold;
-  color: #666;
-  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.125);
-  -webkit-transition: all .2s linear;
-     -moz-transition: all .2s linear;
-          transition: all .2s linear;
-}
-
-.navbar .brand:hover {
-    color: #888;
-}
 
 .home-share {
     margin-bottom: 10px;
@@ -449,11 +427,6 @@ padding: 7px 9px;
 
 @media (max-width: 979px) {
   /* Unfloat brand */
-  .navbar .brand {
-      float: left;
-      margin-left: 0;
-      padding-right: 10px;
-    }
     .content {
         padding-right: 10px;
     }
@@ -476,10 +449,6 @@ padding: 7px 9px;
     }
     .profile-sidebar {
         border: 0;
-    }
-    .navbar, .footer {
-        margin-left: -20px !important;
-        margin-right: -20px !important;
     }
     .topic-images img {
         width: 120px;

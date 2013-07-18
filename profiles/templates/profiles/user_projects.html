@@ -3,16 +3,16 @@
 
 {% load codesters %}
 {% block profile_content %}
-<div class="row-fluid">
+<div class="row">
     {% ifequal user userinfo %}
     <ul class="nav nav-pills">
         <li class="pull-right"><a href="{% url 'project_create' userinfo.username %}"><i class="icon-plus"></i> Add new Project</a></li>
     </ul>
     {% endifequal %}
-    <div class="span11">
-        <div class="row-fluid">
+    <div class="col-11">
+        <div class="row">
         {% for project in projects %}
-            <div class="span12 user-project">
+            <div class="col-12 user-project">
                 <h3>{{ project.title }}</h3>
                 <p>
                     <a href="{{ project.url }}" class="btn btn-success"><i class="icon-link"></i> Project Website</a>

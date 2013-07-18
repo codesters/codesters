@@ -10,15 +10,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
-    <div class="span12">
+<div class="row">
+    <div class="col-12">
         <h2><a href="{% url 'user_snippets' snippet.user.username %}">{{ snippet.user }} Wall</a></h2>
         <hr />
     </div>
 </div>
-<article class="row-fluid">
+<article class="row">
 
-<header class="span12">
+<header class="col-12">
 <h1>{{ snippet.title }}</h1>
 <p><small>added {{ snippet.created_at|age }}</small>
 {% ifequal user snippet.user %}
@@ -31,12 +31,12 @@
 </ul>
 </header>
 
-<section class="span10 offset1 markdown-text">
+<section class="col-10 offset1 markdown-text">
 {{ snippet.content|markdown:"safe" }}
 {% include "snippets/share_this.html" %}
 </section>
 
-<footer class="span10 offset1">
+<footer class="col-10 offset1">
     {% disqus_show_comments %}
 </footer>
 

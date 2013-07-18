@@ -5,17 +5,17 @@
 {% block meta_description %}{{ userinfo.get_full_name }} - {{ userinfo.userprofile.bio }}{% endblock %}
 
 {% block profile_content %}
-<div class="span12" id="user-info">
+<div class="col-12" id="user-info">
     {{ userinfo.userprofile.bio|markdown:"safe"|default:"Bio not provided" }}
 </div>
-<div class="row-fluid">
-    <div class="span7">
+<div class="row">
+    <div class="col-7">
         <h3>Saved Resources:</h3>
         {% for saved_resource in saved_resources %}
         <p><a href="{{ saved_resource.resource.get_absolute_url }}">{{ saved_resource.resource.title }}</a></p>
         {% endfor %}
     </div>
-    <div class="span4 offset1">
+    <div class="col-4 offset1">
         <h3>Topics Followed:</h3>
         {% for topic_follow in topics_follow %}
         <p><a href="{{ topic_follow.topic.get_absolute_url }}">{{ topic_follow.topic.name }}</a></p>

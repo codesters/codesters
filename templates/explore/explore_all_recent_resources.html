@@ -3,8 +3,8 @@
 
 {% block head_title %}Recent Resources submitted on Codesters{% endblock %}
 {% block explore_content %}
-<div class="row-fluid">
-    <div class="span12 explore-box">
+<div class="row">
+    <div class="col-12 explore-box">
         <h3>{{ headline }} <small>Subscribe for Updates: <a class="btn btn-small" href="{% url 'resource_feed_rss' %}"><i class="icon-rss"></i> Rss</a> <a class="btn btn-small" href="{% url 'resource_feed_atom' %}"><i class="icon-rss-sign"></i> Atom</a></small></h3>
         <table class="table table-bordered table-hover">
             <thead>

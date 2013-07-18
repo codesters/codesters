@@ -1,8 +1,8 @@
 {% load url from future %}
 {% load age website issaved from codesters %}
 
-<li class="span6 thumbnail resource">
-    <span class="badge pull-right badge-{{ resource.resource_type.color }}">{{ resource.resource_type }}</span>
+<li class="col-6 thumbnail resource">
+    <col- class="badge pull-right badge-{{ resource.resource_type.color }}">{{ resource.resource_type }}</span>
     <h4><a href="{{ resource.url }}">{{ resource.title }}</a> <small>{{ resource.url|website }}</small></h4>
     <p><small>submitted  {{ resource.created_at|age  }} by <a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a> in 
     {% for topic in resource.topics.all %}

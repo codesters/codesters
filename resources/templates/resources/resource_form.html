@@ -4,7 +4,7 @@
 <p>
     <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'resource_home' %}{% endif %}" class="btn"><i class="icon-double-angle-left"></i> Back</a>
 </p>
-<div class="span8 offset2">
+<div class="col-8 offset2">
 <form action="" method="post">
     {% include "snippets/forms/form_base_block.html" %}
     <button class="btn btn-primary" type="submit"><i class="icon-save"></i> Save</button>

@@ -1,55 +1,53 @@
 {% load url from future %}
 {% load active from codesters %}
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="/" class="brand">Codesters</a>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <li class="{% active request.path "^/$" %}"><a href="{% url 'page_home' %}"><i class="icon-home"></i> Home</a></li>
-                    <li class="{% active request.path "^/resource/" %}"><a href="{% url 'resource_home' %}"><i class="icon-pushpin"></i> Resources</a></li>
-                    <li class="{% active request.path "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
-                    {% if user.is_authenticated %}
-                    <li class="dropdown {% active request.path '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'my_profile' %}"><i class="icon-picture"></i> My Profile</a></li>
-                            <li><a href="{% url 'user_snippets' username=user.username %}"><i class="icon-quote-right"></i> My Wall</a></li>
-                            <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
-                            <li class="divider"></li>
-                            <li class="nav-header"><i class="icon-plus"> Add New</i></li>
-                            <li><a href="{% url 'resource_create' %}">Resource</a></li>
-                            <li><a href="{% url 'snippet_create' username=user.username %}">Snippet</a></li>
-                            <li><a href="{% url 'project_create' username=user.username %}">Project</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown {% active request.path '^/accounts/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Account <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'userprofile_update' %}"><i class="icon-picture"></i> Profile Settings</a></li>
-                            <li><a href="{% url 'user_update' %}"><i class="icon-cogs"></i> Account Settings</a></li>
-                            <li><a href="{% url 'auth_password_change' %}"><i class="icon-unlock"></i> Change Password</a></li>
-                            <li class="divider"></li>
-                            <li><a href="{% url 'auth_logout' %}"><i class="icon-signout"></i> Logout</a></li>
-                        </ul>
-                    </li>
-                    {% if user.is_staff %}
-                    <li class="{% active request.path '^/admin/' %}"><a href="/admin/"><i class="icon-dashboard"></i> Manage</a></li>
-                    {% endif %}
-                    {% endif %}
-                </ul>
-                {% if not user.is_authenticated %}
-                <a class="btn btn-small btn-success" href="{% url 'auth_login' %}"><i class="icon-signin"></i> Login</a>
-                <a class="btn btn-small btn-danger" href="{% url 'registration_register' %}"><i class="icon-unlock"></i> Register</a>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <a href="/" class="navbar-brand">Codesters</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".main-navbar-collapse">
+            <col- class="icon-bar"></span>
+            <col- class="icon-bar"></span>
+            <col- class="icon-bar"></span>
+        </button>
+        <div class="nav-collapse collapse main-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="{% active request.path "^/$" %}"><a href="{% url 'page_home' %}"><i class="icon-home"></i> Home</a></li>
+                <li class="{% active request.path "^/resource/" %}"><a href="{% url 'resource_home' %}"><i class="icon-pushpin"></i> Resources</a></li>
+                <li class="{% active request.path "^/explore/" %}"><a href="{% url 'explore_home' %}"><i class="icon-globe"></i> Explore</a></li>
+                {% if user.is_authenticated %}
+                <li class="dropdown {% active request.path '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'my_profile' %}"><i class="icon-picture"></i> My Profile</a></li>
+                        <li><a href="{% url 'user_snippets' username=user.username %}"><i class="icon-quote-right"></i> My Wall</a></li>
+                        <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header"><i class="icon-plus"> Add New</i></li>
+                        <li><a href="{% url 'resource_create' %}">Resource</a></li>
+                        <li><a href="{% url 'snippet_create' username=user.username %}">Snippet</a></li>
+                        <li><a href="{% url 'project_create' username=user.username %}">Project</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown {% active request.path '^/accounts/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-wrench"></i> Account <b class="caret"></b></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="{% url 'userprofile_update' %}"><i class="icon-picture"></i> Profile Settings</a></li>
+                        <li><a href="{% url 'user_update' %}"><i class="icon-cogs"></i> Account Settings</a></li>
+                        <li><a href="{% url 'auth_password_change' %}"><i class="icon-unlock"></i> Change Password</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url 'auth_logout' %}"><i class="icon-signout"></i> Logout</a></li>
+                    </ul>
+                </li>
+                {% if user.is_staff %}
+                <li class="{% active request.path '^/admin/' %}"><a href="/admin/"><i class="icon-dashboard"></i> Manage</a></li>
                 {% endif %}
-                <form class="navbar-search pull-right" method="get" action="/search/">
-                    <input type="text" class="search-query" placeholder="Search anything" name="q">
-                </form>   
-            </div><!--/.nav-collapse -->
-        </div><!--/.container -->
-    </div><!--/.navbar-inner -->
+                {% endif %}
+            </ul>
+            {% if not user.is_authenticated %}
+            <a class="btn navbar-btn btn-success" href="{% url 'auth_login' %}"><i class="icon-signin"></i> Login</a>
+            <a class="btn navbar-btn btn-danger" href="{% url 'registration_register' %}"><i class="icon-unlock"></i> Register</a>
+            {% endif %}
+            <form class="navbar-form pull-right" method="get" action="/search/">
+                <input type="text" class="search-query" placeholder="Search anything" name="q">
+            </form>   
+        </div><!--/.main-navbar-collapse -->
+    </div><!--/.container -->
 </div><!--/.navbar -->
