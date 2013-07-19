@@ -21,7 +21,7 @@
         <div class="col-5">
             <div class="btn-group pull-right">
                 {% if user.is_staff %} <a href="{% url 'topic_update' slug=current_topic.slug %}" class="btn btn-small btn-danger"><i class="icon-edit"></i> Edit</a> {% endif %}
-                <a href="#" class="btn btn-small dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <col- class="caret"></span></a>
+                <a href="#" class="btn btn-small btn-default dropdown-toggle" data-toggle="dropdown"><i class="icon-rss"></i> Subscribe to Feeds <col- class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url 'topic_feed_rss' topic_slug=current_topic.slug %}">Rss</a></li>
                     <li><a href="{% url 'topic_feed_atom' topic_slug=current_topic.slug %}">Atom</a></li>
@@ -49,20 +49,20 @@
 
 <div class="row">
     <h3>Featured Resources</h3>
-    <ul class="thumbnails">
+    <div class="row">
         {% for k,v in resourcetypes.items %}
-        <li class="col-4">
+        <div class="col-4">
             <div class="thumbnail featured-resource">
-                <col- class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
+                <span class="label label-{{ v.resource_type.color }}">{{ v.resource_type }}</span>
                 <h4><a href="{{ v.url }}">{{ v.title }}</a></h4>
                 <p>{{ v.help_text|slice:":100" }} <a href="{{ v.get_absolute_url }}">...Details</a></p>
-                <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
+                <a href="{% url 'resource_topic_list' slug=current_topic.slug res_type=k %}" class="btn btn-small btn-default">More {{ v.resource_type }}s <i class="icon-caret-right"></i></a>
             </div>
-        </li>
+        </div>
         {% empty %}
         <p class="lead">Sorry, No resources submitted till now</p>
         {% endfor %}
-    </ul>
+    </div>
     <div class="row" id="all-resources-button">
         <div class="col-5 offset4">
             <a href="{% url 'resource_topic_list_all' slug=current_topic.slug %}" class="btn btn-success">Browse all {{ current_topic.name }} resources <i class="icon-double-angle-right"></i></a>

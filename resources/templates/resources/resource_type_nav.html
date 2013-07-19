@@ -2,19 +2,19 @@
 {% load check_active check_active_button from codesters %}
 <div class="btn-toolbar">
     <div class="btn-group">
-        <a class="btn {% check_active_button request.get_full_path 'all' %}" href="{% url 'resource_topic_list_all' slug=current_topic.slug %}">All</a>
-        <a class="btn {% check_active_button request.get_full_path 'book' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="book" %}">Books</a>
-        <a class="btn {% check_active_button request.get_full_path 'ebook' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="ebook" %}">Ebooks</a>
-        <a class="btn {% check_active_button request.get_full_path 'tutorial' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="tutorial" %}">Tutorials</a>
-        <a class="btn {% check_active_button request.get_full_path 'online' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="online" %}">Online Courses</a>
-        <a class="btn {% check_active_button request.get_full_path 'other' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="other" %}">Others</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'all' %}" href="{% url 'resource_topic_list_all' slug=current_topic.slug %}">All</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'book' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="book" %}">Books</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'ebook' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="ebook" %}">Ebooks</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'tutorial' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="tutorial" %}">Tutorials</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'online' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="online" %}">Online Courses</a>
+        <a class="btn btn-default {% check_active_button request.get_full_path 'other' %}" href="{% url 'resource_topic_list' slug=current_topic.slug res_type="other" %}">Others</a>
     </div>
     <div class="btn-group pull-right">
-        <button class="btn">Level: </button>
-        <button class="btn dropdown-toggle" data-toggle="dropdown">
-            <col- class="caret"></span>
+        <button class="btn btn-default">Level: </button>
+        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu" role="menu">
             <li class="{% check_active request.get_full_path 'all' %}"><a href="?level=all">All</a></li>
                 <li class="{% check_active request.get_full_path 'beginner' %}"><a href="?level=beginner">Beginner</a></li>
                 <li class="{% check_active request.get_full_path 'intermediate' %}"><a href="?level=intermediate">Intermediate</a></li>

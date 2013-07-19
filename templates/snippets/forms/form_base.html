@@ -24,7 +24,7 @@
                 {% endifequal %}
 
                 {% if field.errors %} {% for error in field.errors %}
-                    <col- class="help-inline field-error">{{ error }}</span>
+                    <span class="help-inline field-error">{{ error }}</span>
                 {% endfor %} {% endif %}
                 {% if field.help_text %}<col- class="help-block"><em>{{ field.help_text|safe }}</em></span>{% endif %}
             </div>

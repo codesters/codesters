@@ -2,14 +2,14 @@
 {% load ratings %}
 {% rating_by_user user on resource.rating as vote %}
 {% if vote > 0 %}
-<a href="#" class="btn btn-small disabled">Already Voted</a>
+<a href="#" class="btn btn-small btn-default disabled">Already Voted</a>
 {% else %}
 <div class="btn-group">
-    <a href="{% url 'resource_rate' object_id=resource.pk score=1 %}" class="btn btn-small"><i class="icon-star{% if vote > 0 %}{% else %}-empty{% endif %}"></i> </a>
-    <a href="{% url 'resource_rate' object_id=resource.pk score=2 %}" class="btn btn-small"><i class="icon-star{% if vote > 1 %}{% else %}-empty{% endif %}"></i> </a>
-    <a href="{% url 'resource_rate' object_id=resource.pk score=3 %}" class="btn btn-small"><i class="icon-star{% if vote > 2 %}{% else %}-empty{% endif %}"></i> </a>
-    <a href="{% url 'resource_rate' object_id=resource.pk score=4 %}" class="btn btn-small"><i class="icon-star{% if vote > 3 %}{% else %}-empty{% endif %}"></i> </a>
-    <a href="{% url 'resource_rate' object_id=resource.pk score=5 %}" class="btn btn-small"><i class="icon-star{% if vote > 4 %}{% else %}-empty{% endif %}"></i> </a>
+    <a href="{% url 'resource_rate' object_id=resource.pk score=1 %}" class="btn btn-small btn-default"><i class="icon-star{% if vote > 0 %}{% else %}-empty{% endif %}"></i> </a>
+    <a href="{% url 'resource_rate' object_id=resource.pk score=2 %}" class="btn btn-small btn-default"><i class="icon-star{% if vote > 1 %}{% else %}-empty{% endif %}"></i> </a>
+    <a href="{% url 'resource_rate' object_id=resource.pk score=3 %}" class="btn btn-small btn-default"><i class="icon-star{% if vote > 2 %}{% else %}-empty{% endif %}"></i> </a>
+    <a href="{% url 'resource_rate' object_id=resource.pk score=4 %}" class="btn btn-small btn-default"><i class="icon-star{% if vote > 3 %}{% else %}-empty{% endif %}"></i> </a>
+    <a href="{% url 'resource_rate' object_id=resource.pk score=5 %}" class="btn btn-small btn-default"><i class="icon-star{% if vote > 4 %}{% else %}-empty{% endif %}"></i> </a>
 </div>
 {% endif %}
 
