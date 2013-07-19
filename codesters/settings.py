@@ -20,12 +20,16 @@ DJANGO_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.admin',
+#    'django.contrib.admin',
     'django.contrib.sitemaps',
     'django.contrib.markup',
 )
 
 THIRD_PARTY_APPS = (
+    'djadmin2',
+    'rest_framework',
+    'floppyforms',
+    'crispy_forms',
     'haystack',
     'south',
     'django_extensions',

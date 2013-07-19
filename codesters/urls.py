@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
-admin.autodiscover()
+import djadmin2
+djadmin2.default.autodiscover()
 
 from resources.models import Resource, Topic
 from profiles.models import UserProfile
@@ -23,7 +23,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', include(djadmin2.default.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
