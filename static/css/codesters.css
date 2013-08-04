@@ -10,6 +10,8 @@
 
 body {
     background-color: rgb(240, 240, 240);
+    background: transparent;
+    background: url('../img/codesters-bg.png');
 }
 
 .user-project {
