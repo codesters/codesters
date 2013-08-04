@@ -5,6 +5,7 @@ admin.autodiscover()
 from resources.models import Resource, Topic
 from profiles.models import UserProfile
 
+from django.views.generic import RedirectView
 from .views import *
 from profiles.views import UserUpdateView, UserProfileUpdateView
 from .sitemaps import sitemaps
@@ -15,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^contact/$', ContactView.as_view(), name='page_contact'),
     url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
     url(r'^explore/$', explore_home, name='explore_home'),
+    url(r'^admin/$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^explore/resource/all/$', RecentResourceListView.as_view(), name='explore_recent_resources'),
     url(r'^explore/domain/all/$', PopularDomainListView.as_view(), name='explore_all_domains'),
     url(r'^explore/topic/all/$', PopularTopicListView.as_view(), name='explore_all_topics'),
@@ -23,7 +25,7 @@ urlpatterns = patterns('',
 )
 
 urlpatterns += patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^manage/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),

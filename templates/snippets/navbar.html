@@ -4,10 +4,8 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
+            <button type="button" class="btn btn-navbar navbar-menu" data-toggle="collapse" data-target=".nav-collapse" style="color: #555">
+                Menu
             </button>
             <a href="/" class="brand">Codesters</a>
             <div class="nav-collapse collapse">
@@ -38,7 +36,7 @@
                         </ul>
                     </li>
                     {% if user.is_staff %}
-                    <li class="{% active request.path '^/admin/' %}"><a href="/admin/"><i class="icon-dashboard"></i> Manage</a></li>
+                    <li><a href="/manage/"><i class="icon-dashboard"></i> Manage</a></li>
                     {% endif %}
                     {% endif %}
                 </ul>

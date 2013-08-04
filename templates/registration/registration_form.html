@@ -12,3 +12,8 @@
 </form>
 </div>
 {% endblock %}
+{% block extra_js %}
+<script>
+$(".auth-form").find("form").find("input:not([type=hidden]):first").focus();
+</script>
+{% endblock %}

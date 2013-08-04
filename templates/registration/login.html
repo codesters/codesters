@@ -12,10 +12,15 @@ Your username and password didn't match. Please try again.
 </div>
 {% endif %}
     {% include "snippets/forms/form_base.html" %}
-<p><a class="btn btn-mini" href="{% url auth_password_reset %}">Forgot your password?</a> <a class="btn btn-danger btn-mini" href="{% url registration_register %}">Need an account?</a></p>
 <button class="btn btn-primary" type="submit"><i class="icon-signin"></i> Login</button>
+<p>Forgot your password?<a href="{% url auth_password_reset %}"> Reset it</a> <br />Need an new account? <a href="{% url registration_register %}">Register Here</a></p>
 <input type="hidden" name="next" value="{{ next }}" />
 </form>
 </div>
 
+{% endblock %}
+{% block extra_js %}
+<script>
+$(".auth-form").find("form").find("input:not([type=hidden]):first").focus();
+</script>
 {% endblock %}
