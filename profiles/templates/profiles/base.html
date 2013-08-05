@@ -17,7 +17,7 @@
                 {% if userinfo.userprofile.gravatar_email %}
                 <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="{% gravatar_url userinfo.userprofile.gravatar_email %}" alt="{{ userinfo }} photo - codesters" /></a>
                 {% else %}
-                <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="{% gravatar_url userinfo.email %}" alt="{{ userinfo }} photo - codesters" /></a>
+                <a href="http://gravatar.com/emails/"><img class="img-polaroid" src="http://placehold.it/350&text={{ userinfo.username }}"/></a>
                 {% endif %}
             </div>
         </div>
