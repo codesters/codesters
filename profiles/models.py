@@ -99,10 +99,8 @@ def create_user_profile(sender, user, request, **kwargs):
     assign_perm('delete_userprofile', user, user_profile)
     assign_perm('change_user', user, user)
 
-    #Subscribe user to codesters mailing list
-    import mailchimp
-    list = mailchimp.utils.get_connection().get_list_by_id('c9497f5882')
-    list.subscribe(user.email, {'EMAIL':user.email})
+    from .tasks import subscribe_to_list #calling celery task to subscribe a user
+    subscribe_to_list.delay(user.email)
 
 def check_userprofile_details(sender, request, user, **kwargs):
     if not user.first_name:

@@ -26,6 +26,7 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     url(r'^manage/', include(admin.site.urls)),
+    url(r'^mailchimp/', include('mailchimp.urls')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^resource/', include('resources.urls')),
     url(r'^profile/', include('profiles.urls')),
