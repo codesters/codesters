@@ -15,7 +15,7 @@ from django.contrib.contenttypes.models import ContentType
 from .models import Resource, Topic, ResourceType, FeaturedResource
 from profiles.models import SavedResource, TopicFollow
 
-from .forms import ResourceCreateForm, ResourceUpdateForm
+from .forms import ResourceCreateForm, ResourceUpdateForm, TopicCreateForm, TopicUpdateForm
 
 def resource_home(request):
     topics = Topic.objects.filter(resource__title__isnull=False).distinct().order_by('name')
@@ -215,13 +215,16 @@ class ResourceUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlin
 
 
 class TopicCreateView(SetHeadlineMixin, SidebarMixin, CreateView):
-    model = Topic
+    form_class = TopicCreateForm
+    template_name = 'resources/topic_form.html'
     permission_required = 'resources.add_topic'
     headline = 'Create New Topic'
 
 
 class TopicUpdateView(PermissionRequiredMixin, SetHeadlineMixin, SidebarMixin, UpdateView):
+    form_class = TopicUpdateForm
     model = Topic
+    template_name = 'resources/topic_form.html'
     permission_required = 'resources.change_topic'
     render_403 = True
     return_403 = True

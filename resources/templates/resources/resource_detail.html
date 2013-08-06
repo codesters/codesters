@@ -1,4 +1,5 @@
-{% extends "resources/base.html" %}
+{% extends "base.html" %}
+
 {% load url from future %}
 {% load age issaved from codesters %}
 {% load disqus_tags %}
@@ -6,71 +7,87 @@
 
 {% block meta_description %}{{ resource.help_text }} - {{ resource.resource_type }} submitted by {{ resource.created_by }}{% endblock %}
 
-{% block resource_heading %}{{ resource.title }}{% endblock %}
-
-{% block resource_content %}
-<div class="btn-toolbar" id="resource-buttons">
-    <div class="btn-group">
-    <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
-    </div>
-
-    {% if user.is_authenticated %}
-
-    <div class="btn-group">
-        <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
-        {% ifequal resource.created_by user%}
-        <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
-        {% endifequal %}
-    </div>
-        {% include "resources/rating.html" %}
-    {% else %}
-    <div class="btn-group">
-    <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
-    </div>
-    {% endif %}
-
-</div>
-
+{% block content %}
 <div class="row-fluid">
-{% include "snippets/share_this.html" %}
-</div>
+    <div class="container">
+        {% block resource_page %}
+        <div class="row-fluid">
+            <div class="span9 resource-content">
+                <div class="row-fluid well-small" id="resource-title">
+                    <h1><a href="{{ resource.url }}">{{ resource.title }}</a></h1>
+                    <hr />
+                </div>
 
-<div class="row-fluid">
-    <div class="span8 offset2">
-        <table class="table table-bordered table-stripped">
-            <tbody> {% with approval=resource.rating.get_real_percent %}
-                <tr class="{% if approval >= 60 %}success{% endif %}">
-                    <td>User Approval Rate</td> <td>{{ approval|floatformat }}%</td>
-                </tr>{% endwith %}
-                <tr>
-                    <td>Resource Type</td> <td>{{ resource.resource_type }}</td>
-                </tr>
-                <tr>
-                    <td>Topics</td>
-                    <td>
-                        {% for topic in resource.topics.all %}
-                        {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <td>Submitted by</td>
-                    <td><a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></td>
-                </tr>
-                <tr>
-                    <td>Date Submitted</td> <td>{{ resource.created_at|date:"D d M Y"  }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+                <div class="btn-toolbar" id="resource-buttons">
+                    <div class="btn-group">
+                    <a href="{{ resource.url }}" class="btn btn-small btn-info"><i class="icon-link"></i> Open Webpage</a>
+                    </div>
 
-{% if resource.description %}
-<div class="row-fluid markdown-text" id="resource-description">
+                    {% if user.is_authenticated %}
+
+                    <div class="btn-group">
+                        <a href="{% url 'resource_save' pk=resource.pk %}" title="Save this resource to your profile" class="btn btn-small {% if resource|issaved:user %}disabled{% endif %}"><i class="icon-save"></i> {% if resource|issaved:user %}Saved{% else %}Save{% endif %}</a>
+                        {% ifequal resource.created_by user%}
+                        <a href="{% url 'resource_update' pk=resource.id %}" class="btn btn-small"><i class="icon-edit"></i> Edit</a>
+                        {% endifequal %}
+                    </div>
+                        {% include "resources/rating.html" %}
+                    {% else %}
+                    <div class="btn-group">
+                    <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="row-fluid">
+                {% include "snippets/share_this.html" %}
+                </div>
+
+                <div class="row-fluid">
+                    <div class="span8 offset2">
+                        <table class="table table-bordered table-stripped">
+                            <tbody> {% with approval=resource.rating.get_real_rating %}
+                                <tr class="{% if approval >= 3 %}success{% endif %}">
+                                    <td>User Approval Rate</td> <td>{{ approval|floatformat }}/5</td>
+                                </tr>{% endwith %}
+                                <tr>
+                                    <td>Resource Type</td> <td>{{ resource.resource_type }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Topics</td>
+                                    <td>
+                                        {% for topic in resource.topics.all %}
+                                        {% if not forloop.first %}, {% endif %}<a href="{% url 'resource_topic_home' slug=topic.slug %}" class="">{{ topic.name }}</a>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Submitted by</td>
+                                    <td><a href="{{ resource.created_by.get_absolute_url }}">{{ resource.created_by }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Date Submitted</td> <td>{{ resource.created_at|date:"D d M Y"  }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                {% if resource.description %}
+                <div class="row-fluid markdown-text" id="resource-description">
 {{ resource.description|markdown:"safe" }}
-</div>
-{% endif %}
-<div class="row-fluid">
-        {% disqus_show_comments %}
+                </div>
+                {% endif %}
+                <div class="row-fluid">
+                        {% disqus_show_comments %}
+                </div>
+                            </div>
+                            <div class="span3 well" id="sidebar">{% include "resources/topics.html" %}</div>
+        </div>
+        {% endblock %}
+    </div>
 </div>
 {% endblock %}
+
+
