@@ -14,7 +14,7 @@
             {% include "resources/single_resource_snippet.html" %}
         {% empty %}
             <div class="span12">
-                <p class="lead">Sorry, there are no resources here. Why don't you <a href="{% url 'resource_create' %}">add something here. </a></p>
+                <p>Sorry, there are no resources here. Why don't you <a href="{% url 'resource_create' %}">add something here. </a></p>
             </div>
         {% endfor %}
         </ul>
