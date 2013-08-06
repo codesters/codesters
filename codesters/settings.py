@@ -26,6 +26,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'mailchimp',
     'haystack',
     'south',
     'django_extensions',
@@ -179,6 +180,9 @@ RATINGS_VOTES_PER_IP = 2000 #TODO all votes are essentially from 127.0.0.1. This
 #Disqus Settings
 DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
 DISQUS_WEBSITE_SHORTNAME = 'codesters'
+
+#MailChimp Settings
+MAILCHIMP_API_KEY = ''
 
 #Import Local and Prod settings
 try:
