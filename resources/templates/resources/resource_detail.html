@@ -34,7 +34,7 @@
                         {% include "resources/rating.html" %}
                     {% else %}
                     <div class="btn-group">
-                    <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-warning btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
+                    <a href="{% url 'auth_login' %}?next={% url 'resource_detail' pk=resource.pk %}" class="btn btn-small"><i class="icon-info"></i> Login to rate or save this resource</a>
                     </div>
                     {% endif %}
 
@@ -49,7 +49,7 @@
                         <table class="table table-bordered table-stripped">
                             <tbody> {% with approval=resource.rating.get_real_rating %}
                                 <tr class="{% if approval >= 3 %}success{% endif %}">
-                                    <td>User Approval Rate</td> <td>{{ approval|floatformat }}/5</td>
+                                    <td>Rating</td> <td>{{ approval|floatformat }}/5</td>
                                 </tr>{% endwith %}
                                 <tr>
                                     <td>Resource Type</td> <td>{{ resource.resource_type }}</td>
