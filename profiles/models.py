@@ -15,16 +15,6 @@ class Project(models.Model):
         return self.title
 
 
-class Badge(models.Model):
-    name = models.CharField(max_length=30)
-    slug = models.SlugField(max_length=255, blank=True, default='')
-    help_text = models.CharField(max_length=220)
-    description = models.TextField(null=True, blank=True)
-
-    def __unicode__(self):
-        return self.name
-
-
 class Snippet(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
@@ -51,7 +41,6 @@ class UserProfile(models.Model):
     stackoverflow = models.CharField('Stackoverflow Profile', max_length=30, null=True, blank=True)
     facebook = models.CharField('Facebook Username', max_length=30, null=True, blank=True)
     website = models.URLField('Your Website/Blog', null=True, blank=True)
-    badges = models.ManyToManyField(Badge, null=True, blank=True)
     receive_email = models.BooleanField(default=True)
 
     def __unicode__(self):
