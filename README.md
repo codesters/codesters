@@ -21,7 +21,7 @@ We are developing knowledge library for learning programming. The best resources
 
 ##Tools/Apps Used
 
-+ [Django 1.4.5](https://www.djangoproject.com/)
++ [Django 1.5.4](https://www.djangoproject.com/)
 + [Twitter Bootstrap](http://getbootstrap.com/)
 + [django-registration](https://django-registration.readthedocs.org/en/latest/)
 + [django-guardian](https://github.com/lukaszb/django-guardian)
