@@ -167,7 +167,7 @@ ABSOLUTE_URL_OVERRIDES = {
 
 #Django-Registration Settings
 ACCOUNT_ACTIVATION_DAYS = 7
-
+DEFAULT_FROM_EMAIL = "admin@codesters.org"
 
 #Django-Guardian Settings
 ANONYMOUS_USER_ID = -1

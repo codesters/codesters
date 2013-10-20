@@ -6,4 +6,4 @@ codesters/prod_settings.py
 *.db
 assets/*
 media/*
-gunicorn.conf.py
+gunicorn-codesters.conf.py
