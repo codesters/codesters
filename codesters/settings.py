@@ -149,7 +149,7 @@ LOGGING = {
 }
 
 #HAYSTACK settings
-HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.BaseSignalProcessor'
 HAYSTACK_SEARCH_RESULTS_PER_PAGE = 12
 HAYSTACK_CONNECTIONS = {
         'default': {
