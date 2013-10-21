@@ -1,5 +1,4 @@
 {% load active from codesters %}
-{% load url from future %}
 
     <a class="btn btn-danger btn-block" title="Add new resource that you want to share" href="{% url 'resource_create' %}"><i class="icon-plus"></i> Add New Resource</a>
     {% if user.is_staff %}

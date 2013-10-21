@@ -1,5 +1,4 @@
 {% extends "resources/base.html" %}
-{% load url from future %}
 {% block resource_content %}
 <p>
     <a href="{% if request.META.HTTP_REFERER %}{{ request.META.HTTP_REFERER }}{% else %}{% url 'resource_home' %}{% endif %}" class="btn"><i class="icon-double-angle-left"></i> Back</a>
