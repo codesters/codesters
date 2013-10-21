@@ -16,12 +16,10 @@
                     <li class="dropdown {% active request.path '^/profile/' %}"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i> {{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="{% url 'my_profile' %}"><i class="icon-picture"></i> My Profile</a></li>
-                            <li><a href="{% url 'user_snippets' username=user.username %}"><i class="icon-quote-right"></i> My Wall</a></li>
                             <li><a href="{% url 'my_resources' %}"><i class="icon-pushpin"></i> My Shared Resources</a></li>
                             <li class="divider"></li>
                             <li class="nav-header"><i class="icon-plus"> Add New</i></li>
                             <li><a href="{% url 'resource_create' %}">Resource</a></li>
-                            <li><a href="{% url 'snippet_create' username=user.username %}">Snippet</a></li>
                             <li><a href="{% url 'project_create' username=user.username %}">Project</a></li>
                         </ul>
                     </li>
@@ -34,9 +32,6 @@
                             <li><a href="{% url 'auth_logout' %}"><i class="icon-signout"></i> Logout</a></li>
                         </ul>
                     </li>
-                    {% if user.is_staff %}
-                    <li><a href="/manage/"><i class="icon-dashboard"></i> Manage</a></li>
-                    {% endif %}
                     {% else %}
                     <li class="{% active request.path "^/accounts/login/$" %}"><a href="{% url 'auth_login' %}"><i class="icon-signin"></i> Login</a></li>
                     <li class="{% active request.path "^/accounts/register/$" %}"><a href="{% url 'registration_register' %}"><i class="icon-unlock"></i> Register</a></li>

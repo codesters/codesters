@@ -15,22 +15,6 @@ class Project(models.Model):
         return self.title
 
 
-class Snippet(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    show = models.BooleanField(default=True)
-    user = models.ForeignKey(User)
-    created_at = models.DateTimeField(auto_now_add=True, editable=False)
-    updated_at = models.DateTimeField(auto_now=True, editable=False)
-
-    def __unicode__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('snippet_detail', kwargs={'username': self.user.username, 'pk': self.pk})
-
-
-
 #TODO add a textfield for storing all social profiles at one place and write a method that returns a dict of provider with profile
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
@@ -105,11 +89,6 @@ def create_project_permission(sender, instance, created, **kwargs):
         assign_perm('change_project', instance.user, instance)
         assign_perm('delete_project', instance.user, instance)
 
-def create_snippet_permission(sender, instance, created, **kwargs):
-    if created:
-        assign_perm('change_snippet', instance.user, instance)
-        assign_perm('delete_snippet', instance.user, instance)
 
 user_logged_in.connect(check_userprofile_details)
-post_save.connect(create_snippet_permission, sender=Snippet)
 post_save.connect(create_project_permission, sender=Project)
