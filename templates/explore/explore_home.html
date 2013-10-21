@@ -96,48 +96,4 @@
         </table>
     </div>
 </div>
-<div class="row-fluid">
-    <div class="span6 explore-box">
-        <h3>Most Active Users</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Rank</th>
-                    <th>Username</th>
-                    <th>Resources Submitted</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for user in active_users %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td><a href="{{ user.get_absolute_url }}">@{{ user.username }}</a></td>
-                    <td>{{ user.no_of_resources }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="span6 explore-box">
-        <h3>Recent Snippets from Users</h3>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>User</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for snippet in recent_snippets %}
-                <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td><a href="{{ snippet.get_absolute_url }}">{{ snippet.title }}</a></td>
-                    <td>{{ snippet.user }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 {% endblock %}

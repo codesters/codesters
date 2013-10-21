@@ -7,10 +7,10 @@ from guardian.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from braces.views import SetHeadlineMixin
 
 from django.contrib.auth.models import User
-from .models import UserProfile, Snippet, SavedResource, TopicFollow, Project
+from .models import UserProfile, SavedResource, TopicFollow, Project
 from resources.models import Resource
 
-from .forms import UserUpdateForm, UserProfileUpdateForm, SnippetCreateForm, SnippetUpdateForm, ProjectCreateForm, ProjectUpdateForm
+from .forms import UserUpdateForm, UserProfileUpdateForm, ProjectCreateForm, ProjectUpdateForm
 
 def user_redirect_view(request, username):
     user = get_object_or_404(User, username=username)
@@ -109,84 +109,6 @@ class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     def get_success_url(self):
         messages.success(self.request, 'Your project have been removed')
         return reverse_lazy('user_projects', kwargs={'username':self.request.user.username})
-
-
-class UserSnippetsView(SetHeadlineMixin, UserInfoMixin, ListView):
-    context_object_name = 'snippets'
-    template_name = 'profiles/user_snippets.html'
-    paginate_by = 12
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        self.headline = unicode(user.username) + ' Wall'
-        return Snippet.objects.filter(user=user).filter(show=True)
-
-#TODO first implement a view_snippet permission in models then add a Permission required mixin here
-class UserHiddenSnippetsView(SetHeadlineMixin, ListView):
-    context_object_name = 'snippets'
-    template_name = 'profiles/user_snippets.html'
-    paginate_by = 12
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        return Snippet.objects.filter(user=user).filter(show=False)
-
-    def get_context_data(self,**kwargs):
-        context = super(UserHiddenSnippetsView, self).get_context_data(**kwargs)
-        user = get_object_or_404(User, username=self.kwargs['username'])
-        context['userinfo'] = user
-        return context
-
-
-class SnippetDetailView(SetHeadlineMixin, DetailView):
-    model = Snippet
-    context_object_name = 'snippet'
-    template_name = 'profiles/snippet_detail.html'
-
-    def get_object(self):
-        snippet = get_object_or_404(Snippet, pk=self.kwargs['pk'])
-        if snippet.show:
-            self.headline = unicode(snippet.title) + """ | """ + unicode(self.request.user.username) + """ Wall"""
-            return snippet
-        else:
-            raise Http404
-
-
-class SnippetCreateView(LoginRequiredMixin, SetHeadlineMixin, CreateView):
-    model = Snippet
-    form_class = SnippetCreateForm
-    headline = 'Create New Snippet'
-
-    def form_valid(self, form):
-        user = get_object_or_404(User, username =self.request.user.username)
-        form.instance.user = user
-        return super(SnippetCreateView, self).form_valid(form)
-
-    def get_success_url(self):
-        messages.success(self.request, 'New Snippet have been created')
-        return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
-
-
-class SnippetUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):
-    model = Snippet
-    form_class = SnippetUpdateForm
-    permission_required = 'profiles.change_snippet'
-    headline = 'Edit Snippet'
-    return_403 = True
-
-    def get_success_url(self):
-        messages.success(self.request, 'Your changes have been saved')
-        return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
-
-
-class SnippetDeleteView(PermissionRequiredMixin, DeleteView):
-    permission_required = 'profiles.delete_snippet'
-    return_403 = True
-    model = Snippet
-
-    def get_success_url(self):
-        messages.success(self.request, 'Your snippet have been deleted')
-        return reverse_lazy('user_snippets', kwargs={'username':self.request.user.username})
 
 
 class UserUpdateView(LoginRequiredMixin, PermissionRequiredMixin, SetHeadlineMixin, UpdateView):

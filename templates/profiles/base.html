@@ -3,11 +3,6 @@
 
 {% load gravatar %}
 
-{% block extra_head %}
-<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ userinfo.username }}-Rss" href="{% url 'user_snippet_rss' username=userinfo.username %}" />
-<link rel="alternate" type="application/atom+xml" title="Recent Snippets from {{ userinfo.username }}-Atom" href="{% url 'user_snippet_atom' username=userinfo.username %}" />
-{% endblock %}
-
 {% block content %}
 <div class="row-fluid profile-page">
     <div class="span3 profile-sidebar">
@@ -31,9 +26,6 @@
                     {% if userinfo.userprofile.twitter %}<li><a title="{{ userinfo.username }} twitter profile" href="http://twitter.com/{{ userinfo.userprofile.twitter }}"><i class="icon-twitter"></i> Twitter</a></li>{% endif %}
                     {% if userinfo.userprofile.stackoverflow %}<li><a title="{{ userinfo.username }} stackoverflow profile" href="http://stackoverflow.com/users/{{ userinfo.userprofile.stackoverflow }}"><i class="icon-stackexchange"></i> Stackoverflow</a></li>{% endif %}
                     {% if userinfo.userprofile.facebook %}<li><a title="{{ userinfo.username }} facebook profile" href="http://facebook.com/{{ userinfo.userprofile.facebook }}"><i class="icon-facebook"></i> Facebook</a></li>{% endif %}
-                    <li class="nav-header">Subscribe to {{ userinfo.username }}'s Wall</li>
-                    <li><a title="Subscribe to {{ userinfo.username }} wall rss feed" href="{% url 'user_snippet_rss' username=userinfo.username %}"><i class="icon-rss"></i> Rss</a></li>
-                    <li><a title="Subscribe to {{ userinfo.username }} wall atom feed" href="{% url 'user_snippet_atom' username=userinfo.username %}"><i class="icon-rss-sign"></i> Atom</a></li>
                 </ul>
             </div>
         </div>
@@ -42,8 +34,6 @@
         <ul class="nav nav-tabs">
             {% url 'user_info' userinfo.username as info_tab %}
             <li class="{% active request.path info_tab %}"><a href="{{ info_tab }}"><i class="icon-info-sign"></i> Info</a></li>
-            {% url 'user_snippets' username=userinfo.username as snippet_tab %}
-            <li class="{% active request.path snippet_tab %}"><a href="{{ snippet_tab }}"><i class="icon-quote-right"></i> Wall</a></li>
             {% url 'user_projects' username=userinfo.username as project_tab %}
             <li class="{% active request.path  project_tab %}"><a href="{{ project_tab }}"><i class="icon-briefcase"></i> Projects</a></li>
             {% url 'user_resources' userinfo.username as resource_tab %}
