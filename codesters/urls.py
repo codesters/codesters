@@ -12,9 +12,6 @@ from .sitemaps import sitemaps
 
 urlpatterns = patterns('',
     url(r'^$', HomeView.as_view(), name='page_home'),
-    url(r'^about/$', AboutView.as_view(), name='page_about'),
-    url(r'^contact/$', ContactView.as_view(), name='page_contact'),
-    url(r'^guidelines/$', GuidelinesView.as_view(), name='page_guidelines'),
     url(r'^explore/$', explore_home, name='explore_home'),
     url(r'^admin/$', RedirectView.as_view(url='/', permanent=True)),
     url(r'^explore/resource/all/$', RecentResourceListView.as_view(), name='explore_recent_resources'),
@@ -36,3 +33,16 @@ urlpatterns += patterns('',
 urlpatterns += patterns('',
     (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 )
+
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+    url(r'^about/$', 'flatpage', {'url': '/about/'}, name='page_about'),
+    url(r'^contact/$', 'flatpage', {'url': '/contact/'}, name='page_contact'),
+    url(r'^guidelines/$', 'flatpage', {'url': '/guidelines/'}, name='page_guidelines'),
+    url(r'^license/$', 'flatpage', {'url': '/license/'}, name='page_license'),
+)
+
+#Left for future, if needs to make many flatpages
+#urlpatterns += patterns('',
+#    url(r'pages/', include('django.contrib.flatpages.urls')),
+#)
