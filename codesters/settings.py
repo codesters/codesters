@@ -8,7 +8,6 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
      ('Karambir Singh Nain', 'karambir@codesters.org'),
      ('Mohammad Adil', 'adil@codesters.org'),
-     ('Mayank Jain', 'mayank@codesters.org'),
 )
 
 MANAGERS = ADMINS
@@ -30,7 +29,6 @@ THIRD_PARTY_APPS = (
     'haystack',
     'south',
     'django_extensions',
-    'registration',
     'guardian',
     'widget_tweaks',
     'braces',
@@ -39,6 +37,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    'registration',
     'profiles',
 #    'tracks',
     'resources',
@@ -165,6 +164,7 @@ LOGIN_REDIRECT_URL = '/resource/'
 ABSOLUTE_URL_OVERRIDES = {
         'auth.user': lambda u: "/profile/%s/" % u.username,
 }
+SERVER_EMAIL = "admin@codesters.org"
 
 #Django-Registration Settings
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -180,9 +180,6 @@ RATINGS_VOTES_PER_IP = 2000 #TODO all votes are essentially from 127.0.0.1. This
 #Disqus Settings
 DISQUS_API_KEY = 'lTuOXBAfTK3symHWvi7cZHgcYipkL32BoSud7f0H4gl4lfVhVw0HCcbcmiu1rWJY'
 DISQUS_WEBSITE_SHORTNAME = 'codesters'
-
-#MailChimp Settings
-MAILCHIMP_API_KEY = ''
 
 #Import Local and Prod settings
 try:
