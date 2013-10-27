@@ -64,9 +64,8 @@ from django.db.models.signals import post_save
 from django.contrib.auth.signals import user_logged_in
 from registration.signals import user_activated
 
-@receiver(user_activated)
 def create_user_profile(sender, user, request, **kwargs):
-    user_profile = UserProfile.objects.create(user=user)
+    user_profile = UserProfile.objects.get_or_create(user=user)[0]
     from guardian.shortcuts import assign_perm
     assign_perm('change_userprofile', user, user_profile)
     assign_perm('delete_userprofile', user, user_profile)
@@ -85,5 +84,6 @@ def create_project_permission(sender, instance, created, **kwargs):
         assign_perm('delete_project', instance.user, instance)
 
 
+user_activated.connect(create_user_profile)
 user_logged_in.connect(check_userprofile_details)
 post_save.connect(create_project_permission, sender=Project)
