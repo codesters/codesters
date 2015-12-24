@@ -7,3 +7,4 @@ codesters/prod_settings.py
 assets/*
 media/*
 gunicorn-codesters.conf.py
+.idea
