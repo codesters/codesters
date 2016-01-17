@@ -21,7 +21,7 @@ We are developing knowledge library for learning programming. The best resources
 
 ##Tools/Apps Used
 
-+ [Django 1.5.4](https://www.djangoproject.com/)
++ [Django 1.6](https://www.djangoproject.com/)
 + [Twitter Bootstrap](http://getbootstrap.com/)
 + [django-registration](https://django-registration.readthedocs.org/en/latest/)
 + [django-guardian](https://github.com/lukaszb/django-guardian)
@@ -43,11 +43,12 @@ See INSTALL.md for full installation instructions.
 + [Karambir Singh Nain](http://nainomics.in/)
 + [Mohammad Adil](http://madil.in/)
 + [Mayank Jain](http://mayank-jain.in/)
++ Naman Sharma
 
 ## We need your help
 
-+ We need Django developers for this project.
-+ None of us are a designer, if you can help or know someone who can, please [mail us](mailto:akarambir@gmail.com).
++ We are porting this project to Django 1.8 and rewriting the way the resources are categorised into types and topics. We need Django developers for this.
++ None of us are a designer, if you can help or know someone who can, please [mail us](mailto:karambir@codesters.org).
 
 ## LICENSE
 
