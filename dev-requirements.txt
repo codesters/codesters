@@ -18,7 +18,7 @@ django-widget-tweaks==1.4.1
 elasticsearch==1.9.0
 funcsigs==0.4
 gunicorn==19.4.1
-ipython==4.0.1
+ipython==7.16.3
 ipython-genutils==0.1.0
 kombu==3.0.32
 Markdown==2.6.5
